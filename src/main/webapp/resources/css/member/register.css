@@ -1,0 +1,140 @@
+@charset "UTF-8";
+#register-msg{
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    align-items: center;
+    margin: 0 auto;
+}
+    #register-msg>p:nth-child(1){
+        font-size: 1.5em;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: black;
+    }
+    #register-msg>p:nth-child(2){
+        color: black;
+    }
+    #register-msg2{
+        display: flex;
+        align-self: flex-end;
+        margin-right: 100px;
+        font-weight: bolder;
+        color: black;
+    }
+            #register-msg2 span{
+                color: red;
+            }
+
+
+#form-area{
+    padding: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 800px;
+    height: 1100px;
+    margin: 0 auto;
+    background-color: white;
+}
+    #register-step{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        color: black;
+        padding: 30px;
+    }
+            #register-step p:nth-child(2){
+                padding-bottom: 5px;
+                border-bottom: red 2px solid;
+            }
+
+table{
+    border-collapse: collapse;
+    width: 800px;
+    color: black;
+    line-height: 1.5;
+}
+    table th {
+        width: 200px;
+        height: 50px;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+    table td {
+        padding: 10px;
+        padding-left: 30px;
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+    table span{
+        color: red;
+    }
+    #required-pwd{
+        font-size: 0.8em;
+    }
+
+.input-box{
+    width: 200px;
+    height: 25px;
+    border: 1px solid #ccc;
+    font-weight: lighter;
+    padding: 10px;
+}
+    .input-box:focus {
+        outline: 1px solid rgb(255, 0, 0);
+    }
+.email-box{
+    width: 120px;
+    height: 25px;
+    border: 1px solid #ccc;
+    font-size: 1.05em;
+    font-weight: lighter;
+    padding: 10px;
+}
+    .email-box:focus{
+        outline: 1px solid rgb(255, 0, 0);
+    }
+    #gol{
+        color: rgb(102, 102, 102);
+        margin: 5px;
+        font-size: 1.3em;
+    }
+
+#domain-box{
+    width: 80px;
+    height: 45px;
+    margin-left: 5px;
+}
+[type=button]{
+    width: 95px;
+    height: 40px;
+    background-color: #ccc;
+    border: none;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
+}
+    [type=button]:hover{
+        cursor: pointer;
+    }
+
+#button-area{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    #button-area input{
+        border: none;
+        padding: 10px 100px;
+        background-color: #3eeadc;
+        color: white;
+        font-weight: bolder;
+        font-size: 1.2em;
+    }
+        #button-area input:hover{
+            cursor: pointer;
+        }
