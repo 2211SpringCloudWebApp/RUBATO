@@ -19,7 +19,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member selectIdPw(Member member) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -27,6 +26,18 @@ public class MemberServiceImpl implements MemberService{
 	public int insertMember(Member member) {
 		int result = mStore.insertMember(session, member);
 		return result;
+	}
+
+	@Override
+	public Member selectMemberById(String memberId) {
+		Member member = mStore.selectMemberById(session, memberId);
+		return member;
+	}
+
+	@Override
+	public Member selectMemberByNickname(String memberNickname) {
+		Member member = mStore.selectMemberByNickname(session, memberNickname);
+		return member;
 	}
 
 }

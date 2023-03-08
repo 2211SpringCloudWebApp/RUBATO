@@ -2,9 +2,13 @@ package com.rubato.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rubato.common.MailSendService;
 import com.rubato.member.domain.Member;
 import com.rubato.member.service.MemberService;
 
@@ -20,6 +24,9 @@ public class MemberController {
 	*/
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private MailSendService mailSendService;
 	
 	
 	/*===================================================
@@ -38,13 +45,55 @@ public class MemberController {
 	/*===================================================
 	 * 회원가입 기능 관련
 	 *===================================================*/
-	@RequestMapping(value="/member/register", method=RequestMethod.GET)
-	public String registerView() {
+	@GetMapping("/member/register")
+	public String registerView() {  // 회원가입 페이지 View
 		return "member/register";
 	}
-	@RequestMapping(value="/member/register", method=RequestMethod.POST)
-	public String registerLogic() {
-		return "";
+	@PostMapping("/member/register")
+	public String registerLogic(Member member, String memberEmail1, String memberEmail2, String memberAddr1, String memberAddr2) { // 회원가입 기능 구현
+		String memberEmail = memberEmail1+"@"+memberEmail2;
+		String memberAddr = memberAddr1+"++"+memberAddr2;
+		member.setMemberEmail(memberEmail);
+		member.setMemberAddr(memberAddr);
+		int result = mService.insertMember(member);
+		if(result>0) {
+			return "redirect:/";
+		}
+		else {
+			System.out.println("회원가입 실패");
+			return "";
+		}
+	}
+	
+	@GetMapping("/member/register/idCheck")
+	@ResponseBody
+	public String idCheckLogic(String memberId) { // 아이디 중복체크 ajax
+		Member member = mService.selectMemberById(memberId);
+		if(member!=null) { // 아이디 존재
+			return "false";
+		}
+		else {
+			return "true";
+		}
+	}
+	
+	@GetMapping("/member/register/nickCheck")
+	@ResponseBody
+	public String nickCheckLogic(String memberNickname) { // 닉네임 중복체크 ajax
+		Member member = mService.selectMemberByNickname(memberNickname);
+		if(member!=null) { // 닉네임 존재
+			return "false";
+		}
+		else {
+			return "true";
+		}
+	}
+	
+	@GetMapping("/member/register/mailAuth")
+	@ResponseBody
+	public String mailAuthLogic(String email) { // 이메일 인증 ajax
+		String code = mailSendService.registerEmail(email);
+		return code;
 	}
 	
 }

@@ -21,4 +21,16 @@ public class MemberStoreImpl implements MemberStore{
 		return result;
 	}
 
+	@Override
+	public Member selectMemberById(SqlSession session, String memberId) {
+		Member member = session.selectOne("MemberMapper.selectMemberById", memberId);
+		return member;
+	}
+
+	@Override
+	public Member selectMemberByNickname(SqlSession session, String memberNickname) {
+		Member member = session.selectOne("MemberMapper.selectMemberByNickname", memberNickname);
+		return member;
+	}
+
 }

@@ -1,43 +1,20 @@
 @charset "UTF-8";
-#container {
+#header-container {
     width: 1200px;
-    height: 250px;  
+    height: 170px;  
     margin: 0 auto; 
-    border-bottom: 1px solid #3eeadc;
+    border-bottom: 1px solid #2fbdb1;
 }
-ul li{
+#header-container ul li{
     list-style-type: none;
-}
-a{
-    display: block;
-}
-a:link, a:visited  {
-    text-decoration: none;
-    color: black;
-    font-weight: 700;
-}
-a:hover {
-    font-weight: bold;
-    font-size: 90%;
-    border-left: 1px solid rgb(61, 201, 198);
-    border-right: 1px solid #3eeadc;
-    cursor: pointer;
-}
-#logo-img {
-    width: 150px;
-    height: 150px;
-    background-image: url("/resources/images/common/logo.png");
-    background-size: 100%;
-    margin-top: 100px;
-    margin-right: 50px;
-    float: left;
 }
 #navigator {
     width: 700px;
     height: 50px;
-    margin-top: 200px;
+    margin-top: 120px;
     padding: 0;
     float: left;
+    font-family: 'Noto Sans KR', sans-serif;
 }
     .item {
         float: left;
@@ -45,25 +22,51 @@ a:hover {
         text-align: center;
         line-height: 50px;
     }
+    #navigator a{
+        display: block;
+    }
+    #navigator a:link, #navigator a:visited  {
+        text-decoration: none;
+        color: rgb(90, 107, 106);
+        font-weight: 700;
+    }
+    #navigator a:hover {
+        font-weight: bold;
+        font-size: 95%;
+        border-left: 1px solid #2fbdb1;
+        border-right: 1px solid #2fbdb1;
+        cursor: pointer;
+    }
+    #logo-img {
+        width: 150px;
+        height: 150px;
+        background-image: url("/resources/images/common/logo.png");
+        background-size: 100%;
+        margin-top: 30px;
+        margin-right: 50px;
+        float: left;
+    }
+​
 #login-wrapper {
     width: 250px;
     float: right;
 }
-    button {
-        margin-top: 170px;
+    #login-wrapper button {
+        margin-top: 120px;
         width: 120px;
         height: 40px;
         border-radius: 5px;
         font-weight: 700;
         font-size: 95%;
+        font-family: 'Noto Sans KR', sans-serif;
     }
     #login-btn {
         background-color: white;
         color: #6b6b6b;
-        border: 1px solid rgb(61, 201, 198);
+        border: 1px solid #2fbdb1;
     }
     #join-btn {
-        background-color: rgb(61, 201, 198);
+        background-color: #2fbdb1;
         color: white;
         border: none;
     }

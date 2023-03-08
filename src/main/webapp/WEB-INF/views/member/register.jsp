@@ -11,6 +11,8 @@
 		<link rel="stylesheet" href="/resources/css/member/register.css">
 		<script src="/resources/js/member/register.js" defer></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script> <!-- 다음 주소 API -->
+		<!-- jQuery CDN -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<!-- common header jsp include -->
@@ -29,8 +31,10 @@
 		                <tr>
 		                    <th>아이디 <span>*</span></th>
 		                    <td>
-		                        <input type="text" name="memberId" class="input-box" readonly maxlength="15" required>
-		                        <input type="button" value="중복확인" onclick="idCheck()">
+		                        <input type="text" name="memberId" class="input-box" maxlength="15" required>
+		                        <input type="button" id="idCheck-btn" value="중복확인">
+		                        <br>
+		                        <span id="idCheck-msg"></span>
 		                    </td>
 		                </tr>
 		                <tr>
@@ -59,8 +63,10 @@
 		                <tr>
 		                    <th>닉네임 <span>*</span></th>
 		                    <td>
-		                        <input type="text" name="memberName" class="input-box" placeholder="닉네임을 입력하세요">
-		                        <input type="button" value="중복확인" onclick="idCheck()">
+		                        <input type="text" name="memberNickname" class="input-box" placeholder="닉네임을 입력하세요">
+		                        <input type="button" id="nickCheck-btn" value="중복확인">
+		                        <br>
+		                        <span id="nickCheck-msg"></span>
 		                    </td>
 		                </tr>
 		                <tr>
@@ -74,7 +80,10 @@
 		                            <option value="naver.com">naver.com</option>
 		                            <option value="gmail.com">gmail.com</option>
 		                        </select>
-		                        <input type="button" value="이메일 인증" onclick="authEmail();">
+		                        <input type="button" id ="auth-send" value="이메일 인증">
+		                        <input type="hidden" id="auth-code" placeholder="인증번호 입력">
+		                        <input type="hidden" id="auth-btn" value="확인">
+		                        <span id="auth-msg"></span>
 		                    </td>
 		                </tr>
 		                <tr>
@@ -92,7 +101,7 @@
 		                </tr>
 		            </table>
 		            <div id="button-area">
-		                <input type="submit" value="가입하기">
+		                <input type="submit" value="가입하기" onclick="return validation()">
 		            </div>
 		        </form>
 		    </section>

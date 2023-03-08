@@ -138,3 +138,21 @@ table{
         #button-area input:hover{
             cursor: pointer;
         }
+        
+/* 이메일 인증번호 입력form */
+#auth-code{
+    width: 120px;
+    height: 25px;
+    border: 1px solid #ccc;
+    font-weight: lighter;
+    padding: 10px;
+    margin-top: 5px;
+}
+		#auth-code:focus{
+			outline: 1px solid rgb(255, 0, 0);
+		}
+#auth-btn{
+	width: 50px;
+	height: 40px;
+	margin-top: 5px;
+}

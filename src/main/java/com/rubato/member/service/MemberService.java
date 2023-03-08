@@ -17,6 +17,20 @@ public interface MemberService {
 	 * @return int
 	 */
 	public int insertMember(Member member);
+
+	/**
+	 * 아이디로 회원 조회 Service
+	 * @param memberId
+	 * @return Member
+	 */
+	public Member selectMemberById(String memberId);
+
+	/**
+	 * 닉네임으로 회원 조회 Service
+	 * @param memberNickname
+	 * @return Member
+	 */
+	public Member selectMemberByNickname(String memberNickname);
 	
 	
 }

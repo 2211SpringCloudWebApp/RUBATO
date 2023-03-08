@@ -19,4 +19,20 @@ public interface MemberStore {
 	 * @return int
 	 */
 	public int insertMember(SqlSession session, Member member);
+
+	/**
+	 * 아이디로 회원 조회 Store
+	 * @param session
+	 * @param memberId
+	 * @return Member
+	 */
+	public Member selectMemberById(SqlSession session, String memberId);
+
+	/**
+	 * 닉네임으로 회원 조회 Store
+	 * @param session
+	 * @param memberNickname
+	 * @return Member
+	 */
+	public Member selectMemberByNickname(SqlSession session, String memberNickname);
 }

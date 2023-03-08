@@ -12,10 +12,21 @@
 		<result property="regDate" column="REG_DATE"/>
 		<result property="modDate" column="MOD_DATE"/>
 		<result property="status" column="STATUS"/>
+		<result property="memberPoint" column="MEMBER_POINT"/>
 	</resultMap>
 	
+	<!-- select -->
+	<select id="selectMemberById" resultMap="memberResultMap">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ADDR, REG_DATE, MOD_DATE, STATUS, MEMBER_POINT FROM MEMBER WHERE MEMBER_ID=#{memberId}
+	</select>
+	<select id="selectMemberByNickname" resultMap="memberResultMap">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ADDR, REG_DATE, MOD_DATE, STATUS, MEMBER_POINT FROM MEMBER WHERE MEMBER_NICKNAME=#{memberNickname}
+	</select>
+	
+	<!-- insert -->
 	<insert id="insertMember">
 		INSERT INTO MEMBER VALUES(#{memberId}, #{memberPwd}, #{memberName}, #{memberNickname}, #{memberEmail}, #{memberPhone}, #{memberAddr},
 									DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
 </mapper>
