@@ -1,0 +1,227 @@
+#container {
+    width: 1200px;
+    height: 1000px;  
+    margin: 0 auto; 
+}
+#main-layer1 {
+    height: 500px;
+    width: 1200px; 
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 30px;
+    background-color: #cccccc44;
+}
+    #main-info {
+        width: 500px;
+        height: 450px;
+        float: left;
+        padding-left: 80px;
+        padding-top: 50px;
+    }
+        #main-slogan {
+            width: 75%;
+            font-size: 21px;
+            font-style: italic;
+            border-bottom: 3px solid white;
+        }
+        #main-info div{
+            background-color: #2fbdb12d;
+            width: 85%;
+            text-align: center;
+            line-height: 2.5;
+            font-size: 18px;
+            color: rgb(63, 63, 63);
+            padding: 10px;
+            border-radius: 7px;
+        }
+    #main-slide {
+        width: 500px;
+        height: 450px;
+        float: left;
+    }
+#main-layer2 {
+    height: 400px;
+    width: 1200px;
+    font-family: 'Noto Sans KR', sans-serif;
+    border-top: 3px solid #3eeadc96;
+    margin-top: 50px;
+}
+    #main2-title {
+        height: 50px;
+        width: 1200px;
+        padding-top: 30px;
+        text-align: center;
+        font-size: 22px;
+    }
+    #main2-img {
+        height: 300px;
+        width: 1200px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .lesson-hot {
+        width: 400px;
+        height: 200px;
+        float: left;
+    }
+        .lesson-hot div:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+        } 
+        .lesson-hot p {
+            background-color: #2fbdb16b;
+            font-size: 19px;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+        .lesson-hot div {
+            width: 400px;
+            height: 200px;
+            text-align: center;
+            color: white;
+            font-size: 17px;
+            font-weight: 900;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+        #lesson-1 div{
+            background-image: url("/resources/images/common/pianoside.jpg");
+            background-size: 100%;    
+        }     
+        #lesson-2 div{
+            background-image: url("/resources/images/common/mic.jpg");
+            background-size: 100%;
+        }
+     
+----------------------하단
+       
+#underContainer{
+    width: 1200px;
+    margin: 100px auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.quickS{
+    width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+}
+
+.quickText{
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.quickText2{
+    margin-left: 50px;
+}
+
+.quickS img{
+    width: 120px;
+    height: 120px;
+    margin-top: 40px;
+    margin-left: 110px;
+}
+
+#quickBox1:hover{
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+}
+
+#quickBox2:hover{
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+}
+
+#quickBox3:hover{
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+}
+
+#quickBox4:hover{
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+}
+
+#quickBox1{
+    width: 250px;
+    height: 300px;
+    background-color: #B2A4FF;
+    box-shadow: 5px 5px 10px 2px #ccc;
+}
+#quickBox2{
+    width: 250px;
+    height: 300px;
+    background-color: #FFB4B4;
+    box-shadow: 5px 5px 10px 2px #ccc;
+}
+#quickBox3{
+    width: 250px;
+    height: 300px;
+    background-color: #FFDEB4;
+    box-shadow: 5px 5px 10px 2px #ccc;
+}
+#quickBox4{
+    width: 250px;
+    height: 300px;
+    background-color: #FFF9CA;
+    box-shadow: 5px 5px 10px 2px #ccc;
+}
+
+#siteGuide{
+    width: 350px;
+    height: 60px;
+    text-align: center;
+    color: #4b4b4b;
+}
+
+.divLine{
+    width: 1200px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    margin-top: -10px;
+}
+
+#underBox1{
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(45deg, #39b9af44, #46C2CB);
+    box-shadow: 5px 5px 10px 2px #ccc;
+    color: white;
+}
+
+#underBox2{
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(45deg, #39b9af44, #46C2CB);
+    box-shadow: 5px 5px 10px 2px #ccc;
+    color: white;
+}
+
+#underBox3{
+    width: 350px;
+    height: 200px;
+    background: linear-gradient(45deg, #39b9af44, #46C2CB);
+    box-shadow: 5px 5px 10px 2px #ccc;
+    color: white;
+}
+
+#underBox1 h3,p {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#underBox2 h3,p{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#underBox3 h3,p{
+    margin-left: 20px;
+    margin-top: 20px;
+}
