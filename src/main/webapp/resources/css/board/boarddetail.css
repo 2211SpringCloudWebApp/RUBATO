@@ -1,0 +1,167 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#contentContainer{
+    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 1000px;
+}
+
+#contentDetail h1{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.detailLine{
+    width: 1000px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#contentTop{
+    width: 1000px;
+    height: 40px;
+    text-align: center;
+    
+}
+
+#contentCategory, #contentSubject, #contentWriter, #contentDate, #contentCount, #contentComment {
+    float: left;
+}
+
+#contentCategory{
+    width: 10%;
+}
+
+#contentSubject{
+    width: 45%;
+}
+
+#contentWriter{
+    width: 15%;
+}
+
+#contentDate{
+    width: 10%;
+}
+
+#contentCount{
+    width: 10%;
+}
+
+#contentComment{
+    width: 10%;
+}
+
+#contentText{
+    width: 1000px;
+    height: 500px;
+    --border: 1px solid black;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+#commentDiv{
+    height: 50px;
+}
+
+#boardModify{
+    width: 50px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+}
+
+
+#boardModify:hover{
+    background-color: #2FBDB1;
+    color: white;
+}
+
+#boardList{
+    margin-left: 830px;
+    width: 50px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+}
+
+#boardList:hover{
+    background-color: #2FBDB1;
+    color: white;
+}
+
+#boardReport{
+    margin-left: 10px;
+    margin-bottom: 50px;
+    width: 50px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+#boardReport:hover{
+    background-color: gray;
+    color: white;
+}
+
+#commentWriter, #commentDate{
+    float: left;
+    width: 60px;
+    margin-right: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#commentDiv{
+    height: 100px;
+}
+
+#commentWD{
+    clear: both;
+}
+
+#commentWD input[type=text]{
+    width: 800px;
+    height: 50px;
+    border: none;
+    margin-bottom: 40px;
+
+}
+
+#commentSub input[type=textarea]{
+    width: 890px;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    float: left;
+}
+
+#commentSub input[type=submit]{
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
