@@ -42,7 +42,7 @@
     height: 400px;
     width: 1200px;
     font-family: 'Noto Sans KR', sans-serif;
-    border-top: 3px solid #3eeadc96;
+    border-top: 1px solid #2fbdb1;
     margin-top: 50px;
 }
     #main2-title {
@@ -93,9 +93,11 @@
             background-image: url("/resources/images/common/mic.jpg");
             background-size: 100%;
         }
-     
-----------------------하단
-       
+        
+        
+--------------하단부
+
+
 #underContainer{
     width: 1200px;
     margin: 100px auto;
@@ -177,7 +179,7 @@
     width: 350px;
     height: 60px;
     text-align: center;
-    color: #4b4b4b;
+    margin: 0 auto;
 }
 
 .divLine{

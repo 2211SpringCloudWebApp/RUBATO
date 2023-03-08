@@ -1,0 +1,59 @@
+#create-main {
+    width: 800px;
+    margin: 0 auto;
+    height: 1000px;
+    line-height: 5;
+}
+    #create-main fieldset {
+        border: 1px solid #ccc;
+    }
+    #create-main label {
+        width: 200px;
+        text-align: left;
+        float: left;
+        padding-left: 10px;
+        font-size: 16px;
+    }
+    #create-main legend {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 900;
+        color: #2fbdb1;
+    }
+    #lesson-create {
+        list-style-type: none;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+        #lesson-create input {
+            height: 40px;
+            width: 300px;
+        }
+        #lesson-create input:focus
+        , #lesson-create select:focus
+        , #lesson-create textarea:focus {
+            background-color: #62d3952a;
+        }
+        #lesson-create select {
+            width: 100px;
+            height: 40px;
+        }
+#create-btns {
+    text-align: center;
+}
+    .create-btn {
+        width: 120px;
+        height: 50px;
+        background-color: #2fbdb1;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-left: 20px;
+        margin-top: 10px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .create-btn:hover {
+        cursor: pointer;
+        background-color: #ccc;
+    }
