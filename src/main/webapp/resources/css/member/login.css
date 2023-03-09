@@ -1,0 +1,117 @@
+@charset "UTF-8";
+#header-container {
+    width: 1200px;
+    height: 170px;  
+    margin: 0 auto; 
+    border-bottom: 1px solid #2fbdb1;
+}
+#header-container ul li{
+    list-style-type: none;
+}
+#navigator {
+    width: 700px;
+    height: 50px;
+    margin-top: 120px;
+    padding: 0;
+    float: left;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+    .item {
+        float: left;
+        width: 33%;
+        text-align: center;
+        line-height: 50px;
+    }
+    #navigator a{
+        display: block;
+    }
+    #navigator a:link, #navigator a:visited  {
+        text-decoration: none;
+        color: rgb(90, 107, 106);
+        font-weight: 700;
+    }
+    #navigator a:hover {
+        font-weight: bold;
+        font-size: 95%;
+        border-left: 1px solid #2fbdb1;
+        border-right: 1px solid #2fbdb1;
+        cursor: pointer;
+    }
+    #logo-img {
+        width: 150px;
+        height: 150px;
+        background-image: url("/resources/images/common/logo.png");
+        background-size: 100%;
+        margin-top: 30px;
+        margin-right: 50px;
+        float: left;
+    }
+​
+#login-wrapper {
+    width: 250px;
+    float: right;
+}
+    #login-wrapper button {
+        margin-top: 120px;
+        width: 120px;
+        height: 40px;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 95%;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    #login-btn {
+        background-color: white;
+        color: #6b6b6b;
+        border: 1px solid #2fbdb1;
+    }
+    #join-btn {
+        background-color: #2fbdb1;
+        color: white;
+        border: none;
+    }
+    #login-btn:hover, #join-btn:hover {
+        cursor: pointer;
+        background-color: #ccc;
+        color: white;
+        border: none;
+    }
+
+.main {
+    width: 250px;
+    --height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+.logo-main {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#login1 {
+    width: 100%;
+    background-color:#2FBDB1;
+    border-color: transparent;
+    color: white;
+}
+
+.account {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    padding: 3px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+#alert {
+    border-color: transparent;
+}
