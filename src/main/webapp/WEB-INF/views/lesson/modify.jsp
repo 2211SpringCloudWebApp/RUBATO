@@ -1,35 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레슨 등록</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/lesson/create.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css">
-    <link rel="stylesheet" href="/resources/css/common/footer.css">
-</head>
-<body> 
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    <div id="create-main">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>레슨 수정</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/resources/css/lesson/modify.css">
+        <link rel="stylesheet" href="/resources/css/common/header.css">
+        <link rel="stylesheet" href="/resources/css/common/footer.css">
+	</head>
+	<body>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+		
+         <div id="modify-main">
         <fieldset>
-            <legend>[ Rubato 선생님 되기 ]</legend>
-            <form action="/lesson/create" method="post">
-                <ul id="lesson-create">
+            <legend>[ 레슨 정보 수정하기 ]</legend>
+            <form action="/lesson/modify" method="post">
+           		<input type="hidden" name="lessonNo" value="${lesson.lessonNo }">
+                <ul id="lesson-modify">
                     <li>
                         <label for="lesson-title">레슨 이름</label>
-                        <input type="text" id="lesson-title" name="lessonTitle">
+                        <input type="text" id="lesson-title" name="lessonTitle" value="${lesson.lessonTitle}">
                     </li>
                     <li>
+                        <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-area">레슨 지역</label>
                         <select name="lessonArea" id="lesson-area">
-                            <option value="서울">서울</option>
-                            <option value="부산" selected>부산</option>
+                           <option value="서울">서울</option>
+                            <option value="부산">부산</option>
                             <option value="대구">대구</option>
                             <option value="인천">인천</option>
                             <option value="광주">광주</option>
@@ -49,9 +50,10 @@
                         </select>
                     </li>
                     <li>
+                        <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-price">희망 금액 (회당)</label>
                         <select name="lessonPrice" id="lesson-price">
-                            <option value="0~3만원" selected>0~3</option>
+                            <option value="0~3만원">0~3</option>
                             <option value="4~6만원">4~6</option>
                             <option value="7~9만원">7~9</option>
                             <option value="10~15만원">10~15</option>
@@ -60,24 +62,33 @@
                     </li>
                     <li>
                         <label for="lesson-plan">유효 일정</label>
-                        <input type="text" id="lesson-plan" name="lessonPlan">
+                        <input type="text" id="lesson-plan" name="lessonPlan" value="${lesson.lessonPlan}">
                     </li>
                     <li>
                         <label for="lesson-pre">한줄 소개</label>
-                        <input type="text" id="lesson-pre" name="lessonPre" placeholder="목록에서 보일 한줄 소개를 적어주세요.">
+                        <input type="text" id="lesson-pre" name="lessonPre" value="${lesson.lessonPre}">
                     </li>
                     <li>
                         <label for="lesson-content">상세 소개</label>
-                        <textarea name="lessonContent" id="lesson-content" cols="45" rows="10" placeholder="상세한 소개로 매칭확률 UP!"></textarea>
+                        <textarea name="lessonContent" id="lesson-content" cols="45" rows="10">${lesson.lessonContent}</textarea>
                     </li>  
                 </ul>
-                <div id="create-btns">
-                    <input type="submit" value="레슨 생성" class="create-btn">
-                    <input type="reset" value="초기화" class="create-btn">
+                <div id="modify-btns">
+                    <input type="submit" value="수정하기" class="modify-btn">
+                    <input type="button" value="삭제하기" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
                 </div>
             </form>
         </fieldset>
-    </div>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
+        </div>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+        
+        
+        <script>
+            function removeLesson(lessonNo) {
+                if(confirm("레슨을 삭제하시겠습니까?")) {
+                    location.href="/lesson/remove?lessonNo="+lessonNo;
+                }
+            }
+        </script>
+	</body>
 </html>

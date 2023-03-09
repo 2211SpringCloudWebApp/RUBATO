@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,20 +22,23 @@
             <h2>레슨 목록</h2>
         </div>
         <div id="list-content">
-            <table id="list-detail"><a href="해당글">
-                <tr>
-                    <td colspan="4">제목</td>
-                </tr>
-                <tr>
-                    <td  colspan="4">한줄소개</td>
-                </tr>
-                <tr>
-                    <td>지역</td>
-                    <td>금액</td>
-                    <td>시간</td>
-                    <td>작성자</td>
-                </tr></a>
-            </table>
+            <c:forEach items="${lList}" var="lesson" varStatus="i">   
+                <table id="list-detail">
+                    <tr>
+                        <td colspan="4"><a href="/lesson/detail?lessonNo=${lesson.lessonNo}" id="detailLink"> ${lesson.lessonTitle} </a></td>
+                    </tr>
+                    <tr>
+                        <td  colspan="4">${lesson.lessonPre}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>${lesson.lessonArea}</td>
+                        <td>${lesson.lessonPrice}</td>
+                        <td>${lesson.lessonPlan}</td>
+                        <td>${lesson.memberId}</td>
+                    </tr>
+                </table>
+            </c:forEach>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

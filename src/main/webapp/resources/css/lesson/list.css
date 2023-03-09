@@ -13,15 +13,20 @@
 #list-content {
     width: 700px;
     margin: 0 auto;
-    line-height: 3;
-    border-bottom: 1px solid #ccc;
+    line-height: 3;  
     margin-bottom: 70px;
 }
-    #list-content table {
-        width: 600px;
-        margin: 0 auto;
-        margin-bottom: 20px;
-    }
-    #list-detail:hover {
+    #detailLink:link, #detailLink:visited {
+        text-decoration: none;
+        color: black;
+    } 
+    #detailLink:hover {
         cursor: pointer;
     }
+#list-detail {
+    width: 600px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;  
+}

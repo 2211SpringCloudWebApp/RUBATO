@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-	<meta charset="UTF-8">
-	<title>Footer</title>
-		    <link rel="preconnect" href="https://fonts.googleapis.com">
-		    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/resources/css/common/footer.css">
-	</head>
-	<body>
+
 		<div id="footerContainer">
 	    <div id="footerLine"></div>
 	    <div id="footerText" >
@@ -21,5 +11,3 @@
 		    <p><b>Copyright © 2023 Rubato All Right Reserved.</b></p>
 	    </div>
 	    </div>
-	</body>
-</html>

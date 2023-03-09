@@ -22,21 +22,21 @@
             <form action="">
                 <ul id="lesson-apply">
                     <li>
-                        <label for="lesson-title">레슨 이름</label>
-                        <input type="text" id="lesson-title" name="lesson-title">
+                        <label for="lessonTitle">레슨 이름</label>
+                        <input type="text" id="lesson-title" name="lessonTitle">
                     </li>
                     <li>
-                        <label for="apply-price">희망 금액 (회당)</label>
-                        <input type="text" id="apply-price" name="apply-price" placeholder=""> 만원 / 1회 레슨당 <br>
+                        <label for="applyPrice">희망 금액 (회당)</label>
+                        <input type="text" id="apply-price" name="applyPrice" placeholder=""> 만원 / 1회 레슨당 <br>
                         <p><small>※ 선생님이 제시한 금액 내에서 요청해야 매칭이 가능해요</small></p>
                     </li>
                     <li style="margin-top: -30px;">
-                        <label for="apply-plan">일정 요청</label>
-                        <input type="text" id="apply-plan" name="apply-plan">
+                        <label for="applyPlan">일정 요청</label>
+                        <input type="text" id="apply-plan" name="applyPlan">
                     </li>
                     <li>
-                        <label for="apply-content">요청사항</label>
-                        <textarea name="apply-content" id="apply-content" cols="45" rows="10" placeholder="원하는 수업 내용을 자세히 적어주세요!"></textarea>
+                        <label for="applyContent">요청사항</label>
+                        <textarea name="applyContent" id="apply-content" cols="45" rows="10" placeholder="원하는 수업 내용을 자세히 적어주세요!"></textarea>
                     </li>        
                 </ul>
             </fieldset>
