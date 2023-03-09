@@ -30,6 +30,13 @@ public class Member {
 		this.memberAddr = memberAddr;
 	}
 	
+	// 관리자 로그인 사용
+	public Member(String memberId, String memberPwd) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -40,8 +47,7 @@ public class Member {
 				+ "]";
 	}
 
-	
-	
+
 	public String getMemberId() {
 		return memberId;
 	}
