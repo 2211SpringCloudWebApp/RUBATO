@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ManagerMapper">
+	<resultMap type="Member" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberAddr" column="MEMBER_ADDR"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="modDate" column="MOD_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="memberPoint" column="MEMBER_POINT"/>
+	</resultMap>
+	
+	<select id="selectMembers" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}
+	</delete>
+	
+	
+	
+</mapper>

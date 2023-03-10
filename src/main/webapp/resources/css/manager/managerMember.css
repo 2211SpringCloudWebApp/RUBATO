@@ -7,6 +7,7 @@ hr {
     margin: 0;
     background:#2FBDB1;
     height:1px;
+    width : 2000px;
     border:0;
 }
 
@@ -15,7 +16,7 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 #main-menu {
-    width: 15%;
+    width: 13%;
 }
 #main-menu ul{
     background-color: #2fbdb131;
@@ -23,7 +24,7 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-    height: 600px;
+    height: 800px;
 }
 #main-menu li {
     margin-left: 20px;
@@ -63,14 +64,18 @@ main{
         border-radius: 8px;
 }
 
+
+/* 테이블 */
+
 table {
   border-collapse: separate;
   border-spacing: 0;
-  width: 100%;
+  width: 1700px;
 }
+
 th,
 td {
-  padding: 6px 15px;
+  padding: 5px 10px;
 }
 th {
   background: #2fbdb1a2;
