@@ -2,7 +2,7 @@ package com.rubato.lesson.domain;
 
 import java.sql.Timestamp;
 
-public class LessonApply {
+public class Apply {
 	
 	private int lessonNo;
 	private String memberId;
@@ -11,9 +11,9 @@ public class LessonApply {
 	private String applyContent;
 	private Timestamp applyDate;
 	
-	public LessonApply() {}
+	public Apply() {}
 	
-	public LessonApply(int lessonNo, String memberId, String applyPrice, String applyPlan, String applyContent,
+	public Apply(int lessonNo, String memberId, String applyPrice, String applyPlan, String applyContent,
 			Timestamp applyDate) {
 		super();
 		this.lessonNo = lessonNo;
@@ -24,6 +24,12 @@ public class LessonApply {
 		this.applyDate = applyDate;
 	}
 	
+	public Apply(int lessonNo, String memberId) {
+		super();
+		this.lessonNo = lessonNo;
+		this.memberId = memberId;
+	}
+
 	@Override
 	public String toString() {
 		return "LessonApply [lessonNo=" + lessonNo + ", memberId=" + memberId + ", applyPrice=" + applyPrice

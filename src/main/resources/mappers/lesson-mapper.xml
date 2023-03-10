@@ -25,6 +25,7 @@
 		DELETE FROM LESSON WHERE LESSON_NO = #{lessonNo}
 	</delete>
 	
+	<!-- select -->
 	<select id="selectOneByNo" resultMap="lessonResultMap">
 		SELECT * FROM LESSON WHERE LESSON_NO = #{lessonNo}
 	</select>

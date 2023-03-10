@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.store.LessonStore;
 
 @Repository
@@ -41,4 +42,29 @@ public class LessonStoreImpl implements LessonStore{
 		return lList;
 	}
 
+/*---------------------------------------------------------------------------*/
+	
+	@Override //신청글 등록
+	public int createApply(SqlSession session, Apply apply) {
+		int result = session.insert("ApplyMapper.insertApply", apply);
+		return result;
+	}
+
+	@Override //신청글 삭제
+	public int removeApply(SqlSession session, Apply apply) {
+		int result = session.delete("ApplyMapper.deleteApply", apply);
+		return result;
+	}
+
+	@Override
+	public Apply selectOneApply(SqlSession session, Apply user) {
+		Apply apply = session.selectOne("ApplyMapper.selectOneApply", user);
+		return apply;
+	}
+
+	@Override
+	public List<Apply> selectApplys(SqlSession session, String memberId) {
+		List<Apply> aList = session.selectList("ApplyMapper.selectApplys", memberId);
+		return null;
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.lesson.store.LessonStore;
 
@@ -39,10 +40,31 @@ public class LessonServiceImpl implements LessonService{
 		return lStore.modifyLesson(session, lesson);
 	}
 
-	@Override
+	@Override //레슨글 목록
 	public List<Lesson> selectLessons() {
-		List<Lesson> lList = lStore.selectLessons(session);
-		return lList;
+		return lStore.selectLessons(session);
+	}
+
+/*--------------------------------------------------------------------------*/
+	
+	@Override //신청글 등록
+	public int createApply(Apply apply) {
+		return lStore.createApply(session, apply);
+	}
+
+	@Override //신청글 삭제
+	public int removeApply(Apply apply) {
+		return lStore.removeApply(session, apply);
+	}
+
+	@Override //신청글 찾기
+	public Apply selectOneApply(Apply user) {
+		return lStore.selectOneApply(session, user);
+	}
+
+	@Override //신청글 목록
+	public List<Apply> selectApplys(String memberId) {
+		return lStore.selectApplys(session, memberId);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.rubato.lesson.service;
 import java.util.List;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.Apply;
 
 public interface LessonService {
 
@@ -39,5 +40,34 @@ public interface LessonService {
 	 * @return
 	 */
 	public List<Lesson> selectLessons();
+
+/*----------------------------------------------------------------------*/
+	
+	/**
+	 * 신청글 등록 Service
+	 * @param apply
+	 * @return int
+	 */
+	public int createApply(Apply apply);
+
+	/**
+	 * 신청글 삭제 Service
+	 * @param apply
+	 * @return int
+	 */
+	public int removeApply(Apply apply);
+
+	/**
+	 * 신청글 찾기 Service
+	 * @param user
+	 * @return
+	 */
+	public Apply selectOneApply(Apply user);
+
+	/**
+	 * 신청글 목록 Service
+	 * @return List<Apply>
+	 */
+	public List<Apply> selectApplys(String memberId);
 
 }

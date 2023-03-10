@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레슨 상세</title>
+    <title>RUBATO - 레슨상세</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
         <div id="pre-intro">${lesson.lessonPre}</div>
         <div id="lesson-opt">
             <div>${lesson.lessonArea}</div>
-            <div>${lesson.lessonPrice}</div>
+            <div>${lesson.lessonPrice} 만원 / 1회</div>
             <div>${lesson.lessonPlan}</div>
         </div>
         <div id="detail-intro">
@@ -34,8 +34,8 @@
             </fieldset>
         </div>
         <div id="detail-btns">
-            <button onclick="">신청하기</button>
-            <button onclick="">목록으로</button>
+            <button onclick="location.href='/apply/create?lessonNo=${lesson.lessonNo}'">신청하기</button>
+            <button onclick="location.href='/lesson/list'">목록으로</button>
         </div>
         <a href="/lesson/modify?lessonNo=${lesson.lessonNo}">수정</a>
     </div>

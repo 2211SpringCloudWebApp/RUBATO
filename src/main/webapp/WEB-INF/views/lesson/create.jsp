@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레슨 등록</title>
+    <title>RUBATO - 레슨등록</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
@@ -28,34 +28,34 @@
                     <li>
                         <label for="lesson-area">레슨 지역</label>
                         <select name="lessonArea" id="lesson-area">
-                            <option value="서울">서울</option>
-                            <option value="부산" selected>부산</option>
-                            <option value="대구">대구</option>
-                            <option value="인천">인천</option>
-                            <option value="광주">광주</option>
-                            <option value="대전">대전</option>
-                            <option value="울산">울산</option>
-                            <option value="세종">세종</option>
-                            <option value="강원">강원</option>
-                            <option value="경기북부">경기북부</option>
-                            <option value="경기남부">경기남부</option>
-                            <option value="경남">경남</option>
-                            <option value="경북">경북</option>
-                            <option value="전남">전남</option>
-                            <option value="전북">전북</option>
-                            <option value="충남">충남</option>
-                            <option value="충북">충북</option>
-                            <option value="제주">제주</option>
+                            <option value="se">서울</option>
+                            <option value="bu">부산</option>
+                            <option value="daegu">대구</option>
+                            <option value="in">인천</option>
+                            <option value="gwang">광주</option>
+                            <option value="daejeon">대전</option>
+                            <option value="ul">울산</option>
+                            <option value="jong">세종</option>
+                            <option value="kang">강원</option>
+                            <option value="northkk">경기북부</option>
+                            <option value="southk">경기남부</option>
+                            <option value="northks">경북</option>
+                            <option value="southks">경남</option>
+                            <option value="northjl">전북</option>
+                            <option value="southjl">전남</option>
+                            <option value="northcc">충북</option>
+                            <option value="southcc">충남</option>             
+                            <option value="jeju">제주</option>
                         </select>
                     </li>
                     <li>
                         <label for="lesson-price">희망 금액 (회당)</label>
                         <select name="lessonPrice" id="lesson-price">
-                            <option value="0~3만원" selected>0~3</option>
-                            <option value="4~6만원">4~6</option>
-                            <option value="7~9만원">7~9</option>
-                            <option value="10~15만원">10~15</option>
-                            <option value="15만원이상">15~</option>
+                            <option value="0~3" selected>0~3</option>
+                            <option value="4~6">4~6</option>
+                            <option value="7~9">7~9</option>
+                            <option value="10~15">10~15</option>
+                            <option value="15~">15~</option>
                         </select> 만원 / 1회 레슨당
                     </li>
                     <li>
