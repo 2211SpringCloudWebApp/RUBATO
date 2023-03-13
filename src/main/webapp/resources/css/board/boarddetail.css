@@ -40,7 +40,7 @@
 }
 
 #contentSubject{
-    width: 45%;
+    width: 40%;
 }
 
 #contentWriter{
@@ -48,7 +48,7 @@
 }
 
 #contentDate{
-    width: 10%;
+    width: 15%;
 }
 
 #contentCount{
@@ -60,23 +60,46 @@
 }
 
 #contentText{
-    width: 1000px;
+    width: 800px;
     height: 500px;
-    --border: 1px solid black;
     margin-bottom: 50px;
     margin-top: 30px;
+    display: block;
+    justify-items: center;
+}
+
+#contentText input[type=textarea]{
+	border: none;
 }
 
 #commentDiv{
-    height: 50px;
+    height: 120px;
 }
 
-#boardModify{
+#boardList{
+    margin-left: 10px;
     width: 50px;
     height: 30px;
     display: inline-block;
     border: 1px solid #2FBDB1;
     background-color: white;
+    cursor: pointer;
+}
+
+#boardList:hover{
+    background-color: #2FBDB1;
+    color: white;
+}
+
+
+#boardModify{
+    margin-left: 10px;
+    width: 50px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+    cursor: pointer;
 }
 
 
@@ -85,16 +108,17 @@
     color: white;
 }
 
-#boardList{
-    margin-left: 830px;
+#boardDelete{
+    margin-left: 745px;
     width: 50px;
     height: 30px;
     display: inline-block;
-    border: 1px solid #2FBDB1;
+    border: 1px solid grey;
     background-color: white;
+    cursor: pointer;
 }
 
-#boardList:hover{
+#boardDelete:hover{
     background-color: #2FBDB1;
     color: white;
 }
@@ -107,6 +131,7 @@
     display: inline-block;
     border: 1px solid #ccc;
     background-color: white;
+    cursor: pointer;
 }
 
 #boardReport:hover{
@@ -138,7 +163,7 @@
 
 }
 
-#commentSub input[type=textarea]{
+#commentSub input[type=text]{
     width: 890px;
     height: 50px;
     margin-top: 20px;
@@ -155,7 +180,23 @@
     border: 1px solid #2FBDB1;
     background-color: white;
     margin-top: 20px;
+    cursor: pointer;
 }
+
+#commentSub input[type=submit]:hover{
+    background-color: #2FBDB1;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

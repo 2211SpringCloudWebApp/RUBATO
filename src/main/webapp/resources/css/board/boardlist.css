@@ -19,11 +19,16 @@
     text-align: center;
 }
 
+#boardListUl{
+	margin-bottom: 20px;
+}
+
 .listLine{
     width: 1000px;
     border-top: solid 0.5px #ccc;
     margin: 0 auto;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 
@@ -49,6 +54,15 @@
 
 #ulTable {margin-top:10px;}
 
+#boardTitlecss{
+    text-decoration: none;
+    color: black;
+}
+
+#boardTitlecss a:link, a:visited{
+    text-decoration: none;
+    color: black;
+}
 
 #ulTable > li:first-child > ul > li {
     background-color:#2FBDB1;
@@ -65,7 +79,7 @@
 #ulTable > li > ul > li { 
     float:left;
     font-size:10pt;
-    border-bottom:1px solid #ccc;
+    --border-bottom:1px solid #ccc;
     vertical-align:baseline;
 }    
 
@@ -80,14 +94,27 @@
     text-align : center;
 }
 
-#divPaging {
-    clear:both; 
-    margin:0 auto; 
-    width:300px; 
-    height:50px;
+#naviDIV{
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    position: absolute;
 }
 
-#divPaging :hover{
+#divPaging {
+    margin:0 auto; 
+    width:300px; 
+    height:100px;
+}
+
+.naviBtn{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.naviBtn:hover{
     background-color: #2FBDB1;
     color: black;
 }
@@ -98,7 +125,10 @@
     font-size: 12px;
     margin-left: 1px;
     padding: 1px 10px;
-    margin-top: 30px;
+    --margin-top: 30px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 25px;
 }
 
 #divPaging a:first-child{
@@ -122,7 +152,7 @@
 
 #liSearchOption input[type=button] {
     border: 1px solid #2FBDB1;
-    width: 40px;
+    width: 60px;
     height: 30px;
     background-color: white;
     cursor: pointer;
@@ -136,7 +166,7 @@
 
 #liSearchOption input[type=submit] {
     border: 1px solid #2FBDB1;
-    width: 60px;
+    width: 40px;
     height: 30px;
     background-color: white;
     cursor: pointer;
@@ -160,3 +190,11 @@
     height: 30px;
     color: #2FBDB1;
 }
+
+#searchDIV{
+	margin-top: 50px;
+}
+
+
+
+
