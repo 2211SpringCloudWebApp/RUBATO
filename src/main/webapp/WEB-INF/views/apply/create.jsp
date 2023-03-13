@@ -28,9 +28,9 @@
                     </li>
                     <li>
                         <label for="apply-price">희망 금액 (회당)</label>
-                        <input type="text" id="apply-price" name="applyPrice" placeholder=""> 만원 / 1회 레슨당 <br>
+                        <input type="text" id="apply-price" name="applyPrice" placeholder=""> 만원<br>
                         <p><small>
-                            ※ 선생님이 제시한 <strong style="color: #2fbdb1; font-size: 1.05em;">${lesson.lessonPrice}</strong> 내에서 요청해야 매칭이 가능해요.
+                            ※ 선생님이 제시한 금액 >>> <strong style="color: #2fbdb1; font-size: 1.05em;">${lesson.lessonPrice} 만원</strong>
                         </small></p>
                     </li>
                     <li style="margin-top: -30px;">

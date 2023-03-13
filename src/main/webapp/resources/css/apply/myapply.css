@@ -22,6 +22,9 @@
     } 
     #detailLink:hover {
         cursor: pointer;
+        text-decoration-line: underline;
+        text-decoration-color: #2fbdb1b9;
+        text-decoration-thickness: 1px;
     }
 #list-detail {
     width: 600px;
@@ -30,3 +33,19 @@
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;  
 }
+#remove-btn {
+    width: 100px;
+    height: 30px;
+    background-color: #2fbdb1;
+    color: white;
+    border: none;
+    margin: 50px;  
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+    #remove-btn:hover {
+        cursor: pointer;
+        background-color: #ccc;
+    }

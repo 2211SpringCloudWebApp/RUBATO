@@ -40,22 +40,19 @@ public class LessonController {
 			, @ModelAttribute Lesson lesson
 			, Model model) {
 		try {
-			Member member = new Member(); //삭제필
-			member.setMemberId("음악조아"); //삭제필
-			HttpSession session = request.getSession(); //세션 아이디 가져오기
-			session.setAttribute("member", member); //삭제필
-			if(session != null) {
-				String memberId = ((Member)session.getAttribute("member")).getMemberId();
+			HttpSession session = request.getSession();
+			if(session.getAttribute("loginUser") != null) {
+				String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 				lesson.setMemberId(memberId);				
+				int result = lService.createLesson(lesson);
+				if(result > 0) {
+					return "redirect:/lesson/list";
+				} else {
+					model.addAttribute("msg", "레슨글 등록 실패");
+					return "common/error";
+				}
 			} else {
 				model.addAttribute("msg", "로그인 후 레슨을 만들 수 있어요.");
-				return "common/error";
-			}
-			int result = lService.createLesson(lesson);
-			if(result > 0) {
-				return "redirect:/lesson/list";
-			} else {
-				model.addAttribute("msg", "레슨글 등록 실패");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -148,7 +145,7 @@ public class LessonController {
 	}
 	
 	/*===================================================
-	 * 레슨 목록 View
+	 * 레슨 목록 전체 View
 	 *===================================================*/
 	@RequestMapping(value = "/lesson/list", method = RequestMethod.GET)
 	public String listView( // 레슨 목록 View (list.jsp)
@@ -159,7 +156,31 @@ public class LessonController {
 				model.addAttribute("lList", lList);
 				return "lesson/list";
 			} else {
-				model.addAttribute("msg", "텅");
+				model.addAttribute("msg", "생성레슨이 없어요. 레슨을 만들어 루바토의 선생님이 되어보세요!");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	/*===================================================
+	 * 나의 레슨 목록 View
+	 *===================================================*/
+	@RequestMapping(value = "/lesson/mylesson", method = RequestMethod.GET)
+	public String myLessonView(
+			HttpServletRequest request
+			, Model model) {
+		try {
+			HttpSession session = request.getSession();
+			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+			List<Lesson> lList = lService.selectMyLessons(memberId);
+			if(!lList.isEmpty()) {
+				model.addAttribute("lList", lList);
+				return "/lesson/mylesson";
+			} else {
+				model.addAttribute("msg", "레슨 내역이 없어요");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -175,9 +196,9 @@ public class LessonController {
 	 * 신청글 작성 View, Logic
 	 *===================================================*/
 	@RequestMapping(value = "/apply/create", method = RequestMethod.GET)
-	public String applyView(
+	public String applyView(  //레슨 신청 View (apply.jsp)
 			@RequestParam("lessonNo") int lessonNo
-			, Model model) {  //레슨 신청 View (apply.jsp)
+			, Model model) { 
 		Lesson lesson = lService.selectOneByNo(lessonNo);
 		model.addAttribute("lesson", lesson);
 		return "apply/create";
@@ -193,18 +214,25 @@ public class LessonController {
 			if(session.getAttribute("loginUser") != null) {
 				String memberId =((Member)session.getAttribute("loginUser")).getMemberId();
 				apply.setMemberId(memberId);
-				int result = lService.createApply(apply);
-				if(result > 0) {
-					return "apply/myapply";
+				Apply check = lService.selectOneApply(apply);
+				if(check == null ) {
+					int result = lService.createApply(apply);
+					if(result > 0) {
+						return "redirect:/apply/myapply";
+					} else {
+						model.addAttribute("msg", "레슨글 등록 오류. 다시 시도해주세요!");
+						return "common/error";
+					}
 				} else {
-					model.addAttribute("msg", "레슨글 등록 실패");
+					model.addAttribute("msg", "레슨 당 한번만 신청 가능합니다.");
 					return "common/error";
-				}
+				}			
 			} else {
 				model.addAttribute("msg", "로그인이 필요한 기능입니다");
 				return "common/error";
 			}
 		} catch (Exception e) {
+			System.out.println(apply.toString());
 			model.addAttribute("msg", e.getMessage());
 			return "common/error";
 		}
@@ -244,14 +272,13 @@ public class LessonController {
 			, Model model) {
 		try {
 			HttpSession session = request.getSession();
-			String memberId =((Member)session.getAttribute("loginUser")).getMemberId();
-			//레슨 타이틀 가져오기
+			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
 			List<Apply> aList = lService.selectApplys(memberId);
-			model.addAttribute("aList", aList);
 			if(!aList.isEmpty()) {
+				model.addAttribute("aList", aList);
 				return "apply/myapply";
 			} else {
-				model.addAttribute("msg", "신청 내역이 없어요");
+				model.addAttribute("msg", "레슨 신청 내역이 없어요");
 				return "common/error";
 			}
 		} catch (Exception e) {

@@ -1,0 +1,44 @@
+#main {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    height: 480px;
+    align-items: center;
+    margin: 0 auto;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    align-items: center;
+    margin: 0 auto;
+}
+#logo {
+    width: 150px;
+    height: 150px;
+    background-image: url("/resources/images/common/logo.png");
+    background-size: 100%;
+    margin-top: 30px;
+    float: left;
+
+}
+table {
+    border-collapse : collapse;
+    border: 1px solid black;
+}
+    tr,td {
+        border: 1px solid black;
+        
+
+    }
+ {
+#login-modify button {
+	margin-top : 20px
+	width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #2fbdb1;
+}

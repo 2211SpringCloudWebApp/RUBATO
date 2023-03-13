@@ -19,7 +19,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member selectIdPw(Member member) {
-		return null;
+		Member mOne = mStore.selectIdPw(session, member);
+		return mOne;
 	}
 
 	@Override

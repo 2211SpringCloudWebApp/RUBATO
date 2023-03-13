@@ -24,6 +24,5 @@
 	</select>
 	<select id="selectApplys" resultMap="applyResultMap">
 		SELECT * FROM LESSON_APPLY WHERE MEMBER_ID = #{memberId}
-	</select>
-	
+	</select>	
 </mapper>

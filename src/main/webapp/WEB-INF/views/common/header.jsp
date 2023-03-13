@@ -17,15 +17,12 @@
 		<div id="login-wrapper">
 			<c:if test="${sessionScope.loginUser.memberId ne null }">
 				<div id="login-success">
-					<span id="member-id-span">${sessionScope.loginUser.memberId }님 환영합니다! </span>
 					<input type="hidden" id="member-id" value="${sessionScope.loginUser.memberId }">
 				</div>
 				<div id="login-success2">
 					<button id="login-btn" onclick="location.href='/member/login/member/mypage?member-id=${sessionScope.loginUser.memberId }'">마이페이지</button>
 					<button id="join-btn" onclick="location.href='/member/logout'">로그아웃</button>
 				</div>
-				<!-- <a href="/member/mypage?member-id=${sessionScope.loginUser.memberId }" id="login-btn-after">마이페이지</a>
-				<a href="/member/logout" id="join-btn-after">로그아웃</a> -->
 			</c:if>
 		</div>
 	</div>

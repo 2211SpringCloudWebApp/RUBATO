@@ -1,11 +1,16 @@
 package com.rubato.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rubato.common.MailSendService;
@@ -32,14 +37,64 @@ public class MemberController {
 	/*===================================================
 	 * 로그인 기능 관련
 	 *===================================================*/
+	// 멤버 로그인
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String loginView() { // 로그인 페이지 View
-		 return "";
+		 return "member/login";
 	 }
 	
 	@RequestMapping(value="/member/login", method=RequestMethod.POST)
-	public String loginLogic() { // 로그인 기능 구현
-		return "";
+	public String loginLogic(HttpServletRequest request
+			, @RequestParam("memberId") String memberId
+			, @RequestParam("memberPwd") String memberPwd
+			, Model model) { // 로그인 기능 구현
+		try {
+			Member mParam = new Member(memberId, memberPwd);
+			Member member = mService.selectIdPw(mParam);
+			HttpSession session = request.getSession();
+			if(member != null) {
+				session.setAttribute("loginUser", member);
+				return "redirect:/index.jsp";
+			}else {
+				model.addAttribute("msg", "로그인 정보가 존재하지 않습니다.");
+				return "member/login";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "member/login";
+		}
+		
+	}
+	
+	@PostMapping("/member/loginCheck")
+	@ResponseBody
+	public String loginCheckLogic(
+			HttpServletRequest request
+			, String memberId
+			, String memberPwd) { // 로그인 확인 ajax
+		HttpSession session = request.getSession();
+		Member mParam = new Member(memberId, memberPwd);
+		Member member = mService.selectIdPw(mParam);
+		if(member!=null) { // 로그인 확인
+			session.setAttribute("loginUser", member);
+			return "true";
+		}
+		else {
+			return "false";
+		}
+	}
+	
+	// 멤버 로그아웃
+	@RequestMapping(value="/member/logout", method = RequestMethod.GET)
+	public String memberLogout(HttpSession session, Model model) {
+		if(session != null) {
+			session.invalidate();
+			return "redirect:/index.jsp";
+		}else {
+			model.addAttribute("msg", "로그아웃을 완료하지 못했습니다.");
+			return "common/error";
+		}
 	}
 	
 	/*===================================================

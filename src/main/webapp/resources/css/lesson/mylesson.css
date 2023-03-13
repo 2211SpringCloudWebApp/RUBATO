@@ -10,29 +10,6 @@
     margin: 30px auto;
     border-bottom: 2px solid #2fbdb1b9;
 }
-.create-wrapper {
-    width: 700px;
-    margin: 30px auto;
-    text-align: center;
-    border-top: 2px solid #2fbdb1b9;
-    display: flex;
-    justify-content: space-around;
-}
-    .list-btn {
-        width: 160px;
-        height: 45px;
-        background-color: #2fbdb175;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 15px;
-        font-weight: 500;
-        margin-top: 30px;
-    }
-    .list-btn:hover {
-        cursor: pointer;
-        background-color: #ccc;
-    }
 #list-content {
     width: 700px;
     margin: 0 auto;
@@ -45,11 +22,18 @@
     } 
     #detailLink:hover {
         cursor: pointer;
+        text-decoration-line: underline;
+        text-decoration-color: #2fbdb1b9;
+        text-decoration-thickness: 1px;
     }
 #list-detail {
-    width: 600px;
+    width: 700px;
     margin: 0 auto;
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;  
+    text-align: center;
 }
+    #list-detail td {
+        width: 25%;
+    }

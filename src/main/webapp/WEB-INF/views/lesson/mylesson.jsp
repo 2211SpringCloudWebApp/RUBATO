@@ -7,45 +7,36 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>RUBATO - 나의신청</title>
+        <title>RUBATO - 나의레슨</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/resources/css/apply/myapply.css">
+        <link rel="stylesheet" href="/resources/css/lesson/mylesson.css">
         <link rel="stylesheet" href="/resources/css/common/header.css">
         <link rel="stylesheet" href="/resources/css/common/footer.css">
     </head>
+
     <body> 
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         <div id="list-main">
             <div id="list-title">
-                <h2>나의 신청 내역</h2>
+                <h2>나의 레슨 내역</h2>
             </div>
             <div id="list-content">
-                <input type="hidden" name="lessonNo" value="${lesson.lessonNo }">
-                <c:forEach items="${aList}" var="apply" varStatus="i">   
+                <c:forEach items="${lList}" var="lesson" varStatus="i">   
                     <table id="list-detail">
                         <tr>
-                            <td colspan="2"><a href="" id="detailLink">${lesson.lessonTitle}</a></td>
-                            <td rowspan="2"><button id="remove-btn" onclick="removeApply('${apply.lessonNo}', '${apply.memberId}');">삭제</button></td>
-                        </tr>
+                            <td colspan="3"><a href="/lesson/detail?lessonNo=${lesson.lessonNo}" id="detailLink"> ${lesson.lessonTitle} </a></td>
+                        </tr>                       
                         <tr>
-                            <!-- inner값 가져오도록 컨트롤러 수정하기 -->
-                            <td><b>제시 금액 | </b> ${apply.applyPrice}</td>
-                            <td><b>요청 일정 | </b>${apply.applyPlan}</td>
+                            <td>${lesson.lessonArea}</td>
+                            <td>희망금액 | ${lesson.lessonPrice} 만원</td>
+                            <td style="width: 50%;">희망일정 | ${lesson.lessonPlan}</td>
                         </tr>
                     </table>
                 </c:forEach>
             </div>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-        <script> 
-            function removeApply(lessonNo, memberId) {
-                if(confirm("신청을 취소하시겠습니까?")) {
-                    location.href="/apply/remove?lessonNo="+lessonNo+"&memberId="+memberId;
-                }
-            }
-        </script>
     </body>
 </html>

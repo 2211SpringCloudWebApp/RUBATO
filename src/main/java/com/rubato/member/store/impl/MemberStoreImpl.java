@@ -11,8 +11,8 @@ public class MemberStoreImpl implements MemberStore{
 
 	@Override
 	public Member selectIdPw(SqlSession session, Member member) {
-		// TODO Auto-generated method stub
-		return null;
+		Member mOne = session.selectOne("MemberMapper.selectMemberById", member);
+		return mOne;
 	}
 
 	@Override

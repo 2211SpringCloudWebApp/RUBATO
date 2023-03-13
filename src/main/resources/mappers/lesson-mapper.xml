@@ -32,5 +32,8 @@
 	<select id="selectLessons" resultMap="lessonResultMap">
 		SELECT * FROM LESSON ORDER BY LESSON_NO DESC
 	</select>
+	<select id="selectMyLessons" resultMap="lessonResultMap">
+		SELECT * FROM LESSON WHERE MEMBER_ID = #{memberId}
+	</select>
 	
 </mapper>

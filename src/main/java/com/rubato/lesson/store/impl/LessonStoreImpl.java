@@ -41,6 +41,12 @@ public class LessonStoreImpl implements LessonStore{
 		List<Lesson> lList = session.selectList("LessonMapper.selectLessons");
 		return lList;
 	}
+	
+	@Override //나의 레슨 목록
+	public List<Lesson> selectMyLessons(SqlSession session, String memberId) {
+		List<Lesson> lList = session.selectList("LessonMapper.selectMyLessons", memberId);
+		return lList;
+	}
 
 /*---------------------------------------------------------------------------*/
 	
@@ -49,22 +55,26 @@ public class LessonStoreImpl implements LessonStore{
 		int result = session.insert("ApplyMapper.insertApply", apply);
 		return result;
 	}
-
+	
 	@Override //신청글 삭제
 	public int removeApply(SqlSession session, Apply apply) {
 		int result = session.delete("ApplyMapper.deleteApply", apply);
 		return result;
 	}
 
-	@Override
+	@Override //신청글 찾기
 	public Apply selectOneApply(SqlSession session, Apply user) {
 		Apply apply = session.selectOne("ApplyMapper.selectOneApply", user);
 		return apply;
 	}
 
-	@Override
+	@Override //나의 신청글 목록
 	public List<Apply> selectApplys(SqlSession session, String memberId) {
 		List<Apply> aList = session.selectList("ApplyMapper.selectApplys", memberId);
-		return null;
+		return aList;
 	}
+
+	
+
+
 }

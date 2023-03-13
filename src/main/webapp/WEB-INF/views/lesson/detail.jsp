@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,12 +33,17 @@
                 <legend>상세설명</legend>
                 ${lesson.lessonContent}
             </fieldset>
-        </div>
+        </div>       
         <div id="detail-btns">
-            <button onclick="location.href='/apply/create?lessonNo=${lesson.lessonNo}'">신청하기</button>
-            <button onclick="location.href='/lesson/list'">목록으로</button>
+            <c:if test="${sessionScope.loginUser.memberId eq lesson.memberId}">
+                <button onclick="location.href='/lesson/modify?lessonNo=${lesson.lessonNo}'">수정하기</button>
+                <button onclick="location.href='/lesson/list'">목록으로</button>
+            </c:if>
+            <c:if test="${sessionScope.loginUser.memberId ne lesson.memberId}">
+                <button onclick="location.href='/apply/create?lessonNo=${lesson.lessonNo}'">신청하기</button>
+                <button onclick="location.href='/lesson/list'">목록으로</button>
+            </c:if>   
         </div>
-        <a href="/lesson/modify?lessonNo=${lesson.lessonNo}">수정</a>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

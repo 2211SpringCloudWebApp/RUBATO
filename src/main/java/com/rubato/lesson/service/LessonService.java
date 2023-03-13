@@ -37,9 +37,17 @@ public interface LessonService {
 
 	/**
 	 * 레슨글 목록 Service
-	 * @return
+	 * @return List<Lesson>
 	 */
 	public List<Lesson> selectLessons();
+	
+	/**
+	 * 나의 레슨글 목록 Service
+	 * @param memberId
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectMyLessons(String memberId);
+
 
 /*----------------------------------------------------------------------*/
 	
@@ -49,7 +57,7 @@ public interface LessonService {
 	 * @return int
 	 */
 	public int createApply(Apply apply);
-
+	
 	/**
 	 * 신청글 삭제 Service
 	 * @param apply
@@ -70,4 +78,7 @@ public interface LessonService {
 	 */
 	public List<Apply> selectApplys(String memberId);
 
+	
+
+	
 }

@@ -45,8 +45,14 @@ public class LessonServiceImpl implements LessonService{
 		return lStore.selectLessons(session);
 	}
 
+	@Override //나의 레슨 목록
+	public List<Lesson> selectMyLessons(String memberId) {
+		return lStore.selectMyLessons(session, memberId);
+	}
+	
 /*--------------------------------------------------------------------------*/
 	
+
 	@Override //신청글 등록
 	public int createApply(Apply apply) {
 		return lStore.createApply(session, apply);
@@ -66,5 +72,6 @@ public class LessonServiceImpl implements LessonService{
 	public List<Apply> selectApplys(String memberId) {
 		return lStore.selectApplys(session, memberId);
 	}
+
 
 }
