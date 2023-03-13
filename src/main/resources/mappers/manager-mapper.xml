@@ -18,6 +18,9 @@
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 	</select>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
 	
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}

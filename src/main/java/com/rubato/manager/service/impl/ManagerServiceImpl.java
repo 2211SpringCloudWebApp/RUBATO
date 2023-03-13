@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
+import com.rubato.member.domain.PageInfo;
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
@@ -19,8 +20,8 @@ public class ManagerServiceImpl implements ManagerService{
 
 	// 회원 리스트
 	@Override
-	public List<Member> selectMembers() {
-		List<Member> mList = managerStore.selectMembers();
+	public List<Member> selectMembers(PageInfo pi) {
+		List<Member> mList = managerStore.selectMembers(pi);
 		return mList;
 	}
 
@@ -28,6 +29,12 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int deleteMember(String memberId) {
 		int result = managerStore.deleteMember(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int getListCount() {
+		int result = managerStore.getListCount(session);
 		return result;
 	}
 
