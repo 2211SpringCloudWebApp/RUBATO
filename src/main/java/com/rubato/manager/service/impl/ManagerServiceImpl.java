@@ -10,6 +10,7 @@ import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
 import com.rubato.member.domain.PageInfo;
+import com.rubato.member.domain.SearchMember;
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
@@ -36,6 +37,19 @@ public class ManagerServiceImpl implements ManagerService{
 	public int getListCount() {
 		int result = managerStore.getListCount(session);
 		return result;
+	}
+
+	//회원 검색
+	@Override
+	public List<Member> selectListByKeyword(PageInfo pi, SearchMember searchMember) {
+		List<Member> searchList = managerStore.selectListByKeyword(session, pi, searchMember);
+		return searchList;
+	}
+
+	@Override
+	public int getListCount(SearchMember searchMember) {
+		int totalCount = managerStore.getListCount(session, searchMember);
+		return totalCount;
 	}
 
 

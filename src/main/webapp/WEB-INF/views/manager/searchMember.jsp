@@ -53,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${mList }" var="member">
+                            <c:forEach items="${sList }" var="member">
                                 <tr>
                                     <td style="width: 130px;">${member.memberId }</td>
                                     <td style="width: 100px;">${member.memberName }</td>
@@ -79,11 +79,12 @@
                         <div id="select">
                             <form action="/manager/searchMember" method="get">
                                 <select name="searchMemberCondition" id="">
-                                    <option value="all">전체</option>
-                                    <option value="m-id">아이디</option>
-                                    <option value="m-name">이름</option>
+								<!--밑에 if문 : selected가 검색할 때 선택한 옵션으로 고정되게 하는 것 -->
+                                    <option value="all" <c:if test="${searchMember.searchMemberCondition == 'all' }">selected</c:if>>전체</option>
+                                    <option value="m-id" <c:if test="${searchMember.searchMemberCondition == 'm-id' }">selected</c:if>>아이디</option>
+                                    <option value="m-name" <c:if test="${searchMember.searchMemberCondition == 'm-name' }">selected</c:if>>이름</option>
                                 </select>
-                                <input type="text" name="searchValue" value="${keyword }"placeholder="검색">
+                                <input type="text" name="searchValue" value="${searchMember.searchValue }"placeholder="검색">
                                 <input type="submit" id="search-btn" name="search-btn"value="검색">
                             </form>
                         </div>
@@ -92,21 +93,23 @@
                         		<td colspan="9">
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
-                        				<a href="/manager/main?page=${pi.currentPage - 1 }"> &lt; </a>
+                        				<a href="/manager/searchMember?page=${pi.currentPage - 1 }&searchValue=${searchMember.searchValue }&searchMemberCondition=${searchMember.searchMemberCondition }"> &lt; </a>
 									</c:if>
 									<c:if test="${pi.currentPage - 1 == 0}">
                         				<a href="javascript:void(0)"> &lt; </a>
 									</c:if>
 									<!--ㄴ 현재페이지 - 1 해서 0이 아닐때만 이전으로 이동 0 이면 a링크 동작 x -->
                         			<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-										<c:url var="pageUrl" value="/manager/main">
+										<c:url var="pageUrl" value="/manager/searchMember">
 											<c:param name="page" value="${p }"></c:param>
+											<c:param name="searchValue" value="${searchMember.searchValue }"></c:param>
+											<c:param name="searchMemberCondition" value="${searchMember.searchMemberCondition }"></c:param>
 										</c:url>
 										<a href="${pageUrl }">${p }</a>&nbsp;
 									</c:forEach>
 									<!--현재페이지 + 1 이 최대페이지랑 똑같을때까지 '>' 이걸 보여주겠다 -->
 									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
-                        				<a href="/manager/main?page=${pi.currentPage + 1 }"> &gt; </a>
+                        				<a href="/manager/searchMember?page=${pi.currentPage + 1 }&searchValue=${searchMember.searchValue }&searchMemberCondition=${searchMember.searchMemberCondition }"> &gt; </a>
 									</c:if>
 									<!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
 									<c:if test="${pi.currentPage == pi.maxPage}">

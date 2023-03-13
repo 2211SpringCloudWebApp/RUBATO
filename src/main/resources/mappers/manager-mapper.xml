@@ -21,6 +21,35 @@
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		<choose>
+			<when test="searchMemberCondition == 'm-id'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchMemberCondition == 'm-name'">
+				WHERE MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	
+	</select>
+	<select id="selectListByKeyword" resultMap="memberResultMap">
+		SELECT * FROM MEMBER 
+		<choose>
+			<when test="searchMemberCondition == 'm-id'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchMemberCondition == 'm-name'">
+				WHERE MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
 	
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}

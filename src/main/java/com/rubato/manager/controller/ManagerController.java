@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.member.domain.Member;
 import com.rubato.member.domain.PageInfo;
+import com.rubato.member.domain.SearchMember;
 
 @Controller
 public class ManagerController {
@@ -73,6 +75,35 @@ public class ManagerController {
 		}
 		return "manager/managerMember";
 	}
+	
+	// 회원 검색 기능 searchMember.jsp 에서 select로 검색하게 해주는 메소드
+	@RequestMapping(value="/manager/searchMember", method=RequestMethod.GET)
+	public String memberSearchLogic(
+			@ModelAttribute SearchMember searchMember,
+			// @RequestParam("searchValue") String keyword
+			//, @RequestParam(value="searchMemberCondition") String memberCondition
+			 @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			, Model model) {
+		int totalCount = managerService.getListCount(searchMember);
+		pi = this.getPageInfo(page, totalCount);
+		try {
+			List<Member> searchList = managerService.selectListByKeyword(pi, searchMember);
+			if(!searchList.isEmpty()) {
+				model.addAttribute("searchMember", searchMember);
+				model.addAttribute("pi", pi);
+				model.addAttribute("sList", searchList);
+				return "manager/searchMember";
+			}else {
+				return "manager/searchMember";
+			}
+			
+		} catch (Exception e) {
+			return "manager/searchMember";
+		}
+	}
+	
+	
+	
 	// 페이징 처리 메소드
 	private PageInfo getPageInfo(int currentPage, int totalCount) {
 		PageInfo pi = null;
@@ -120,11 +151,11 @@ public class ManagerController {
 	
 	
 	
-	@RequestMapping(value = "/manager/memberView", method = RequestMethod.GET)
-	public String managerMemberView() {
-		return "manager/managerMember";
-	}
-	
+//	@RequestMapping(value = "/manager/memberView", method = RequestMethod.GET)
+//	public String managerMemberView() {
+//		return "manager/managerMember";
+//	}
+//	
 	@RequestMapping(value = "/manager/Board", method = RequestMethod.GET)
 	public String managerBoardView() {
 		return "manager/managerBoard";
