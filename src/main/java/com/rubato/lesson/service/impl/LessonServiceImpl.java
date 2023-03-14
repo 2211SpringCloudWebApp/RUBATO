@@ -49,6 +49,7 @@ public class LessonServiceImpl implements LessonService{
 	public List<Lesson> selectMyLessons(String memberId) {
 		return lStore.selectMyLessons(session, memberId);
 	}
+
 	
 /*--------------------------------------------------------------------------*/
 	
@@ -71,6 +72,11 @@ public class LessonServiceImpl implements LessonService{
 	@Override //신청글 목록
 	public List<Apply> selectApplys(String memberId) {
 		return lStore.selectApplys(session, memberId);
+	}
+	
+	@Override //레슨별 신청글 목록
+	public List<Apply> selectByLesson(int lessonNo) {
+		return lStore.selectByLesson(session, lessonNo);
 	}
 
 

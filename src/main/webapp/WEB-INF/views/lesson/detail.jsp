@@ -37,7 +37,7 @@
         <div id="detail-btns">
             <c:if test="${sessionScope.loginUser.memberId eq lesson.memberId}">
                 <button onclick="location.href='/lesson/modify?lessonNo=${lesson.lessonNo}'">수정하기</button>
-                <button onclick="location.href='/lesson/list'">목록으로</button>
+                <button onclick="location.href='/apply/listbylesson?lessonNo=${lesson.lessonNo}'">받은 신청</button>
             </c:if>
             <c:if test="${sessionScope.loginUser.memberId ne lesson.memberId}">
                 <button onclick="location.href='/apply/create?lessonNo=${lesson.lessonNo}'">신청하기</button>

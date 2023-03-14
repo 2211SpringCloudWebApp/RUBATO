@@ -48,13 +48,14 @@ public interface LessonStore {
 	 */
 	public List<Lesson> selectLessons(SqlSession session);
 	
-	/**
-	 * 나의 레슨글 목록
+	/** 
+	 * 나의 레슨글 목록 Store
 	 * @param session
 	 * @param memberId Store
 	 * @return List<Lesson>
 	 */
 	public List<Lesson> selectMyLessons(SqlSession session, String memberId);
+
 
 /*---------------------------------------------------------------------------*/
 	
@@ -90,6 +91,16 @@ public interface LessonStore {
 	 * @return List<Apply>
 	 */
 	public List<Apply> selectApplys(SqlSession session, String memberId);
+	
+	/**
+	 * 레슨별 신청글 목록 Store
+	 * @param session
+	 * @param lessonNo
+	 * @return List<Apply>
+	 */
+	public List<Apply> selectByLesson(SqlSession session, int lessonNo);
+
+	
 
 	
 

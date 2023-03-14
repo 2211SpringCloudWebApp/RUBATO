@@ -23,9 +23,7 @@
     } 
     #detailLink:hover {
         cursor: pointer;
-        text-decoration-line: underline;
-        text-decoration-color: #2fbdb1b9;
-        text-decoration-thickness: 1.1px;
+        color: #2fbdb1;
     }
 #list-detail {
     width: 700px;
@@ -44,19 +42,21 @@
     #list-detail:last-child {
         border: none;
     }
-#remove-btn {
+#confirm-btn {
     width: 120px;
     height: 40px;
     background-color: #fafafa;
-    color: #2fbdb1;
     border: 1px solid #2fbdb1;
-    font-weight: 700;
-    font-size: 95%;
-    font-family: 'Noto Sans KR', sans-serif;
 }
-    #remove-btn:hover {
+    #confirm-btn:hover {
         cursor: pointer;
         background-color: #ccc;
         color: white;
         border: none;
+    }
+    #confirm-btn a, #confirm-btn a:visited {
+        text-decoration: none;
+        color: #2fbdb1;
+        font-weight: 700;
+        font-family: 'Noto Sans KR', sans-serif;
     }

@@ -21,6 +21,18 @@
         <div id="list-title">
             <h2>레슨 목록</h2>
         </div>
+        <c:if test="${sessionScope.loginUser.memberId eq null}">
+            <div class="create-wrapper">
+                <h4> < 로그인 후 RUBATO의 선생님이 되어보세요! > </h4>
+            </div>
+        </c:if>
+        <c:if test="${sessionScope.loginUser.memberId ne null}">
+            <div class="create-wrapper">
+                <button class="list-btn" onclick="location.href='/lesson/create'">레슨 등록</button>
+                <button class="list-btn" onclick="location.href='/lesson/mylesson'">나의 레슨</button>
+                <button class="list-btn" onclick="location.href='/apply/myapply'">나의 신청</button>
+            </div>
+        </c:if>
         <div id="list-content">
             <c:forEach items="${lList}" var="lesson" varStatus="i">   
                 <table id="list-detail">
@@ -31,28 +43,16 @@
                         <td  colspan="4">${lesson.lessonPre}</td>
                     </tr>
                     
-                    <tr>
-                        <!-- inner값 가져오도록 컨트롤러 수정하기 -->
-                        <td>${lesson.lessonArea}</td>
-                        <td>${lesson.lessonPrice}</td>
-                        <td>${lesson.lessonPlan}</td>
-                        <td>${lesson.memberId}</td>
+                    <tr id="for-width">
+                        <td style="width: 20%;">${lesson.lessonArea}</td>
+                        <td style="width: 25%;">${lesson.lessonPrice} 만원 / 1회</td>
+                        <td style="width: 40%;">${lesson.lessonPlan}</td>
+                        <td style="width: 15%;">${lesson.memberId}</td>
                     </tr>
                 </table>
             </c:forEach>
         </div>
-        <c:if test="${sessionScope.loginUser.memberId eq null}">
-            <div class="create-wrapper">
-                <h4>로그인 후 RUBATO의 선생님이 될 레슨을 생성해보세요!</h4>
-            </div>
-        </c:if>
-        <c:if test="${sessionScope.loginUser.memberId ne null}">
-            <div class="create-wrapper">
-                <button class="list-btn" onclick="location.href='/lesson/create'">레슨 등록</button>
-                <button class="list-btn" onclick="location.href='/lesson/mylesson'">나의 레슨</button>
-                <button class="list-btn" onclick="location.href='/apply/myapply'">나의 신청</button>
-            </div>
-        </c:if>
+
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

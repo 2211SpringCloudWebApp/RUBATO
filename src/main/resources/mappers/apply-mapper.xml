@@ -3,7 +3,9 @@
 <mapper namespace="ApplyMapper">
 	<resultMap type="Apply" id="applyResultMap">
 		<result property="lessonNo" column="LESSON_NO"/>
+		<result property="lessonTitle" column="LESSON_TITLE"/>
 		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
 		<result property="applyPrice" column="APPLY_PRICE"/>
 		<result property="applyPlan" column="APPLY_PLAN"/>
 		<result property="applyContent" column="APPLY_CONTENT"/>
@@ -23,6 +25,9 @@
 		SELECT * FROM LESSON_APPLY WHERE LESSON_NO = #{lessonNo} AND MEMBER_ID = #{memberId}
 	</select>
 	<select id="selectApplys" resultMap="applyResultMap">
-		SELECT * FROM LESSON_APPLY WHERE MEMBER_ID = #{memberId}
+		SELECT A.*, L.LESSON_TITLE FROM LESSON_APPLY A JOIN LESSON L ON A.LESSON_NO = L.LESSON_NO WHERE A.MEMBER_ID = #{memberId}
+	</select>
+	<select id="selectByLesson" resultMap="applyResultMap">
+		SELECT A.*, M.MEMBER_EMAIL, L.LESSON_TITLE FROM LESSON_APPLY A JOIN MEMBER M ON A.MEMBER_ID = M.MEMBER_ID JOIN LESSON L ON A.LESSON_NO = L.LESSON_NO WHERE A.LESSON_NO = #{lessonNo}
 	</select>	
 </mapper>

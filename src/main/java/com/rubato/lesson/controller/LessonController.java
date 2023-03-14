@@ -190,6 +190,8 @@ public class LessonController {
 	}
 	
 	
+	
+	
 /*-학생, 레슨 신청-----------------------------------------------------------------*/
 	
 	/*===================================================
@@ -286,7 +288,28 @@ public class LessonController {
 			return "common/error";
 		}
 	}
-	
+
+	/*===================================================
+	 * 레슨별 신청글 목록 View
+	 *===================================================*/
+	@RequestMapping(value = "/apply/listbylesson", method = RequestMethod.GET)
+	public String applyByLesson( // 레슨별 신청 목록 View (listbylesson.jsp)
+			@RequestParam("lessonNo") int lessonNo
+			, Model model) {
+		try {
+			List<Apply> aList = lService.selectByLesson(lessonNo);
+			if(!aList.isEmpty()) {
+				model.addAttribute("aList", aList);
+				return "apply/listbylesson";
+			} else {
+				model.addAttribute("msg", "해당 레슨에 받은 신청이 없어요.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
 	
 	
 	

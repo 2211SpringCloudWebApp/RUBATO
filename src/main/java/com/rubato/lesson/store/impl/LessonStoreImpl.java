@@ -48,6 +48,7 @@ public class LessonStoreImpl implements LessonStore{
 		return lList;
 	}
 
+	
 /*---------------------------------------------------------------------------*/
 	
 	@Override //신청글 등록
@@ -73,6 +74,14 @@ public class LessonStoreImpl implements LessonStore{
 		List<Apply> aList = session.selectList("ApplyMapper.selectApplys", memberId);
 		return aList;
 	}
+	
+	@Override //레슨별 신청글 목록
+	public List<Apply> selectByLesson(SqlSession session, int lessonNo) {
+		List<Apply> aList = session.selectList("ApplyMapper.selectByLesson", lessonNo);
+		return aList;
+	}
+
+
 
 	
 

@@ -1,11 +1,14 @@
 package com.rubato.lesson.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Apply {
 	
 	private int lessonNo;
+	private String lessonTitle;
 	private String memberId;
+	private String memberEmail;
 	private String applyPrice;
 	private String applyPlan;
 	private String applyContent;
@@ -72,5 +75,23 @@ public class Apply {
 	public void setApplyDate(Timestamp applyDate) {
 		this.applyDate = applyDate;
 	}
+
+	public String getLessonTitle() {
+		return lessonTitle;
+	}
+
+	public void setLessonTitle(String lessonTitle) {
+		this.lessonTitle = lessonTitle;
+	}
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+	
+	
 	
 }

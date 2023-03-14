@@ -30,24 +30,24 @@
                         <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-area">레슨 지역</label>
                         <select name="lessonArea" id="lesson-area">
-                           <option value="se">서울</option>
-                            <option value="bu">부산</option>
-                            <option value="daegu">대구</option>
-                            <option value="in">인천</option>
-                            <option value="gwang">광주</option>
-                            <option value="daejeon">대전</option>
-                            <option value="ul">울산</option>
-                            <option value="jong">세종</option>
-                            <option value="kang">강원</option>
-                            <option value="northkk">경기북부</option>
-                            <option value="southk">경기남부</option>
-                            <option value="northks">경북</option>
-                            <option value="southks">경남</option>
-                            <option value="northjl">전북</option>
-                            <option value="southjl">전남</option>
-                            <option value="northcc">충북</option>
-                            <option value="southcc">충남</option>             
-                            <option value="jeju">제주</option>
+                            <option value="서울">서울</option>
+                            <option value="부산">부산</option>
+                            <option value="대구">대구</option>
+                            <option value="인천">인천</option>
+                            <option value="광주">광주</option>
+                            <option value="대전">대전</option>
+                            <option value="울산">울산</option>
+                            <option value="세종">세종</option>
+                            <option value="강원">강원</option>
+                            <option value="경기북부">경기북부</option>
+                            <option value="경기남부">경기남부</option>
+                            <option value="경북">경북</option>
+                            <option value="경남">경남</option>
+                            <option value="전북">전북</option>
+                            <option value="전남">전남</option>
+                            <option value="충북">충북</option>
+                            <option value="충남">충남</option>             
+                            <option value="제주">제주</option>
                         </select>
                     </li>
                     <li>
@@ -74,12 +74,12 @@
                         <textarea name="lessonContent" id="lesson-content" cols="45" rows="10">${lesson.lessonContent}</textarea>
                     </li>  
                 </ul>
-                <div id="modify-btns">
-                    <input type="submit" value="수정하기" class="modify-btn">
-                    <input type="button" value="삭제하기" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
-                </div>
             </form>
         </fieldset>
+        <div id="modify-btns">
+            <input type="submit" value="저장" class="modify-btn">
+            <input type="button" value="삭제" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
+        </div>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
         

@@ -6,6 +6,7 @@
 }
     #modify-main fieldset {
         border: 1px solid #ccc;
+        height: 700px;
     }
     #modify-main label {
         width: 200px;
@@ -39,6 +40,7 @@
         }
 #modify-btns {
     text-align: center;
+    margin-top: 20px;
 }
     .modify-btn {
         width: 120px;
