@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
-import com.rubato.member.domain.PageInfo;
-import com.rubato.member.domain.SearchMember;
+import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchMember;
 
 public interface ManagerStore {
 
@@ -40,6 +41,28 @@ public interface ManagerStore {
 	 * @return
 	 */
 	public int getListCount(SqlSession session, SearchMember searchMember);
+
+	/**
+	 * 레슨 게시판 관리 Store
+	 * @param pi
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectLessonBoard(PageInfo pi);
+
+	/**
+	 * 레슨 게시물 삭제 Store
+	 * @param session
+	 * @param lessonNo
+	 * @return int
+	 */
+	public int deleteLessonBoard(SqlSession session, Integer lessonNo);
+
+	/**
+	 * 레슨 게시물 리스트 Store
+	 * @param session
+	 * @return
+	 */
+	public int getLessonListCount(SqlSession session);
 	
 
 }

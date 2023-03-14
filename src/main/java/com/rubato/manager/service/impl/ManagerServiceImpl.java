@@ -6,11 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
-import com.rubato.member.domain.PageInfo;
-import com.rubato.member.domain.SearchMember;
+import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchMember;
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
@@ -50,6 +51,24 @@ public class ManagerServiceImpl implements ManagerService{
 	public int getListCount(SearchMember searchMember) {
 		int totalCount = managerStore.getListCount(session, searchMember);
 		return totalCount;
+	}
+
+	@Override
+	public List<Lesson> selectLessonBoard(PageInfo pi) {
+		List<Lesson> lbList = managerStore.selectLessonBoard(pi);
+		return lbList;
+	}
+
+	@Override
+	public int deleteLessonBoard(Integer lessonNo) {
+		int result = managerStore.deleteLessonBoard(session, lessonNo);
+		return result;
+	}
+
+	@Override
+	public int getLessonListCount() {
+		int result = managerStore.getLessonListCount(session);
+		return result;
 	}
 
 

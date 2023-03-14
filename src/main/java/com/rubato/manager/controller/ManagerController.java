@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.member.domain.Member;
-import com.rubato.member.domain.PageInfo;
-import com.rubato.member.domain.SearchMember;
+import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchMember;
 
 @Controller
 public class ManagerController {
@@ -122,6 +123,43 @@ public class ManagerController {
 		} else {
 			// 에러 페이지 이동으로 변경 필요
 			return "redirect:/manager/main";
+		}
+	}
+	
+	/*===================================================
+	 * 게시글 관리 기능 관련
+	 *===================================================*/
+	
+	
+	@RequestMapping(value = "/manager/lessonBoard", method=RequestMethod.GET)
+	public String managerBoardLogic( 		// 레슨게시판 관리
+			HttpSession session
+			, HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			,Model model) {
+		int totalCount = managerService.getLessonListCount();
+		pi = this.getPageInfo(page, totalCount);
+		if(session.getAttribute("loginUser")!=null) {
+			List<Lesson> lbList = managerService.selectLessonBoard(pi);
+			if(!lbList.isEmpty()) {
+				model.addAttribute("pi", pi);
+				model.addAttribute("lbList", lbList);
+			}
+		}
+		return "manager/managerLessonBoard";
+		
+	}
+	
+	@RequestMapping(value = "/manager/lessonDelete", method = RequestMethod.GET)
+	public String lessonDeleteLogic(
+			@RequestParam("lessonNo" ) Integer lessonNo
+			, Model model) {
+		int result = managerService.deleteLessonBoard(lessonNo);
+		if(result > 0) {
+			
+			return "redirect:/manager/lessonBoard";
+		} else {
+			return "redirect:/manager/lessonBoard";
 		}
 	}
 	

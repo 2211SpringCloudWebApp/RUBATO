@@ -15,6 +15,19 @@
 		<result property="memberPoint" column="MEMBER_POINT"/>
 	</resultMap>
 	
+	<resultMap type="Lesson" id="lessonResultMap">
+		<id property="lessonNo" column="LESSON_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="lessonTitle" column="LESSON_TITLE"/>
+		<result property="lessonPre" column="LESSON_PRE"/>
+		<result property="lessonContent" column="LESSON_CONTENT"/>
+		<result property="lessonArea" column="LESSON_AREA"/>
+		<result property="lessonPlan" column="LESSON_PLAN"/>
+		<result property="lessonPrice" column="LESSON_PRICE"/>
+		<result property="lessonDate" column="LESSON_DATE"/>
+		<result property="lessonUpdate" column="LESSON_UPDATE"/>
+	</resultMap>
+	
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 	</select>
@@ -50,11 +63,22 @@
 			</otherwise>
 		</choose>
 	</select>
-	
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</delete>
 	
 	
+	
+	<!-- 레슨 게시판 -->
+	<select id="selectLessonBoard" resultMap="lessonResultMap">
+		SELECT * FROM LESSON
+	</select>
+	<select id="getLessonListCount" resultType="_int">
+		SELECT COUNT(*) FROM LESSON
+	</select>
+	
+	<delete id="deleteLessonBoard">
+		DELETE FROM LESSON WHERE LESSON_NO=#{lessonNo}
+	</delete>
 	
 </mapper>

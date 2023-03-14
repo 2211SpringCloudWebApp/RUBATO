@@ -9,6 +9,7 @@
 	<!-- VO 별칭 설정 -->
 	<typeAliases>
 		<typeAlias type="com.rubato.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.rubato.lesson.domain.Lesson" alias="Lesson"/>
 	</typeAliases>
 
 	<!-- mapper파일 매핑 -->

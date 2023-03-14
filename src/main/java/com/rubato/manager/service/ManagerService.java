@@ -2,9 +2,10 @@ package com.rubato.manager.service;
 
 import java.util.List;
 
+import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
-import com.rubato.member.domain.PageInfo;
-import com.rubato.member.domain.SearchMember;
+import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchMember;
 
 public interface ManagerService {
 	
@@ -37,6 +38,27 @@ public interface ManagerService {
 	 * @return
 	 */
 	public int getListCount(SearchMember searchMember);
+
+	/**
+	 * 레슨 게시판 리스트 Service
+	 * @param pi
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectLessonBoard(PageInfo pi);
+
+	/**
+	 * 레슨 게시판 삭제 Service
+	 * @param lessonNo
+	 * @return int
+	 */
+	public int deleteLessonBoard(Integer lessonNo);
+
+	/**
+	 * 레슨 게시물 전체 개수 Service
+	 * @return
+	 */
+	public int getLessonListCount();
+
 
 	
 
