@@ -24,42 +24,43 @@ public class ManagerController {
 	private ManagerService managerService;
 	PageInfo pi = null;
 	
-	// 관리자 메인 보이게
+	
 	@RequestMapping(value = "/manager/mainView", method = RequestMethod.GET)
-	public String managerMainView() {
+	public String managerMainView() {		// 관리자 메인 View
 		return "manager/managerMain";
 	}
 	/*===================================================
 	 * 로그인 기능 관련
 	 *===================================================*/
 	
-	// 관리자 메인(로그인)
+	
 	@RequestMapping(value = "/manager/main", method=RequestMethod.POST)
-	public String managerLoginLogic(
+	public String managerLoginLogic(		// 관리자 메인 Logic(로그인 기능)
 		  HttpSession session
 		, HttpServletRequest request
 		, Model model
 		, Member member) {
 		
-		// 세션이 있으면 바로 페이지 이동 
-		// (첫 로그인은 세션이 없으므로 else if 실행)
-		// (로그인 후 페이지 내에서 a태그 이동시 매개변수 member에 null이 들어가므로
-		//   else if문에서 null로 된 세션 생성을 못하게 하기 위해) 
 		if(member.getMemberId().equals("mngmt2023") && member.getMemberPwd().equals("1234")) {
 			session = request.getSession();
 			session.setAttribute("loginUser", member);
 			return "redirect:/manager/main?page=1";
 		}
 		// 로그인 실패 시
+//		(managerMain.jsp로 넘어가서 로그인 실패 모달창 실행)
 		else {
 			int fail = 0;
 			model.addAttribute("loginUser", fail);
 			return "manager/managerMain";
 		} 
 	}
+	
+	/*===================================================
+	 * 회원 관리 기능 관련
+	 *===================================================*/
 	// 관리자 메인(회원 리스트)
 	@RequestMapping(value = "/manager/main", method=RequestMethod.GET)
-	public String managerMainLogin(
+	public String managerMainLogic(		// 관리자 메인 Logic(로그인 후 회원 리스트 보여주는 기능)
 		  HttpSession session
 		, HttpServletRequest request
 		, @RequestParam(value="page", required=false, defaultValue="1") Integer page
@@ -76,9 +77,9 @@ public class ManagerController {
 		return "manager/managerMember";
 	}
 	
-	// 회원 검색 기능 searchMember.jsp 에서 select로 검색하게 해주는 메소드
+	// searchMember.jsp 에서 select로 검색하게 해주는 메소드
 	@RequestMapping(value="/manager/searchMember", method=RequestMethod.GET)
-	public String memberSearchLogic(
+	public String memberSearchLogic(		// 회원 검색 기능
 			@ModelAttribute SearchMember searchMember,
 			// @RequestParam("searchValue") String keyword
 			//, @RequestParam(value="searchMemberCondition") String memberCondition
@@ -104,7 +105,28 @@ public class ManagerController {
 	
 	
 	
-	// 페이징 처리 메소드
+	@RequestMapping(value = "/manager/memberOut", method = RequestMethod.GET)
+	public String managerMemberOutLogic(		// 회원 탈퇴- 관리자
+			@RequestParam("memberId") String memberId
+			, Model model) {
+		int result = managerService.deleteMember(memberId);
+		if(result > 0) {
+//			List<Member> mList = managerService.selectMembers(pi);
+//			if(!mList.isEmpty()) {
+//				model.addAttribute("pi", pi);
+//				model.addAttribute("mList", mList);
+//				return "manager/managerMember";
+//			} else {
+			return "redirect:/manager/main";
+//			}
+		} else {
+			// 에러 페이지 이동으로 변경 필요
+			return "redirect:/manager/main";
+		}
+	}
+	
+	
+// 페이징 처리 메소드
 	private PageInfo getPageInfo(int currentPage, int totalCount) {
 		PageInfo pi = null;
 		int boardLimit = 10; 	// 한 페이지 당 게시글 갯수
@@ -123,35 +145,16 @@ public class ManagerController {
 		return pi;
 	}
 
+
 	// 로그아웃
 	@RequestMapping(value = "/manager/logout", method = RequestMethod.GET)
 	public String managerLogoutLogic(HttpSession session) {
 		session.invalidate();
 		return "redirect:/manager/mainView";
 	}
-	
-	// 회원 탈퇴- 관리자
-	@RequestMapping(value = "/manager/memberOut", method = RequestMethod.GET)
-	public String managerMemberOutLogic(@RequestParam("memberId") String memberId, Model model) {
-		int result = managerService.deleteMember(memberId);
-		if(result > 0) {
-//			List<Member> mList = managerService.selectMembers(pi);
-//			if(!mList.isEmpty()) {
-//				model.addAttribute("pi", pi);
-//				model.addAttribute("mList", mList);
-//				return "manager/managerMember";
-//			} else {
-			return "redirect:/manager/main";
-//			}
-		} else {
-			// 에러 페이지 이동으로 변경 필요
-			return "redirect:/manager/main";
-		}
-	}
-	
-	
-	
-//	@RequestMapping(value = "/manager/memberView", method = RequestMethod.GET)
+
+
+	//	@RequestMapping(value = "/manager/memberView", method = RequestMethod.GET)
 //	public String managerMemberView() {
 //		return "manager/managerMember";
 //	}

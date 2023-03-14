@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/resources/css/manager/managerMain.css">
+    <script src="/resources/js/manager/managerMain.js" defer></script>
 </head>
 <body>
     <div id="container">
@@ -27,39 +28,34 @@
             </form>
         </div>
 		
+<!-- 로그인 실패 시 모달창 실행 -->
 		<c:if test="${loginUser == 0}">
-		<button type="button" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal"></button>
-		
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">로그인 실패</h4>
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body">
-		        관리자 정보와 일치하지 않습니다.
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
+			<button type="button" id="modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal"></button>
+			
+			<div class="modal" id="myModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">로그인 실패</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        관리자 정보와 일치하지 않습니다.
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
 		</c:if>
     </div>
-    <script type="text/javascript">
-    	
-    	window.onload = function(){
-			document.querySelector("#modal").click();
-    	}
-    </script>
 </body>
 </html>
