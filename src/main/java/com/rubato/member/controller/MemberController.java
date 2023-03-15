@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -66,13 +67,13 @@ public class MemberController {
 		}
 		
 	}
-	
+	// 로그인 확인 ajax
 	@PostMapping("/member/loginCheck")
 	@ResponseBody
 	public String loginCheckLogic(
 			HttpServletRequest request
 			, String memberId
-			, String memberPwd) { // 로그인 확인 ajax
+			, String memberPwd) { 
 		HttpSession session = request.getSession();
 		Member mParam = new Member(memberId, memberPwd);
 		Member member = mService.selectIdPw(mParam);
@@ -149,6 +150,102 @@ public class MemberController {
 	public String mailAuthLogic(String email) { // 이메일 인증 ajax
 		String code = mailSendService.registerEmail(email);
 		return code;
+		}
+	
+ 	
+
+
+	/*===================================================
+	 * 마이페이지 기능 관련
+	 *===================================================*/
+		// 마이페이지
+	@RequestMapping(value="/member/mypage", method= RequestMethod.GET)
+	public String myPage(HttpServletRequest request, HttpSession session, Model model) {
+			if(session.getAttribute("loginUser")!=null) { //로그인 됐음
+				Member mOne = (Member)session.getAttribute("loginUser");
+				String memberId = (mOne).getMemberId();
+				Member member = mService.selectMemberById(memberId);
+				model.addAttribute("member", member);
+				return "/member/mypage";
+			}
+			else { //로그인 되지 않았음
+				return "redirect:/index.jsp";
+			}
+			
+			
+			
+		
+		}
+	
+	// 회원 정보 불러오기
+	@RequestMapping(value="/member/modify" , method = RequestMethod.GET)
+	public String MypageInfo(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("loginUser");
+		model.addAttribute("member", member);
+		return "member/modify";
 	}
 	
+	// 회원 정보 수정
+	@RequestMapping(value="/member/modify1", method = RequestMethod.POST)
+	public String memberModify(
+			@ModelAttribute Member member
+			, @RequestParam("memberAddr1") String memberAddr1
+			, @RequestParam("memberAddr2") String memberAddr2
+			, Model model) {
+		try {
+			System.out.println(member);
+			member.setMemberAddr(memberAddr1 + "++" + memberAddr2);
+			int result = mService.updateMember(member);
+			if(result > 0) {
+				
+				model.addAttribute("member", member);
+				return "member/mypage";
+			}else {
+				model.addAttribute("msg", "정보 수정이 되지 않았습니다.");
+				return "member/aa";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+				return "member/mypage";
+		}
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value = "/member/delete", method = RequestMethod.GET)
+	public String memberRemove(
+			@RequestParam("memberId") String memberId
+			, Model model) {
+		try {
+			int result = mService.deleteMember(memberId);
+			model.addAttribute("member", memberId);
+			if(result > 0) {
+				return "redirect:/member/logout";
+			}else {
+				model.addAttribute("msg", "탈퇴가 완료되지 않았습니다.");
+				return "member/modify";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "member/modify";
+		
+		
+	}
 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -32,5 +32,20 @@ public interface MemberService {
 	 */
 	public Member selectMemberByNickname(String memberNickname);
 	
+	/**
+	 * 회원 정보 수정 Service
+	 * @param member
+	 * @return Member
+	 */
+	public int updateMember(Member member);
+	
+	/** 회원 탈퇴 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int deleteMember(String memberId);
+
+	
+	
 	
 }

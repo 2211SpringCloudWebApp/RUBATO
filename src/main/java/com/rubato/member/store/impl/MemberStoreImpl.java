@@ -11,7 +11,7 @@ public class MemberStoreImpl implements MemberStore{
 
 	@Override
 	public Member selectIdPw(SqlSession session, Member member) {
-		Member mOne = session.selectOne("MemberMapper.selectMemberById", member);
+		Member mOne = session.selectOne("MemberMapper.selectIdPw", member);
 		return mOne;
 	}
 
@@ -33,4 +33,17 @@ public class MemberStoreImpl implements MemberStore{
 		return member;
 	}
 
+	@Override
+	public int updateMember(SqlSession session, Member member) {
+		int result = session.update("MemberMapper.updateMember", member);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(SqlSession session, String memberId) {
+		int result = session.delete("MemberMapper.deleteMember", memberId);
+		return result;
+	}
+
+	
 }

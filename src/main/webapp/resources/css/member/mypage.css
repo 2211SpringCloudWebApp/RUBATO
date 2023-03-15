@@ -1,0 +1,56 @@
+#main {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    height: 530px;
+    align-items: center;
+    margin: 0 auto;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+    align-items: center;
+    margin: 0 auto;
+}
+#logo {
+    width: 150px;
+    height: 150px;
+    background-image: url("/resources/images/common/logo.png");
+    background-size: 100%;
+    margin-top: 20px;
+    float: left;
+
+}
+
+#member-message2 {
+	margin-bottom : 10px;
+
+
+}
+table {
+    border-collapse : collapse;
+    
+}
+    tr,td {
+    background-color: white;
+    color: #6b6b6b;
+    border: 1px solid #2fbdb1;
+    }
+    #table {
+        margin: 3 auto;
+    }
+ 
+#login-modify  {
+	margin-top : 20px;
+	width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #2fbdb1;
+    color : white;
+    border : none;
+    
+}

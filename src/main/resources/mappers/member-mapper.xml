@@ -22,11 +22,28 @@
 	<select id="selectMemberByNickname" resultMap="memberResultMap">
 		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ADDR, REG_DATE, MOD_DATE, STATUS, MEMBER_POINT FROM MEMBER WHERE MEMBER_NICKNAME=#{memberNickname}
 	</select>
+	<select id="selectIdPw" resultMap="memberResultMap">
+		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+	</select>
 	
 	<!-- insert -->
 	<insert id="insertMember">
 		INSERT INTO MEMBER VALUES(#{memberId}, #{memberPwd}, #{memberName}, #{memberNickname}, #{memberEmail}, #{memberPhone}, #{memberAddr},
 									DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
+	<!-- update -->
+	<update id="updateMember">
+		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd}, MEMBER_NAME = #{memberName}
+		, MEMBER_NICKNAME = #{memberNickname}, MEMBER_EMAIL = #{memberEmail}, MEMBER_PHONE = #{memberPhone}
+		, MEMBER_ADDR = #{memberAddr} WHERE MEMBER_ID = #{memberId}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId }
+	</delete>
+	
+	
 	
 </mapper>
