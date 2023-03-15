@@ -17,6 +17,12 @@ public class Member {
 	private int memberPoint;
 	
 	public Member() {}
+	
+	public Member(String memberId, String memberPwd) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+	}
 		
 	public Member(String memberId, String memberPwd, String memberName, String memberNickname, String memberEmail,
 			String memberPhone, String memberAddr) {

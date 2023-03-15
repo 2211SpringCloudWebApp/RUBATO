@@ -57,20 +57,30 @@
                             <ul>
                                 <li id="naviLi">
                                     <div id="naviDIV">
+                                        <a href="${pi.startNavi-1 }" class="naviBtn">◀</a>
+                                        <c:if test="${currentPage < lastPage - 2}">
+                                        <c:set var="endNavi" value="${currentPage + 2}" />
+                                        </c:if>
                                         <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
                                             <c:url var="pageUrl" value="/board/list">
                                                 <c:param name="page" value="${p }"></c:param>
                                             </c:url>
-                                            <a href="${pi.startNavi }" class="naviBtn">◀</a>
-                                            <a href="${pageUrl }" class="naviBtn">${p }</a>
-                                            <a href="${pi.endNavi }" class="naviBtn">▶</a>
+                                            <a href="${pageUrl}"
+                                                class="naviBtn ${p == currentPage ? 'active' : ''}">${p}</a>
                                         </c:forEach>
+                                        <a href="${pi.endNavi+2 }" class="naviBtn">▶</a>
                                     </div>
+                                        <!--글쓰기-->
+                                        <div id="listWrite">
+                                        <form action="/board/write" method="post">
+                                            <input type='button' value='글쓰기' onClick="location.href='/board/write'" />
+                                        </form>
+                                        </div>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <!--글쓰기-->
+
                     <!-- 검색 폼 영역 -->
                     <li id='liSearchOption'>
                         <ul>
@@ -78,17 +88,18 @@
                                 <div id="searchDIV">
                                     <form action="/board/search" method="get">
                                         <select id='selSearchOption' name="searchCondition">
-                                            <option value='1' <c:if test="${search.searchCondition == 'A' }">selected
+                                            <option value='1' <c:if test="${search.searchCondition == '1' }">selected
                                                 </c:if>>제목+내용</option>
-                                            <option value='2' <c:if test="${search.searchCondition == 'T' }">selected
+                                            <option value='title' <c:if test="${search.searchCondition == '2' }">selected
                                                 </c:if>>제목</option>
-                                            <option value='3' <c:if test="${search.searchCondition == 'C' }">selected
+                                            <option value='3' <c:if test="${search.searchCondition == '3' }">selected
                                                 </c:if>>내용</option>
+                                            <option value='4' <c:if test="${search.searchCondition == '4' }">selected
+                                                </c:if>>작성자</option> 
                                         </select>
                                         <input type="text" id='txtKeyWord' name="searchValue"
                                             value="${search.searchValue }" placeholder="검색어를 입력하세요." />
                                         <input type='submit' value='검색'>
-                                        <input type='button' value='글쓰기' onClick="location.href='/board/write'" />
                                     </form>
                                 </div>
                             </li>

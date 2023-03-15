@@ -60,6 +60,10 @@
         font-size: 95%;
         font-family: 'Noto Sans KR', sans-serif;
     }
+    #login-success {
+        position: relative;
+        top: 80px;
+    }
     #login-btn {
         background-color: white;
         color: #6b6b6b;

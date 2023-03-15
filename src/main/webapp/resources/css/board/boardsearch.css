@@ -95,21 +95,21 @@
 }
 
 #naviDIV{
-    width: 1000px;
+    width: 250px;
     display: flex;
     justify-content: center;
-    --margin-bottom: 50px;
     --position: absolute;
-    --margin-left: 230px;
+    --margin-bottom: 50px;
+    --margin-top: 20px;
 }
 
 #divPaging {
-    width: 100%;
-    height: 50px;
+    margin:0 auto; 
+    width:1000px; 
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative;
+    margin-top: 75px;
 }
 
 .naviBtn{
@@ -130,6 +130,7 @@
     font-size: 12px;
     margin-left: 1px;
     padding: 1px 10px;
+    --margin-top: 30px;
     text-align: center;
     cursor: pointer;
     line-height: 25px;
@@ -154,14 +155,7 @@
 
 #liSearchOption:focus { outline:none; } /*검색창 테두리 생기지 않게 하기*/
 
-#listWrite {
-    width: 1000px;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: -50px;
-  }
-
-#listWrite input[type=button] {
+#naviDIV input[type=button] {
     border: 1px solid #2FBDB1;
     width: 60px;
     height: 30px;
@@ -169,9 +163,10 @@
     cursor: pointer;
     vertical-align: middle;
     border-radius: 5px;
+    margin-left: 400px;
 }
 
-#listWrite input[type=button]:hover{
+#naviDIV input[type=button]:hover{
     background-color: #2FBDB1;
     color: black;
 }
@@ -207,7 +202,6 @@
 }
 
 #searchDIV{
-	margin-top: 50px;
     margin-bottom: 100px;
 }
 

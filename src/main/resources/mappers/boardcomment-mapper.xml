@@ -12,12 +12,18 @@
 	
 	<!-- 댓글 등록 -->
 	<insert id="insertComment" parameterType="BoardComment">
-		INSERT INTO BOARD_COMMENT VALUES (#{commentNo}, #{boardNo}, #{commentContent}, #{memberId}, DEFAULT)
+		INSERT INTO BOARD_COMMENT (COMMENT_NO, BOARD_NO, COMMENT_CONTENT, MEMBER_ID) VALUES (SEQ_BORADCOMMENTNO.NEXTVAL, #{boardNo}, #{commentContent}, #{memberId})
 	</insert>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComment">
 		DELETE FROM BOARD_COMMENT WHERE COMMENT_NO = #{commentNo}
 	</delete>
+	
+	<!-- 댓글 목록 -->
+	<select id="selectCommentList" resultMap="BoardCommentResultMap">
+		SELECT * FROM BOARD_COMMENT ORDER BY BOARD_NO DESC
+	</select>
+	
 	
 </mapper>

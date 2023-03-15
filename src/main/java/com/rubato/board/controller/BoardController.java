@@ -26,7 +26,7 @@ public class BoardController {
 	private BoardService bService;
 
 	// 게시판 작성 화면
-	@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
 	public String writeView() {
 		return "board/boardwrite";
 	}
@@ -36,7 +36,9 @@ public class BoardController {
 	public String boardwrite(@ModelAttribute Board board, HttpServletRequest request, Model model) {
 		try {
 			// 로그인한 사용자인 경우에만 게시글 등록 가능하도록 처리
-			if (request.getSession().getAttribute("memberId") != null) {
+			if (request.getSession().getAttribute("loginUser") != null) {
+				Member loginUser = (Member) (request.getSession().getAttribute("loginUser"));
+				board.setMemberId(loginUser.getMemberId());
 				int result = bService.insertBoard(board);
 				if (result > 0) {
 					return "redirect:/board/list";
@@ -55,24 +57,37 @@ public class BoardController {
 		}
 	}
 
-	// 게시판 수정
+	// 게시판 수정 view
 	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)
-	public String boardModify(@ModelAttribute Board board, @RequestParam("boardNo") Integer boardNo, Model model, HttpSession session) {
+	public String boardModifyView(@RequestParam("boardNo") Integer boardNo, Model model, HttpSession session) {
 		try {
 			// 로그인한 사용자의 정보 가져오기
-			Member loginUser = (Member)session.getAttribute("loginUser");
-			
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			Board board = bService.selectOneByNo(boardNo);
+
 			// 게시글의 작성자와 로그인한 사용자의 아이디가 일치하는 경우에만 수정 가능
-			if (loginUser.getMemberId().equals(board.getMemberId())) {
-				int result = bService.updateBoard(board);
-				if (result > 0) {
-					return "redirect:/board/detail?boardNo=" + board.getBoardNo();
-				} else {
-					model.addAttribute("msg", "게시판 수정이 완료되지 않았습니다.");
-					return "common/error";
-				}
-			} else {
+			if (loginUser == null || !loginUser.getMemberId().equals(board.getMemberId())) {
 				model.addAttribute("msg", "본인이 작성한 게시물만 수정 가능합니다.");
+				return "common/error";
+			}
+			model.addAttribute("board", board);
+			return "board/boardmodify";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+
+	// 게시판 수정 logic
+	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
+	public String boardModify(@ModelAttribute Board board, Model model) {
+		try {
+			int result = bService.updateBoard(board);
+			if (result > 0) {
+				return "redirect:/board/list";
+			} else {
+				model.addAttribute("msg", "게시판 수정이 완료되지 않았습니다.");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -121,9 +136,9 @@ public class BoardController {
 		int startNavi; // pageNavi 시작값
 		int endNavi; // pageNavi 끝값
 
-		maxPage = (int) ((double) totalCount / boardLimit + 0.9);
-		startNavi = (((int) ((double) currentPage / naviLimit + 0.9)) - 1) * naviLimit + 1;
-		endNavi = startNavi + naviLimit - 1;
+		maxPage = (int)((double) totalCount/boardLimit+0.9);
+		startNavi = (((int)((double) currentPage/naviLimit+0.9))-1)*naviLimit+1;
+		endNavi = startNavi+naviLimit-1;
 		if (endNavi > maxPage) {
 			endNavi = maxPage;
 		}
@@ -158,6 +173,7 @@ public class BoardController {
 				model.addAttribute("search", search);
 				model.addAttribute("pi", pi);
 				model.addAttribute("sList", searchList);
+				model.addAttribute("searchValue", search.getSearchValue()); // 검색 키워드 추가
 				return "board/boardsearch";
 			} else {
 				model.addAttribute("msg", "검색이 되지 않았습니다.");

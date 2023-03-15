@@ -1,0 +1,25 @@
+
+#footerContainer{
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#footerLine{
+    width: 1200px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#footerText{
+    margin-top: 20px;
+    color: #ccc;
+}
+
+#footerText a:link, a:visited{
+    text-decoration: none;
+    color: #ccc;
+}

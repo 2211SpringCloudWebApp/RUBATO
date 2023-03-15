@@ -84,6 +84,7 @@
     border: 1px solid #2FBDB1;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #boardList:hover{
@@ -100,6 +101,7 @@
     border: 1px solid #2FBDB1;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 
@@ -116,6 +118,7 @@
     border: 1px solid grey;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #boardDelete:hover{
@@ -132,6 +135,7 @@
     border: 1px solid #ccc;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #boardReport:hover{
@@ -171,6 +175,7 @@
     border: 1px solid #ccc;
     margin-right: 10px;
     float: left;
+    border-radius: 5px;
 }
 
 #commentSub input[type=submit]{
@@ -181,6 +186,7 @@
     background-color: white;
     margin-top: 20px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #commentSub input[type=submit]:hover{

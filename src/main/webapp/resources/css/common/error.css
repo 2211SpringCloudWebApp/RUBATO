@@ -1,0 +1,26 @@
+#error-container {
+    width: 800px;
+    height: 400px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+    #error-container h2 {
+        color: #2fbdb1;
+    }
+#error-btn {
+    width: 200px;
+    height: 50px;
+    background-color: #2fbdb1;
+    color: white;
+    border: none;
+    margin: 50px;  
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+    #error-btn:hover {
+        cursor: pointer;
+        background-color: #ccc;
+    }

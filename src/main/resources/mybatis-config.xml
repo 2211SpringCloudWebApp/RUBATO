@@ -9,10 +9,14 @@
 	<!-- VO 별칭 설정 -->
 	<typeAliases>
 		<typeAlias type="com.rubato.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>
+		<typeAlias type="com.rubato.board.domain.BoardComment" alias="BoardComment"/>
 	</typeAliases>
 
 	<!-- mapper파일 매핑 -->
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/boardcomment-mapper.xml"/>
 	</mappers>
 </configuration>
