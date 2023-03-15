@@ -5,6 +5,7 @@ import java.util.List;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
 public interface ManagerService {
@@ -53,11 +54,20 @@ public interface ManagerService {
 	 */
 	public int deleteLessonBoard(Integer lessonNo);
 
+	public int getLessonListCount();
 	/**
 	 * 레슨 게시물 전체 개수 Service
 	 * @return
 	 */
-	public int getLessonListCount();
+	public int getLessonListCount(SearchLesson searchLesson);
+
+	/**
+	 * 레슨게시판 검색 Service
+	 * @param pi
+	 * @param searchLesson
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectLessonListByKeyword(PageInfo pi, SearchLesson searchLesson);
 
 
 	

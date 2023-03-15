@@ -11,6 +11,7 @@ import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
 @Service
@@ -69,6 +70,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public int getLessonListCount() {
 		int result = managerStore.getLessonListCount(session);
 		return result;
+	}
+	
+	@Override
+	public int getLessonListCount(SearchLesson searchLesson) {
+		int result = managerStore.getLessonListCount(session, searchLesson);
+		return result;
+	}
+
+	@Override
+	public List<Lesson> selectLessonListByKeyword(PageInfo pi, SearchLesson searchLesson) {
+		List<Lesson> searchLessonList = managerStore.selectLessonListByKeyword(session, pi, searchLesson);
+		return searchLessonList;
 	}
 
 

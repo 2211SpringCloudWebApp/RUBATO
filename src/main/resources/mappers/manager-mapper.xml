@@ -28,6 +28,7 @@
 		<result property="lessonUpdate" column="LESSON_UPDATE"/>
 	</resultMap>
 	
+	<!-- 회원관리 -->
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
 	</select>
@@ -47,7 +48,6 @@
 				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR MEMBER_NAME LIKE '%' || #{searchValue} || '%'
 			</otherwise>
 		</choose>
-	
 	</select>
 	<select id="selectListByKeyword" resultMap="memberResultMap">
 		SELECT * FROM MEMBER 
@@ -75,6 +75,31 @@
 	</select>
 	<select id="getLessonListCount" resultType="_int">
 		SELECT COUNT(*) FROM LESSON
+		<choose>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectLessonListByKeyword" resultMap="lessonResultMap">
+		SELECT * FROM LESSON
+		<choose>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
 	</select>
 	
 	<delete id="deleteLessonBoard">

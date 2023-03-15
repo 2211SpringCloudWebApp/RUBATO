@@ -11,6 +11,7 @@ import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
 @Repository
@@ -75,10 +76,26 @@ public class ManagerStoreLogic implements ManagerStore{
 		return result;
 	}
 
-	@Override
+	
 	public int getLessonListCount(SqlSession session) {
 		int result = session.selectOne("ManagerMapper.getLessonListCount");
 		return result;
+	}
+	
+	@Override
+	public int getLessonListCount(SqlSession session, SearchLesson searchLesson) {
+		int result = session.selectOne("ManagerMapper.getLessonListCount", searchLesson);
+		return result;
+	}
+
+	@Override
+	public List<Lesson> selectLessonListByKeyword(SqlSession session, PageInfo pi, SearchLesson searchLesson) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Lesson> searchLessonList = session.selectList("ManagerMapper.selectLessonListByKeyword",searchLesson, rowBounds);
+		return searchLessonList;
 	}
 
 	

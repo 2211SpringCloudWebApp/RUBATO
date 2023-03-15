@@ -17,6 +17,7 @@ import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
 @Controller
@@ -149,9 +150,31 @@ public class ManagerController {
 		return "manager/managerLessonBoard";
 		
 	}
+	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
+	@RequestMapping(value = "/manager/searchLesson", method=RequestMethod.GET)
+	public String lessonSearchLogic( 
+			@ModelAttribute SearchLesson searchLesson
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			,Model model) {
+		int totalCount = managerService.getLessonListCount(searchLesson);
+		pi = this.getPageInfo(page, totalCount);
+		try {
+			List<Lesson> searchLessonList = managerService.selectLessonListByKeyword(pi, searchLesson);
+			if(!searchLessonList.isEmpty()) {
+				model.addAttribute("searchLesson", searchLesson);
+				model.addAttribute("pi", pi);
+				model.addAttribute("lessonList", searchLessonList);
+				return "manager/searchLesson";
+			} else {
+				return "manager/searchLesson";
+			}
+		} catch (Exception e) {
+			return "manager/searchLesson";
+		}
+		}
 	
 	@RequestMapping(value = "/manager/lessonDelete", method = RequestMethod.GET)
-	public String lessonDeleteLogic(
+	public String lessonDeleteLogic(		// 레슨게시판 게시글 삭제
 			@RequestParam("lessonNo" ) Integer lessonNo
 			, Model model) {
 		int result = managerService.deleteLessonBoard(lessonNo);
