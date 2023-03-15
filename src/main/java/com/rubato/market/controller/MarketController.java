@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -19,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
+import com.rubato.market.domain.PageInfo;
+import com.rubato.market.domain.SearchInfo;
 import com.rubato.market.service.MarketService;
 import com.rubato.member.domain.Member;
 
@@ -76,7 +80,9 @@ public class MarketController {
 			int sellPrice = Integer.parseInt(strPrice.replace(",", ""));
 			marketSell.setSellPrice(sellPrice);
 			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			String memberNickname = ((Member) session.getAttribute("loginUser")).getMemberNickname();
 			marketSell.setMemberId(memberId);
+			marketSell.setMemberNickname(memberNickname);
 			int result = marketService.insertMarketSell(marketImg, marketSell);
 			if(result>0) {
 				return "redirect:/market/list";
@@ -87,6 +93,29 @@ public class MarketController {
 		}
 		else {
 			return "common/error";
+		}
+	}
+	
+	/*===================================================
+	 * 마켓 목록
+	 *===================================================*/
+	@GetMapping("/market/list")
+	public String marketListView(SearchInfo searchInfo,
+								Model model,
+								@RequestParam(value="page", required=false, defaultValue="1") Integer page) { // 게시물 목록 View
+		int totalCount = marketService.getTotalCount(searchInfo);
+		System.out.println(totalCount);
+		PageInfo pi = new PageInfo(page, totalCount);
+		List<MarketSell> sellList = marketService.selectAllSell(searchInfo, pi);
+		if(!sellList.isEmpty()) {
+			model.addAttribute("pi", pi);
+			model.addAttribute("searchInfo", searchInfo);
+			model.addAttribute("sellList", sellList);
+			return "market/marketList";
+		}
+		else {
+			model.addAttribute("msg", "게시물이 존재하지 않습니다.");
+			return "market/marketList";
 		}
 	}
 

@@ -1,0 +1,184 @@
+main{
+    width: 1200px;
+    height: 2000px;  
+    margin: 0 auto; 
+    padding-left: 20px;
+}
+#top-area{
+    color: rgb(81, 79, 79);
+    font-size: 2em;
+    font-weight: 600;
+}
+#top-area2{
+    display: flex;
+    justify-content: space-between;
+}
+    #write-btn{
+        background-color: #2fbdb1;
+        border: none;
+        border-radius: 7%;
+        color: white;
+        font-weight: bolder;
+        padding: 10px;
+    }
+    #write-btn:hover{
+        cursor: pointer;
+    }
+#search-input{
+    width: 210px;
+    height: 30px;
+    font-size: 1.05em;
+    border: none;
+    border-radius: 30px;
+    padding-left: 50px;
+    padding-right: 20px;
+    background-color: #eee;
+    background-image: url('/resources/images/market/search.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 15px center;
+}
+        #search-input:focus{
+            outline: none;
+        }
+
+#place-nav{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    color: rgb(163, 163, 163);
+    font-weight: bold;
+}
+        #place-nav li:hover{
+            color: black;
+            cursor: pointer;
+        }
+        #place-nav a{
+            text-decoration: none;
+        }
+        #place-nav a:link{
+            color: rgb(163, 163, 163);
+        }
+        #place-nav a:visited{
+            color: rgb(163, 163, 163);
+        }
+#selectCondition{
+    border-radius:0; /* 아이폰 사파리 보더 없애기 */
+	-webkit-appearance:none; /* 화살표 없애기 for chrome*/
+	-moz-appearance:none; /* 화살표 없애기 for firefox*/
+	appearance:none; /* 화살표 없애기 공통*/
+    background: url(/resources/images/market/down-arrow.png) no-repeat 97% 50%/15px auto;
+    font-size: 1.02em;
+    border: 1px solid #cdcccc;
+    border-radius: 10px;
+    padding: 5px;
+    padding-right: 15px;
+    margin-left: 20px;
+    color: rgb(115, 114, 114);
+    
+}
+    #selectCondition:focus{
+        outline: none;
+    }
+#list-area{
+    width: 1100px;
+    margin: 0 auto; 
+    padding-left: 20px;
+}
+#no-posting{
+	margin-left: 450px;
+	color: rgb(81, 79, 79);
+}
+
+.product-area{
+    display: flex;
+    padding: 15px;
+    color: rgb(81, 79, 79);
+    border-bottom: 1px solid #eee;
+}
+        .product-area a{
+            text-decoration: none;
+        }
+        .product-area a:link{
+            color: rgb(81, 79, 79);
+        }
+        .product-area a:visited{
+            color: rgb(81, 79, 79);
+        }
+        .product-area img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10%;
+            margin-right: 30px;
+        }
+        .product-area1{
+            display: flex;
+            width: 600px;
+            flex-direction: column;
+        }
+            .product-area1 h2{
+                margin-bottom: 5px;
+            }
+        .product-area2{
+            display: flex;
+            flex-direction: column;
+        }
+        .product-area3{
+            display: flex;
+            flex-direction: row;
+        }
+            .product-area3 img{
+                margin: 0;
+                padding-top: 20px;
+                padding-left: 20px;
+                width: 25px;
+                height: 25px;
+            }
+            .product-area3 span{
+                padding-top: 20px;
+                padding-left: 5px;
+            }
+
+#navi-area{
+    display: flex;
+    justify-content: center;
+    width: 1100px;
+    margin: 0 auto; 
+    margin-top: 30px;
+    padding-left: 20px;
+}
+    #navi-area a{
+        text-decoration: none;
+        color: rgb(81, 79, 79);
+    }
+        #navi-area a:link{
+            color: rgb(81, 79, 79);
+        }
+        #navi-area a:visited{
+            color: rgb(81, 79, 79);
+        }
+    #navi-btn1{
+        border: 1px solid #cdcccc;
+        padding: 10px;
+    }
+    #navi-btn2{
+        border: 1px solid #cdcccc;
+        padding: 10px;
+        margin-right: 20px;
+    }
+    .navi-btn3{
+        border: 1px solid #cdcccc;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #navi-btn4{
+        border: 1px solid #cdcccc;
+        padding: 10px;
+        margin-left: 20px;
+    }  
+    #navi-btn5{
+        border: 1px solid #cdcccc;
+        padding: 10px;
+    }

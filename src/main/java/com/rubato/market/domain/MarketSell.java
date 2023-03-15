@@ -10,10 +10,14 @@ public class MarketSell {
 	private String sellArea;
 	private String productCondition;
 	private String memberId;
-	private Timestamp wirteDate;
+	private Timestamp writeDate;
 	private Timestamp modDate;
 	private String sellCondition;
 	private int viewCount;
+	private String img1;
+	private String img2;
+	private String img3;
+	private String memberNickname;
 	
 	public MarketSell() {}
 	
@@ -29,12 +33,37 @@ public class MarketSell {
 	}
 
 
-	@Override
-	public String toString() {
-		return "MarketSell [판매글번호=" + sellNo + ", 판매글제목=" + sellTitle + ", 판매글내용=" + sellContent
-				+ ", 판매가격=" + sellPrice + ", 판매지역=" + sellArea + ", 제품상태=" + productCondition
-				+ ", 판매자ID=" + memberId + ", 등록일=" + wirteDate + ", 수정일=" + modDate + ", 거래상태="
-				+ sellCondition + ", 조회수=" + viewCount + "]";
+
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
+	}
+
+	public String getImg1() {
+		return img1;
+	}
+
+	public void setImg1(String img1) {
+		this.img1 = img1;
+	}
+
+	public String getImg2() {
+		return img2;
+	}
+
+	public void setImg2(String img2) {
+		this.img2 = img2;
+	}
+
+	public String getImg3() {
+		return img3;
+	}
+
+	public void setImg3(String img3) {
+		this.img3 = img3;
 	}
 
 	// getter setter
@@ -94,12 +123,12 @@ public class MarketSell {
 		this.memberId = memberId;
 	}
 
-	public Timestamp getWirteDate() {
-		return wirteDate;
+	public Timestamp getWriteDate() {
+		return writeDate;
 	}
 
-	public void setWirteDate(Timestamp wirteDate) {
-		this.wirteDate = wirteDate;
+	public void setWriteDate(Timestamp writeDate) {
+		this.writeDate = writeDate;
 	}
 
 	public Timestamp getModDate() {

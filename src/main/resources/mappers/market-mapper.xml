@@ -10,10 +10,14 @@
 		<result property="sellArea" column="SELL_AREA"/>
 		<result property="productCondition" column="PRODUCT_CONDITION"/>
 		<result property="memberId" column="MEMBER_ID"/>
-		<result property="wirteDate" column="WRITE_DATE"/>
+		<result property="writeDate" column="WRITE_DATE"/>
 		<result property="modDate" column="MOD_DATE"/>
 		<result property="sellCondition" column="SELL_CONDITION"/>
 		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="img1" column="IMG1"/>
+		<result property="img2" column="IMG2"/>
+		<result property="img3" column="IMG3"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 	</resultMap>
 	<resultMap type="MarketImage" id="marketImageResultMap">
 		<id property="sellNo" column="SELL_NO"/>
@@ -24,11 +28,77 @@
 	
 	<!-- SQL Query -->
 	<!-- select -->
+	<select id="selectAllSell" resultMap="marketSellResultMap">
+		SELECT * FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO
+			<!-- 검색 -->
+			<if test="sellArea=='' and sellCondition=='' and search!=null">
+				WHERE SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search==''">
+				WHERE SELL_AREA = #{sellArea}
+			</if>
+			<!-- 판매여부 -->
+			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
+				WHERE SELL_CONDITION = #{sellCondition}
+			</if>
+			<!-- 지역 + 검색 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search!=''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 + 판매여부 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition}
+			</if>
+			<!-- 판매여부 + 검색 -->
+			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
+				WHERE SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 + 판매여부 + 검색 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+		ORDER BY WRITE_DATE DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO
+			<!-- 검색 -->
+			<if test="sellArea=='' and sellCondition=='' and search!=null">
+				WHERE SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search==''">
+				WHERE SELL_AREA = #{sellArea}
+			</if>
+			<!-- 판매여부 -->
+			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
+				WHERE SELL_CONDITION = #{sellCondition}
+			</if>
+			<!-- 지역 + 검색 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search!=''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 + 판매여부 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition}
+			</if>
+			<!-- 판매여부 + 검색 -->
+			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
+				WHERE SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+			<!-- 지역 + 판매여부 + 검색 -->
+			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
+				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+			</if>
+		ORDER BY WRITE_DATE DESC
+	</select>
+	
 	<!-- insert -->
 	<insert id="insertMarketSell">
 		INSERT INTO MARKET_SELL 
 		VALUES(SEQ_SELLNO.NEXTVAL, #{sellTitle}, #{sellContent}, #{sellPrice}, #{sellArea}, #{productCondition}, #{memberId}, DEFAULT, DEFAULT,
-				DEFAULT, DEFAULT)
+				DEFAULT, DEFAULT, #{memberNickname})
 	</insert>
 	<insert id="insertMarketImage">
 		INSERT INTO MARKET_IMAGE
