@@ -47,7 +47,7 @@
                         <td style="width: 20%;">${lesson.lessonArea}</td>
                         <td style="width: 25%;">${lesson.lessonPrice} 만원 / 1회</td>
                         <td style="width: 40%;">${lesson.lessonPlan}</td>
-                        <td style="width: 15%;">${lesson.memberId}</td>
+                        <td style="width: 15%;">${lesson.memberNickname}</td>
                     </tr>
                 </table>
             </c:forEach>

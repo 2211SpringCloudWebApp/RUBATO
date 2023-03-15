@@ -9,6 +9,7 @@ public class Apply {
 	private String lessonTitle;
 	private String memberId;
 	private String memberEmail;
+	private String memberNickname;
 	private String applyPrice;
 	private String applyPlan;
 	private String applyContent;
@@ -91,7 +92,14 @@ public class Apply {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-	
+
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
+	}
 	
 	
 }

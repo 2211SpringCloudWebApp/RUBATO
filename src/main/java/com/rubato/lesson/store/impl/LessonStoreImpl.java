@@ -62,6 +62,12 @@ public class LessonStoreImpl implements LessonStore{
 		int result = session.delete("ApplyMapper.deleteApply", apply);
 		return result;
 	}
+	
+	@Override //신청글 수정
+	public int modifyApply(SqlSession session, Apply apply) {
+		int result = session.update("ApplyMapper.modifyApply", apply);
+		return result;
+	}
 
 	@Override //신청글 찾기
 	public Apply selectOneApply(SqlSession session, Apply user) {
@@ -80,6 +86,8 @@ public class LessonStoreImpl implements LessonStore{
 		List<Apply> aList = session.selectList("ApplyMapper.selectByLesson", lessonNo);
 		return aList;
 	}
+
+	
 
 
 

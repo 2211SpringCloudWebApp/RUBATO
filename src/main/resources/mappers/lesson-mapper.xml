@@ -4,6 +4,7 @@
 	<resultMap type="Lesson" id="lessonResultMap">
 		<id property="lessonNo" column="LESSON_NO"/>
 		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		<result property="lessonTitle" column="LESSON_TITLE"/>
 		<result property="lessonPre" column="LESSON_PRE"/>
 		<result property="lessonContent" column="LESSON_CONTENT"/>
@@ -27,10 +28,10 @@
 	
 	<!-- select -->
 	<select id="selectOneByNo" resultMap="lessonResultMap">
-		SELECT * FROM LESSON WHERE LESSON_NO = #{lessonNo}
+		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID WHERE LESSON_NO = #{lessonNo}
 	</select>
 	<select id="selectLessons" resultMap="lessonResultMap">
-		SELECT * FROM LESSON ORDER BY LESSON_NO DESC
+		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
 	</select>
 	<select id="selectMyLessons" resultMap="lessonResultMap">
 		SELECT * FROM LESSON WHERE MEMBER_ID = #{memberId}

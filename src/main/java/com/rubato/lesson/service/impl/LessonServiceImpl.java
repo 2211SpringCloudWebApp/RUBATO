@@ -63,6 +63,11 @@ public class LessonServiceImpl implements LessonService{
 	public int removeApply(Apply apply) {
 		return lStore.removeApply(session, apply);
 	}
+	
+	@Override //신청글 수정
+	public int modifyApply(Apply apply) {
+		return lStore.modifyApply(session, apply);
+	}
 
 	@Override //신청글 찾기
 	public Apply selectOneApply(Apply user) {
@@ -78,6 +83,8 @@ public class LessonServiceImpl implements LessonService{
 	public List<Apply> selectByLesson(int lessonNo) {
 		return lStore.selectByLesson(session, lessonNo);
 	}
+
+	
 
 
 }

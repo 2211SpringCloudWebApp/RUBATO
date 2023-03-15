@@ -26,7 +26,7 @@
                     
                     <table id="list-detail">    
                         <tr>
-                            <td style="width: 30%;"><b>신청자 ID | </b>${apply.memberId}</td>
+                            <td style="width: 30%;"><b>신청자 ID | </b>${apply.memberNickname}</td>
                             <td style="width: 30%;"><b>요청 금액 | </b>${apply.applyPrice}</td>
                             <td style="width: 40%;"><b>요청 일정 | </b>${apply.applyPlan}</td>   
                         </tr>

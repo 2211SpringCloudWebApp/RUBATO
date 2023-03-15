@@ -88,7 +88,7 @@ public class LessonController {
 	 *===================================================*/
 	@RequestMapping(value = "/lesson/detail", method = RequestMethod.GET)
 	public String detailView( // 레슨 상세 View (detail.jsp)
-			@RequestParam("lessonNo") int lessonNo
+			@RequestParam("lessonNo") Integer lessonNo
 			, Model model) {  
 		try {
 			Lesson lesson = lService.selectOneByNo(lessonNo);
@@ -264,6 +264,59 @@ public class LessonController {
 			return "common/error";
 		}
 	}
+	
+	/*===================================================
+	 * 신청글 수정 View, Logic
+	 *===================================================*/
+	@RequestMapping(value = "/apply/modify", method = RequestMethod.GET)
+	public String applyModifyView( // 신청글 수정 View
+			@RequestParam("lessonNo") int lessonNo
+			, HttpServletRequest request
+			, Model model) {
+		try {
+			HttpSession session = request.getSession();
+			String memberId =((Member)session.getAttribute("loginUser")).getMemberId();
+			Apply apply = new Apply(lessonNo, memberId);
+			Apply apply2 = lService.selectOneApply(apply);
+			if(apply2 != null) {
+				model.addAttribute("apply", apply2);
+				return "apply/modify";
+			} else {
+				model.addAttribute("msg", "신청글 수정 실패");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	@RequestMapping(value = "/apply/modify", method = RequestMethod.POST)
+	public String applyModifyLogic( // 신청글 수정 Logic
+			@ModelAttribute Apply apply
+			, HttpServletRequest request
+			, Model model) {
+		try {
+			HttpSession session = request.getSession();
+			String memberId =((Member)session.getAttribute("loginUser")).getMemberId();
+			apply.setMemberId(memberId);
+			int result = lService.modifyApply(apply);
+			if(result > 0) {
+				return "redirect:/apply/myapply";
+			} else {
+				model.addAttribute("msg", "신청 수정 실패");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
+	
 	
 	/*===================================================
 	 * 신청글 목록 View

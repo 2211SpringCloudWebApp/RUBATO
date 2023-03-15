@@ -51,7 +51,7 @@
                     <li>
                         <label for="lesson-price">희망 금액 (회당)</label>
                         <select name="lessonPrice" id="lesson-price">
-                            <option value="0~3" selected>0~3</option>
+                            <option value="0~3">0~3</option>
                             <option value="4~6">4~6</option>
                             <option value="7~9">7~9</option>
                             <option value="10~15">10~15</option>

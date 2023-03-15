@@ -6,6 +6,7 @@ public class Lesson {
 
 	private int lessonNo;
 	private String memberId;
+	private String memberNickname;
 	private String lessonTitle;
 	private String lessonPre;
 	private String lessonContent;
@@ -119,6 +120,14 @@ public class Lesson {
 
 	public void setLessonUpdate(Timestamp lessonUpdate) {
 		this.lessonUpdate = lessonUpdate;
+	}
+
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
 	}
 
 	

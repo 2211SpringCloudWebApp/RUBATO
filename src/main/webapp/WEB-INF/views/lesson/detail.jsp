@@ -20,7 +20,7 @@
     <div id="detail-main">
         <h2>${lesson.lessonTitle}</h2>
         <div id="teacher-id">
-            <small>${lesson.memberId}</small>
+            <small>${lesson.memberNickname}</small>
         </div>
         <div id="pre-intro">${lesson.lessonPre}</div>
         <div id="lesson-opt">
@@ -40,11 +40,24 @@
                 <button onclick="location.href='/apply/listbylesson?lessonNo=${lesson.lessonNo}'">받은 신청</button>
             </c:if>
             <c:if test="${sessionScope.loginUser.memberId ne lesson.memberId}">
-                <button onclick="location.href='/apply/create?lessonNo=${lesson.lessonNo}'">신청하기</button>
+                <button onclick="loginCheck()">신청하기</button>
                 <button onclick="location.href='/lesson/list'">목록으로</button>
             </c:if>   
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+    <script>
+        function loginCheck() {
+            let memberId = "${sessionScope.loginUser.memberId}"
+            if(memberId=="") {
+                alert("로그인 후 레슨 신청이 가능합니다.");
+                location.href="/member/login";
+            } else {
+                location.href="/apply/create?lessonNo=${lesson.lessonNo}";
+            } 
+        }
+    </script>
+
 </body>
 </html>

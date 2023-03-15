@@ -44,7 +44,7 @@
     #list-detail:last-child {
         border: none;
     }
-#remove-btn {
+    #list-detail button {
     width: 120px;
     height: 40px;
     background-color: #fafafa;
@@ -53,8 +53,8 @@
     font-weight: 700;
     font-size: 95%;
     font-family: 'Noto Sans KR', sans-serif;
-}
-    #remove-btn:hover {
+    }
+    #list-detail button:hover {
         cursor: pointer;
         background-color: #ccc;
         color: white;

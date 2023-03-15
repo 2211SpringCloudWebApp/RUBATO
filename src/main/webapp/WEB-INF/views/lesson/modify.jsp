@@ -15,11 +15,10 @@
 	</head>
 	<body>
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-		
          <div id="modify-main">
-        <fieldset>
+        <form action="/lesson/modify" method="post">
+            <fieldset>
             <legend>[ 레슨 정보 수정하기 ]</legend>
-            <form action="/lesson/modify" method="post">
            		<input type="hidden" name="lessonNo" value="${lesson.lessonNo }">
                 <ul id="lesson-modify">
                     <li>
@@ -27,7 +26,6 @@
                         <input type="text" id="lesson-title" name="lessonTitle" value="${lesson.lessonTitle}">
                     </li>
                     <li>
-                        <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-area">레슨 지역</label>
                         <select name="lessonArea" id="lesson-area">
                             <option value="서울">서울</option>
@@ -54,7 +52,7 @@
                         <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-price">희망 금액 (회당)</label>
                         <select name="lessonPrice" id="lesson-price">
-                            <option value="0~3" selected>0~3</option>
+                            <option value="0~3">0~3</option>
                             <option value="4~6">4~6</option>
                             <option value="7~9">7~9</option>
                             <option value="10~15">10~15</option>
@@ -74,28 +72,26 @@
                         <textarea name="lessonContent" id="lesson-content" cols="45" rows="10">${lesson.lessonContent}</textarea>
                     </li>  
                 </ul>
-            </form>
-        </fieldset>
-        <div id="modify-btns">
-            <input type="submit" value="저장" class="modify-btn">
-            <input type="button" value="삭제" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
-        </div>
+            </fieldset>
+            <div id="modify-btns">
+                <input type="submit" value="저장" class="modify-btn">
+                <input type="button" value="삭제" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
+            </div>
+        </form>   
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
         
         
         <script>
+            document.querySelector("[value='${lesson.lessonArea}']").selected = true;
+            document.querySelector("[value='${lesson.lessonPrice}']").selected = true;
+           
             function removeLesson(lessonNo) {
                 if(confirm("레슨을 삭제하시겠습니까?")) {
                     location.href="/lesson/remove?lessonNo="+lessonNo;
                 }
             }
-
-            // select 선택값 유지 ,,,,, 이거 구동 안댐 ㅜ 찾아보기
-            // inner값 가져오도록 컨트롤러 수정하기
-            $(function() {
-                $("#lesson-area").val("${param.lessonArea}").attr("selected", "selected");
-            })
+           
         </script>
 	</body>
 </html>

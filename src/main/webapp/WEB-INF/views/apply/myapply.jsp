@@ -26,16 +26,17 @@
                 <c:forEach items="${aList}" var="apply" varStatus="i">   
                     <table id="list-detail">
                         <tr>
-                            <td colspan="3"><a href="/lesson/detail?lessonNo=${apply.lessonNo}" id="detailLink"><b>레슨명 | </b><span>${apply.lessonTitle}</span></a></td>
+                            <td colspan="4"><a href="/lesson/detail?lessonNo=${apply.lessonNo}" id="detailLink"><b>레슨명 | </b><span>${apply.lessonTitle}</span></a></td>
                             
                         </tr>
                         <tr>
-                            <td colspan="3"><b>나의 요청 | </b>${apply.applyContent}</td>
+                            <td colspan="4"><b>나의 요청 | </b>${apply.applyContent}</td>
                         </tr>
                         <tr>
                             <td style="width: 20%;"><b>제시 금액 | </b> ${apply.applyPrice}</td>
-                            <td style="width: 60%;"><b>요청 일정 | </b>${apply.applyPlan}</td>
-                            <td style="width: 20%;"><button id="remove-btn" onclick="removeApply('${apply.lessonNo}', '${apply.memberId}');">삭제</button></td>
+                            <td style="width: 40%;"><b>요청 일정 | </b>${apply.applyPlan}</td>
+                            <td style="width: 20%;"><button onclick="location.href='/apply/modify?lessonNo=${apply.lessonNo}&memberId=${apply.memberId}' ">수정</button></td>
+                            <td style="width: 20%;"><button onclick="removeApply('${apply.lessonNo}', '${apply.memberId}');">삭제</button></td>
                         </tr>
                     </table>
                 </c:forEach>

@@ -66,6 +66,13 @@ public interface LessonService {
 	public int removeApply(Apply apply);
 
 	/**
+	 * 신청글 수정 Service
+	 * @param apply
+	 * @return int
+	 */
+	public int modifyApply(Apply apply);
+	
+	/**
 	 * 신청글 찾기 Service
 	 * @param user
 	 * @return
@@ -84,5 +91,7 @@ public interface LessonService {
 	 * @return List<Apply>
 	 */
 	public List<Apply> selectByLesson(int lessonNo);
+
+	
 	
 }

@@ -72,9 +72,17 @@ public interface LessonStore {
 	 * @param session
 	 * @param lessonNo
 	 * @param memberId
-	 * @return
+	 * @return int
 	 */
 	public int removeApply(SqlSession session, Apply apply);
+
+	/**
+	 * 신청글 수정 Store
+	 * @param session
+	 * @param apply
+	 * @return int
+	 */
+	public int modifyApply(SqlSession session, Apply apply);
 
 	/**
 	 * 신청글 찾기 Store
@@ -100,6 +108,7 @@ public interface LessonStore {
 	 */
 	public List<Apply> selectByLesson(SqlSession session, int lessonNo);
 
+	
 	
 
 	

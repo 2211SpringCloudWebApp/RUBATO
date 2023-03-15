@@ -1,0 +1,63 @@
+#modify-main {
+    width: 800px;
+    margin: 0 auto;
+    height: 700px;
+    line-height: 5;
+}
+    #modify-main fieldset {
+        border: 1px solid #ccc;
+    }
+    #modify-main label {
+        width: 200px;
+        text-align: left;
+        float: left;
+        padding-left: 10px;
+        font-size: 16px;
+    }
+    #modify-main legend {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 900;
+        color: #2fbdb1;
+    }
+    #apply-modify {
+        list-style-type: none;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+        #apply-plan {
+            height: 40px;
+            width: 300px;
+        }
+        #apply-price {
+            width: 100px;
+            height: 40px;
+        }
+        #apply-modify input:focus
+        , #apply-modify select:focus
+        , #apply-modify textarea:focus {
+            background-color: #62d3952a;
+        }
+        #apply-modify select {
+            width: 100px;
+            height: 40px;
+        }
+#modify-btns {
+    text-align: center;
+}
+    .modify-btn {
+        width: 120px;
+        height: 50px;
+        background-color: #2fbdb1;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-left: 20px;
+        margin-top: 10px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .modify-btn:hover {
+        cursor: pointer;
+        background-color: #ccc;
+    }
