@@ -13,6 +13,8 @@
 		<typeAlias type="com.rubato.market.domain.MarketImage" alias="MarketImage"/>
 		<typeAlias type="com.rubato.lesson.domain.Lesson" alias="Lesson"/>
 		<typeAlias type="com.rubato.lesson.domain.Apply" alias="Apply"/>
+		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>
+		<typeAlias type="com.rubato.board.domain.BoardComment" alias="BoardComment"/>
 	</typeAliases>
 	<!-- mapper파일 매핑 -->
 	<mappers>
@@ -21,5 +23,7 @@
 		<mapper resource="mappers/lesson-mapper.xml"/>
 		<mapper resource="mappers/apply-mapper.xml"/>
 		<mapper resource="mappers/manager-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/boardcomment-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardCommentMapper">
+	<resultMap type="BoardComment" id="BoardCommentResultMap">
+		<id 	property="commentNo"  	 column="COMMENT_NO"/>
+		<result property="boardNo" 		 column="BOARD_NO"/>
+		<result property="commentContent" 	 column="COMMENT_CONTENT"/>
+		<result property="memberId" 	 column="MEMBER_ID"/>
+		<result property="commentDate" 	 column="COMMENT_DATE"/>
+		<result property="commentUpdate" 	 column="COMMENT_UPDATE"/>
+	</resultMap>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertComment" parameterType="BoardComment">
+		INSERT INTO BOARD_COMMENT (COMMENT_NO, BOARD_NO, COMMENT_CONTENT, MEMBER_ID) VALUES (SEQ_BORADCOMMENTNO.NEXTVAL, #{boardNo}, #{commentContent}, #{memberId})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment">
+		DELETE FROM BOARD_COMMENT WHERE COMMENT_NO = #{commentNo}
+	</delete>
+	
+	<!-- 댓글 목록 -->
+	<select id="selectCommentList" resultMap="BoardCommentResultMap">
+		SELECT * FROM BOARD_COMMENT ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+</mapper>
