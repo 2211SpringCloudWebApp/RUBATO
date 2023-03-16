@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.PageInfo;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.member.domain.Member;
@@ -149,11 +150,15 @@ public class LessonController {
 	 *===================================================*/
 	@RequestMapping(value = "/lesson/list", method = RequestMethod.GET)
 	public String listView( // 레슨 목록 View (list.jsp)
-			Model model) { 
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page
+			, Model model) { 
 		try {
-			List<Lesson> lList = lService.selectLessons();
+			int totalCount = lService.getListCount();
+			PageInfo pi = getPageInfo(page, totalCount);
+			List<Lesson> lList = lService.selectLessons(pi);
 			if(!lList.isEmpty()) {
 				model.addAttribute("lList", lList);
+				model.addAttribute("pi", pi);
 				return "lesson/list";
 			} else {
 				model.addAttribute("msg", "생성레슨이 없어요. 레슨을 만들어 루바토의 선생님이 되어보세요!");
@@ -188,7 +193,24 @@ public class LessonController {
 			return "common/error";
 		}
 	}
-	
+
+	private PageInfo getPageInfo(int currentPage, int totalCount) {
+		PageInfo pi = null;
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int)((double)totalCount/boardLimit+0.9);
+		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(endNavi > maxPage) {
+			endNavi = maxPage;
+		}
+		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+		return pi;
+	}
 	
 	
 	
@@ -348,11 +370,15 @@ public class LessonController {
 	@RequestMapping(value = "/apply/listbylesson", method = RequestMethod.GET)
 	public String applyByLesson( // 레슨별 신청 목록 View (listbylesson.jsp)
 			@RequestParam("lessonNo") int lessonNo
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {
 		try {
-			List<Apply> aList = lService.selectByLesson(lessonNo);
+			int totalCount = lService.getListCount(lessonNo);
+			PageInfo pi = getPageInfo(page, totalCount);
+			List<Apply> aList = lService.selectByLesson(lessonNo, pi);
 			if(!aList.isEmpty()) {
 				model.addAttribute("aList", aList);
+				model.addAttribute("pi", pi);
 				return "apply/listbylesson";
 			} else {
 				model.addAttribute("msg", "해당 레슨에 받은 신청이 없어요.");

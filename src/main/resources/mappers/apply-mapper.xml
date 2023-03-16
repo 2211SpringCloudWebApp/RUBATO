@@ -33,5 +33,8 @@
 	</select>
 	<select id="selectByLesson" resultMap="applyResultMap">
 		SELECT A.*, M.MEMBER_EMAIL, M.MEMBER_NICKNAME, L.LESSON_TITLE FROM LESSON_APPLY A JOIN MEMBER M ON A.MEMBER_ID = M.MEMBER_ID JOIN LESSON L ON A.LESSON_NO = L.LESSON_NO WHERE A.LESSON_NO = #{lessonNo}
+	</select>
+	<select id="countByLesson" resultType="_int">
+		SELECT COUNT(*) FROM LESSON_APPLY WHERE LESSON_NO = #{lessonNo}
 	</select>	
 </mapper>

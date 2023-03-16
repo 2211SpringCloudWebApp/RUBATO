@@ -3,6 +3,7 @@ package com.rubato.lesson.service;
 import java.util.List;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.PageInfo;
 import com.rubato.lesson.domain.Apply;
 
 public interface LessonService {
@@ -39,7 +40,7 @@ public interface LessonService {
 	 * 레슨글 목록 Service
 	 * @return List<Lesson>
 	 */
-	public List<Lesson> selectLessons();
+	public List<Lesson> selectLessons(PageInfo pi);
 	
 	/**
 	 * 나의 레슨글 목록 Service
@@ -47,7 +48,12 @@ public interface LessonService {
 	 * @return List<Lesson>
 	 */
 	public List<Lesson> selectMyLessons(String memberId);
-	
+
+	/**
+	 * 레슨글 전체 개수 Service
+	 * @return int
+	 */
+	public int getListCount();
 
 /*----------------------------------------------------------------------*/
 	
@@ -90,7 +96,15 @@ public interface LessonService {
 	 * @param lessonNo
 	 * @return List<Apply>
 	 */
-	public List<Apply> selectByLesson(int lessonNo);
+	public List<Apply> selectByLesson(int lessonNo, PageInfo pi);
+
+	/**
+	 * 레슨별 신청글 개수 Service
+	 * @param lessonNo
+	 * @return int
+	 */
+	public int getListCount(int lessonNo);
+
 
 	
 	

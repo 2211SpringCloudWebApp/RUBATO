@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.PageInfo;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.lesson.store.LessonStore;
@@ -41,13 +42,18 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override //레슨글 목록
-	public List<Lesson> selectLessons() {
-		return lStore.selectLessons(session);
+	public List<Lesson> selectLessons(PageInfo pi) {
+		return lStore.selectLessons(session, pi);
 	}
 
 	@Override //나의 레슨 목록
 	public List<Lesson> selectMyLessons(String memberId) {
 		return lStore.selectMyLessons(session, memberId);
+	}
+	
+	@Override //레슨글 전체 수
+	public int getListCount() {
+		return lStore.getListCount(session);
 	}
 
 	
@@ -80,9 +86,15 @@ public class LessonServiceImpl implements LessonService{
 	}
 	
 	@Override //레슨별 신청글 목록
-	public List<Apply> selectByLesson(int lessonNo) {
-		return lStore.selectByLesson(session, lessonNo);
+	public List<Apply> selectByLesson(int lessonNo, PageInfo pi) {
+		return lStore.selectByLesson(session, lessonNo, pi);
 	}
+
+	@Override //레슨별 신청 개수
+	public int getListCount(int lessonNo) {
+		return lStore.getListCount(session, lessonNo);
+	}
+
 
 	
 

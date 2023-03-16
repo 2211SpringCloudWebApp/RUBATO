@@ -2,10 +2,12 @@ package com.rubato.lesson.store.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.PageInfo;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.store.LessonStore;
 
@@ -37,8 +39,12 @@ public class LessonStoreImpl implements LessonStore{
 	}
 
 	@Override //레슨글 목록
-	public List<Lesson> selectLessons(SqlSession session) {
-		List<Lesson> lList = session.selectList("LessonMapper.selectLessons");
+	public List<Lesson> selectLessons(SqlSession session, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrenPage();
+		int offset = (currentPage -1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Lesson> lList = session.selectList("LessonMapper.selectLessons", null, rowBounds);
 		return lList;
 	}
 	
@@ -46,6 +52,12 @@ public class LessonStoreImpl implements LessonStore{
 	public List<Lesson> selectMyLessons(SqlSession session, String memberId) {
 		List<Lesson> lList = session.selectList("LessonMapper.selectMyLessons", memberId);
 		return lList;
+	}
+	
+	@Override //레슨글 전체 수
+	public int getListCount(SqlSession session) {
+		int result = session.selectOne("LessonMapper.getListcount");
+		return result;
 	}
 
 	
@@ -82,11 +94,20 @@ public class LessonStoreImpl implements LessonStore{
 	}
 	
 	@Override //레슨별 신청글 목록
-	public List<Apply> selectByLesson(SqlSession session, int lessonNo) {
-		List<Apply> aList = session.selectList("ApplyMapper.selectByLesson", lessonNo);
+	public List<Apply> selectByLesson(SqlSession session, int lessonNo, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrenPage();
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Apply> aList = session.selectList("ApplyMapper.selectByLesson", lessonNo, rowBounds);
 		return aList;
 	}
 
+	@Override //레슨별 신청글 개수
+	public int getListCount(SqlSession session, int lessonNo) {
+		int result = session.selectOne("ApplyMapper.countByLesson", lessonNo);
+		return result;
+	}
 	
 
 

@@ -36,5 +36,8 @@
 	<select id="selectMyLessons" resultMap="lessonResultMap">
 		SELECT * FROM LESSON WHERE MEMBER_ID = #{memberId}
 	</select>
+	<select id="getListcount" resultType="_int">
+		SELECT COUNT(*) FROM LESSON 
+	</select>
 	
 </mapper>

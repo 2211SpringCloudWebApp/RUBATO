@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.rubato.lesson.domain.Lesson;
+import com.rubato.lesson.domain.PageInfo;
 import com.rubato.lesson.domain.Apply;
 
 public interface LessonStore {
@@ -46,7 +47,7 @@ public interface LessonStore {
 	 * @param session
 	 * @return List<Lesson>
 	 */
-	public List<Lesson> selectLessons(SqlSession session);
+	public List<Lesson> selectLessons(SqlSession session, PageInfo pi);
 	
 	/** 
 	 * 나의 레슨글 목록 Store
@@ -56,6 +57,12 @@ public interface LessonStore {
 	 */
 	public List<Lesson> selectMyLessons(SqlSession session, String memberId);
 
+	/**
+	 * 레슨글 전체수 Store
+	 * @param session
+	 * @return int
+	 */
+	public int getListCount(SqlSession session);
 
 /*---------------------------------------------------------------------------*/
 	
@@ -106,7 +113,16 @@ public interface LessonStore {
 	 * @param lessonNo
 	 * @return List<Apply>
 	 */
-	public List<Apply> selectByLesson(SqlSession session, int lessonNo);
+	public List<Apply> selectByLesson(SqlSession session, int lessonNo, PageInfo pi);
+
+	/**
+	 * 레슨별 신청글 개수 Store
+	 * @param session
+	 * @param lessonNo
+	 * @return int
+	 */
+	public int getListCount(SqlSession session, int lessonNo);
+
 
 	
 	
