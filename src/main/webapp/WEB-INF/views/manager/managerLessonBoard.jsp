@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/manager/managerMember.css">
+    <link rel="stylesheet" href="/resources/css/manager/managerLesson.css">
     <script src="/resources/js/manager/managerLessonBoard.js" defer></script>
 </head>
 <body>
@@ -65,12 +65,12 @@
                             <tbody>
                             <c:forEach items="${lbList }" var="lesson">
                                 <tr>
-                                    <td style="width: 30px;">${lesson.lessonNo }</td>
-                                    <td style="width: 100px;">${lesson.lessonTitle }</td>
-                                    <td style="width: 30px;">${lesson.memberId }</td>
-                                    <td style="width: 210px;">${lesson.lessonContent }</td>
-                                    <td style="width: 150px;">${lesson.lessonDate }</td>
-                                    <td style="width: 150px;"><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
+                                    <td>${lesson.lessonNo }</td>
+                                    <td><a href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
+                                    <td>${lesson.memberId }</td>
+                                    <td>${lesson.lessonContent }</td>
+                                    <td>${lesson.lessonDate }</td>
+                                    <td><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
                                     
                                 </tr>
                               </c:forEach>

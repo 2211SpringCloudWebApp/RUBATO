@@ -84,7 +84,7 @@ main{
 }
 
 #footer {
-/*     display: flex; */
+	display: flex;
     margin-top: 20px;
 }
 
@@ -96,6 +96,7 @@ main{
 }
 #page {
   text-align: center;
+  margin-left: 20px;
 }
 #page a {
   color: #000000b1;

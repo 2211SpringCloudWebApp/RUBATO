@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/manager/managerMember.css">
+    <link rel="stylesheet" href="/resources/css/manager/managerBoard.css">
     <script src="/resources/js/manager/managerBoard.js" defer></script>
 </head>
 <body>
@@ -64,14 +64,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${boardList }" var="board">
+                              <c:forEach items="${boardList }" var="board">
                                 <tr>
-                                    <td style="width: 130px;">${board.boardNo }</td>
-                                    <td style="width: 100px;">${board.boardCategory }</td>
-                                    <td style="width: 130px;">${board.boardTitle }</td>
-                                    <td style="width: 210px;">${board.memberId }</td>
-                                    <td style="width: 150px;">${board.boardDate }</td>
-                                    <td style="width: 400px;">${board.viewCount }</td>
+                                    <td>${board.boardNo }</td>
+                                    <td>${board.boardCategory }</td>
+                                    <td>${board.boardTitle }</td>
+                                    <td>${board.memberId }</td>
+                                    <td>${board.boardDate }</td>
+                                    <td>${board.viewCount }</td>
                                     <td><a href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
