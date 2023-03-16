@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ManagerMapper">
+	<resultMap type="Member" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberAddr" column="MEMBER_ADDR"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="modDate" column="MOD_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="memberPoint" column="MEMBER_POINT"/>
+	</resultMap>
+	
+	<resultMap type="Lesson" id="lessonResultMap">
+		<id property="lessonNo" column="LESSON_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="lessonTitle" column="LESSON_TITLE"/>
+		<result property="lessonPre" column="LESSON_PRE"/>
+		<result property="lessonContent" column="LESSON_CONTENT"/>
+		<result property="lessonArea" column="LESSON_AREA"/>
+		<result property="lessonPlan" column="LESSON_PLAN"/>
+		<result property="lessonPrice" column="LESSON_PRICE"/>
+		<result property="lessonDate" column="LESSON_DATE"/>
+		<result property="lessonUpdate" column="LESSON_UPDATE"/>
+	</resultMap>
+	
+	<!-- 회원관리 -->
+	<select id="selectMembers" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+	</select>
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		<choose>
+			<when test="searchMemberCondition == 'm-id'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchMemberCondition == 'm-name'">
+				WHERE MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectListByKeyword" resultMap="memberResultMap">
+		SELECT * FROM MEMBER 
+		<choose>
+			<when test="searchMemberCondition == 'm-id'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchMemberCondition == 'm-name'">
+				WHERE MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR MEMBER_NAME LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}
+	</delete>
+	
+	
+	
+	<!-- 레슨 게시판 -->
+	<select id="selectLessonBoard" resultMap="lessonResultMap">
+		SELECT * FROM LESSON
+	</select>
+	<select id="getLessonListCount" resultType="_int">
+		SELECT COUNT(*) FROM LESSON
+		<choose>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectLessonListByKeyword" resultMap="lessonResultMap">
+		SELECT * FROM LESSON
+		<choose>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
+	<delete id="deleteLessonBoard">
+		DELETE FROM LESSON WHERE LESSON_NO=#{lessonNo}
+	</delete>
+	
+</mapper>

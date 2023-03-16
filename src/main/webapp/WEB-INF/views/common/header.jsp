@@ -20,7 +20,7 @@
 					<input type="hidden" id="member-id" value="${sessionScope.loginUser.memberId }">
 				</div>
 				<div id="login-success2">
-					<button id="login-btn" onclick="location.href='/member/login/member/mypage?member-id=${sessionScope.loginUser.memberId }'">마이페이지</button>
+					<button id="login-btn" onclick="location.href='/member/mypage?member-id=${sessionScope.loginUser.memberId }'">마이페이지</button>
 					<button id="join-btn" onclick="location.href='/member/logout'">로그아웃</button>
 				</div>
 			</c:if>

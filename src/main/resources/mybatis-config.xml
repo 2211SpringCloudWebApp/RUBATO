@@ -20,5 +20,6 @@
 		<mapper resource="mappers/market-mapper.xml"/>
 		<mapper resource="mappers/lesson-mapper.xml"/>
 		<mapper resource="mappers/apply-mapper.xml"/>
+		<mapper resource="mappers/manager-mapper.xml"/>
 	</mappers>
 </configuration>

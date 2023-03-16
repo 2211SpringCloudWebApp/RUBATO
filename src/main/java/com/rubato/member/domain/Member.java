@@ -36,7 +36,6 @@ public class Member {
 		this.memberAddr = memberAddr;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Member [아이디=" + memberId + ", 비밀번호=" + memberPwd + ", 이름=" + memberName
@@ -46,8 +45,7 @@ public class Member {
 				+ "]";
 	}
 
-	
-	
+
 	public String getMemberId() {
 		return memberId;
 	}
