@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
@@ -54,6 +55,7 @@ public class ManagerServiceImpl implements ManagerService{
 		return totalCount;
 	}
 
+	// 레슨게시판
 	@Override
 	public List<Lesson> selectLessonBoard(PageInfo pi) {
 		List<Lesson> lbList = managerStore.selectLessonBoard(pi);
@@ -82,6 +84,25 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<Lesson> selectLessonListByKeyword(PageInfo pi, SearchLesson searchLesson) {
 		List<Lesson> searchLessonList = managerStore.selectLessonListByKeyword(session, pi, searchLesson);
 		return searchLessonList;
+	}
+
+	// 자유게시판
+	@Override
+	public int getBoardListCount() {
+		int result = managerStore.getBoardListCount(session);
+		return result;
+	}
+
+	@Override
+	public List<Board> selectBoard(PageInfo pi) {
+		List<Board> boardList = managerStore.selectBoard(pi);
+		return boardList;
+	}
+
+	@Override
+	public int deleteBoard(Integer boardNo) {
+		int result = managerStore.deleteBoard(session, boardNo);
+		return result;
 	}
 
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.member.domain.Member;
@@ -133,7 +134,7 @@ public class ManagerController {
 	
 	
 	@RequestMapping(value = "/manager/lessonBoard", method=RequestMethod.GET)
-	public String managerBoardLogic( 		// 레슨게시판 관리
+	public String managerLessonLogic( 		// 레슨게시판 관리
 			HttpSession session
 			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
@@ -148,8 +149,8 @@ public class ManagerController {
 			}
 		}
 		return "manager/managerLessonBoard";
-		
 	}
+	
 	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
 	@RequestMapping(value = "/manager/searchLesson", method=RequestMethod.GET)
 	public String lessonSearchLogic( 
@@ -186,6 +187,38 @@ public class ManagerController {
 		}
 	}
 	
+	// 자유게시판
+	@RequestMapping(value = "/manager/board", method=RequestMethod.GET)
+	public String managerBoardLogic( 		// 자유게시판 관리
+			HttpSession session
+			, HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			,Model model) {
+		int totalCount = managerService.getBoardListCount();
+		pi = this.getPageInfo(page, totalCount);
+		if(session.getAttribute("loginUser")!=null) {
+			List<Board> boardList = managerService.selectBoard(pi);
+			if(!boardList.isEmpty()) {
+				model.addAttribute("pi", pi);
+				model.addAttribute("boardList", boardList);
+			}
+		}
+		return "manager/managerBoard";
+		
+	}
+	
+	@RequestMapping(value = "/manager/boardDelete", method=RequestMethod.GET)
+	public String boardDelete(
+			@RequestParam("boardNo") Integer boardNo
+			, Model model) {
+		int result = managerService.deleteBoard(boardNo);
+		if(result > 0) {
+			return "redirect:/manager/board";
+		} else {
+			return "redirect:/manager/board";
+		}
+		
+	}
 	
 // 페이징 처리 메소드
 	private PageInfo getPageInfo(int currentPage, int totalCount) {
@@ -214,18 +247,5 @@ public class ManagerController {
 		return "redirect:/manager/mainView";
 	}
 
-
-	//	@RequestMapping(value = "/manager/memberView", method = RequestMethod.GET)
-//	public String managerMemberView() {
-//		return "manager/managerMember";
-//	}
-//	
-	@RequestMapping(value = "/manager/Board", method = RequestMethod.GET)
-	public String managerBoardView() {
-		return "manager/managerBoard";
-	}
 	
-	
-	
-
 }

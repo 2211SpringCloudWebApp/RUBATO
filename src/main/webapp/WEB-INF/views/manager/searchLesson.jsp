@@ -31,7 +31,7 @@
                 <li class="group">
                     <div class="title">게시글관리</div>
                     <ul class="sub">
-                        <li><a href="/manager/Board">-- 자유게시판</a></li>  
+                        <li><a href="/manager/board">-- 자유게시판</a></li>  
                         <li><a href="/manager/lessonBoard">-- 레슨게시판</a></li>                
                         <li><a href="#">-- 마켓게시판</a></li>                
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
@@ -43,6 +44,7 @@ public interface ManagerStore {
 	 */
 	public int getListCount(SqlSession session, SearchMember searchMember);
 
+	// 레슨게시판
 	/**
 	 * 레슨 게시판 관리 Store
 	 * @param pi
@@ -74,6 +76,29 @@ public interface ManagerStore {
 	 * @return
 	 */
 	public List<Lesson> selectLessonListByKeyword(SqlSession session, PageInfo pi, SearchLesson searchLesson);
+
+	// 자유게시판
+	/**
+	 * 자유게시판 게시물 리스트 Store
+	 * @param session
+	 * @return int
+	 */
+	public int getBoardListCount(SqlSession session);
+
+	/**
+	 * 자유 게시판 리스트 Store
+	 * @param pi
+	 * @return
+	 */
+	public List<Board> selectBoard(PageInfo pi);
+
+	/**
+	 * 자유 게시판 게시글 삭제 Store
+	 * @param session
+	 * @param boardNo
+	 * @return int
+	 */
+	public int deleteBoard(SqlSession session, Integer boardNo);
 	
 
 }

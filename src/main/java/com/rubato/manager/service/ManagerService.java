@@ -2,6 +2,7 @@ package com.rubato.manager.service;
 
 import java.util.List;
 
+import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
@@ -68,6 +69,26 @@ public interface ManagerService {
 	 * @return List<Lesson>
 	 */
 	public List<Lesson> selectLessonListByKeyword(PageInfo pi, SearchLesson searchLesson);
+
+	/**
+	 * 자유게시판 전체 개수 Service
+	 * @return int
+	 */
+	public int getBoardListCount();
+
+	/**
+	 * 자유 게시판 리스트 Service
+	 * @param pi
+	 * @return List<Board>
+	 */
+	public List<Board> selectBoard(PageInfo pi);
+
+	/**
+	 * 자유게시판 게시글 삭제 Service
+	 * @param boardNo
+	 * @return int
+	 */
+	public int deleteBoard(Integer boardNo);
 
 
 	
