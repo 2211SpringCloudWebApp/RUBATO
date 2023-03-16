@@ -22,7 +22,7 @@
 	
 	<!-- 게시판 수정 -->
 	<update id="updateBoard">
-		UPDATE BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CATEGORY = #{boardCategory},  BOARD_CONTENT= #{boardContent}	WHERE BOARD_NO = #{boardNo}
+		UPDATE BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CATEGORY = #{boardCategory},  BOARD_CONTENT= #{boardContent} WHERE BOARD_NO = #{boardNo}
 	</update>
 	
 	<!-- 게시판 삭제 -->
@@ -42,6 +42,20 @@
 	<!-- 게시판 검색 -->
 	<select id="selectListByKeyword" resultMap="BoardResultMap">
 		SELECT * FROM BOARD
+		<where>
+			<if test="searchCondition == 'all'">
+				BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR BOARD_CONTENT LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'title'">
+				BOARD_TITLE LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'content'">
+				BOARD_CONTENT LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'writer'">
+				MEMEBER_ID LIKE '%' || #{searchValue } || '%'
+			</if>
+		</where>
 	</select>
 	
 	<!-- 게시판 게시물 전체 개수 -->
@@ -52,6 +66,20 @@
 	<!-- 게시판 검색 결과 조회 -->
 	<select id="searchListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
+		<where>
+			<if test="searchCondition == 'all'">
+				BOARD_TITLE LIKE '%' || #{searchValue } || '%' OR BOARD_CONTENT LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'title'">
+				BOARD_TITLE LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'content'">
+				BOARD_CONTENT LIKE '%' || #{searchValue } || '%'
+			</if>
+			<if test="searchCondition == 'writer'">
+				MEMEBER_ID LIKE '%' || #{searchValue } || '%'
+			</if>
+		</where>
 	</select>
 	
 </mapper>

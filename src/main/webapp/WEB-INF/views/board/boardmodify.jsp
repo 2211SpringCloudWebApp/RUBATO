@@ -36,22 +36,22 @@
 								</select>
 							</div>
 							<div id="contentSubject">
-								<input type="text" value="${board.boardTitle }">
+								<input type="text" value="${board.boardTitle }" name="boardTitle">
 							</div>
-							<div id="contentWriter">${board.memberId }</div>
-							<div id="contentDate">${board.boardDate }</div>
-							<div id="contentCount">조회수 : ${board.viewCount }</div>
-							<div id="contentComment">댓글 : ${boardComment.commentNo }</div>
+							<div id="contentWriter" name="memberId">${board.memberId }</div>
+							<div id="contentDate" name="boardDate">${board.boardDate }</div>
+							<div id="contentCount" name="viewCount">조회수 : ${board.viewCount }</div>
+							<div id="contentComment" name="commentNo">댓글 : ${boardComment.commentNo }</div>
 						</div>
 						<div class="detailLine"></div>
 						<div id="contentText">
-							<textarea rows="30" cols="100">${board.boardContent }</textarea>
+							<textarea rows="30" cols="100" name="boardContent">${board.boardContent }</textarea>
 						</div>
 						<div class="detailLine"></div>
 						<div id="detailBtn">
 							<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> 
 							<input type="button" value="등록" id="boardModify"
-								onclick="location.href='/board/list'">
+								onclick="location.href='/board/detail?boardNo=${board.boardNo}'">
 							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
 							<input type="button" value="신고" id="boardReport">
 						</div>

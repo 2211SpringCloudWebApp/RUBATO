@@ -59,19 +59,17 @@ public class BoardController {
 
 	// 게시판 수정 view
 	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)
-	public String boardModifyView(@RequestParam("boardNo") Integer boardNo, Model model, HttpSession session) {
+	public String boardModifyView(@RequestParam("boardNo") Integer boardNo, 
+								  Model model, HttpSession session) {
 		try {
-			// 로그인한 사용자의 정보 가져오기
-			Member loginUser = (Member) session.getAttribute("loginUser");
 			Board board = bService.selectOneByNo(boardNo);
-
-			// 게시글의 작성자와 로그인한 사용자의 아이디가 일치하는 경우에만 수정 가능
-			if (loginUser == null || !loginUser.getMemberId().equals(board.getMemberId())) {
-				model.addAttribute("msg", "본인이 작성한 게시물만 수정 가능합니다.");
+			if(board != null) {
+				model.addAttribute("board", board);
+				return "board/boardmodify";
+			} else {
+				model.addAttribute("msg", "데이터 조회에 실패하였습니다.");
 				return "common/error";
 			}
-			model.addAttribute("board", board);
-			return "board/boardmodify";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -85,7 +83,7 @@ public class BoardController {
 		try {
 			int result = bService.updateBoard(board);
 			if (result > 0) {
-				return "redirect:/board/list";
+				return "redirect:/board/detail?boarNo="+board.getBoardNo();
 			} else {
 				model.addAttribute("msg", "게시판 수정이 완료되지 않았습니다.");
 				return "common/error";

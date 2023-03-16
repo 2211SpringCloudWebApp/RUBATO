@@ -55,7 +55,9 @@
                             <ul>
                                 <li id="naviLi">
                                     <div id="naviDIV">
-                                        <a href="${pi.startNavi }" class="naviBtn">◀</a>
+                                   		 <c:if test="${pi.currentPage ne 1 }">
+                                        <a href="/board/list?page=${pi.currentPage-1 }" class="naviBtn">◀</a>
+                                     	 </c:if>
                                         <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
                                             <c:url var="pageUrl" value="/board/list">
                                                 <c:param name="page" value="${p }"></c:param>
@@ -63,7 +65,9 @@
                                             <a href="${pageUrl}"
                                                 class="naviBtn ${p == currentPage ? 'active' : ''}">${p}</a>
                                         </c:forEach>
-                                        <a href="${pi.endNavi }" class="naviBtn">▶</a>
+                                        <c:if test="${pi.maxPage ne pi.currentPage }">
+                                        <a href="/board/list?page=${pi.currentPage+1 }" class="naviBtn">▶</a>
+                                        </c:if>
                                     </div>
                                 </li>
                             </ul>
@@ -76,13 +80,13 @@
                                 <div id="searchDIV">
                                     <form action="/board/search" method="get">
                                         <select id='selSearchOption' name="searchCondition">
-                                            <option value='1' <c:if test="${search.searchCondition == '1' }">selected
+                                            <option value='all' <c:if test="${search.searchCondition == 'all' }">selected
                                                 </c:if>>제목+내용</option>
-                                            <option value='2' <c:if test="${search.searchCondition == '2' }">selected
+                                            <option value='title' <c:if test="${search.searchCondition == 'title' }">selected
                                                 </c:if>>제목</option>
-                                            <option value='3' <c:if test="${search.searchCondition == '3' }">selected
+                                            <option value='content' <c:if test="${search.searchCondition == 'content' }">selected
                                                 </c:if>>내용</option>
-                                            <option value='4' <c:if test="${search.searchCondition == '4' }">selected
+                                            <option value='writer' <c:if test="${search.searchCondition == 'writer' }">selected
                                                 </c:if>>작성자</option> 
                                         </select>
                                         <input type="text" id='txtKeyWord' name="searchValue"
