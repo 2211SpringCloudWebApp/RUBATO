@@ -41,7 +41,7 @@ public class LessonStoreImpl implements LessonStore{
 	@Override //레슨글 목록
 	public List<Lesson> selectLessons(SqlSession session, PageInfo pi) {
 		int limit = pi.getBoardLimit();
-		int currentPage = pi.getCurrenPage();
+		int currentPage = pi.getCurrentPage();
 		int offset = (currentPage -1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<Lesson> lList = session.selectList("LessonMapper.selectLessons", null, rowBounds);
@@ -49,17 +49,26 @@ public class LessonStoreImpl implements LessonStore{
 	}
 	
 	@Override //나의 레슨 목록
-	public List<Lesson> selectMyLessons(SqlSession session, String memberId) {
-		List<Lesson> lList = session.selectList("LessonMapper.selectMyLessons", memberId);
+	public List<Lesson> selectMyLessons(SqlSession session, String memberId, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Lesson> lList = session.selectList("LessonMapper.selectMyLessons", memberId, rowBounds);
 		return lList;
 	}
 	
-	@Override //레슨글 전체 수
+	@Override //레슨글 전체 개수
 	public int getListCount(SqlSession session) {
 		int result = session.selectOne("LessonMapper.getListcount");
 		return result;
 	}
 
+	@Override //회원별 레슨 개수
+	public int getListCount(SqlSession session, String memberId) {
+		int result = session.selectOne("LessonMapper.countByMember", memberId);
+		return result;
+	}	
 	
 /*---------------------------------------------------------------------------*/
 	
@@ -88,15 +97,19 @@ public class LessonStoreImpl implements LessonStore{
 	}
 
 	@Override //나의 신청글 목록
-	public List<Apply> selectApplys(SqlSession session, String memberId) {
-		List<Apply> aList = session.selectList("ApplyMapper.selectApplys", memberId);
+	public List<Apply> selectApplys(SqlSession session, String memberId, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Apply> aList = session.selectList("ApplyMapper.selectApplys", memberId, rowBounds);
 		return aList;
 	}
 	
 	@Override //레슨별 신청글 목록
 	public List<Apply> selectByLesson(SqlSession session, int lessonNo, PageInfo pi) {
 		int limit = pi.getBoardLimit();
-		int currentPage = pi.getCurrenPage();
+		int currentPage = pi.getCurrentPage();
 		int offset = (currentPage-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<Apply> aList = session.selectList("ApplyMapper.selectByLesson", lessonNo, rowBounds);
@@ -108,6 +121,13 @@ public class LessonStoreImpl implements LessonStore{
 		int result = session.selectOne("ApplyMapper.countByLesson", lessonNo);
 		return result;
 	}
+
+	@Override //회원별 신청글 개수
+	public int getApplyCount(SqlSession session, String memberId) {
+		int result = session.selectOne("ApplyMapper.countByMember", memberId);
+		return result;
+	}
+
 	
 
 

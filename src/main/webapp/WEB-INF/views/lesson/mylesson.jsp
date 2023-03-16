@@ -36,6 +36,31 @@
                     </table>
                 </c:forEach>
             </div>
+            <table id="navi-box">
+                <tr>
+                    <td>
+                        <c:if test="${pi.currentPage ne 1}">
+                            <a href="/lesson/mylesson?memberId=${memberId}&page=1" id="navi-btn1"> ≪ </a>
+                        </c:if>
+                        <c:if test="${pi.currentPage ne 1}">
+                            <a href="/lesson/mylesson?memberId=${memberId}&page=${pi.currentPage-1}" id="navi-btn2"> ＜ </a>
+                        </c:if>
+                        <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
+                            <c:url var="pageUrl" value="/lesson/mylesson">
+                                <c:param name="memberId" value="${memberId}"></c:param>
+                                <c:param name="page" value="${p }"></c:param> 
+                            </c:url>
+                            <a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
+                        </c:forEach>
+                        <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                            <a href="/lesson/mylesson?memberId=${memberId}&page=${pi.currentPage+1}" id="navi-btn4"> ＞ </a>
+                        </c:if> 
+                        <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                            <a href="/lesson/mylesson?memberId=${memberId}&page=${pi.maxPage}" id="navi-btn5"> ≫ </a>
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     </body>

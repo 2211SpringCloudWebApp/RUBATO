@@ -14,7 +14,7 @@
     width: 700px;
     margin: 0 auto;
     line-height: 3;  
-    margin-bottom: 70px;
+    margin-bottom: 10px;
     border-bottom: 2px solid #2fbdb1b9;
 }
     #detailLink:link, #detailLink:visited {
@@ -30,7 +30,7 @@
     margin: 0 auto;
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;  
+    padding-bottom: 20px;  
     text-align: center;
 }
     #list-detail b {
@@ -59,4 +59,47 @@
         color: #2fbdb1;
         font-weight: 700;
         font-family: 'Noto Sans KR', sans-serif;
+    }
+
+/*페이징///////////////////////////////////////*/
+#navi-box {
+    width: 800px;
+    height: 120px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    text-align: center;
+}
+    #navi-box a{
+        text-decoration: none;
+        color: rgb(81, 79, 79);
+    }
+        #navi-box a:link{
+            color: rgb(81, 79, 79);
+        }
+        #navi-box a:visited{
+            color: rgb(81, 79, 79);
+        }
+    #navi-btn1{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+    }
+    #navi-btn2{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        margin-right: 20px;
+    }
+    .navi-btn3{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #navi-btn4{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        margin-left: 20px;
+    }  
+    #navi-btn5{
+        border: 1px solid #cdcccc;
+        padding: 8px;
     }

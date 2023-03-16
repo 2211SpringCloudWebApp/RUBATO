@@ -39,5 +39,8 @@
 	<select id="getListcount" resultType="_int">
 		SELECT COUNT(*) FROM LESSON 
 	</select>
+	<select id="countByMember" resultType="_int">
+		SELECT COUNT(*) FROM LESSON WHERE MEMBER_ID = #{memberId}
+	</select>
 	
 </mapper>

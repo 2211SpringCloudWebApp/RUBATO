@@ -47,13 +47,20 @@ public interface LessonService {
 	 * @param memberId
 	 * @return List<Lesson>
 	 */
-	public List<Lesson> selectMyLessons(String memberId);
+	public List<Lesson> selectMyLessons(String memberId, PageInfo pi);
 
 	/**
 	 * 레슨글 전체 개수 Service
 	 * @return int
 	 */
 	public int getListCount();
+	
+	/**
+	 * 회원 별 레슨 개수 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int getListCount(String memberId);
 
 /*----------------------------------------------------------------------*/
 	
@@ -86,10 +93,10 @@ public interface LessonService {
 	public Apply selectOneApply(Apply user);
 
 	/**
-	 * 신청글 목록 Service
+	 * 회원별 신청글 목록 Service
 	 * @return List<Apply>
 	 */
-	public List<Apply> selectApplys(String memberId);
+	public List<Apply> selectApplys(String memberId, PageInfo pi);
 	
 	/**
 	 * 레슨별 신청글 목록 Service
@@ -104,6 +111,15 @@ public interface LessonService {
 	 * @return int
 	 */
 	public int getListCount(int lessonNo);
+
+	/**
+	 * 회원별 신청글 개수 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int getApplyCount(String memberId);
+
+	
 
 
 	

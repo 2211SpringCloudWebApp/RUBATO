@@ -55,14 +55,22 @@ public interface LessonStore {
 	 * @param memberId Store
 	 * @return List<Lesson>
 	 */
-	public List<Lesson> selectMyLessons(SqlSession session, String memberId);
+	public List<Lesson> selectMyLessons(SqlSession session, String memberId, PageInfo pi);
 
 	/**
-	 * 레슨글 전체수 Store
+	 * 레슨글 전체 개수 Store
 	 * @param session
 	 * @return int
 	 */
 	public int getListCount(SqlSession session);
+	
+	/**
+	 * 회원별 레슨 개수 Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int getListCount(SqlSession session, String memberId);
 
 /*---------------------------------------------------------------------------*/
 	
@@ -105,7 +113,7 @@ public interface LessonStore {
 	 * @param memberId
 	 * @return List<Apply>
 	 */
-	public List<Apply> selectApplys(SqlSession session, String memberId);
+	public List<Apply> selectApplys(SqlSession session, String memberId, PageInfo pi);
 	
 	/**
 	 * 레슨별 신청글 목록 Store
@@ -122,6 +130,16 @@ public interface LessonStore {
 	 * @return int
 	 */
 	public int getListCount(SqlSession session, int lessonNo);
+
+	/**
+	 * 회원별 신청글 개수 Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int getApplyCount(SqlSession session, String memberId);
+
+	
 
 
 	

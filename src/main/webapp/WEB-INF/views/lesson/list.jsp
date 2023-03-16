@@ -51,35 +51,46 @@
                     </tr>
                 </table>
             </c:forEach>
-            <div>
-                <table>
-                    <tr align="center">
-                        <td>
-                            <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
-                                <c:url var="pageUrl" value="/lesson/list">
-                                    <c:param name="page" value="${p } "></c:param>
-                                </c:url>
-                                <a href="${pageUrl }">${p }</a>&nbsp;
-                            </c:forEach>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form action="/lesson/search" method="get">
-                                <select name="searchCondition">
-                                    <option value="all">전체</option>
-                                    <option value="writer">작성자</option>
-                                    <option value="title">제목</option>
-                                </select>
-                                <input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
-                                <input type="submit" value="검색">
-                            </form>
-                        </td>                       
-                    </tr>
-                </table>
-            </div>
         </div>
+        <table id="navi-box">
+            <tr>
+                <td>
+                    <c:if test="${pi.currentPage ne 1}">
+                        <a href="/lesson/list?page=1" id="navi-btn1"> ≪ </a>
+                    </c:if>
+                    <c:if test="${pi.currentPage ne 1}">
+                        <a href="/lesson/list?page=${pi.currentPage-1}" id="navi-btn2"> ＜ </a>
+                    </c:if>
+                    
+                    <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
+                        <c:url var="pageUrl" value="/lesson/list">
+                            <c:param name="page" value="${p } "></c:param>
+                        </c:url>
+                        <a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
+                    </c:forEach>
 
+                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        <a href="/lesson/list?page=${pi.currentPage+1}" id="navi-btn4"> ＞ </a>
+                    </c:if> 
+                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        <a href="/lesson/list?page=${pi.maxPage}" id="navi-btn5"> ≫ </a>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form action="/lesson/search" method="get">
+                        <select name="searchCondition">
+                            <option value="all">전체</option>
+                            <option value="writer">작성자</option>
+                            <option value="title">제목</option>
+                        </select>
+                        <input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
+                        <input type="submit" value="검색">
+                    </form>
+                </td>                       
+            </tr>
+        </table>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
