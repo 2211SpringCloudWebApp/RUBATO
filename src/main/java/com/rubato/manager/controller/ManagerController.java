@@ -85,25 +85,32 @@ public class ManagerController {
 	@RequestMapping(value="/manager/searchMember", method=RequestMethod.GET)
 	public String memberSearchLogic(		// 회원 검색 기능
 			@ModelAttribute SearchMember searchMember,
+			HttpServletRequest request,
 			// @RequestParam("searchValue") String keyword
 			//, @RequestParam(value="searchMemberCondition") String memberCondition
 			 @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {
-		int totalCount = managerService.getListCount(searchMember);
-		pi = this.getPageInfo(page, totalCount);
-		try {
-			List<Member> searchList = managerService.selectListByKeyword(pi, searchMember);
-			if(!searchList.isEmpty()) {
-				model.addAttribute("searchMember", searchMember);
-				model.addAttribute("pi", pi);
-				model.addAttribute("sList", searchList);
-				return "manager/searchMember";
-			} else {
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getListCount(searchMember);
+			pi = this.getPageInfo(page, totalCount);
+			try {
+				List<Member> searchList = managerService.selectListByKeyword(pi, searchMember);
+				if(!searchList.isEmpty()) {
+					model.addAttribute("searchMember", searchMember);
+					model.addAttribute("pi", pi);
+					model.addAttribute("sList", searchList);
+					return "manager/searchMember";
+				} else {
+					return "manager/searchMember";
+				}
+				
+			} catch (Exception e) {
 				return "manager/searchMember";
 			}
-			
-		} catch (Exception e) {
-			return "manager/searchMember";
 		}
 	}
 	
@@ -125,6 +132,18 @@ public class ManagerController {
 //			}
 		} else {
 			// 에러 페이지 이동으로 변경 필요
+			return "redirect:/manager/main";
+		}
+	}
+	
+	@RequestMapping(value = "/manager/updateStatus", method = RequestMethod.GET)
+	public String updateStatusLogic(		// 회원 활성화
+			@RequestParam("memberId") String memberId
+			, Model model) {
+		int result = managerService.updateStatus(memberId);
+		if(result > 0) {
+			return "redirect:/manager/main";
+		} else {
 			return "redirect:/manager/main";
 		}
 	}
@@ -233,7 +252,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/manager/boardDelete", method=RequestMethod.GET)
-	public String boardDelete(		// 자유게시판 게시글 삭제
+	public String boardDeleteLogic(		// 자유게시판 게시글 삭제
 			@RequestParam("boardNo") Integer boardNo
 			, Model model) {
 		int result = managerService.deleteBoard(boardNo);

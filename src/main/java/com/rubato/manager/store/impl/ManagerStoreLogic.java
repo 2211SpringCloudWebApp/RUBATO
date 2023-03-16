@@ -40,6 +40,12 @@ public class ManagerStoreLogic implements ManagerStore{
 	}
 
 	@Override
+	public int updateStatus(SqlSession session, String memberId) {
+		int result = session.update("ManagerMapper.updateStatus", memberId);
+		return result;
+	}
+
+	@Override
 	public int getListCount(SqlSession session) {
 		int result = session.selectOne("ManagerMapper.getListCount");
 		return result;

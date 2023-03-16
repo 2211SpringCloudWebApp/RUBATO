@@ -43,6 +43,14 @@ public interface ManagerService {
 	public int getListCount(SearchMember searchMember);
 
 	/**
+	 * 회원 활성화 Service
+	 * @param memberId
+	 * @return int
+	 */
+	public int updateStatus(String memberId);
+
+	// 레슨게시판
+	/**
 	 * 레슨 게시판 리스트 Service
 	 * @param pi
 	 * @return List<Lesson>
@@ -75,6 +83,7 @@ public interface ManagerService {
 	 */
 	public List<Lesson> selectLessonListByKeyword(PageInfo pi, SearchLesson searchLesson);
 
+	// 자유게시판
 	/**
 	 * 자유게시판 전체 개수 Service
 	 * @return int

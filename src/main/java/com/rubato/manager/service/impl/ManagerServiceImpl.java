@@ -38,6 +38,12 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
+	public int updateStatus(String memberId) {
+		int result = managerStore.updateStatus(session, memberId);
+		return result;
+	}
+
+	@Override
 	public int getListCount() {
 		int result = managerStore.getListCount(session);
 		return result;

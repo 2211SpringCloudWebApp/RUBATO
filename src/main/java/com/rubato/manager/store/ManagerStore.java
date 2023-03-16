@@ -28,6 +28,14 @@ public interface ManagerStore {
 	 */
 	public int deleteMember(SqlSession session, String memberId);
 
+	/**
+	 * 회원 활성화 Store
+	 * @param session
+	 * @param memberId
+	 * @return
+	 */
+	public int updateStatus(SqlSession session, String memberId);
+
 	public int getListCount(SqlSession session);
 
 	/**

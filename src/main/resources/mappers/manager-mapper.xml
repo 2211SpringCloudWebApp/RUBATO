@@ -77,6 +77,11 @@
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</delete>
+	<update id="updateStatus">
+		UPDATE MEMBER 
+		SET STATUS= CASE WHEN STATUS = 'Y' THEN 'N' ELSE 'Y' END
+		WHERE MEMBER_ID=#{memberId}
+	</update>
 	
 	
 	
