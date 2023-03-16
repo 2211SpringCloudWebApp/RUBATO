@@ -28,6 +28,17 @@
 		<result property="lessonUpdate" column="LESSON_UPDATE"/>
 	</resultMap>
 	
+	<resultMap type="Board" id="BoardResultMap">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="boardCategory" column="BOARD_CATEGORY"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="boardContent" column="BOARD_CONTENT"/>
+		<result property="boardDate" column="BOARD_DATE"/>
+		<result property="boardUpdate" column="BOARD_UPDATE"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+	</resultMap>
+	
 	<!-- 회원관리 -->
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
@@ -106,4 +117,14 @@
 		DELETE FROM LESSON WHERE LESSON_NO=#{lessonNo}
 	</delete>
 	
+	<!-- 자유 게시판 -->
+	<select id="selectBoard" resultMap="BoardResultMap">
+		SELECT * FROM BOARD
+	</select>
+	<select id="getBoardListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	<delete id="deleteBoard">
+		DELETE FROM BOARD WHERE BOARD_NO=#{boardNo}
+	</delete>
 </mapper>

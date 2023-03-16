@@ -10,6 +10,7 @@
 	<typeAliases>
 		<typeAlias type="com.rubato.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.rubato.lesson.domain.Lesson" alias="Lesson"/>
+		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>
 	</typeAliases>
 
 	<!-- mapper파일 매핑 -->

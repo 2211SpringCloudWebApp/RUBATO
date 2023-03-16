@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
@@ -60,6 +61,7 @@ public class ManagerStoreLogic implements ManagerStore{
 		return result;
 	}
 
+	// 레슨게시판
 	@Override
 	public List<Lesson> selectLessonBoard(PageInfo pi) {
 		int limit = pi.getBoardLimit();
@@ -96,6 +98,29 @@ public class ManagerStoreLogic implements ManagerStore{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<Lesson> searchLessonList = session.selectList("ManagerMapper.selectLessonListByKeyword",searchLesson, rowBounds);
 		return searchLessonList;
+	}
+
+	// 자유게시판
+	@Override
+	public int getBoardListCount(SqlSession session) {
+		int result = session.selectOne("ManagerMapper.getBoardListCount");
+		return result;
+	}
+
+	@Override
+	public List<Board> selectBoard(PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Board> boardList = session.selectList("ManagerMapper.selectBoard", null, rowBounds);
+		return boardList;
+	}
+
+	@Override
+	public int deleteBoard(SqlSession session, Integer boardNo) {
+		int result = session.delete("ManagerMapper.deleteBoard", boardNo);
+		return result;
 	}
 
 	
