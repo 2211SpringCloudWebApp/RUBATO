@@ -1,0 +1,43 @@
+#list-main {
+    width: 1000px;
+    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 70px;
+}
+#list-title {
+    width: 700px;
+    text-align: center;
+    margin: 30px auto;
+    border-bottom: 2px solid #2fbdb1b9;
+}
+#list-content {
+    width: 700px;
+    margin: 0 auto;
+    line-height: 3;  
+    margin-bottom: 70px;
+    border-bottom: 2px solid #2fbdb1b9;
+}
+    #detailLink:link, #detailLink:visited {
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 17px;
+        color: #2fbdb1;
+    } 
+    #detailLink:hover {
+        cursor: pointer;
+        color: #646464;
+    }
+#list-detail {
+    width: 700px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;  
+    text-align: center;
+}
+    #list-detail td {
+        width: 25%;
+    }
+    #list-detail:last-child {
+        border: none;
+    }   

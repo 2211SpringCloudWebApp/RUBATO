@@ -1,13 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-footer{
+#footerContainer{
     width: 1200px;
     text-align: center;
     margin: 0 auto;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 #footerLine{

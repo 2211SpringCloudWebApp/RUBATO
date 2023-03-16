@@ -11,10 +11,14 @@
 		<typeAlias type="com.rubato.member.domain.Member" alias="Member"/>
 		<typeAlias type="com.rubato.market.domain.MarketSell" alias="MarketSell"/>
 		<typeAlias type="com.rubato.market.domain.MarketImage" alias="MarketImage"/>
+		<typeAlias type="com.rubato.lesson.domain.Lesson" alias="Lesson"/>
+		<typeAlias type="com.rubato.lesson.domain.Apply" alias="Apply"/>
 	</typeAliases>
 	<!-- mapper파일 매핑 -->
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/market-mapper.xml"/>
+		<mapper resource="mappers/lesson-mapper.xml"/>
+		<mapper resource="mappers/apply-mapper.xml"/>
 	</mappers>
 </configuration>
