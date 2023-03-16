@@ -9,10 +9,12 @@
 	<!-- VO 별칭 설정 -->
 	<typeAliases>
 		<typeAlias type="com.rubato.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.rubato.market.domain.MarketSell" alias="MarketSell"/>
+		<typeAlias type="com.rubato.market.domain.MarketImage" alias="MarketImage"/>
 	</typeAliases>
-
 	<!-- mapper파일 매핑 -->
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/market-mapper.xml"/>
 	</mappers>
 </configuration>

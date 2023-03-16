@@ -1,0 +1,135 @@
+main{
+    width: 1200px;
+    height: 1700px;  
+    margin: 0 auto; 
+    padding-left: 20px;
+}
+#top-area{
+    color: rgb(81, 79, 79);
+    font-size: 2em;
+    font-weight: 600;
+}
+#form-tag{
+    display: flex;
+}
+#post-area{
+    display: flex;
+    flex-direction: column;
+    padding-right: 30px;
+}
+
+#title-area{
+    padding-bottom: 20px;
+}
+    #title{
+        width: 650px;
+        height: 30px;
+        padding-left: 15px;
+        font-size: 1.02em;
+        margin-right: 20px;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+    }
+        #title:focus{
+            outline: none;
+        }
+    #area{
+        width: 80px;
+        height: 35px;
+        font-size: 1.02em;
+        margin-right: 20px;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+    }
+        #area:focus{
+            outline: none;
+        }
+    #condition{
+        width: 100px;
+        height: 35px;
+        font-size: 1.02em;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+    }
+        #condition:focus{
+            outline: none;
+        }
+
+#file-area{
+    display: flex;
+    padding-bottom: 20px;
+}
+    #upload-btn{
+        border: 1px solid #eee;
+        width: 150px;
+        height: 150px;
+        cursor: pointer;
+        background-color: white;
+    }
+        #upload-btn img{
+            width: 70px;
+        }
+        #uploadLimit{
+            font-size: 2em;
+        }
+    #thumbnails img{
+        margin-left: 20px;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+        #thumbnails img:hover{
+            margin-left: 20px;
+            margin-right: 20px;
+            cursor: pointer;
+            filter: brightness(0.5);
+        }
+
+#price-area{
+    padding-bottom: 20px;
+}
+    #won{
+        font-size: 1.5em;
+    }
+    #price{
+        width: 120px;
+        height: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 1.02em;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+        position: relative;
+        bottom: 3px;
+    }
+        #price:focus{
+            outline: none;
+        }
+    #price-msg{
+        color: #939393;
+    }
+
+textarea{
+    width: 850px;
+    height: 500px;
+    padding: 20px;
+    padding-top: 30px;
+    resize: none;
+    font-size: 1.07em;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+    textarea:focus{
+        outline: none;
+    }
+#enroll-btn{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #2fbdb1;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
