@@ -8,6 +8,7 @@ import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
@@ -99,6 +100,23 @@ public interface ManagerStore {
 	 * @return int
 	 */
 	public int deleteBoard(SqlSession session, Integer boardNo);
+
+	/**
+	 * 자유 게시판 게시글 삭제 Store - 검색했을때
+	 * @param session
+	 * @param searchBoard
+	 * @return
+	 */
+	public int getBoardListCount(SqlSession session, SearchBoard searchBoard);
+
+	/**
+	 * 자유 게시판 검색 Store
+	 * @param session
+	 * @param pi
+	 * @param searchBoard
+	 * @return
+	 */
+	public List<Board> selectBoardListByKeyword(SqlSession session, PageInfo pi, SearchBoard searchBoard);
 	
 
 }

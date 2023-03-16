@@ -12,6 +12,7 @@ import com.rubato.manager.service.ManagerService;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
@@ -103,6 +104,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public int deleteBoard(Integer boardNo) {
 		int result = managerStore.deleteBoard(session, boardNo);
 		return result;
+	}
+
+	@Override
+	public int getBoardListCount(SearchBoard searchBoard) {
+		int result = managerStore.getBoardListCount(session, searchBoard);
+		return result;
+	}
+
+	@Override
+	public List<Board> selectBoardListByKeyword(PageInfo pi, SearchBoard searchBoard) {
+		List<Board> searchBoardList = managerStore.selectBoardListByKeyword(session, pi, searchBoard);
+		return searchBoardList;
 	}
 
 

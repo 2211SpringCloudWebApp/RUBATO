@@ -62,6 +62,7 @@
                                     <th>주소</th>
                                     <th>가입일</th>
                                     <th>포인트</th>
+                                    <th>활성화</th>
                                     <th>관리</th>
                                 </tr>
                             </thead>
@@ -76,6 +77,7 @@
                                     <td style="width: 400px;">${member.memberAddr }</td>
                                     <td style="width: 100px;">${member.regDate }</td>
                                     <td style="width: 50px;">${memberPoint }</td>
+                                    <td style="width: 50px;">${member.status }</td>
 									<!--아이디가 관리자라면 탈퇴에 a 태그 안뜨게, 나머지 회원들한테만 뜨게 c:if 사용 (관리자는 탈퇴못하게) -->
                                     <c:if test="${member.memberId != 'mngmt2023' }">
                                     	<td><a href="javascript:void(0)" onclick="deleteCheck('${member.memberId}');">탈퇴</a></td>

@@ -80,8 +80,8 @@
             
                     <div id="footer">
                         <div id="select">
-                            <form action="/manager/searchMember" method="get">
-                                <select name="searchMemberCondition" id="">
+                            <form action="/manager/searchBoard" method="get">
+                                <select name="searchCondition" id="">
                                     <option value="all">전체</option>
                                     <option value="category">카테고리</option>
                                     <option value="writer">작성자</option>

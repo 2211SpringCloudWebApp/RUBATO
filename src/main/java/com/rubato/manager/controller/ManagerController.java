@@ -18,6 +18,7 @@ import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
@@ -97,7 +98,7 @@ public class ManagerController {
 				model.addAttribute("pi", pi);
 				model.addAttribute("sList", searchList);
 				return "manager/searchMember";
-			}else {
+			} else {
 				return "manager/searchMember";
 			}
 			
@@ -129,7 +130,7 @@ public class ManagerController {
 	}
 	
 	/*===================================================
-	 * 게시글 관리 기능 관련
+	 * 게시글 관리 기능 관련 - 레슨 게시판
 	 *===================================================*/
 	
 	
@@ -153,7 +154,7 @@ public class ManagerController {
 	
 	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
 	@RequestMapping(value = "/manager/searchLesson", method=RequestMethod.GET)
-	public String lessonSearchLogic( 
+	public String lessonSearchLogic( 	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
 			@ModelAttribute SearchLesson searchLesson
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			,Model model) {
@@ -187,7 +188,10 @@ public class ManagerController {
 		}
 	}
 	
-	// 자유게시판
+	/*===================================================
+	 * 게시글 관리 기능 관련 - 자유 게시판
+	 *===================================================*/
+	
 	@RequestMapping(value = "/manager/board", method=RequestMethod.GET)
 	public String managerBoardLogic( 		// 자유게시판 관리
 			HttpSession session
@@ -204,11 +208,32 @@ public class ManagerController {
 			}
 		}
 		return "manager/managerBoard";
-		
+	}
+	
+	@RequestMapping(value = "/manager/searchBoard", method=RequestMethod.GET)
+	public String boardSearchLogic(		// searchBoard.jsp 에서 검색하게 해주는 메소드
+			@ModelAttribute SearchBoard searchBoard
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			, Model model) {	
+		int totalCount = managerService.getBoardListCount(searchBoard);
+		pi = this.getPageInfo(page, totalCount);
+		try {
+			List<Board> searchBoardList = managerService.selectBoardListByKeyword(pi, searchBoard);
+			if(!searchBoardList.isEmpty()) {
+				model.addAttribute("searchBoard", searchBoard);
+				model.addAttribute("pi", pi);
+				model.addAttribute("searchBoardList", searchBoardList);
+				return "manager/searchBoard";
+			} else {
+				return "manager/searchBoard";
+			}
+		} catch (Exception e) {
+		}
+		return "manager/searchBoard";
 	}
 	
 	@RequestMapping(value = "/manager/boardDelete", method=RequestMethod.GET)
-	public String boardDelete(
+	public String boardDelete(		// 자유게시판 게시글 삭제
 			@RequestParam("boardNo") Integer boardNo
 			, Model model) {
 		int result = managerService.deleteBoard(boardNo);

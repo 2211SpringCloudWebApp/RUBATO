@@ -6,6 +6,7 @@ import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
@@ -55,9 +56,13 @@ public interface ManagerService {
 	 */
 	public int deleteLessonBoard(Integer lessonNo);
 
+	/**
+	 * 레슨 게시물 전체 개수 Service 
+	 * @return
+	 */
 	public int getLessonListCount();
 	/**
-	 * 레슨 게시물 전체 개수 Service
+	 * 레슨 게시물 전체 개수 Service (검색했을때)
 	 * @return
 	 */
 	public int getLessonListCount(SearchLesson searchLesson);
@@ -89,6 +94,21 @@ public interface ManagerService {
 	 * @return int
 	 */
 	public int deleteBoard(Integer boardNo);
+
+	/**
+	 * 자유 게시판 전체 개수 Service (검색했을때)
+	 * @param searchBoard
+	 * @return int
+	 */
+	public int getBoardListCount(SearchBoard searchBoard);
+
+	/**
+	 * 자유게시판 검색 Service
+	 * @param pi
+	 * @param searchBoard
+	 * @return
+	 */
+	public List<Board> selectBoardListByKeyword(PageInfo pi, SearchBoard searchBoard);
 
 
 	

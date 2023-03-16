@@ -12,6 +12,7 @@ import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.store.ManagerStore;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
+import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
 
@@ -121,6 +122,22 @@ public class ManagerStoreLogic implements ManagerStore{
 	public int deleteBoard(SqlSession session, Integer boardNo) {
 		int result = session.delete("ManagerMapper.deleteBoard", boardNo);
 		return result;
+	}
+
+	@Override
+	public int getBoardListCount(SqlSession session, SearchBoard searchBoard) {
+		int result = session.selectOne("ManagerMapper.getBoardListCount", searchBoard);
+		return result;
+	}
+
+	@Override
+	public List<Board> selectBoardListByKeyword(SqlSession session, PageInfo pi, SearchBoard searchBoard) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Board> searchBoardList = session.selectList("ManagerMapper.selectBoardListByKeyword", searchBoard, rowBounds);
+		return searchBoardList;
 	}
 
 	
