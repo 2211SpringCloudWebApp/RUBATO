@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer{
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#footerLine{
+    width: 1200px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#footerText{
+    margin-top: 20px;
+    color: #ccc;
+}
+
+#footerText a:link, a:visited{
+    text-decoration: none;
+    color: #ccc;
+}
