@@ -1,4 +1,8 @@
 @charset "UTF-8";
+main{
+	font-family: 'Noto Sans KR', sans-serif;
+	height: 1100px;
+}
 #register-msg{
     display: flex;
     flex-direction: column;
@@ -122,7 +126,7 @@ table{
     }
 
 #button-area{
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,7 +134,7 @@ table{
     #button-area input{
         border: none;
         padding: 10px 100px;
-        background-color: #3eeadc;
+        background-color: #2fbdb1;
         color: white;
         font-weight: bolder;
         font-size: 1.2em;

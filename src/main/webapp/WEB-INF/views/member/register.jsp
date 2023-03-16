@@ -7,12 +7,18 @@
 		<title>RUBATO - 회원가입</title>
 		<!-- common header css & js -->
 		<link rel="stylesheet" href="/resources/css/common/header.css">
+		<link rel="stylesheet" href="/resources/css/common/footer.css">
 		<!-- register.jsp css & js -->
 		<link rel="stylesheet" href="/resources/css/member/register.css">
 		<script src="/resources/js/member/register.js" defer></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script> <!-- 다음 주소 API -->
 		<!-- jQuery CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		<!-- Google Font -->
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+		
 	</head>
 	<body>
 		<!-- common header jsp include -->
@@ -106,5 +112,7 @@
 		        </form>
 		    </section>
 		</main>
+		<!-- common footer jsp include -->
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</body>
 </html>
