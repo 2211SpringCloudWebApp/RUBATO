@@ -39,6 +39,24 @@
 		<result property="viewCount" column="VIEW_COUNT"/>
 	</resultMap>
 	
+	<resultMap type="MarketSell" id="marketSellResultMap">
+		<id property="sellNo" column="SELL_NO"/>
+		<result property="sellTitle" column="SELL_TITLE"/>
+		<result property="sellContent" column="SELL_CONTENT"/>
+		<result property="sellPrice" column="SELL_PRICE"/>
+		<result property="sellArea" column="SELL_AREA"/>
+		<result property="productCondition" column="PRODUCT_CONDITION"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="writeDate" column="WRITE_DATE"/>
+		<result property="modDate" column="MOD_DATE"/>
+		<result property="sellCondition" column="SELL_CONDITION"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="img1" column="IMG1"/>
+		<result property="img2" column="IMG2"/>
+		<result property="img3" column="IMG3"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+	</resultMap>
+	
 	<!-- 회원관리 -->
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
@@ -158,4 +176,18 @@
 	<delete id="deleteBoard">
 		DELETE FROM BOARD WHERE BOARD_NO=#{boardNo}
 	</delete>
+	
+	<!-- 마켓 게시판 -->
+	<select id="selectMarketBoard" resultMap="marketSellResultMap">
+		SELECT * FROM MARKET_SELL
+	</select>
+	<select id="getMarketListCount" resultType="_int">
+		SELECT COUNT(*) FROM MARKET_SELL
+	</select>
+	
+	<delete id="deleteMarketBoard">
+		DELETE FROM MARKET_SELL WHERE SELL_NO=#{sellNo}
+	</delete>
+	
+	
 </mapper>

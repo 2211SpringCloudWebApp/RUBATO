@@ -34,7 +34,7 @@
                     <ul class="sub">
                         <li><a href="/manager/board">-- 자유게시판</a></li>  
                         <li><a href="/manager/lessonBoard">-- 레슨게시판</a></li>                
-                        <li><a href="#">-- 마켓게시판</a></li>                
+                        <li><a href="/manager/marketBoard">-- 마켓게시판</a></li>                
 
                     </ul>
                 </li>
@@ -82,7 +82,7 @@
 									<!--아이디가 관리자라면 탈퇴에 a 태그 안뜨게, 나머지 회원들한테만 뜨게 c:if 사용 (관리자는 탈퇴못하게) -->
                                     <c:if test="${member.memberId != 'mngmt2023' }">
                                     	<td><a href="javascript:void(0)" onclick="deleteCheck('${member.memberId}');">탈퇴</a>
-                                    	<a href="javascript:void(0)" onclick="updateCheck('${member.memberId}');">/ 활성화</a>
+                                    		<a href="javascript:void(0)" onclick="updateCheck('${member.memberId}');">/ 활성화</a>
                                     	</td>
                                     </c:if>
                                     <c:if test="${member.memberId == 'mngmt2023' }">
@@ -108,6 +108,9 @@
                         <div id="page">
                         	<tr>
                         		<td colspan="9">
+                        			<c:if test="${pi.currentPage - 1 != 0}">
+                        				<a href="/manager/main?page=1" class="naviBtn"> ◀◀ </a>
+									</c:if>
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
                         				<a href="/manager/main?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
@@ -130,6 +133,10 @@
 									<c:if test="${pi.currentPage == pi.maxPage}">
                         				<a href="javascript:void(0)" class="naviBtn"> ▶ </a>
 									</c:if>
+									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        				<a href="/manager/main?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
+									</c:if>
+									
                         		</td>
                         	</tr>
                         </div>

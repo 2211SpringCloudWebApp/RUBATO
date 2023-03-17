@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
+import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
@@ -33,10 +34,10 @@ public class ManagerController {
 	public String managerMainView() {		// 관리자 메인 View
 		return "manager/managerMain";
 	}
+	
 	/*===================================================
 	 * 로그인 기능 관련
 	 *===================================================*/
-	
 	
 	@RequestMapping(value = "/manager/main", method=RequestMethod.POST)
 	public String managerLoginLogic(		// 관리자 메인 Logic(로그인 기능)
@@ -59,9 +60,17 @@ public class ManagerController {
 		} 
 	}
 	
+	@RequestMapping(value = "/manager/logout", method = RequestMethod.GET)
+	public String managerLogoutLogic(HttpSession session) {		// 로그아웃
+		session.invalidate();
+		return "redirect:/manager/mainView";
+	}
+	
+	
 	/*===================================================
 	 * 회원 관리 기능 관련
 	 *===================================================*/
+	
 	// 관리자 메인(회원 리스트)
 	@RequestMapping(value = "/manager/main", method=RequestMethod.GET)
 	public String managerMainLogic(		// 관리자 메인 Logic(로그인 후 회원 리스트 보여주는 기능)
@@ -115,7 +124,6 @@ public class ManagerController {
 	}
 	
 	
-	
 	@RequestMapping(value = "/manager/memberOut", method = RequestMethod.GET)
 	public String managerMemberOutLogic(		// 회원 탈퇴- 관리자
 			@RequestParam("memberId") String memberId
@@ -151,7 +159,6 @@ public class ManagerController {
 	/*===================================================
 	 * 게시글 관리 기능 관련 - 레슨 게시판
 	 *===================================================*/
-	
 	
 	@RequestMapping(value = "/manager/lessonBoard", method=RequestMethod.GET)
 	public String managerLessonLogic( 		// 레슨게시판 관리
@@ -264,7 +271,47 @@ public class ManagerController {
 		
 	}
 	
-// 페이징 처리 메소드
+	/*===================================================
+	 * 게시글 관리 기능 관련 - 마켓 게시판
+	 *===================================================*/
+	
+	@RequestMapping(value = "/manager/marketBoard", method = RequestMethod.GET)
+	public String managerMarketLogic(
+			HttpSession session
+			, HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			,Model model
+			) {
+		int totalCount = managerService.getMarketListCount();
+		pi = this.getPageInfo(page, totalCount);
+		if(session.getAttribute("loginUser")!= null) {
+			List<MarketSell> marketList = managerService.selectMarketBoard(pi);
+			if(!marketList.isEmpty()) {
+				model.addAttribute("pi", pi);
+				model.addAttribute("marketList", marketList);
+			}
+		}
+		return "manager/managerMarketBoard";
+		
+	}
+	
+	@RequestMapping(value = "/manager/marketDelete", method = RequestMethod.GET)
+	public String marketDeleteLogic(
+			@RequestParam("sellNo" ) Integer sellNo
+			, Model model
+			) {
+		int result = managerService.deleteMarketBoard(sellNo);
+		if(result > 0) {
+			return "redirect:/manager/marketBoard";
+		} else {
+			return "redirect:/manager/marketBoard";
+		}
+	}
+	
+	
+	/*===================================================
+	 * 페이징 처리
+	 *===================================================*/
 	private PageInfo getPageInfo(int currentPage, int totalCount) {
 		PageInfo pi = null;
 		int boardLimit = 10; 	// 한 페이지 당 게시글 갯수
@@ -281,14 +328,6 @@ public class ManagerController {
 		}
 		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
 		return pi;
-	}
-
-
-	// 로그아웃
-	@RequestMapping(value = "/manager/logout", method = RequestMethod.GET)
-	public String managerLogoutLogic(HttpSession session) {
-		session.invalidate();
-		return "redirect:/manager/mainView";
 	}
 
 	

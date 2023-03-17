@@ -33,7 +33,7 @@
                     <ul class="sub">
                         <li><a href="/manager/board">-- 자유게시판</a></li>  
                         <li><a href="/manager/lessonBoard">-- 레슨게시판</a></li>                
-                        <li><a href="#">-- 마켓게시판</a></li>                
+                        <li><a href="/manager/marketBoard">-- 마켓게시판</a></li>                
 
                     </ul>
                 </li>
@@ -71,7 +71,6 @@
                                     <td>${lesson.lessonContent }</td>
                                     <td>${lesson.lessonDate }</td>
                                     <td><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
-                                    
                                 </tr>
                               </c:forEach>
                             </tbody>
@@ -92,6 +91,9 @@
                         <div id="page">
                         	<tr>
                         		<td colspan="6">
+                        		<c:if test="${pi.currentPage - 1 != 0}">
+                        				<a href="/manager/lessonBoard?page=1" class="naviBtn"> ◀◀ </a>
+									</c:if>
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
                         				<a href="/manager/lessonBoard?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
@@ -113,6 +115,9 @@
 									<!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
 									<c:if test="${pi.currentPage == pi.maxPage}">
                         				<a href="javascript:void(0)" class="naviBtn"> ▶ </a>
+									</c:if>
+									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        				<a href="/manager/lessonBoard?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
 									</c:if>
                         		</td>
                         	</tr>

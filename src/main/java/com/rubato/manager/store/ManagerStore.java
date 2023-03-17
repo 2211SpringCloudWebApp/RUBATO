@@ -11,6 +11,7 @@ import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.market.domain.MarketSell;
 
 public interface ManagerStore {
 
@@ -110,7 +111,7 @@ public interface ManagerStore {
 	public int deleteBoard(SqlSession session, Integer boardNo);
 
 	/**
-	 * 자유 게시판 게시글 삭제 Store - 검색했을때
+	 * 자유 게시판 게시글 Store - 검색했을때
 	 * @param session
 	 * @param searchBoard
 	 * @return
@@ -125,6 +126,28 @@ public interface ManagerStore {
 	 * @return
 	 */
 	public List<Board> selectBoardListByKeyword(SqlSession session, PageInfo pi, SearchBoard searchBoard);
+
+	/**
+	 * 마켓 게시물 전체 개수 Store
+	 * @param session
+	 * @return
+	 */
+	public int getMarketListCount(SqlSession session);
+
+	/**
+	 * 마켓 게시판 리스트 Store
+	 * @param pi
+	 * @return List<MarketSell>
+	 */
+	public List<MarketSell> selectMarketBoard(PageInfo pi);
+
+	/**
+	 * 마켓 게시판 게시글 삭제 Store
+	 * @param session
+	 * @param sellNo
+	 * @return
+	 */
+	public int deleteMarketBoard(SqlSession session, Integer sellNo);
 	
 
 }
