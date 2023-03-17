@@ -68,11 +68,11 @@
                                 <tr>
                                     <td>${board.boardNo }</td>
                                     <td>${board.boardCategory }</td>
-                                    <td><a href="/board/detail?boardNo=${board.boardNo }">${board.boardTitle }</a></td>
+                                    <td><a class="a-color" href="/board/detail?boardNo=${board.boardNo }">${board.boardTitle }</a></td>
                                     <td>${board.memberId }</td>
                                     <td>${board.boardDate }</td>
                                     <td>${board.viewCount }</td>
-                                    <td><a href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>

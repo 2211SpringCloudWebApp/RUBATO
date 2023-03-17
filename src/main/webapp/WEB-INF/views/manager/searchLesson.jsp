@@ -64,14 +64,13 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${lessonList }" var="lesson">
-                                <tr>
-                                    <td style="width: 30px;">${lesson.lessonNo }</td>
-                                    <td style="width: 100px;">${lesson.lessonTitle }</td>
-                                    <td style="width: 30px;">${lesson.memberId }</td>
-                                    <td style="width: 210px;">${lesson.lessonContent }</td>
-                                    <td style="width: 150px;">${lesson.lessonDate }</td>
-                                    <td style="width: 150px;"><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
-                                    
+                                 <tr>
+                                    <td>${lesson.lessonNo }</td>
+                                    <td><a class="a-color" href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
+                                    <td>${lesson.memberId }</td>
+                                    <td>${lesson.lessonContent }</td>
+                                    <td>${lesson.lessonDate }</td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>

@@ -72,7 +72,7 @@
                                     <td>${market.sellArea }</td>
                                     <td>${market.memberId }</td>
                                     <td>${market.writeDate }</td>
-                                    <td><a href="javascript:void(0)" onclick="deleteCheck('${market.sellNo}');">삭제</a></td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${market.sellNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>

@@ -66,11 +66,11 @@
                             <c:forEach items="${lbList }" var="lesson">
                                 <tr>
                                     <td>${lesson.lessonNo }</td>
-                                    <td><a href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
+                                    <td><a class="a-color" href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
                                     <td>${lesson.memberId }</td>
                                     <td>${lesson.lessonContent }</td>
                                     <td>${lesson.lessonDate }</td>
-                                    <td><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>

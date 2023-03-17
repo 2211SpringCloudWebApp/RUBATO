@@ -81,8 +81,8 @@
                                     <td>${member.status }</td>
 									<!--아이디가 관리자라면 탈퇴에 a 태그 안뜨게, 나머지 회원들한테만 뜨게 c:if 사용 (관리자는 탈퇴못하게) -->
                                     <c:if test="${member.memberId != 'mngmt2023' }">
-                                    	<td><a href="javascript:void(0)" onclick="deleteCheck('${member.memberId}');">탈퇴</a>
-                                    		<a href="javascript:void(0)" onclick="updateCheck('${member.memberId}');">/ 활성화</a>
+                                    	<td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${member.memberId}');">탈퇴</a>
+                                    		<a class="a-color" href="javascript:void(0)" onclick="updateCheck('${member.memberId}');">/ 활성화</a>
                                     	</td>
                                     </c:if>
                                     <c:if test="${member.memberId == 'mngmt2023' }">

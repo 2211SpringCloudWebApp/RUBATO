@@ -18,6 +18,9 @@ body {
 a {
 	text-decoration: none;
 }
+a:visited {
+    color: #000;
+}
 /* #main-menu {
     width: 13%;
 } */
@@ -154,4 +157,17 @@ tr:last-child td:first-child {
 }
 tr:last-child td:last-child {
   border-bottom-right-radius: 6px;
+}
+
+
+td a:visited {
+  color: #2fbdb1;
+}
+td a:hover {
+  color: red;
+}
+
+.a-color {
+	 color: #2fbdb1;
+	 font-weight: 800;
 }

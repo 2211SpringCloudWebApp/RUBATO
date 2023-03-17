@@ -65,14 +65,14 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${searchBoardList }" var="board">
-                                <tr>
-                                    <td style="width: 130px;">${board.boardNo }</td>
-                                    <td style="width: 100px;">${board.boardCategory }</td>
-                                    <td style="width: 130px;">${board.boardTitle }</td>
-                                    <td style="width: 210px;">${board.memberId }</td>
-                                    <td style="width: 150px;">${board.boardDate }</td>
-                                    <td style="width: 400px;">${board.viewCount }</td>
-                                    <td style="width: 100px;"><a href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
+                                 <tr>
+                                    <td>${board.boardNo }</td>
+                                    <td>${board.boardCategory }</td>
+                                    <td><a class="a-color" href="/board/detail?boardNo=${board.boardNo }">${board.boardTitle }</a></td>
+                                    <td>${board.memberId }</td>
+                                    <td>${board.boardDate }</td>
+                                    <td>${board.viewCount }</td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>
