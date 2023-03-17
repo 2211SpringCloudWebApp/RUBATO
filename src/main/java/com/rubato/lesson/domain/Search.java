@@ -5,8 +5,6 @@ public class Search {
 	private String searchValue;
 	private String searchCondition;
 	
-
-	
 	public Search() {}
 
 

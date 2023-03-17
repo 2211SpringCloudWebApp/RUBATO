@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 
 public interface LessonStore {
@@ -71,6 +72,25 @@ public interface LessonStore {
 	 * @return int
 	 */
 	public int getListCount(SqlSession session, String memberId);
+	
+	/**
+	 * 검색된 레슨 개수 Store
+	 * @param session
+	 * @param search
+	 * @return int
+	 */
+	public int getListCount(SqlSession session, Search search);
+	
+	/**
+	 * 레슨글 검색
+	 * @param session
+	 * @param pi
+	 * @param search
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectListByKeyword(SqlSession session, PageInfo pi, Search search);
+
+	
 
 /*---------------------------------------------------------------------------*/
 	
@@ -139,7 +159,7 @@ public interface LessonStore {
 	 */
 	public int getApplyCount(SqlSession session, String memberId);
 
-	
+
 
 
 	

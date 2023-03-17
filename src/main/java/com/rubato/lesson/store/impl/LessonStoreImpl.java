@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.store.LessonStore;
 
@@ -70,6 +71,24 @@ public class LessonStoreImpl implements LessonStore{
 		return result;
 	}	
 	
+	@Override //검색된 레슨 개수
+	public int getListCount(SqlSession session, Search search) {
+		int result = session.selectOne("LessonMapper.countBySearch", search);
+		return result;
+	}
+	
+	@Override //레슨글 검색
+	public List<Lesson> selectListByKeyword(SqlSession session, PageInfo pi, Search search) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Lesson> searchList = session.selectList("LessonMapper.selectListByKeyword", search, rowBounds);
+		return searchList;
+	}
+
+
+	
 /*---------------------------------------------------------------------------*/
 	
 	@Override //신청글 등록
@@ -127,6 +146,7 @@ public class LessonStoreImpl implements LessonStore{
 		int result = session.selectOne("ApplyMapper.countByMember", memberId);
 		return result;
 	}
+
 
 	
 

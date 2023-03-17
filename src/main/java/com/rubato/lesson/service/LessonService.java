@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 
 public interface LessonService {
@@ -61,6 +62,23 @@ public interface LessonService {
 	 * @return int
 	 */
 	public int getListCount(String memberId);
+	
+	/**
+	 * 검색된 레슨 개수 Service
+	 * @param search
+	 * @return int
+	 */
+	public int getListCount(Search search);
+	
+	/**
+	 * 레슨글 검색
+	 * @param pi
+	 * @param search
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectListByKeyword(PageInfo pi, Search search);
+
+
 
 /*----------------------------------------------------------------------*/
 	
@@ -119,6 +137,7 @@ public interface LessonService {
 	 */
 	public int getApplyCount(String memberId);
 
+	
 	
 
 

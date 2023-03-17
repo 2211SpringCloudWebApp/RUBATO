@@ -209,7 +209,18 @@ public class LessonController {
 			, @RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage
 			, Model model) {
 		try {
-			return "lesson/search";
+			int totalCount = lService.getListCount(search);
+			PageInfo pi = this.getPageInfo(currentPage, totalCount);
+			List<Lesson> searchList = lService.selectListByKeyword(pi, search);
+			if(!searchList.isEmpty()) {
+				model.addAttribute("search", search);
+				model.addAttribute("pi", pi);
+				model.addAttribute("sList", searchList);
+				return "lesson/search";
+			} else {
+				model.addAttribute("msg", "검색된 결과가 없습니다.");
+				return "common/error";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());

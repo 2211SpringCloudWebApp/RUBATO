@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.lesson.store.LessonStore;
@@ -61,6 +62,16 @@ public class LessonServiceImpl implements LessonService{
 		return lStore.getListCount(session, memberId);
 	}
 
+	@Override //검색된 레슨 개수
+	public int getListCount(Search search) {
+		return lStore.getListCount(session, search);
+	}
+
+	@Override //레슨글 검색
+	public List<Lesson> selectListByKeyword(PageInfo pi, Search search) {
+		return lStore.selectListByKeyword(session, pi, search);
+	}
+
 	
 /*--------------------------------------------------------------------------*/
 	
@@ -104,6 +115,8 @@ public class LessonServiceImpl implements LessonService{
 	public int getApplyCount(String memberId) {
 		return lStore.getApplyCount(session, memberId);
 	}
+
+
 
 	
 
