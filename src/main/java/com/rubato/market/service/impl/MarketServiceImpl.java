@@ -39,4 +39,16 @@ public class MarketServiceImpl implements MarketService {
 	public int getTotalCount(SearchInfo searchInfo) {
 		return marketStore.getTotalCount(session, searchInfo);
 	}
+
+
+	@Override
+	public MarketSell selectOneByNo(Integer sellNo) {
+		return marketStore.selectOneByNo(session, sellNo);
+	}
+
+
+	@Override
+	public int deleteMarketSell(Map<String, Object> deleter) {
+		return marketStore.deleteMarketSell(session, deleter);
+	}
 }

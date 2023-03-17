@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,6 +26,7 @@ import com.rubato.market.domain.PageInfo;
 import com.rubato.market.domain.SearchInfo;
 import com.rubato.market.service.MarketService;
 import com.rubato.member.domain.Member;
+import com.rubato.member.service.MemberService;
 
 @Controller
 public class MarketController {
@@ -34,15 +36,19 @@ public class MarketController {
 	@Autowired
 	private MarketService marketService;
 	
+	@Autowired
+	private MemberService memService;
+	
 	/*===================================================
 	 * 마켓 판매 등록 관련
 	 *===================================================*/
 	@GetMapping("/market/write")
-	public String marketWriteView(HttpSession session) { // 마켓 판매 페이지 View
+	public String marketWriteView(HttpSession session, Model model) { // 마켓 판매 페이지 View
 		if(session.getAttribute("loginUser")!=null) {
 			return "market/marketWrite";
 		}
 		else {
+			model.addAttribute("msg", "로그인 후 이용할 수 있습니다.");
 			return "common/error";
 		}
 	}
@@ -116,6 +122,52 @@ public class MarketController {
 		else {
 			model.addAttribute("msg", "게시물이 존재하지 않습니다.");
 			return "market/marketList";
+		}
+	}
+	
+	/*===================================================
+	 * 마켓 글 상세정보
+	 *===================================================*/
+	@GetMapping("/market/detail")
+	public String marketDetail(@RequestParam(value="sellNo") Integer sellNo, Model model, HttpSession session) {
+		MarketSell sell = marketService.selectOneByNo(sellNo);
+		String memberId = sell.getMemberId();
+		Member seller = memService.selectMemberById(memberId);
+		Member loginMember = (Member) session.getAttribute("loginUser");
+		if(memberId != "") {
+			model.addAttribute("sell", sell);
+			model.addAttribute("seller", seller);
+			model.addAttribute("loginMember", loginMember);
+			return "market/marketDetail";
+		}
+		else {
+			model.addAttribute("msg", "게시물이 존재하지 않습니다.");
+			return "common/error";
+		}
+	}
+	
+	/*===================================================
+	 * 마켓 글 삭제
+	 *===================================================*/
+	@GetMapping("/market/delete")
+	public String marketDelete(@RequestParam(value="sellNo") Integer sellNo, HttpSession session, Model model) {
+		if(session.getAttribute("loginUser") != null) {
+			String loginMemberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			Map<String, Object> deleter = new HashMap<String, Object>();
+			deleter.put("loginMemberId", loginMemberId);
+			deleter.put("sellNo", sellNo);
+			int result = marketService.deleteMarketSell(deleter);
+			if(result>0) {
+				return "redirect:/market/list";
+			}
+			else {
+				model.addAttribute("msg", "본인 게시물만 삭제할 수 있습니다.");
+				return "common/error";
+			}
+		}
+		else {
+			model.addAttribute("msg", "로그인 후 이용할 수 있습니다.");
+			return "common/error";
 		}
 	}
 

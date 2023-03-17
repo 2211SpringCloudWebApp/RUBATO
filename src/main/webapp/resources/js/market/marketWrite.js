@@ -26,7 +26,8 @@ var imageUpload = () => {
         input.id = 'input-file' + cnt;
         //input.name = 'uploadFile' + cnt;
         input.name = 'uploadFile';
-        //input.style.display = "none";
+        input.style.display = "none";
+        input.accept="image/jpeg, image/png, image/jpg";
         document.querySelector("#file-tag").appendChild(input);
         input.addEventListener('change', (event) => {
             const files = event.target.files;
@@ -98,4 +99,34 @@ var deleteImage3 = ()=>{
         cnt -= 1;
         document.querySelector("#uploadLimit").innerHTML = (cnt-1)+"/3";
     }
+}
+
+
+
+// 유효성 체크
+document.querySelector("#enroll-btn").addEventListener("click", (event)=>{
+	// 1. 파일 첨부 확인 검증
+    if(!document.querySelector("#input-file2")){
+        alert("원활한 거래를 위해서 최소한 2장의 이미지를 첨부해주세요.")
+        event.preventDefault();
+    }
+    // 2. 파일 확장자 검증
+    var uploadFiles = document.querySelectorAll("[type=file]");
+    for(var i=0; i<uploadFiles.length; i++){
+        var result = checkExt(uploadFiles[i].files[0].name);
+        if(result!==0){
+            alert("이미지 파일만 업로드할 수 있습니다.");
+            event.preventDefault();
+        }
+    }
+});
+
+// 2. 파일 확장자 검증 코드
+var checkExt = (name)=>{
+    var reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
+    let result = 0;
+    if(!name.match(reg)) {
+        result += 1;
+    }
+    return result;
 }

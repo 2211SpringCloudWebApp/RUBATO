@@ -93,6 +93,13 @@
 			</if>
 		ORDER BY WRITE_DATE DESC
 	</select>
+	<select id="selectOneByNo" resultMap="marketSellResultMap">
+		SELECT SELL.SELL_NO, SELL.SELL_TITLE, SELL.SELL_CONTENT, SELL.SELL_PRICE, SELL.SELL_AREA, SELL.PRODUCT_CONDITION, SELL.MEMBER_ID,
+		SELL.WRITE_DATE, SELL.MOD_DATE, SELL.SELL_CONDITION, SELL.VIEW_COUNT, SELL.MEMBER_NICKNAME,
+		IMAGE.IMG1, IMAGE.IMG2, IMAGE.IMG3
+		FROM MARKET_SELL SELL INNER JOIN MARKET_IMAGE IMAGE
+		ON SELL.SELL_NO = IMAGE.SELL_NO WHERE SELL.SELL_NO = #{sellNo}
+	</select>
 	
 	<!-- insert -->
 	<insert id="insertMarketSell">
@@ -104,4 +111,9 @@
 		INSERT INTO MARKET_IMAGE
 		VALUES(SEQ_SELLNO.CURRVAL, #{img1}, #{img2}, #{img3})
 	</insert>
+	
+	<!-- delete -->
+	<delete id="deleteMarketSell">
+		DELETE FROM MARKET_SELL WHERE SELL_NO = #{sellNo} AND MEMBER_ID = #{loginMemberId}
+	</delete>
 </mapper>

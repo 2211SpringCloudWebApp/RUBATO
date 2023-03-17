@@ -31,4 +31,18 @@ public interface MarketService {
 	 */
 	public int getTotalCount(SearchInfo searchInfo);
 
+	/**
+	 * 게시물 번호로 상세조회 Service
+	 * @param sellNo
+	 * @return MarketSell
+	 */
+	public MarketSell selectOneByNo(Integer sellNo);
+
+	/**
+	 * 판매글 삭제 Service
+	 * @param deleter
+	 * @return int
+	 */
+	public int deleteMarketSell(Map<String, Object> deleter);
+
 }

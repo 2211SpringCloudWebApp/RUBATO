@@ -34,6 +34,17 @@ public class MarketSell {
 
 
 
+	@Override
+	public String toString() {
+		return "MarketSell [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellContent=" + sellContent
+				+ ", sellPrice=" + sellPrice + ", sellArea=" + sellArea + ", productCondition=" + productCondition
+				+ ", memberId=" + memberId + ", writeDate=" + writeDate + ", modDate=" + modDate + ", sellCondition="
+				+ sellCondition + ", viewCount=" + viewCount + ", img1=" + img1 + ", img2=" + img2 + ", img3=" + img3
+				+ ", memberNickname=" + memberNickname + "]";
+	}
+
+	
+	
 	public String getMemberNickname() {
 		return memberNickname;
 	}

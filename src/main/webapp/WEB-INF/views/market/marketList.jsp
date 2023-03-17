@@ -62,10 +62,12 @@
 		    </c:if>
 		    <c:forEach items="${sellList }" var="sell">
 		        <div class="product-area">
+		        	<a href="/market/detail?sellNo=${sell.sellNo }">
 		        	<c:set var="img1" value="${sell.img1 }" />
 		            <img src="${fn:substring(img1,56, fn:length(img1)) }" alt="">
 		            <div class="product-area1">
 		                <h3>${sell.sellTitle }</h3>
+		        	</a>
 		        		<c:if test="${sell.sellArea  eq 'seoul'}">
 			                <span>서울 · <fmt:formatDate value="${sell.writeDate }" pattern="yyyy-MM-dd"/></span>
 		        		</c:if>

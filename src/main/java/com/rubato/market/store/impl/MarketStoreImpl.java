@@ -1,6 +1,7 @@
 package com.rubato.market.store.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -43,6 +44,18 @@ public class MarketStoreImpl implements MarketStore{
 	@Override
 	public int getTotalCount(SqlSession session, SearchInfo searchInfo) {
 		int result = session.selectOne("MarketMapper.getTotalCount", searchInfo);
+		return result;
+	}
+
+	@Override
+	public MarketSell selectOneByNo(SqlSession session, Integer sellNo) {
+		MarketSell sell = session.selectOne("MarketMapper.selectOneByNo", sellNo);
+		return sell;
+	}
+
+	@Override
+	public int deleteMarketSell(SqlSession session, Map<String, Object> deleter) {
+		int result = session.delete("MarketMapper.deleteMarketSell", deleter);
 		return result;
 	}
 

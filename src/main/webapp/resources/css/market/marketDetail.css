@@ -1,0 +1,183 @@
+@charset "UTF-8";
+main{
+    width: 700px;
+    height: 3000px;  
+    margin: 0 auto; 
+    padding-left: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+#img-area{
+	min-width:670px;
+	min-height: 600px;
+	max-width:670px;
+	max-height: 1000px;
+	border-radius: 5%;
+	overflow: hidden;
+}
+
+	#imgGuide{
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate( -50%, -50% );
+	    color: white;
+	    background-color: rgba(0, 0, 0, 0.5);
+	}
+
+.uploadImg{
+/* 	top: -100px; */
+/* 	left: -100px; */
+	min-width:670px;
+	min-height: 600px;
+	max-width:670px;
+	height: 100%;
+	cursor: pointer;
+	position: relative;
+}
+	.uploadImg:hover{
+	    filter: brightness(0.5);
+	}
+	.uploadImg:nth-child(1){
+/* 		display:none; */
+	}
+	.uploadImg:nth-child(2){
+		display:none;
+	}
+	.uploadImg:nth-child(3){
+		display:none;
+	}
+
+.controller span{
+  position:absolute;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border-radius: 50%;
+  padding: 10px 20px;
+  top: 50%;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.controller span:hover{
+  background-color: rgba(128, 128, 128, 0.11);
+}
+
+.prev{
+  left: 550px;
+}
+
+
+.next{
+  right: 550px;
+}
+
+
+
+
+#buy-btn{
+    position: relative;
+    bottom: 40px;
+    cursor: pointer;
+    margin-left: 550px;
+    border: none;
+    background-color: #2fbdb1;
+    color: white;
+    padding: 5px;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 95%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#info-area{
+    border-top: 0.5px solid #eee;
+    padding-bottom: 30px;
+    border-bottom: 0.5px solid #eee;
+}
+    #userimg{
+        width: 30px;
+        height: 30px;
+        border: 2px solid black;
+        border-radius: 50%;
+        position: relative;
+        top: 20px;
+    }
+    #nickname{
+        font-weight: bolder;
+    }
+    #registerDay{
+        font-size: 0.8em;
+        margin-left: 38px;
+    }
+    pre{
+	    width: 100%;
+	    white-space: pre-wrap;
+	    word-wrap: break-word;
+    }
+    #viewComment{
+        color: #aaa8a8;
+    }
+    #report{
+        color: #aaa8a8;
+        margin-left: 550px;
+        cursor: pointer;
+    }
+    #modify{
+        color: #aaa8a8;
+        margin-left: 510px;
+        cursor: pointer;
+    }
+    #partition{
+    	color: #aaa8a8;
+    }
+    #delete{
+        color: #aaa8a8;
+        cursor: pointer;
+    }
+    #info-area a {
+    	text-decoration: none;
+    }
+
+#comment-area{
+    margin-top: 20px;
+}
+textarea{
+    width: 680px;
+    height: 50px;
+    padding: 10px;
+    resize: none;
+    font-size: 1.07em;
+    border: 1px solid #d3d3d3;
+    color: #7e7d7d;
+    border-radius: 5px;
+}
+    textarea:focus{
+        outline: none;
+    }
+    textarea::placeholder{
+        font-style: italic;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 80%;
+        color: #a8a6a6;
+    }
+    #enroll-btn{
+        border: none;
+        background-color: white;
+        margin-left: 635px;
+        color: #7e7d7d;
+        font-weight: bolder;
+        font-size: 95%;
+        font-family: 'Noto Sans KR', sans-serif;
+        cursor: pointer;
+    }
+
+
+#comment{
+    border-bottom: 1px solid #eee;
+}

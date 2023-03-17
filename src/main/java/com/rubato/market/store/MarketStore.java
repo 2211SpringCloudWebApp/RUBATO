@@ -35,4 +35,19 @@ public interface MarketStore {
 	 */
 	public int getTotalCount(SqlSession session, SearchInfo searchInfo);
 
+	/**
+	 * 게시물 번호로 상세조회 Store
+	 * @param session, sellNo
+	 * @return MarketSell
+	 */
+	public MarketSell selectOneByNo(SqlSession session, Integer sellNo);
+
+	/**
+	 * 판매글 삭제 Store
+	 * @param session
+	 * @param deleter
+	 * @return int
+	 */
+	public int deleteMarketSell(SqlSession session, Map<String, Object> deleter);
+
 }
