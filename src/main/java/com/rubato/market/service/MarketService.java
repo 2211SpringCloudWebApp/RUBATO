@@ -37,6 +37,13 @@ public interface MarketService {
 	 * @return MarketSell
 	 */
 	public MarketSell selectOneByNo(Integer sellNo);
+	
+	/**
+	 * 조회수 증가 Service
+	 * @param sellNo
+	 * @return int
+	 */
+	public int updateViewCount(Integer sellNo);
 
 	/**
 	 * 판매글 삭제 Service
@@ -44,5 +51,28 @@ public interface MarketService {
 	 * @return int
 	 */
 	public int deleteMarketSell(Map<String, Object> deleter);
+
+	/**
+	 * 결제정보 저장 Service
+	 * @param map
+	 * @return int
+	 */
+	public int insertMarketPayment(Map<String, Object> map);
+
+	/**
+	 * 판매완료로 변경 Service
+	 * @param sellNo
+	 * @return int
+	 */
+	public int updateSellCondition(int sellNo);
+
+	/**
+	 * 판매금액 적립 Service
+	 * @param seller
+	 * @return int
+	 */
+	public int updateMemberPoint(Map<String, Object> seller);
+
+
 
 }

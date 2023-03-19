@@ -101,16 +101,42 @@
 		ON SELL.SELL_NO = IMAGE.SELL_NO WHERE SELL.SELL_NO = #{sellNo}
 	</select>
 	
+	
+	
 	<!-- insert -->
 	<insert id="insertMarketSell">
 		INSERT INTO MARKET_SELL 
 		VALUES(SEQ_SELLNO.NEXTVAL, #{sellTitle}, #{sellContent}, #{sellPrice}, #{sellArea}, #{productCondition}, #{memberId}, DEFAULT, DEFAULT,
 				DEFAULT, DEFAULT, #{memberNickname})
 	</insert>
+	
 	<insert id="insertMarketImage">
 		INSERT INTO MARKET_IMAGE
 		VALUES(SEQ_SELLNO.CURRVAL, #{img1}, #{img2}, #{img3})
 	</insert>
+	
+	<insert id="insertMarketPayment">
+		INSERT INTO MARKET_PAYMENT
+		VALUES(SEQ_PAYMENTNO.NEXTVAL, #{sellNo}, #{sellTitle}, #{sellerId}, #{buyerId}, #{paymentPrice}, #{deliveryMsg}, DEFAULT)
+	</insert>
+	
+	
+	
+	
+	<!-- update -->
+	<update id="updateViewCount">
+		UPDATE MARKET_SELL SET VIEW_COUNT = VIEW_COUNT + 1 WHERE SELL_NO = #{sellNo}
+	</update>
+	
+	<update id="updateSellCondition">
+		UPDATE MARKET_SELL SET SELL_CONDITION = 'soldout' WHERE SELL_NO = #{sellNo}
+	</update>
+	
+	<update id="updateMemberPoint">
+		UPDATE MEMBER SET MEMBER_POINT = MEMBER_POINT + #{paymentPrice} WHERE MEMBER_ID = #{sellerId}
+	</update>
+	
+	
 	
 	<!-- delete -->
 	<delete id="deleteMarketSell">

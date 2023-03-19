@@ -43,11 +43,44 @@ public interface MarketStore {
 	public MarketSell selectOneByNo(SqlSession session, Integer sellNo);
 
 	/**
+	 * 조회수 증가 Store
+	 * @param session
+	 * @param sellNo
+	 * @return int
+	 */
+	public int updateViewCount(SqlSession session, Integer sellNo);
+	
+	/**
 	 * 판매글 삭제 Store
 	 * @param session
 	 * @param deleter
 	 * @return int
 	 */
 	public int deleteMarketSell(SqlSession session, Map<String, Object> deleter);
+
+	/**
+	 * 결제 정보 저장 Store
+	 * @param session
+	 * @param map
+	 * @return int
+	 */
+	public int insertMarketPayment(SqlSession session, Map<String, Object> map);
+
+	/**
+	 * 판매완료로 변경 Store
+	 * @param session, sellNo
+	 * @return int
+	 */
+	public int updateSellCondition(SqlSession session, int sellNo);
+
+	/**
+	 * 판매금액 적립 Store
+	 * @param session
+	 * @param seller
+	 * @return int
+	 */
+	public int updateMemberPoint(SqlSession session, Map<String, Object> seller);
+
+
 
 }

@@ -54,7 +54,7 @@
             <span id="nickname">${sell.memberNickname }</span><br>
             <span id="registerDay">가입일: <fmt:formatDate value="${seller.regDate }" pattern="yyyy-MM-dd"/></span>
             <c:if test="${sell.sellCondition eq 'selling' && seller.memberId ne loginMember.memberId }">
-	            <button id="buy-btn">구매하기</button>
+	            <button id="buy-btn" onclick="location.href='/market/payment?sellNo=${sell.sellNo}'">구매하기</button>
             </c:if>
             <c:if test="${sell.sellCondition eq 'soldout' }">
 	            <button id="buy-btn" style="background-color: red; cursor: not-allowed;">판매완료</button>

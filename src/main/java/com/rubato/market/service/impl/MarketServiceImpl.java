@@ -45,10 +45,36 @@ public class MarketServiceImpl implements MarketService {
 	public MarketSell selectOneByNo(Integer sellNo) {
 		return marketStore.selectOneByNo(session, sellNo);
 	}
+	
+	
+	@Override
+	public int updateViewCount(Integer sellNo) {
+		return marketStore.updateViewCount(session, sellNo);
+	}
 
 
 	@Override
 	public int deleteMarketSell(Map<String, Object> deleter) {
 		return marketStore.deleteMarketSell(session, deleter);
 	}
+
+
+	@Override
+	public int insertMarketPayment(Map<String, Object> map) {
+		return marketStore.insertMarketPayment(session, map);
+	}
+
+
+	@Override
+	public int updateSellCondition(int sellNo) {
+		return marketStore.updateSellCondition(session, sellNo);
+	}
+
+
+	@Override
+	public int updateMemberPoint(Map<String, Object> seller) {
+		return marketStore.updateMemberPoint(session, seller);
+	}
+
+
 }

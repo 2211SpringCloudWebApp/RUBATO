@@ -52,11 +52,36 @@ public class MarketStoreImpl implements MarketStore{
 		MarketSell sell = session.selectOne("MarketMapper.selectOneByNo", sellNo);
 		return sell;
 	}
+	
+	@Override
+	public int updateViewCount(SqlSession session, Integer sellNo) {
+		int result = session.update("MarketMapper.updateViewCount", sellNo);
+		return result;
+	}
 
 	@Override
 	public int deleteMarketSell(SqlSession session, Map<String, Object> deleter) {
 		int result = session.delete("MarketMapper.deleteMarketSell", deleter);
 		return result;
 	}
+
+	@Override
+	public int insertMarketPayment(SqlSession session, Map<String, Object> map) {
+		int result = session.insert("MarketMapper.insertMarketPayment", map);
+		return result;
+	}
+
+	@Override
+	public int updateSellCondition(SqlSession session, int sellNo) {
+		int result = session.update("MarketMapper.updateSellCondition", sellNo);
+		return result;
+	}
+
+	@Override
+	public int updateMemberPoint(SqlSession session, Map<String, Object> seller) {
+		int result = session.update("MarketMapper.updateMemberPoint", seller);
+		return result;
+	}
+
 
 }

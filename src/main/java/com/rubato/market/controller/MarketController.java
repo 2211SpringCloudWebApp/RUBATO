@@ -17,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rubato.market.domain.MarketImage;
@@ -130,15 +132,22 @@ public class MarketController {
 	 *===================================================*/
 	@GetMapping("/market/detail")
 	public String marketDetail(@RequestParam(value="sellNo") Integer sellNo, Model model, HttpSession session) {
-		MarketSell sell = marketService.selectOneByNo(sellNo);
-		String memberId = sell.getMemberId();
-		Member seller = memService.selectMemberById(memberId);
-		Member loginMember = (Member) session.getAttribute("loginUser");
-		if(memberId != "") {
-			model.addAttribute("sell", sell);
-			model.addAttribute("seller", seller);
-			model.addAttribute("loginMember", loginMember);
-			return "market/marketDetail";
+		int result = marketService.updateViewCount(sellNo);
+		if(result>0) { //게시물 존재 => 조회수 증가
+			MarketSell sell = marketService.selectOneByNo(sellNo);
+			String memberId = sell.getMemberId();
+			Member seller = memService.selectMemberById(memberId);
+			Member loginMember = (Member) session.getAttribute("loginUser");
+			if(memberId != "") {
+				model.addAttribute("sell", sell);
+				model.addAttribute("seller", seller);
+				model.addAttribute("loginMember", loginMember);
+				return "market/marketDetail";
+			}
+			else {
+				model.addAttribute("msg", "게시물이 존재하지 않습니다.");
+				return "common/error";
+			}
 		}
 		else {
 			model.addAttribute("msg", "게시물이 존재하지 않습니다.");
@@ -168,6 +177,65 @@ public class MarketController {
 		else {
 			model.addAttribute("msg", "로그인 후 이용할 수 있습니다.");
 			return "common/error";
+		}
+	}
+	
+	/*===================================================
+	 * 마켓 구매 신청 (결제)
+	 *===================================================*/
+	// 결제창 View
+	@GetMapping("/market/payment")
+	public String marketPayment(@RequestParam(value="sellNo") Integer sellNo, HttpSession session, Model model) {
+		Member loginMember = (Member) session.getAttribute("loginUser");
+		MarketSell sell = marketService.selectOneByNo(sellNo);
+		if(loginMember!=null && sell.getSellCondition().equals("selling")) {
+			model.addAttribute("sell", sell);
+			return "market/marketBuy";
+		}
+		else if(sell.getSellCondition().equals("soldout")) {
+			model.addAttribute("msg", "이미 판매 완료된 상품입니다.");
+			return "common/error";
+		}
+		else {
+			model.addAttribute("msg", "로그인 후 이용할 수 있습니다.");
+			return "common/error";
+		}
+	}
+	
+	// 결제완료
+	@PostMapping("/market/payment")
+	@ResponseBody
+	public String marketPayment(@RequestBody Map<String, Object> map) {
+		int sellNo = Integer.parseInt(String.valueOf(map.get("sellNo")));
+		String sellerId = ((MarketSell) marketService.selectOneByNo(sellNo)).getMemberId();
+		map.put("sellerId", sellerId); //판매자ID를 여기서 저장하도록 할것. (jsp 수정 귀찮음)
+//		String sellTitle = (String) map.get("sellTitle");
+		int paymentPrice = Integer.parseInt(String.valueOf(map.get("paymentPrice")));
+		Map<String, Object> seller = new HashMap<String, Object>();
+		seller.put("sellerId", sellerId);
+		seller.put("paymentPrice", paymentPrice);
+//		String buyerId = (String) map.get("buyerId");
+//		String deliveryMsg = (String) map.get("deliveryMsg");
+		int result = marketService.insertMarketPayment(map);
+		if(result>0) {
+			result = 0;
+			result = marketService.updateSellCondition(sellNo);
+			if(result>0) {
+				result = 0;
+				result = marketService.updateMemberPoint(seller);
+				if(result>0) {
+					return "true";
+				}
+				else {
+					return "false";
+				}
+			}
+			else {
+				return "false";
+			}
+		}
+		else {
+			return "false";
 		}
 	}
 
