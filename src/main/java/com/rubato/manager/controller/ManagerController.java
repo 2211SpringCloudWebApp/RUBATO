@@ -21,6 +21,7 @@ import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
+import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
 
 @Controller
@@ -276,7 +277,7 @@ public class ManagerController {
 	 *===================================================*/
 	
 	@RequestMapping(value = "/manager/marketBoard", method = RequestMethod.GET)
-	public String managerMarketLogic(
+	public String managerMarketLogic(		// 마켓 게시판 관리 리스트
 			HttpSession session
 			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
@@ -295,8 +296,31 @@ public class ManagerController {
 		
 	}
 	
+	@RequestMapping(value = "/manager/searchMarket", method=RequestMethod.GET)
+	public String boardSearchLogic(		// searchMarket.jsp 에서 검색하게 해주는 메소드
+			@ModelAttribute SearchMarket searchMarket
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			, Model model) {	
+		int totalCount = managerService.getMarketListCount(searchMarket);
+		pi = this.getPageInfo(page, totalCount);
+		try {
+			List<MarketSell> searchMarketList = managerService.selectMarketListByKeyword(pi, searchMarket);
+			if(!searchMarketList.isEmpty()) {
+				model.addAttribute("searchMarket", searchMarket);
+				model.addAttribute("pi", pi);
+				model.addAttribute("searchMarketList", searchMarketList);
+				return "manager/searchMarket";
+			} else {
+				return "manager/searchMarket";
+			}
+		} catch (Exception e) {
+		}
+		return "manager/searchMarket";
+		
+	}
+	
 	@RequestMapping(value = "/manager/marketDelete", method = RequestMethod.GET)
-	public String marketDeleteLogic(
+	public String marketDeleteLogic(		// 마켓 게시글 삭제
 			@RequestParam("sellNo" ) Integer sellNo
 			, Model model
 			) {

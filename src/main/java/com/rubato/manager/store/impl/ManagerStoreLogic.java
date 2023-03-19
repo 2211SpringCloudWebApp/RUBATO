@@ -15,6 +15,7 @@ import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
+import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
 
 @Repository
@@ -167,6 +168,22 @@ public class ManagerStoreLogic implements ManagerStore{
 	public int deleteMarketBoard(SqlSession session, Integer sellNo) {
 		int result = session.delete("ManagerMapper.deleteMarketBoard", sellNo);
 		return result;
+	}
+
+	@Override
+	public int getMarketListCount(SqlSession session, SearchMarket searchMarket) {
+		int result = session.selectOne("ManagerMapper.getMarketListCount", searchMarket);
+		return result;
+	}
+
+	@Override
+	public List<MarketSell> selectMarketListByKeyword(SqlSession session, PageInfo pi, SearchMarket searchMarket) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<MarketSell> searchMarketList = session.selectList("ManagerMapper.selectMarketListByKeyword", searchMarket,rowBounds );
+		return searchMarketList;
 	}
 
 	

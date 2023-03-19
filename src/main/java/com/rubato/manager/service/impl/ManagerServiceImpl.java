@@ -15,6 +15,7 @@ import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
+import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
 
 @Service
@@ -141,6 +142,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public int deleteMarketBoard(Integer sellNo) {
 		int result = managerStore.deleteMarketBoard(session, sellNo);
 		return result;
+	}
+
+	@Override
+	public int getMarketListCount(SearchMarket searchMarket) {
+		int result = managerStore.getMarketListCount(session, searchMarket);
+		return result;
+	}
+
+	@Override
+	public List<MarketSell> selectMarketListByKeyword(PageInfo pi, SearchMarket searchMarket) {
+		List<MarketSell> searchMarketList = managerStore.selectMarketListByKeyword(session, pi, searchMarket);
+		return searchMarketList;
 	}
 
 

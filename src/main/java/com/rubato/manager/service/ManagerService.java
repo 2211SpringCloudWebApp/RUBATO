@@ -8,6 +8,7 @@ import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
+import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
 import com.rubato.market.domain.MarketSell;
 
@@ -139,6 +140,22 @@ public interface ManagerService {
 	 * @return int
 	 */
 	public int deleteMarketBoard(Integer sellNo);
+
+	/**
+	 * 마켓 게시판 전체 개수 Service(검색했을때)
+	 * @param searchMarket
+	 * @return
+	 */
+	public int getMarketListCount(SearchMarket searchMarket);
+
+	/**
+	 * 마켓 게시판 검색 Service
+	 * @param pi
+	 * @param searchMarket
+	 * @return
+	 */
+	public List<MarketSell> selectMarketListByKeyword(PageInfo pi, SearchMarket searchMarket);
+
 
 
 	

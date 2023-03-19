@@ -183,6 +183,37 @@
 	</select>
 	<select id="getMarketListCount" resultType="_int">
 		SELECT COUNT(*) FROM MARKET_SELL
+		<choose>
+			<when test="searchCondition == 'no'">
+				WHERE SELL_NO LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR SELL_NO LIKE '%' || #{searchValue} || '%' OR SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectMarketListByKeyword" resultMap="marketSellResultMap">
+		SELECT * FROM MARKET_SELL
+		<choose>
+			<when test="searchCondition == 'no'">
+				WHERE SELL_NO LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR SELL_NO LIKE '%' || #{searchValue} || '%' OR SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
 	</select>
 	
 	<delete id="deleteMarketBoard">
