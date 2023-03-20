@@ -77,4 +77,16 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 
+	@Override
+	public int deleteMarketImage(Integer sellNo) {
+		return marketStore.deleteMarketImage(session, sellNo);
+	}
+
+
+	@Override
+	public int updateMarketSell(MarketImage marketImg, MarketSell marketSell) {
+		return marketStore.updateMarketSell(session, marketImg, marketSell);
+	}
+
+
 }

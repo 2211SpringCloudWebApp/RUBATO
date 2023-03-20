@@ -156,6 +156,91 @@ public class MarketController {
 	}
 	
 	/*===================================================
+	 * 마켓 글 수정
+	 *===================================================*/
+	@GetMapping("/market/modify")
+	public String marketModify(@RequestParam(value="sellNo") Integer sellNo, HttpSession session, Model model) {
+		if(session.getAttribute("loginUser") != null) {
+			MarketSell sell = marketService.selectOneByNo(sellNo);
+			String writerId = sell.getMemberId();
+			String loginMemberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			Map<String, Object> writer = new HashMap<String, Object>();
+			writer.put("sellNo", sellNo);
+			writer.put("loginMemberId", loginMemberId);
+			if(sell!=null && writerId.equals(loginMemberId)) {
+				model.addAttribute("sell", sell);
+				return "market/marketModify";
+			}
+			else {
+				model.addAttribute("msg", "본인 게시물만 수정할 수 있습니다.");
+				return "common/error";
+			}
+		}
+		else {
+			model.addAttribute("msg", "로그인 후 이용할 수 있습니다.");
+			return "common/error";
+		}
+	}
+	
+	@PostMapping("/market/modify")
+	public String marketModify(@RequestParam("uploadFile") MultipartFile[] uploadFiles,
+								@RequestParam(value="sellNo") Integer sellNo,
+								MarketSell marketSell,
+								String strPrice,
+								HttpSession session,
+								Model model) throws IllegalStateException, IOException {
+		//기존 존재하는 이미지 파일 전부 삭제
+		int result = marketService.deleteMarketImage(sellNo);
+		if(result>0) {
+			if(session.getAttribute("loginUser")!=null) {
+				String realPath = servletContext.getRealPath("/resources/upload/market");
+				String today = new SimpleDateFormat("yyMMdd").format(new Date());
+				String savePath = realPath + File.separator + today;
+				File folder = new File(savePath);
+				if(!folder.exists())
+					folder.mkdir();
+				
+				
+				String[] saveFileNames = new String[3];
+				int i = 0;
+				for(MultipartFile uploadFile : uploadFiles) {
+					String originalFileName = uploadFile.getOriginalFilename();
+					if(!originalFileName.isEmpty()) {
+						saveFileNames[i] = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf('.'));
+						uploadFile.transferTo(new File(folder, saveFileNames[i]));
+						i++;
+					}
+				}
+				MarketImage marketImg = new MarketImage();
+				marketImg.setImg1(savePath + File.separator + saveFileNames[0]);
+				marketImg.setImg2(savePath + File.separator + saveFileNames[1]);
+				marketImg.setImg3(savePath + File.separator + saveFileNames[2]);
+				int sellPrice = Integer.parseInt(strPrice.replace(",", ""));
+				marketSell.setSellPrice(sellPrice);
+				String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+				String memberNickname = ((Member) session.getAttribute("loginUser")).getMemberNickname();
+				marketSell.setMemberId(memberId);
+				marketSell.setMemberNickname(memberNickname);
+				marketSell.setSellNo(sellNo);
+				result = marketService.updateMarketSell(marketImg, marketSell);
+				if(result>0) {
+					return "redirect:/market/list";
+				}
+				else {
+					return "common/error";
+				}
+			}
+			else {
+				return "common/error";
+			}
+		}
+		else { //이미지 삭제 실패
+			return "common/error";
+		}
+	}
+	
+	
+	/*===================================================
 	 * 마켓 글 삭제
 	 *===================================================*/
 	@GetMapping("/market/delete")

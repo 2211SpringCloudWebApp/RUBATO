@@ -73,6 +73,21 @@ public interface MarketService {
 	 */
 	public int updateMemberPoint(Map<String, Object> seller);
 
+	/**
+	 * 수정 시 존재하는 이미지 삭제 Service
+	 * @param sellNo
+	 * @return int
+	 */
+	public int deleteMarketImage(Integer sellNo);
+
+	/**
+	 * 판매글 수정 Service
+	 * @param marketImg
+	 * @param marketSell
+	 * @return int
+	 */
+	public int updateMarketSell(MarketImage marketImg, MarketSell marketSell);
+
 
 
 }

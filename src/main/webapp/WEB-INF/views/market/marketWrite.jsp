@@ -7,9 +7,13 @@
 		<title>RUBATO - 판매등록</title>
 		<!-- common header css & js -->
 		<link rel="stylesheet" href="/resources/css/common/header.css">
+		<link rel="stylesheet" href="/resources/css/common/footer.css">
 		<!-- marketWrite css & js -->
 		<link rel="stylesheet" href="/resources/css/market/marketWrite.css">
 		<script src="/resources/js/market/marketWrite.js" defer></script>
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<!-- common header jsp include -->
@@ -68,5 +72,7 @@
 		    </div>
 		    </form>
 		</main>
+		<!-- common footer jsp include -->
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	</body>
 </html>

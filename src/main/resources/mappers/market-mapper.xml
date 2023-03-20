@@ -136,10 +136,19 @@
 		UPDATE MEMBER SET MEMBER_POINT = MEMBER_POINT + #{paymentPrice} WHERE MEMBER_ID = #{sellerId}
 	</update>
 	
+	<update id="updateMarketSell">
+		UPDATE MARKET_SELL SET SELL_TITLE = #{sellTitle}, SELL_CONTENT = #{sellContent}, SELL_PRICE = #{sellPrice}, SELL_AREA = #{sellArea},
+		PRODUCT_CONDITION = #{productCondition}, MOD_DATE = DEFAULT WHERE SELL_NO = #{sellNo}
+	</update>
+	
 	
 	
 	<!-- delete -->
 	<delete id="deleteMarketSell">
 		DELETE FROM MARKET_SELL WHERE SELL_NO = #{sellNo} AND MEMBER_ID = #{loginMemberId}
+	</delete>
+	
+	<delete id="deleteMarketImage">
+		DELETE FROM MARKET_IMAGE WHERE SELL_NO = #{sellNo}
 	</delete>
 </mapper>

@@ -81,6 +81,22 @@ public interface MarketStore {
 	 */
 	public int updateMemberPoint(SqlSession session, Map<String, Object> seller);
 
+	/**
+	 * 수정 시 존재하는 이미지 삭제 Store
+	 * @param session, sellNo
+	 * @return int
+	 */
+	public int deleteMarketImage(SqlSession session, Integer sellNo);
+
+	/**
+	 * 판매글 수정 Store
+	 * @param session
+	 * @param marketImg
+	 * @param marketSell
+	 * @return int
+	 */
+	public int updateMarketSell(SqlSession session, MarketImage marketImg, MarketSell marketSell);
+
 
 
 }

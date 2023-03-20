@@ -83,5 +83,19 @@ public class MarketStoreImpl implements MarketStore{
 		return result;
 	}
 
+	@Override
+	public int deleteMarketImage(SqlSession session, Integer sellNo) {
+		int result = session.delete("MarketMapper.deleteMarketImage", sellNo);
+		return result;
+	}
 
+	@Override
+	public int updateMarketSell(SqlSession session, MarketImage marketImg, MarketSell marketSell) {
+		int result = 0;
+		int result1 = session.insert("MarketMapper.updateMarketSell", marketSell);
+		int result2 = insertMarketImage(session, marketImg);
+		if((result1+result2)>1)
+			result = result1+result2;
+		return result;
+	}
 }

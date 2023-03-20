@@ -1,0 +1,13 @@
+.uploadImg{
+	width: 150px;
+	height: 150px;
+	border-radius: 10%;
+}
+
+#img-msg{
+	margin: 0;
+	padding: 0;
+	color: red;
+	position: relative;
+	top: -20px;
+}

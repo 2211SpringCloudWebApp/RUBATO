@@ -123,7 +123,7 @@ ${sell.sellContent }
 	            <a href="#" id="report">신고</a>
             </c:if>
             <c:if test="${seller.memberId eq loginMember.memberId }">
-	            <a href="/market/modify" id="modify">수정</a><span id="partition"> · </span>
+	            <a href="/market/modify?sellNo=${sell.sellNo }" id="modify">수정</a><span id="partition"> · </span>
 	            <a href="/market/delete?sellNo=${sell.sellNo }" id="delete" onclick="return deleteCheck()">삭제</a>
             </c:if>
         </div>
