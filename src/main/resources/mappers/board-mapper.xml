@@ -82,4 +82,9 @@
 		</where>
 	</select>
 	
+<!-- 	민우 추가 -->
+	<select id="searchListById" resultMap="BoardResultMap">
+		SELECT * FROM BOARD WHERE MEMBER_ID = #{memberId}
+	</select>
+	
 </mapper>

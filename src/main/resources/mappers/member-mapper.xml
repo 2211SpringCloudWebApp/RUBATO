@@ -22,8 +22,32 @@
 	<select id="selectMemberByNickname" resultMap="memberResultMap">
 		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ADDR, REG_DATE, MOD_DATE, STATUS, MEMBER_POINT FROM MEMBER WHERE MEMBER_NICKNAME=#{memberNickname}
 	</select>
-	<select id="selectIdPw" resultMap="memberResultMap">
+	<select id="selectIdPw" resultMap="memberResultMap"> <!-- 로그인 -->
 		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+	</select>
+	<select id="findId" resultMap="memberResultMap"> <!-- 아이디 찾기 -->
+		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_NAME = #{memberName} AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+	<select id="findPwd" resultMap="memberResultMap"> <!-- 비밀번호 찾기 -->
+		SELECT MEMBER_PWD FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+	<select id="boardWriterCount" resultType="_int" > <!-- 마이페이지 작성 글 카운트 -->
+		SELECT COUNT(*) FROM BOARD WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="boardCommentCount" resultType="_int"> <!-- 마이페이지 댓글 작성 내역 -->
+		SELECT COUNT(*) FROM BOARD_COMMENT WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="lessonWriteCount" resultType="_int"> <!-- 마이페이지 레슨 등록 내역 -->
+		SELECT COUNT(*) FROM LESSON WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="lessonApplyCount" resultType="_int">	<!-- 마이페이지 레슨 신청 내역 -->
+		SELECT COUNT(*) FROM LESSON_APPLY WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="sellWriteCount" resultType="_int"> <!-- 마이페이지 판매 등록 내역 -->
+	  	SELECT COUNT(*) FROM MARKET_SELL WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="buyApplyCount" resultType="_int"> <!-- 마이페이지 구매 신청 내역 -->
+	 	SELECT COUNT(*) FROM MARKET_PAYMENT WHERE BUYER_ID = #{memberId}
 	</select>
 	
 	<!-- insert -->

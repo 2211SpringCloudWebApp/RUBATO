@@ -1,5 +1,7 @@
 package com.rubato.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rubato.board.domain.Board;
+import com.rubato.board.domain.PageInfo;
+import com.rubato.board.domain.Search;
+import com.rubato.board.service.BoardService;
 import com.rubato.common.MailSendService;
+import com.rubato.market.domain.MarketPayment;
+import com.rubato.market.domain.MarketSell;
+import com.rubato.market.domain.SearchInfo;
+import com.rubato.market.service.MarketService;
+import com.rubato.member.domain.CategoryCount;
 import com.rubato.member.domain.Member;
 import com.rubato.member.service.MemberService;
 
@@ -33,6 +44,12 @@ public class MemberController {
 	
 	@Autowired
 	private MailSendService mailSendService;
+
+	@Autowired
+	private BoardService bService;
+	
+	@Autowired
+	private MarketService marketService;
 	
 	
 	/*===================================================
@@ -83,6 +100,58 @@ public class MemberController {
 		}
 		else {
 			return "false";
+		}
+	}
+	
+	// 아이디 찾기 뷰
+	@RequestMapping(value= "/member/findId",method= RequestMethod.GET)
+	public String memberFindIdView() {
+		return "member/findId";
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value="/member/findId",  method = RequestMethod.POST)
+	public String findId(HttpSession session
+			, @RequestParam("memberName") String memberName
+			, @RequestParam("memberEmail") String memberEmail
+			, Model model) {
+		try {
+			Member mParam = new Member();
+			mParam.setMemberName(memberName);
+			mParam.setMemberEmail(memberEmail);
+			Member member =  mService.findId(mParam);
+			model.addAttribute("member", member);
+			return "member/findIdAfter";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "member/findIdAfter";
+		}
+	}
+	
+	// 비밀번호 찾기 뷰
+	@RequestMapping(value="/member/findPwd", method = RequestMethod.GET)
+	public String memberFindPwdView() {
+		return "member/findPwd";
+	}
+	
+	//비밀번호 찾기
+	@RequestMapping(value="member/findPwd", method = RequestMethod.POST)
+	public String findPwd(HttpSession session
+			, @RequestParam("memberId") String memberId
+			, @RequestParam("memberEmail") String memberEmail
+			, Model model) {
+		try {
+			Member mParam = new Member();
+			mParam.setMemberId(memberId);
+			mParam.setMemberEmail(memberEmail);
+			Member member = mService.findPwd(mParam);
+			model.addAttribute("member", member);
+			return "member/findPwdAfter";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "member/findPwdAfter";
 		}
 	}
 	
@@ -164,7 +233,21 @@ public class MemberController {
 			if(session.getAttribute("loginUser")!=null) { //로그인 됐음
 				Member mOne = (Member)session.getAttribute("loginUser");
 				String memberId = (mOne).getMemberId();
-				Member member = mService.selectMemberById(memberId);
+				Member member = mService.selectMemberById(memberId); // 회원 정보 수정
+				CategoryCount count = new CategoryCount();
+				int boardWriterCount = mService.boardWriterCount(memberId);
+				count.setBoardWriteCount(boardWriterCount); // 작성한 글 내역 카운트
+				int boardCommentCount = mService.boardCommentCount(memberId);
+				count.setboardCommentCount(boardCommentCount); // 댓글 작성 내역
+				int lessonWriteCount = mService.lessonWriteCount(memberId);
+				count.setLessonWriteCount(lessonWriteCount); // 레슨 등록 내역
+				int lessonApplyCount = mService.lessonApplyCount(memberId);
+				count.setLessonApplyCount(lessonApplyCount); // 레슨 신청 내역
+				int sellWriteCount = mService.sellWriteCount(memberId);
+				count.setSellWriteCount(sellWriteCount); // 판매 등록 내역
+				int buyApplyCount = mService.buyApplyCount(memberId);
+				count.setBuyApplyCount(buyApplyCount);
+				model.addAttribute("count", count);
 				model.addAttribute("member", member);
 				return "/member/mypage";
 			}
@@ -193,7 +276,6 @@ public class MemberController {
 			, @RequestParam("memberAddr2") String memberAddr2
 			, Model model) {
 		try {
-			System.out.println(member);
 			member.setMemberAddr(memberAddr1 + "++" + memberAddr2);
 			int result = mService.updateMember(member);
 			if(result > 0) {
@@ -233,6 +315,81 @@ public class MemberController {
 		
 	}
 }
+	
+	// 마이페이지 내가 쓴 글
+	@RequestMapping(value = "/board/mypageMyWrite", method = RequestMethod.GET)
+	public String MypageWriteView(
+			 @ModelAttribute Search search
+			 , HttpSession session
+			 , @RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage, Model model) {
+		try {
+			Member mOne = (Member)session.getAttribute("loginUser");
+			String memberId = (mOne).getMemberId();
+			List<Board> boardList = bService.selectListById(memberId);
+			model.addAttribute("myList", boardList);
+			return "/board/mypageMyWrite";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "/board/mypageMyWrite";
+		}
+	}
+	
+	// 내가 쓴 글 상세화면
+		@RequestMapping(value = "/board/mypageMyWritedetail", method = RequestMethod.GET)
+		public String boardDetailView(@RequestParam("boardNo") int boardNo, Model model) {
+			try {
+				Board board = bService.selectOneByNo(boardNo);
+				model.addAttribute("board", board);
+				return "board/mypageMyWritedetail";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("msg", e.getMessage());
+				return "common/error";
+			}
+		}
+	
+	// 마이페이지 내가 쓴 댓글
+		
+	// 마이페이지 나의 판매 내역
+		@GetMapping("/market/mypageSellListView")
+		public String mypageSellListView(
+					  SearchInfo searchInfo
+				    , Model model
+					, HttpSession session
+					, @RequestParam(value="page", required=false, defaultValue="1") Integer page) { // 게시물 목록 View
+			try {
+				Member mOne = (Member)session.getAttribute("loginUser");
+				String memberId = (mOne).getMemberId();
+				List<MarketSell> sList = marketService.searchsellListById(memberId);
+				model.addAttribute("sList", sList);
+				return "/market/mypageSellListView";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("mysellList", e.getMessage());
+				return "/market/mypageSellListView";
+			}
+		}
+		
+	// 마이페이지 구매 신청 내역
+		@GetMapping("/market/searchbuyListById")
+		public String searchbuyListById(
+					  SearchInfo searchInfo
+				    , Model model
+					, HttpSession session
+					, @RequestParam(value="page", required=false, defaultValue="1") Integer page) { // 게시물 목록 View
+			try {
+				Member mOne = (Member)session.getAttribute("loginUser");
+				String memberId = (mOne).getMemberId();
+				List<MarketPayment> paymentList = marketService.searchbuyListById(memberId);
+				model.addAttribute("paymentList", paymentList);
+				return "/market/searchbuyListById";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("paymentList", e.getMessage());
+				return "/market/searchbuyListById";
+			}
+		}
 }
 
 

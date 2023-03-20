@@ -28,6 +28,13 @@
 	
 	<!-- SQL Query -->
 	<!-- select -->
+	<!-- 	민우 추가 -->
+	<select id="searchsellListById" resultMap="marketSellResultMap">
+		select s.sell_no,s.sell_title,s.sell_price,s.sell_area,s.member_id,s.write_date, substr(i.img1, 57) as img1 from market_sell s join market_image i on i.sell_no = s.sell_no where member_id = #{memberId}
+	</select>
+	<select id="searchbuyListById" resultMap="marketSellResultMap">
+		SELECT * FROM MARKET_PAYMENT WHERE BUYER_ID = #{memberId}
+	</select>
 	<select id="selectAllSell" resultMap="marketSellResultMap">
 		SELECT * FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO
 			<!-- 검색 -->

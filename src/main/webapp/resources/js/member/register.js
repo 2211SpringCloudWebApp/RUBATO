@@ -150,4 +150,21 @@ var validation = ()=>{
 		alert("이메일 인증을 해주세요.");
 		return false;
 	}
+	// 유효성 검사 -민우 추가-
+	var memberPwd = $("#memberPwd");
+	var memberPwd2 = $("#memberPwd2");
+	var pwdRegExp = /^(?!.*(.)\1{3,})(?!.*\d{4,})(?!.*[a-zA-Z]{4,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~])[a-zA-Z\d!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~]{8,16}$/;
+	if(!pwdRegExp.test(memberPwd.val())) {
+		$('#pwdCheck-msg').html("다시 입력해 주시길 바랍니다.");
+		$('#pwdCheck-msg').css("color", "red");
+		return false;
+	}
+	
+	if(memberPwd.val() !== userPwd2.val()) {
+		$('#pwdCheck-msg2').html("비밀번호가 다릅니다.");
+		$('#pwdCheck-msg2').css("color", "red");
+		return false;
+	}
+	
+    
 }

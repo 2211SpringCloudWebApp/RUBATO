@@ -57,6 +57,13 @@ public class BoardStoreImpl implements BoardStore {
 		Board board = session.selectOne("BoardMapper.selectOneByNo", boardNo);
 		return board;
 	}
+	
+//	민우 추가
+	@Override
+	public List<Board> selectListById(SqlSession session, String memberId) {
+		List<Board> boardList = session.selectList("BoardMapper.searchListById", memberId);
+		return boardList;
+	}
 
 	@Override
 	public int updateBoard(SqlSession session, Board board) {

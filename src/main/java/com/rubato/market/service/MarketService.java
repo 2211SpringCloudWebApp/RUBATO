@@ -3,7 +3,10 @@ package com.rubato.market.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.rubato.market.domain.MarketImage;
+import com.rubato.market.domain.MarketPayment;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
 import com.rubato.market.domain.SearchInfo;
@@ -30,5 +33,20 @@ public interface MarketService {
 	 * @return int
 	 */
 	public int getTotalCount(SearchInfo searchInfo);
-
+	
+	// 민우 추가
+	/**
+	 * 마이페이지 나의 판매 내역 Service
+	 * return List<MarketSell>
+	 */
+	public List<MarketSell> searchsellListById(String memberId);
+	
+	/**
+	 * 마이페이지 구매 신청 내역 Service
+	 * @param memberId
+	 * @return List<MarketSell>
+	 */
+	public List<MarketPayment> searchbuyListById(String memberId);
 }
+
+	

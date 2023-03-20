@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rubato.market.domain.MarketImage;
+import com.rubato.market.domain.MarketPayment;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
 import com.rubato.market.domain.SearchInfo;
@@ -45,5 +46,19 @@ public class MarketStoreImpl implements MarketStore{
 		int result = session.selectOne("MarketMapper.getTotalCount", searchInfo);
 		return result;
 	}
+	
+	// 민우 추가
+	@Override
+	public List<MarketSell> searchsellListById(SqlSession session, String memberId) {
+		List<MarketSell> sList = session.selectList("MarketMapper.searchsellListById", memberId);
+		return sList;
+	}
+
+	@Override
+	public List<MarketPayment> searchbuyListById(SqlSession session, String memberId) {
+		List<MarketPayment> paymentList = session.selectList("MarketMapper.searchbuyListById", memberId);
+		return paymentList;
+	}
+
 
 }

@@ -58,6 +58,15 @@ public interface BoardStore {
 	 */
 	public Board selectOneByNo(SqlSession session, int boardNo);
 
+//	민우 추가
+	/**
+	 * 아이디로 목록 조회 Store
+	 * @param session
+	 * @param memberId
+	 * @return List<Board>
+	 */
+	List<Board> selectListById(SqlSession session, String memberId);
+
 	/**
 	 * 게시판 수정 Store
 	 * @param session

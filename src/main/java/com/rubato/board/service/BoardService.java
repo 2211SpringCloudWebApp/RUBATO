@@ -45,6 +45,14 @@ public interface BoardService {
 	 */
 	public Board selectOneByNo(int boardNo);
 
+//	민우 추가
+	/**
+	 * 아이디로 목록 조회 Service
+	 * @param memberId
+	 * @return List<Board>
+	 */
+	List<Board> selectListById(String memberId);
+
 	/**
 	 * 게시판 수정 Service
 	 * @param board

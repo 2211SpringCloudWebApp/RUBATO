@@ -54,6 +54,13 @@ public class BoardServiceImpl implements BoardService{
 		Board board = bStore.selectOneByNo(session, boardNo);
 		return board;
 	}
+	
+//	민우 추가
+	@Override
+	public List<Board> selectListById(String memberId) {
+		List<Board> boardList = bStore.selectListById(session, memberId);
+		return boardList;
+	}
 
 	@Override
 	public int updateBoard(Board board) {

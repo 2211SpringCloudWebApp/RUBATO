@@ -45,5 +45,53 @@ public class MemberStoreImpl implements MemberStore{
 		return result;
 	}
 
+	@Override
+	public Member findId(SqlSession session, Member mParam) {
+		Member member = session.selectOne("MemberMapper.findId", mParam);
+		return member;
+	}
+
+	@Override
+	public Member findPwd(SqlSession session, Member mParam) {
+		Member member = session.selectOne("MemberMapper.findPwd" , mParam);
+		return member;
+	}
+
+	@Override
+	public int boardWriterCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.boardWriterCount", memberId);
+		return result;
+	}
+
+	@Override
+	public int boardCommentCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.boardCommentCount", memberId);
+		return result;
+	}
+
+	@Override
+	public int lessonWriteCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.lessonWriteCount", memberId);
+		return result;
+	}
+
+	@Override
+	public int lessonApplyCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.lessonApplyCount", memberId);
+		return result;
+	}
+
+	@Override
+	public int sellWriteCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.sellWriteCount", memberId);
+		return result;
+	}
+
+	@Override
+	public int buyApplyCount(SqlSession session, String memberId) {
+		int result = session.selectOne("MemberMapper.buyApplyCount", memberId);
+		return result;
+	}
+
 	
 }

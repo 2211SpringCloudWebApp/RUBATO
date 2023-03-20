@@ -54,6 +54,54 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public Member findId(Member mParam) {
+		Member member = mStore.findId(session, mParam);
+		return member;
+	}
+
+	@Override
+	public Member findPwd(Member mParam) {
+		Member member = mStore.findPwd(session, mParam);
+		return member;
+	}
+
+	@Override
+	public int boardWriterCount(String memberId) {
+		int result = mStore.boardWriterCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int boardCommentCount(String memberId) {
+		int result = mStore.boardCommentCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int lessonWriteCount(String memberId) {
+		int result = mStore.lessonWriteCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int lessonApplyCount(String memberId) {
+		int result = mStore.lessonApplyCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int sellWriteCount(String memberId) {
+		int result = mStore.sellWriteCount(session, memberId);
+		return result;
+	}
+
+	@Override
+	public int buyApplyCount(String memberId) {
+		int result = mStore.buyApplyCount(session, memberId);
+		return result;
+	}
+
 	
 
 }
