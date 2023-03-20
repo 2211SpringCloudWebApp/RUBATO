@@ -79,16 +79,22 @@ public class ManagerController {
 		, HttpServletRequest request
 		, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 		, Model model) {
-		int totalCount = managerService.getListCount();
-		pi = this.getPageInfo(page, totalCount);
-		if(session.getAttribute("loginUser")!=null) {
-			List<Member> mList = managerService.selectMembers(pi);
-			if(!mList.isEmpty()) {
-				model.addAttribute("pi", pi);
-				model.addAttribute("mList", mList);
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getListCount();
+			pi = this.getPageInfo(page, totalCount);
+			if(session.getAttribute("loginUser")!=null) {
+				List<Member> mList = managerService.selectMembers(pi);
+				if(!mList.isEmpty()) {
+					model.addAttribute("pi", pi);
+					model.addAttribute("mList", mList);
+				}
 			}
+			return "manager/managerMember";
 		}
-		return "manager/managerMember";
 	}
 	
 	// searchMember.jsp 에서 select로 검색하게 해주는 메소드
@@ -131,14 +137,7 @@ public class ManagerController {
 			, Model model) {
 		int result = managerService.deleteMember(memberId);
 		if(result > 0) {
-//			List<Member> mList = managerService.selectMembers(pi);
-//			if(!mList.isEmpty()) {
-//				model.addAttribute("pi", pi);
-//				model.addAttribute("mList", mList);
-//				return "manager/managerMember";
-//			} else {
 			return "redirect:/manager/main";
-//			}
 		} else {
 			// 에러 페이지 이동으로 변경 필요
 			return "redirect:/manager/main";
@@ -167,40 +166,53 @@ public class ManagerController {
 			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			,Model model) {
-		int totalCount = managerService.getLessonListCount();
-		pi = this.getPageInfo(page, totalCount);
-		if(session.getAttribute("loginUser")!=null) {
-			List<Lesson> lbList = managerService.selectLessonBoard(pi);
-			if(!lbList.isEmpty()) {
-				model.addAttribute("pi", pi);
-				model.addAttribute("lbList", lbList);
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getLessonListCount();
+			pi = this.getPageInfo(page, totalCount);
+			if(session.getAttribute("loginUser")!=null) {
+				List<Lesson> lbList = managerService.selectLessonBoard(pi);
+				if(!lbList.isEmpty()) {
+					model.addAttribute("pi", pi);
+					model.addAttribute("lbList", lbList);
+				}
 			}
+			return "manager/managerLessonBoard";
 		}
-		return "manager/managerLessonBoard";
 	}
 	
 	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
 	@RequestMapping(value = "/manager/searchLesson", method=RequestMethod.GET)
 	public String lessonSearchLogic( 	// searchLesson.jsp 에서 select로 검색하게 해주는 메소드
 			@ModelAttribute SearchLesson searchLesson
+			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			,Model model) {
-		int totalCount = managerService.getLessonListCount(searchLesson);
-		pi = this.getPageInfo(page, totalCount);
-		try {
-			List<Lesson> searchLessonList = managerService.selectLessonListByKeyword(pi, searchLesson);
-			if(!searchLessonList.isEmpty()) {
-				model.addAttribute("searchLesson", searchLesson);
-				model.addAttribute("pi", pi);
-				model.addAttribute("lessonList", searchLessonList);
-				return "manager/searchLesson";
-			} else {
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getLessonListCount(searchLesson);
+			pi = this.getPageInfo(page, totalCount);
+			try {
+				List<Lesson> searchLessonList = managerService.selectLessonListByKeyword(pi, searchLesson);
+				if(!searchLessonList.isEmpty()) {
+					model.addAttribute("searchLesson", searchLesson);
+					model.addAttribute("pi", pi);
+					model.addAttribute("lessonList", searchLessonList);
+					return "manager/searchLesson";
+				} else {
+					return "manager/searchLesson";
+				}
+			} catch (Exception e) {
 				return "manager/searchLesson";
 			}
-		} catch (Exception e) {
-			return "manager/searchLesson";
 		}
-		}
+	}
 	
 	@RequestMapping(value = "/manager/lessonDelete", method = RequestMethod.GET)
 	public String lessonDeleteLogic(		// 레슨게시판 게시글 삭제
@@ -225,38 +237,51 @@ public class ManagerController {
 			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			,Model model) {
-		int totalCount = managerService.getBoardListCount();
-		pi = this.getPageInfo(page, totalCount);
-		if(session.getAttribute("loginUser")!=null) {
-			List<Board> boardList = managerService.selectBoard(pi);
-			if(!boardList.isEmpty()) {
-				model.addAttribute("pi", pi);
-				model.addAttribute("boardList", boardList);
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getBoardListCount();
+			pi = this.getPageInfo(page, totalCount);
+			if(session.getAttribute("loginUser")!=null) {
+				List<Board> boardList = managerService.selectBoard(pi);
+				if(!boardList.isEmpty()) {
+					model.addAttribute("pi", pi);
+					model.addAttribute("boardList", boardList);
+				}
 			}
+			return "manager/managerBoard";
 		}
-		return "manager/managerBoard";
 	}
 	
 	@RequestMapping(value = "/manager/searchBoard", method=RequestMethod.GET)
 	public String boardSearchLogic(		// searchBoard.jsp 에서 검색하게 해주는 메소드
 			@ModelAttribute SearchBoard searchBoard
+			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {	
-		int totalCount = managerService.getBoardListCount(searchBoard);
-		pi = this.getPageInfo(page, totalCount);
-		try {
-			List<Board> searchBoardList = managerService.selectBoardListByKeyword(pi, searchBoard);
-			if(!searchBoardList.isEmpty()) {
-				model.addAttribute("searchBoard", searchBoard);
-				model.addAttribute("pi", pi);
-				model.addAttribute("searchBoardList", searchBoardList);
-				return "manager/searchBoard";
-			} else {
-				return "manager/searchBoard";
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getBoardListCount(searchBoard);
+			pi = this.getPageInfo(page, totalCount);
+			try {
+				List<Board> searchBoardList = managerService.selectBoardListByKeyword(pi, searchBoard);
+				if(!searchBoardList.isEmpty()) {
+					model.addAttribute("searchBoard", searchBoard);
+					model.addAttribute("pi", pi);
+					model.addAttribute("searchBoardList", searchBoardList);
+					return "manager/searchBoard";
+				} else {
+					return "manager/searchBoard";
+				}
+			} catch (Exception e) {
 			}
-		} catch (Exception e) {
+			return "manager/searchBoard";
 		}
-		return "manager/searchBoard";
 	}
 	
 	@RequestMapping(value = "/manager/boardDelete", method=RequestMethod.GET)
@@ -283,39 +308,51 @@ public class ManagerController {
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			,Model model
 			) {
-		int totalCount = managerService.getMarketListCount();
-		pi = this.getPageInfo(page, totalCount);
-		if(session.getAttribute("loginUser")!= null) {
-			List<MarketSell> marketList = managerService.selectMarketBoard(pi);
-			if(!marketList.isEmpty()) {
-				model.addAttribute("pi", pi);
-				model.addAttribute("marketList", marketList);
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getMarketListCount();
+			pi = this.getPageInfo(page, totalCount);
+			if(session.getAttribute("loginUser")!= null) {
+				List<MarketSell> marketList = managerService.selectMarketBoard(pi);
+				if(!marketList.isEmpty()) {
+					model.addAttribute("pi", pi);
+					model.addAttribute("marketList", marketList);
+				}
 			}
+			return "manager/managerMarketBoard";
 		}
-		return "manager/managerMarketBoard";
-		
 	}
 	
 	@RequestMapping(value = "/manager/searchMarket", method=RequestMethod.GET)
 	public String boardSearchLogic(		// searchMarket.jsp 에서 검색하게 해주는 메소드
 			@ModelAttribute SearchMarket searchMarket
+			, HttpServletRequest request
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {	
-		int totalCount = managerService.getMarketListCount(searchMarket);
-		pi = this.getPageInfo(page, totalCount);
-		try {
-			List<MarketSell> searchMarketList = managerService.selectMarketListByKeyword(pi, searchMarket);
-			if(!searchMarketList.isEmpty()) {
-				model.addAttribute("searchMarket", searchMarket);
-				model.addAttribute("pi", pi);
-				model.addAttribute("searchMarketList", searchMarketList);
-				return "manager/searchMarket";
-			} else {
-				return "manager/searchMarket";
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getMarketListCount(searchMarket);
+			pi = this.getPageInfo(page, totalCount);
+			try {
+				List<MarketSell> searchMarketList = managerService.selectMarketListByKeyword(pi, searchMarket);
+				if(!searchMarketList.isEmpty()) {
+					model.addAttribute("searchMarket", searchMarket);
+					model.addAttribute("pi", pi);
+					model.addAttribute("searchMarketList", searchMarketList);
+					return "manager/searchMarket";
+				} else {
+					return "manager/searchMarket";
+				}
+			} catch (Exception e) {
 			}
-		} catch (Exception e) {
+			return "manager/searchMarket";
 		}
-		return "manager/searchMarket";
 		
 	}
 	
