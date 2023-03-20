@@ -18,7 +18,7 @@
     <div id="container">
          <header>
             <div id="logo">
-                <img src="/resources/images/manager/logo.png" alt="로고">
+                <a href="/manager/main"><img src="/resources/images/manager/logo.png" alt="로고"></a>
             </div>
             <hr>
         </header>
