@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
@@ -86,6 +87,24 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public int updateMarketSell(MarketImage marketImg, MarketSell marketSell) {
 		return marketStore.updateMarketSell(session, marketImg, marketSell);
+	}
+
+
+	@Override
+	public int insertComment(Map<String, Object> comment) {
+		return marketStore.insertComment(session, comment);
+	}
+
+
+	@Override
+	public int getCmtTotalCount(int sellNo) {
+		return marketStore.getCmtTotalCount(session, sellNo);
+	}
+
+
+	@Override
+	public List<MarketComment> selectAllComment(Map<String, Object> commentMap) {
+		return marketStore.selectAllComment(session, commentMap);
 	}
 
 

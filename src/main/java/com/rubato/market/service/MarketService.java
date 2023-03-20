@@ -3,6 +3,7 @@ package com.rubato.market.service;
 import java.util.List;
 import java.util.Map;
 
+import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
@@ -87,6 +88,27 @@ public interface MarketService {
 	 * @return int
 	 */
 	public int updateMarketSell(MarketImage marketImg, MarketSell marketSell);
+
+	/**
+	 * 댓글 작성 Service
+	 * @param comment
+	 * @return int
+	 */
+	public int insertComment(Map<String, Object> comment);
+
+	/**
+	 * 댓글 전체 개수 출력 Service
+	 * @param sellNo
+	 * @return int
+	 */
+	public int getCmtTotalCount(int sellNo);
+
+	/**
+	 * 댓글 목록 출력 Service
+	 * @param pi
+	 * @return List<MarketComment>
+	 */
+	public List<MarketComment> selectAllComment(Map<String, Object> commentMap);
 
 
 

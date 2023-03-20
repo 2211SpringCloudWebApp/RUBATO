@@ -125,7 +125,7 @@ main{
     }
     #report{
         color: #aaa8a8;
-        margin-left: 550px;
+        margin-left: 540px;
         cursor: pointer;
     }
     #modify{
@@ -169,7 +169,7 @@ textarea{
     #enroll-btn{
         border: none;
         background-color: white;
-        margin-left: 635px;
+        margin-left: 630px;
         color: #7e7d7d;
         font-weight: bolder;
         font-size: 95%;
@@ -181,3 +181,30 @@ textarea{
 #comment{
     border-bottom: 1px solid #eee;
 }
+	#commentModify{
+        color: #aaa8a8;
+        cursor: pointer;
+	}
+	#commentDelete{
+        color: #aaa8a8;
+        cursor: pointer;
+	}
+	#commentReport{
+        color: #aaa8a8;
+        cursor: pointer;
+	}
+	#comment-prev{
+		text-decoration: none;
+		margin-left: 642px;
+		padding: 2px 5px;
+		cursor: pointer;
+		color: white;
+		background-color: #bdbdbd;
+	}
+	#comment-next{
+		text-decoration: none;
+		padding: 2px 5px;
+		cursor: pointer;
+		color: white;
+		background-color: #bdbdbd;
+	}

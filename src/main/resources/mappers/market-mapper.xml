@@ -18,6 +18,7 @@
 		<result property="img2" column="IMG2"/>
 		<result property="img3" column="IMG3"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="commentCount" column="COMMENT_COUNT"/>
 	</resultMap>
 	<resultMap type="MarketImage" id="marketImageResultMap">
 		<id property="sellNo" column="SELL_NO"/>
@@ -25,40 +26,54 @@
 		<result property="img2" column="IMG2"/>
 		<result property="img3" column="IMG3"/>
 	</resultMap>
+	<resultMap type="MarketComment" id="marketCommentResultMap">
+		<id property="commentNo" column="COMMENT_NO"/>
+		<result property="sellNo" column="SELL_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="writeDate" column="WRITE_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+	</resultMap>
 	
 	<!-- SQL Query -->
 	<!-- select -->
 	<select id="selectAllSell" resultMap="marketSellResultMap">
-		SELECT * FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO
+<!-- 		SELECT * FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO -->
+		SELECT S.*, I.IMG1, COUNT(C.SELL_NO) AS COMMENT_COUNT
+		FROM MARKET_SELL S JOIN MARKET_IMAGE I ON S.SELL_NO = I.SELL_NO LEFT JOIN MARKET_COMMENT C ON S.SELL_NO = C.SELL_NO 
+
 			<!-- 검색 -->
 			<if test="sellArea=='' and sellCondition=='' and search!=null">
-				WHERE SELL_TITLE LIKE '%' || #{search} || '%'
+				WHERE S.SELL_TITLE LIKE '%' || #{search} || '%'
 			</if>
 			<!-- 지역 -->
 			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search==''">
-				WHERE SELL_AREA = #{sellArea}
+				WHERE S.SELL_AREA = #{sellArea}
 			</if>
 			<!-- 판매여부 -->
 			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
-				WHERE SELL_CONDITION = #{sellCondition}
+				WHERE S.SELL_CONDITION = #{sellCondition}
 			</if>
 			<!-- 지역 + 검색 -->
 			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition=='' and search!=null and search!=''">
-				WHERE SELL_AREA = #{sellArea} AND SELL_TITLE LIKE '%' || #{search} || '%'
+				WHERE S.SELL_AREA = #{sellArea} AND S.SELL_TITLE LIKE '%' || #{search} || '%'
 			</if>
 			<!-- 지역 + 판매여부 -->
 			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search==''">
-				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition}
+				WHERE S.SELL_AREA = #{sellArea} AND S.SELL_CONDITION = #{sellCondition}
 			</if>
 			<!-- 판매여부 + 검색 -->
 			<if test="sellArea!=null and sellArea=='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
-				WHERE SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+				WHERE S.SELL_CONDITION = #{sellCondition} AND S.SELL_TITLE LIKE '%' || #{search} || '%'
 			</if>
 			<!-- 지역 + 판매여부 + 검색 -->
 			<if test="sellArea!=null and sellArea!='' and sellCondition!=null and sellCondition!='' and search!=null and search!=''">
-				WHERE SELL_AREA = #{sellArea} AND SELL_CONDITION = #{sellCondition} AND SELL_TITLE LIKE '%' || #{search} || '%'
+				WHERE S.SELL_AREA = #{sellArea} AND S.SELL_CONDITION = #{sellCondition} AND S.SELL_TITLE LIKE '%' || #{search} || '%'
 			</if>
-		ORDER BY WRITE_DATE DESC
+		GROUP BY S.SELL_NO, S.SELL_TITLE, S.SELL_CONTENT, S.SELL_PRICE, S.SELL_AREA, S.PRODUCT_CONDITION,
+		S.MEMBER_ID, S.WRITE_DATE, S.MOD_DATE, S.SELL_CONDITION, S.VIEW_COUNT, S.MEMBER_NICKNAME, I.IMG1
+		ORDER BY S.WRITE_DATE DESC
 	</select>
 	
 	<select id="getTotalCount" resultType="_int">
@@ -101,7 +116,14 @@
 		ON SELL.SELL_NO = IMAGE.SELL_NO WHERE SELL.SELL_NO = #{sellNo}
 	</select>
 	
+	<select id="getCmtTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MARKET_COMMENT WHERE SELL_NO = #{sellNo}
+	</select>
 	
+	<select id="selectAllComment" resultMap="marketCommentResultMap">
+		SELECT C.*, M.MEMBER_NICKNAME FROM MARKET_COMMENT C JOIN MEMBER M ON C.MEMBER_ID = M.MEMBER_ID 
+		WHERE SELL_NO = #{sellNo} ORDER BY WRITE_DATE ASC
+	</select>
 	
 	<!-- insert -->
 	<insert id="insertMarketSell">
@@ -120,6 +142,10 @@
 		VALUES(SEQ_PAYMENTNO.NEXTVAL, #{sellNo}, #{sellTitle}, #{sellerId}, #{buyerId}, #{paymentPrice}, #{deliveryMsg}, DEFAULT)
 	</insert>
 	
+	<insert id="insertComment">
+		INSERT INTO MARKET_COMMENT
+		VALUES(SEQ_MARKETCOMMENTNO.NEXTVAL, #{sellNo}, #{memberId}, #{commentContent}, DEFAULT, DEFAULT)
+	</insert>
 	
 	
 	

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
@@ -112,7 +113,6 @@ public class MarketController {
 								Model model,
 								@RequestParam(value="page", required=false, defaultValue="1") Integer page) { // 게시물 목록 View
 		int totalCount = marketService.getTotalCount(searchInfo);
-		System.out.println(totalCount);
 		PageInfo pi = new PageInfo(page, totalCount);
 		List<MarketSell> sellList = marketService.selectAllSell(searchInfo, pi);
 		if(!sellList.isEmpty()) {
@@ -131,9 +131,16 @@ public class MarketController {
 	 * 마켓 글 상세정보
 	 *===================================================*/
 	@GetMapping("/market/detail")
-	public String marketDetail(@RequestParam(value="sellNo") Integer sellNo, Model model, HttpSession session) {
+	public String marketDetail(@RequestParam(value="sellNo") Integer sellNo, Model model, HttpSession session,
+											@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
 		int result = marketService.updateViewCount(sellNo);
-		if(result>0) { //게시물 존재 => 조회수 증가
+		if(result>0) { //조회수 증가 =>  게시물 존재
+			int totalCount = marketService.getCmtTotalCount(sellNo);
+			PageInfo pi = new PageInfo(page, totalCount);
+			Map<String, Object> commentMap = new HashMap<String, Object>();
+			commentMap.put("sellNo", sellNo);
+			commentMap.put("pi", pi);
+			List<MarketComment> commentList = marketService.selectAllComment(commentMap);
 			MarketSell sell = marketService.selectOneByNo(sellNo);
 			String memberId = sell.getMemberId();
 			Member seller = memService.selectMemberById(memberId);
@@ -142,6 +149,9 @@ public class MarketController {
 				model.addAttribute("sell", sell);
 				model.addAttribute("seller", seller);
 				model.addAttribute("loginMember", loginMember);
+				model.addAttribute("commentList", commentList);
+				model.addAttribute("commentCount", totalCount);
+				model.addAttribute("pi", pi);
 				return "market/marketDetail";
 			}
 			else {
@@ -293,7 +303,7 @@ public class MarketController {
 	public String marketPayment(@RequestBody Map<String, Object> map) {
 		int sellNo = Integer.parseInt(String.valueOf(map.get("sellNo")));
 		String sellerId = ((MarketSell) marketService.selectOneByNo(sellNo)).getMemberId();
-		map.put("sellerId", sellerId); //판매자ID를 여기서 저장하도록 할것. (jsp 수정 귀찮음)
+		map.put("sellerId", sellerId); //판매자ID를 여기서 저장하도록 할것.
 //		String sellTitle = (String) map.get("sellTitle");
 		int paymentPrice = Integer.parseInt(String.valueOf(map.get("paymentPrice")));
 		Map<String, Object> seller = new HashMap<String, Object>();
@@ -314,6 +324,33 @@ public class MarketController {
 				else {
 					return "false";
 				}
+			}
+			else {
+				return "false";
+			}
+		}
+		else {
+			return "false";
+		}
+	}
+	
+	/*===================================================
+	 * 판매글 댓글작성
+	 *===================================================*/
+	@PostMapping("/market/detail/comment")
+	@ResponseBody
+	public String marketComment(@RequestBody Map<String, Object> map) {
+		int sellNo = Double.valueOf(String.valueOf(map.get("sellNo"))).intValue();
+		String memberId = (String) map.get("memberId");
+		String commentContent = (String) map.get("commentContent");
+		if(memberId.length()!=0) {
+			Map<String, Object> comment = new HashMap<String, Object>();
+			comment.put("sellNo", sellNo);
+			comment.put("memberId", memberId);
+			comment.put("commentContent", commentContent);
+			int result = marketService.insertComment(comment);
+			if(result>0) {
+				return "true";
 			}
 			else {
 				return "false";

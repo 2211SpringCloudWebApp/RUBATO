@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
@@ -97,5 +98,29 @@ public class MarketStoreImpl implements MarketStore{
 		if((result1+result2)>1)
 			result = result1+result2;
 		return result;
+	}
+
+	@Override
+	public int insertComment(SqlSession session, Map<String, Object> comment) {
+		int result = session.insert("MarketMapper.insertComment", comment);
+		return result;
+	}
+
+	@Override
+	public int getCmtTotalCount(SqlSession session, int sellNo) {
+		int result = session.selectOne("MarketMapper.getCmtTotalCount", sellNo);
+		return result;
+	}
+
+	@Override
+	public List<MarketComment> selectAllComment(SqlSession session, Map<String, Object> commentMap) {
+		PageInfo pi = (PageInfo) commentMap.get("pi");
+		int sellNo = Double.valueOf(String.valueOf(commentMap.get("sellNo"))).intValue();
+		int limit = pi.getRecordCountPerPage();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage-1)*limit;
+		RowBounds rb = new RowBounds(offset, limit);
+		List<MarketComment> commentList = session.selectList("MarketMapper.selectAllComment", sellNo, rb);
+		return commentList;
 	}
 }

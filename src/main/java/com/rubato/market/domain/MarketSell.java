@@ -18,6 +18,8 @@ public class MarketSell {
 	private String img2;
 	private String img3;
 	private String memberNickname;
+	//
+	private int CommentCount;
 	
 	public MarketSell() {}
 	
@@ -33,6 +35,14 @@ public class MarketSell {
 	}
 
 
+
+	public int getCommentCount() {
+		return CommentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		CommentCount = commentCount;
+	}
 
 	@Override
 	public String toString() {

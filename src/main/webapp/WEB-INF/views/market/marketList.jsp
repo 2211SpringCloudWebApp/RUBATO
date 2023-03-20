@@ -128,7 +128,7 @@
 <%-- 		                <h3>${sell.sellCondition } · ${sell.productCondition }</h3> --%>
 		                <div class="product-area3">
 		                    <h4>판매자: ${sell.memberNickname }</h4>
-		                    <img src="/resources/images/market/comment.png" alt=""><span id="comment">4</span>
+		                    <img src="/resources/images/market/comment.png" alt=""><span id="comment">${sell.commentCount }</span>
 		                    <img src="/resources/images/market/view.png" alt=""><span id="viewCount">${sell.viewCount }</span>
 		                </div>
 		            </div>

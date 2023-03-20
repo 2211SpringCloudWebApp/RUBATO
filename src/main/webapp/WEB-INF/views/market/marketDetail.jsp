@@ -18,6 +18,7 @@
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
     	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	</head>
 	<body>
 		<!-- common header jsp include -->
@@ -118,7 +119,7 @@
             <pre>
 ${sell.sellContent }
             </pre>
-            <span id="viewComment">조회 ${sell.viewCount } · 댓글 10</span>
+            <span id="viewComment">조회 ${sell.viewCount } · 댓글 ${commentCount }</span>
             <c:if test="${seller.memberId ne loginMember.memberId }">
 	            <a href="#" id="report">신고</a>
             </c:if>
@@ -128,16 +129,40 @@ ${sell.sellContent }
             </c:if>
         </div>
         <div id="comment-area">
-            <form action="#" method="POST">
-                <textarea name="commentContent" id="commentContent" cols="30" rows="10" placeholder="부적절한 댓글을 작성할 시 관련 법령에 의거 처벌될 수 있습니다."></textarea>
-                <input type="submit" id="enroll-btn" value="등록하기">
-            </form>
-
-            <div id="comment">
-                <img src="/resources/images/market/user.png" id="userimg" alt="">
-                <span id="nickname">열정의기름붓</span><br>
-                <span id="registerDay">2023-03-15</span>
-                <p>구매신청 했습니다. 제가 꼭 사고 싶어요 저한테 팔아주세요</p>
+            <textarea name="commentContent" id="commentContent" cols="30" rows="10" placeholder="부적절한 댓글을 작성할 시 관련 법령에 의거 처벌될 수 있습니다."></textarea>
+            <button id="enroll-btn" onclick="commentWrite(${sell.sellNo}, '${loginMember.memberId }')">등록하기</button>
+			<c:forEach items="${commentList }" var="comment">
+	            <div id="comment">
+	                <img src="/resources/images/market/user.png" id="userimg" alt="">
+	                <span id="nickname">${comment.memberNickname }</span>
+	                <c:if test="${comment.memberId eq loginMember.memberId }">
+		                <span id="commentModify">수정</span>
+		                <span id="partition"> · </span>
+		                <span id="commentDelete">삭제</span>
+	                </c:if>
+	                <c:if test="${comment.memberId ne loginMember.memberId }">
+		                <span id="commentReport">신고</span>
+	                </c:if>
+	                <br>
+	                <span id="registerDay"><fmt:formatDate value="${comment.writeDate }" pattern="yyyy-MM-dd HH:mm"/></span>
+	                <p>${comment.commentContent }</p>
+	            </div>
+			</c:forEach>
+            <div id="navi">
+           	<!--  [<] 버튼 -->
+            	<c:if test="${pi.currentPage eq 1}">
+	            	<a href="javscript:void(0);" id="comment-prev">＜</a>
+            	</c:if>
+   		        <c:if test="${pi.currentPage gt 1 }">
+   		        	<a href="/market/detail?sellNo=${sell.sellNo }&page=${pi.currentPage-1}" id="comment-prev">＜</a>
+		        </c:if>
+           	<!--  [>] 버튼 -->
+		        <c:if test="${pi.currentPage lt pi.maxPage }">
+			        <a href="/market/detail?sellNo=${sell.sellNo }&page=${pi.currentPage+1 }" id="comment-next">＞</a>		        
+		        </c:if>
+   		        <c:if test="${pi.currentPage eq pi.maxPage }">
+			        <a href="javscript:void(0);" id="comment-next">＞</a>		        
+		        </c:if>
             </div>
         </div>
     </main>

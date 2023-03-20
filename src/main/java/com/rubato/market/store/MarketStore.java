@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
@@ -96,6 +97,29 @@ public interface MarketStore {
 	 * @return int
 	 */
 	public int updateMarketSell(SqlSession session, MarketImage marketImg, MarketSell marketSell);
+
+	/**
+	 * 댓글 작성 Store
+	 * @param session
+	 * @param comment
+	 * @return int
+	 */
+	public int insertComment(SqlSession session, Map<String, Object> comment);
+
+	/**
+	 * 댓글 전체 개수 조회 Store
+	 * @param session, sellNo
+	 * @return int
+	 */
+	public int getCmtTotalCount(SqlSession session, int sellNo);
+
+	/**
+	 * 댓글 목록 출력 Store
+	 * @param session, pi
+	 * @param pi
+	 * @return List<MarketComment>
+	 */
+	public List<MarketComment> selectAllComment(SqlSession session, Map<String, Object> commentMap);
 
 
 

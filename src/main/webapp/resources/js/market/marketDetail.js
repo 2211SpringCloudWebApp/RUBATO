@@ -69,3 +69,27 @@ var deleteCheck = ()=> {
         return false;
     }
 }
+
+
+//댓글
+var commentWrite = (sellNo, memberId)=>{
+	var commentContent = document.querySelector("#commentContent").value;
+	$.ajax({
+		type: 'POST',
+		url: '/market/detail/comment',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			'sellNo': sellNo,
+			'memberId': memberId,
+			'commentContent': commentContent
+		}),
+		success: function(response){
+			if(response==="true"){
+				location.reload();
+			}
+			else{
+				alert("로그인 후 이용할 수 있습니다.");
+			}
+		}
+	});
+}
