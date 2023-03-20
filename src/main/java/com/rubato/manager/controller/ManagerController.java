@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.service.ManagerService;
+import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;

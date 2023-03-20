@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,7 @@
                             <thead>
                                 <tr>
                                     <th>글 번호</th>
+                                    <th>이미지</th>
                                     <th>글 제목</th>
                                     <th>판매 가격</th>
                                     <th>판매 지역</th>
@@ -64,9 +66,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <c:forEach items="${marketList }" var="market">
+                              <c:forEach items="${marketList }" var="market" >
                                 <tr>
                                     <td>${market.sellNo }</td>
+                                    <td><img style="width: 100px; height: 100px;" src="${market.img1 }" alt=""></td>
                                     <td>${market.sellTitle }</td>
                                     <td>${market.sellPrice }</td>
                                     <td>${market.sellArea }</td>
@@ -93,7 +96,7 @@
                         </div>
                         <div id="page">
                         	<tr>
-                        		<td colspan="7">
+                        		<td colspan="8">
                         			<c:if test="${pi.currentPage - 1 != 0}">
                         				<a href="/manager/marketBoard?page=1" class="naviBtn"> ◀◀ </a>
 									</c:if>
@@ -130,7 +133,6 @@
                 </div>
 
             </div>
-        </main>
-        
+
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.manager.store.ManagerStore;
+import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
 import com.rubato.manager.domain.PageInfo;
@@ -184,6 +185,12 @@ public class ManagerStoreLogic implements ManagerStore{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<MarketSell> searchMarketList = session.selectList("ManagerMapper.selectMarketListByKeyword", searchMarket,rowBounds );
 		return searchMarketList;
+	}
+
+	@Override
+	public List<MarketImage> selectImage(PageInfo pi) {
+		List<MarketImage> imageList = session.selectList("ManagerMapper.selectImage");
+		return imageList;
 	}
 
 	

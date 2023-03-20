@@ -10,6 +10,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 
 public interface ManagerService {
@@ -155,6 +156,8 @@ public interface ManagerService {
 	 * @return
 	 */
 	public List<MarketSell> selectMarketListByKeyword(PageInfo pi, SearchMarket searchMarket);
+
+	public List<MarketImage> selectImage(PageInfo pi);
 
 
 
