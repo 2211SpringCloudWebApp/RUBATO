@@ -18,8 +18,8 @@
             <!-- common header jsp include -->
             <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+            <div id="boardImg"></div>
             <div id="boardMain">
-                <h1 style="color: #2FBDB1;">자유게시판</h1>
 
                 <div id="boardList">
                     <!-- 게시판 목록  -->
@@ -39,7 +39,7 @@
                         <li>
                             <c:forEach items="${bList}" var="board" varStatus="i">
                                 <ul>
-                                    <li>${i.count }</li>
+                                    <li>${pi.totalCount - (pi.boardLimit * (pi.currentPage - 1)) - i.index}</li>
                                     <li>${board.boardCategory }</li>
                                     <li class="left"><a href="/board/detail?boardNo=${board.boardNo }"
                                             id="boardTitlecss">${board.boardTitle }</a></li>
@@ -57,9 +57,9 @@
                             <ul>
                                 <li id="naviLi">
                                     <div id="naviDIV">
-                                   		 <c:if test="${pi.currentPage ne 1 }">
-                                        <a href="/board/list?page=${pi.currentPage-1 }" class="naviBtn">◀</a>
-                                     	 </c:if>
+                                        <c:if test="${pi.currentPage ne 1 }">
+                                            <a href="/board/list?page=${pi.currentPage-1 }" class="naviBtn">≪</a>
+                                        </c:if>
                                         <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
                                             <c:url var="pageUrl" value="/board/list">
                                                 <c:param name="page" value="${p }"></c:param>
@@ -68,7 +68,7 @@
                                                 class="naviBtn ${p == currentPage ? 'active' : ''}">${p}</a>
                                         </c:forEach>
                                         <c:if test="${pi.maxPage ne pi.currentPage }">
-                                        <a href="/board/list?page=${pi.currentPage+1 }" class="naviBtn">▶</a>
+                                            <a href="/board/list?page=${pi.currentPage+1 }" class="naviBtn">≫</a>
                                         </c:if>
                                     </div>
                                     <!--글쓰기-->
@@ -83,35 +83,37 @@
                     </ul>
 
                     <!-- 검색 폼 영역 -->
-                  <ul>
-                    <li id='liSearchOption'>
-                        <ul>
-                            <li>
-                                <div id="searchDIV">
-                                    <form action="/board/search" method="get">
-                                        <select id='selSearchOption' name="searchCondition">
-                                            <option value='all' <c:if test="${search.searchCondition == 'all' }">
-                                                selected
-                                                </c:if>>제목+내용</option>
-                                            <option value='title' <c:if test="${search.searchCondition == 'title' }">
-                                                selected
-                                                </c:if>>제목</option>
-                                            <option value='content' <c:if
-                                                test="${search.searchCondition == 'content' }">selected
-                                                </c:if>>내용</option>
-                                            <option value='writer' <c:if test="${search.searchCondition == 'writer' }">
-                                                selected
-                                                </c:if>>작성자</option>
-                                        </select>
-                                        <input type="text" id='txtKeyWord' name="searchValue"
-                                            value="${search.searchValue }" placeholder="검색어를 입력하세요." />
-                                        <input type='submit' value='검색'>
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                  </ul>
+                    <ul>
+                        <li id='liSearchOption'>
+                            <ul>
+                                <li>
+                                    <div id="searchDIV">
+                                        <form action="/board/search" method="get">
+                                            <select id='selSearchOption' name="searchCondition">
+                                                <option value='all' <c:if test="${search.searchCondition == 'all' }">
+                                                    selected
+                                                    </c:if>>제목+내용</option>
+                                                <option value='title' <c:if
+                                                    test="${search.searchCondition == 'title' }">
+                                                    selected
+                                                    </c:if>>제목</option>
+                                                <option value='content' <c:if
+                                                    test="${search.searchCondition == 'content' }">selected
+                                                    </c:if>>내용</option>
+                                                <option value='writer' <c:if
+                                                    test="${search.searchCondition == 'writer' }">
+                                                    selected
+                                                    </c:if>>작성자</option>
+                                            </select>
+                                            <input type="text" id='txtKeyWord' name="searchValue"
+                                                value="${search.searchValue }" placeholder="검색어를 입력하세요." />
+                                            <input type='submit' value='검색'>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <script>

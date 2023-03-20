@@ -66,6 +66,11 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 
+	@Override
+	public int updateViewCount(int boardNo) {
+		return bStore.updateViewCount(session, boardNo);
+	}
+
 
 
 }

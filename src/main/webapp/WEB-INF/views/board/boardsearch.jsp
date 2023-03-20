@@ -19,7 +19,7 @@
             <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
             <div id="boardMain">
-                <h1 style="color: #2FBDB1;">자유게시판</h1>
+                <h1>자유게시판</h1>
 
                 <div id="boardList">
                     <!-- 게시판 목록  -->
@@ -46,7 +46,9 @@
                                     <li class="boardLi">${board.boardDate }</li>
                                     <li>${board.memberId }</li>
                                     <li>${board.viewCount }</li>
-                                    <li><div class="listLine"></div></li>
+                                    <li>
+                                        <div class="listLine"></div>
+                                    </li>
                                 </ul>
                             </c:forEach>
                         </li>
@@ -55,18 +57,42 @@
                             <ul>
                                 <li id="naviLi">
                                     <div id="naviDIV">
-                                   		 <c:if test="${pi.currentPage ne 1 }">
-                                        <a href="/board/list?page=${pi.currentPage-1 }" class="naviBtn">◀</a>
-                                     	 </c:if>
-                                        <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-                                            <c:url var="pageUrl" value="/board/list">
-                                                <c:param name="page" value="${p }"></c:param>
+                                        <c:if test="${pi.currentPage ne 1}">
+                                            <c:url var="pageUrl" value="/board/search">
+                                                <c:param name="page" value="${p}" />
+                                                <c:param name="searchCondition" value="${search.searchCondition }" />
+                                                <c:param name="searchValue" value="${search.searchValue}" />
+                                                <%-- <c:if test="${not empty search}"> --%>
+                                                    <%-- <c:forEach items="${search}" var="param"> --%>
+                                                        <%-- <c:param name="${param.key}" value="${param.value}" /> --%>
+                                                        <%-- </c:forEach> --%>
+                                                            <%-- </c:if> --%>
                                             </c:url>
                                             <a href="${pageUrl}"
-                                                class="naviBtn ${p == currentPage ? 'active' : ''}">${p}</a>
+                                                class="naviBtn ${p == pi.currentPage ? 'active' : ''}">${p}</a>
+                                        </c:if>
+                                        <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
+                                            <c:url var="pageUrl" value="/board/search">
+                                                <c:param name="page" value="${p}" />
+                                                <c:param name="searchCondition" value="${search.searchCondition }" />
+                                                <c:param name="searchValue" value="${search.searchValue}" />
+                                                <%-- <c:forEach items="${search}" var="param"> --%>
+                                                    <%-- <c:param name="${param.key}" value="${param.value}" /> --%>
+                                                    <%-- </c:forEach> --%>
+                                            </c:url>
+                                            <a href="${pageUrl}"
+                                                class="naviBtn ${p == pi.currentPage ? 'active' : ''}">${p}</a>
                                         </c:forEach>
-                                        <c:if test="${pi.maxPage ne pi.currentPage }">
-                                        <a href="/board/list?page=${pi.currentPage+1 }" class="naviBtn">▶</a>
+                                        <c:if test="${pi.maxPage ne pi.currentPage}">
+                                            <c:url var="nextUrl" value="/board/search">
+                                                <c:param name="page" value="${pi.currentPage+1}" />
+                                                <c:param name="searchCondition" value="${search.searchCondition }" />
+                                                <c:param name="searchValue" value="${search.searchValue}" />
+                                                <%-- <c:forEach items="${search}" var="param"> --%>
+                                                    <%-- <c:param name="${param.key}" value="${param.value}" /> --%>
+                                                    <%-- </c:forEach> --%>
+                                            </c:url>
+                                            <a href="${nextUrl}" class="naviBtn">≫</a>
                                         </c:if>
                                     </div>
                                 </li>
@@ -80,14 +106,18 @@
                                 <div id="searchDIV">
                                     <form action="/board/search" method="get">
                                         <select id='selSearchOption' name="searchCondition">
-                                            <option value='all' <c:if test="${search.searchCondition == 'all' }">selected
+                                            <option value='all' <c:if test="${search.searchCondition == 'all' }">
+                                                selected
                                                 </c:if>>제목+내용</option>
-                                            <option value='title' <c:if test="${search.searchCondition == 'title' }">selected
+                                            <option value='title' <c:if test="${search.searchCondition == 'title' }">
+                                                selected
                                                 </c:if>>제목</option>
-                                            <option value='content' <c:if test="${search.searchCondition == 'content' }">selected
+                                            <option value='content' <c:if
+                                                test="${search.searchCondition == 'content' }">selected
                                                 </c:if>>내용</option>
-                                            <option value='writer' <c:if test="${search.searchCondition == 'writer' }">selected
-                                                </c:if>>작성자</option> 
+                                            <option value='writer' <c:if test="${search.searchCondition == 'writer' }">
+                                                selected
+                                                </c:if>>작성자</option>
                                         </select>
                                         <input type="text" id='txtKeyWord' name="searchValue"
                                             value="${search.searchValue }" placeholder="검색어를 입력하세요." />

@@ -11,64 +11,56 @@
 			<!-- common footer css & js -->
 			<link rel="stylesheet" href="/resources/css/common/footer.css">
 			<!-- boarddetail css & js -->
-			<link rel="stylesheet" type="text/css" href="/resources/css/board/boarddetail.css">
+			<link rel="stylesheet" type="text/css" href="/resources/css/board/boardmodify.css">
 		</head>
 
 		<body>
 			<!-- common header jsp include -->
 			<jsp:include page="/WEB-INF/views/common/header.jsp" />
 			<div id="contentContainer">
-				<form action="/board/modify" method="get">
-					<div id="contentDetail">
-						<h1 style="color: #2FBDB1;">자유게시판</h1>
-						<div class="detailLine"></div>
-						<div id="contentTop">
-							<div id="contentCategory">
-								<select id="selwriteOption" name="boardCategory">
-									<option value='G' <c:if test="${board.boardCategory eq 'G' }">selected</c:if>>고민
-									</option>
-									<option value='L' <c:if test="${board.boardCategory eq 'L' }">selected</c:if>>레슨후기
-									</option>
-									<option value='I' <c:if test="${board.boardCategory eq 'I' }">selected</c:if>>일상공유
-									</option>
-									<option value='K' <c:if test="${board.boardCategory eq 'K' }">selected</c:if>>기타
-									</option>
-								</select>
+					<form action="/board/modify" method="post">
+						<input type="hidden" name="boardNo" value="${boardNo }" />
+						<div id="contentDetail">
+							<h1>자유게시판</h1>
+							<div class="detailLine"></div>
+							<div id="contentTop">
+								<div id="contentCategory">
+									<select id="selwriteOption" name="boardCategory">
+										<option value='고민' <c:if test="${board.boardCategory eq 'G' }">selected</c:if>>고민</option>
+										<option value='레슨후기' <c:if test="${board.boardCategory eq 'L' }">selected</c:if>>레슨후기</option>
+										<option value='일상공유' <c:if test="${board.boardCategory eq 'I' }">selected</c:if>>일상공유</option>
+										<option value='기타' <c:if test="${board.boardCategory eq 'K' }">selected</c:if>>기타</option>
+									</select>
+								</div>
+								<div id="contentSubject">
+									<input type="text" value="${board.boardTitle }" name="boardTitle">
+								</div>
+								<div id="contentWriter">${board.memberId }</div>
+								<div id="contentDate"><input type="text" name="boardDate">${board.boardDate }</div>
+								<div id="contentCount">조회수 : ${board.viewCount }</div>
+								<div id="contentComment">댓글 : ${boardComment.commentNo }</div>
 							</div>
-							<div id="contentSubject">
-								<input type="text" value="${board.boardTitle }" name="boardTitle">
+							<div class="detailLine"></div>
+							<div id="contentText">
+								<textarea rows="30" cols="100" name="boardContent">${board.boardContent }</textarea>
 							</div>
-							<div id="contentWriter" name="memberId">${board.memberId }</div>
-							<div id="contentDate" name="boardDate">${board.boardDate }</div>
-							<div id="contentCount" name="viewCount">조회수 : ${board.viewCount }</div>
-							<div id="contentComment" name="commentNo">댓글 : ${boardComment.commentNo }</div>
+							<div class="detailLine"></div>
+							<div id="detailBtn">
+								<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> 
+								<input type="submit" value="등록" id="boardModify">
+								<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
+							</div>
 						</div>
-						<div class="detailLine"></div>
-						<div id="contentText">
-							<textarea rows="30" cols="100" name="boardContent">${board.boardContent }</textarea>
-						</div>
-						<div class="detailLine"></div>
-						<div id="detailBtn">
-							<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> 
-							<input type="button" value="등록" id="boardModify"
-								onclick="location.href='/board/detail?boardNo=${board.boardNo}'">
-							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
-							<input type="button" value="신고" id="boardReport">
-						</div>
-					</div>
-				</form>
+					</form>
 				<!-- 작성된 댓글 목록 -->
-				<p>0개의 댓글</p>
+				<p>${bcList.size()}개의 댓글</p>
 				<div class="detailLine"></div>
 				<div id="commentDiv">
-
-					<div id="commentWriter">작성자</div>
-					<div id="commentDate">작성일</div>
-
-					<div id="commentWD">
-						<input type="text">
-					</div>
-
+					<c:forEach var="bc" items="${bcList}">
+						<div id="commentWriter">작성자 ${bc.memberId }</div>
+						<div id="commentDate">작성일 ${bc.commentDate}</div>
+						<div id="commentWD">${bc.commentContent }</div>
+					</c:forEach>
 				</div>
 				<div class="detailLine"></div>
 				<!-- 댓글 작성 -->
@@ -124,9 +116,6 @@
 
 // 					return cookieValue === 'true';
 				}
-
 			</script>
-
 		</body>
-
 		</html>

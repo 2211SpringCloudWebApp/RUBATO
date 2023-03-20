@@ -4,23 +4,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-#boardMai{
-    height: 100%;
-}
 
 #contentContainer{
     margin: 0 auto;
     font-family: 'Noto Sans KR', sans-serif;
     width: 1000px;
-    margin-top: 100px;
-}
-#commentContainer {
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll;
-}
-#commentContainer::-webkit-scrollbar {
-    display: none; /* for Chrome, Safari, and Opera */
 }
 
 #contentDetail h1{
@@ -33,11 +21,27 @@
     margin-bottom: 20px;
 }
 
+
 .detailLine{
     width: 1000px;
     border-top: solid 0.5px #ccc;
     margin: 0 auto;
     margin-bottom: 10px;
+}
+
+#contentCategory select{
+    border: none;
+    outline: none;
+}
+
+#contentSubject input{
+    border: none;
+    width: 400px;
+    height: 30px;
+}
+
+#contentText textarea{
+    border: none;
 }
 
 #contentTop{
@@ -76,8 +80,8 @@
 }
 
 #contentText{
-    width: 800px;
-    height: 500px;
+    width: 1000px;
+    height: 600px;
     margin-bottom: 50px;
     margin-top: 30px;
     display: block;
@@ -88,20 +92,25 @@
 	border: none;
 }
 
+#commentDiv{
+    height: 120px;
+}
+
 #boardList{
     margin-left: 10px;
     width: 50px;
     height: 30px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #2FBDB1;
+    background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #boardList:hover{
     background-color: #2FBDB1;
     color: white;
 }
-
 
 #boardModify{
     margin-left: 10px;
@@ -111,6 +120,7 @@
     border: 1px solid #ccc;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 
@@ -124,45 +134,31 @@
     width: 50px;
     height: 30px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid grey;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 #boardDelete:hover{
-    background-color: grey;
+    background-color: #2FBDB1;
     color: white;
 }
 
-
 #commentWriter, #commentDate{
-    --float: left;
-    width: 200px;
+    float: left;
+    width: 60px;
+    margin-right: 10px;
+    margin-top: 10px;
     text-align: center;
-    margin-bottom: 10px;
 }
 
 #commentDiv{
-    width : 1000px;
     height: 100px;
-    margin : 0 auto;
-}
-
-#commentWriter{
-    font-size: 0.9rem;
-}
-
-#commentDate {
-    margin-top: 5px;
-    font-size: 0.9rem;
-    color: grey;
 }
 
 #commentWD{
     clear: both;
-    margin-top: 20px;
-    white-space: pre-wrap;
-    flex-grow: 1;
 }
 
 #commentWD input[type=text]{
@@ -170,55 +166,35 @@
     height: 50px;
     border: none;
     margin-bottom: 40px;
-    margin-top: 20px;
 
-}
-#commentSub {
-    display : flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #commentSub input[type=text]{
     width: 890px;
     height: 50px;
-    margin-top: 80px;
+    margin-top: 20px;
     margin-bottom: 50px;
     border: 1px solid #ccc;
     margin-right: 10px;
-    --float: left;
-    outline: none;
+    float: left;
+    border-radius: 5px;
 }
 
 #commentSub input[type=submit]{
     width: 100px;
     height: 50px;
     display: inline-block;
-    border: 1px solid #ccc;
-    margin-top: 80px;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+    margin-top: 20px;
     cursor: pointer;
-    --float: left;
+    border-radius: 5px;
 }
 
 #commentSub input[type=submit]:hover{
     background-color: #2FBDB1;
     color: white;
 }
-
-#commentDeleteBtn{
-    width: 30px;
-    height: 20px;
-    display: flex;
-    border: 1px solid #ccc;
-    background-color: #ccc;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-#commentDeleteBtn:hover{
-    background-color: grey;
-}
-
 
 
 

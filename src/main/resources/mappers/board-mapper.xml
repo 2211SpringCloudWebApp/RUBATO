@@ -25,13 +25,18 @@
 		UPDATE BOARD SET BOARD_TITLE = #{boardTitle}, BOARD_CATEGORY = #{boardCategory},  BOARD_CONTENT= #{boardContent} WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 게시글 조회수 -->
+	<update id="updateViewCount">
+		UPDATE BOARD SET VIEW_COUNT = VIEW_COUNT +1 WHERE BOARD_NO = #{boardNo}
+	</update>	
 	<!-- 게시판 삭제 -->
 	<delete id="deleteBoard">
 		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
 	</delete>
+	
 	<!-- 게시판 목록조회 -->
 	<select id="selectBoardList" resultMap="BoardResultMap">
-		SELECT * FROM BOARD ORDER BY BOARD_NO DESC
+		SELECT * FROM BOARD ORDER BY BOARD_DATE DESC
 	</select>
 	
 	<!-- 게시판 상세조회 -->

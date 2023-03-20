@@ -17,13 +17,19 @@ import com.rubato.board.domain.Board;
 import com.rubato.board.domain.BoardComment;
 import com.rubato.board.domain.PageInfo;
 import com.rubato.board.domain.Search;
+import com.rubato.board.service.BoardCommentService;
 import com.rubato.board.service.BoardService;
 import com.rubato.member.domain.Member;
+import com.rubato.member.service.MemberService;
 
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private BoardCommentService bcService;
+	@Autowired
+	private MemberService memService;
 
 	// 게시판 작성 화면
 	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
@@ -59,11 +65,11 @@ public class BoardController {
 
 	// 게시판 수정 view
 	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)
-	public String boardModifyView(@RequestParam("boardNo") Integer boardNo, 
-								  Model model, HttpSession session) {
+	public String boardModifyView(@RequestParam("boardNo") Integer boardNo, Model model, HttpSession session) {
 		try {
 			Board board = bService.selectOneByNo(boardNo);
-			if(board != null) {
+			if (board != null) {
+				model.addAttribute("boardNo", boardNo);
 				model.addAttribute("board", board);
 				return "board/boardmodify";
 			} else {
@@ -79,11 +85,11 @@ public class BoardController {
 
 	// 게시판 수정 logic
 	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
-	public String boardModify(@ModelAttribute Board board, Model model) {
+	public String boardModify(@RequestParam("boardNo") Integer boardNo, @ModelAttribute Board board, Model model) {
 		try {
 			int result = bService.updateBoard(board);
 			if (result > 0) {
-				return "redirect:/board/detail?boarNo="+board.getBoardNo();
+				return "redirect:/board/detail?boardNo=" + board.getBoardNo(); // boardNo 오타 수정
 			} else {
 				model.addAttribute("msg", "게시판 수정이 완료되지 않았습니다.");
 				return "common/error";
@@ -120,6 +126,12 @@ public class BoardController {
 		int totalCount = bService.getListCount();
 		PageInfo pi = this.getPageInfo(page, totalCount);
 		List<Board> bList = bService.selectBoardList(pi);
+
+		// 글 번호 매기기
+//	    int count = totalCount - (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+//	    for (Board board : bList) {
+//	        board.setBoardNo(count--);
+//	    }
 		model.addAttribute("pi", pi);
 		model.addAttribute("bList", bList);
 		return "board/boardlist";
@@ -134,11 +146,16 @@ public class BoardController {
 		int startNavi; // pageNavi 시작값
 		int endNavi; // pageNavi 끝값
 
-		maxPage = (int)((double) totalCount/boardLimit+0.9);
-		startNavi = (((int)((double) currentPage/naviLimit+0.9))-1)*naviLimit+1;
-		endNavi = startNavi+naviLimit-1;
+		maxPage = (int) ((double) totalCount / boardLimit + 0.9);
+		startNavi = (((int) ((double) currentPage / naviLimit + 0.9)) - 1) * naviLimit + 1;
+		endNavi = startNavi + naviLimit - 1;
 		if (endNavi > maxPage) {
 			endNavi = maxPage;
+		}
+		int startBoard = (currentPage - 1) * boardLimit + 1;
+		int endBoard = startBoard + boardLimit - 1;
+		if (endBoard > totalCount) {
+			endBoard = totalCount;
 		}
 		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
 		return pi;
@@ -146,16 +163,34 @@ public class BoardController {
 
 	// 게시판 상세화면
 	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
-	public String boardDetailView(@RequestParam("boardNo") int boardNo, Model model) {
-		try {
-			Board board = bService.selectOneByNo(boardNo);
-			model.addAttribute("board", board);
-			return "board/boarddetail";
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", e.getMessage());
-			return "common/error";
-		}
+	public String boardDetailView(@RequestParam("boardNo") int boardNo, Model model, HttpSession session) {
+	    try {
+	        int result = bService.updateViewCount(boardNo);
+	        if (result > 0) {
+	            Board board = bService.selectOneByNo(boardNo);
+	            List<BoardComment> comments = bcService.selectCommentList(boardNo);
+	            String memberId = board.getMemberId();
+	            Member writer = memService.selectMemberById(memberId);
+	            Member loginMember = (Member)session.getAttribute("loginUser");
+	            if (memberId != null && !memberId.equals("")) {
+	                model.addAttribute("board", board);
+	                model.addAttribute("writer", writer);
+	                model.addAttribute("comments", comments);
+	                model.addAttribute("loginMember", loginMember);
+	                return "board/boarddetail";
+	            } else {
+	                model.addAttribute("msg", "정보를 가져올 수 없습니다.");
+	                return "common/error";
+	            }
+	        } else {
+	            model.addAttribute("msg", "게시물이 존재하지 않습니다.");
+	            return "common/error";
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("msg", e.getMessage());
+	        return "common/error";
+	    }
 	}
 
 	// 게시판 검색기능

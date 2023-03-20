@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,13 +76,15 @@ public class BoardCommentController {
 	}
 
 	// 댓글 삭제
-	@DeleteMapping("/boardComment/{commentNo}")
-	public String deleteComment(@PathVariable("commentNo") int commentNo, Model model) {
+	@GetMapping("/boardComment/remove/{refBoardNo}/{commentNo}")
+	public String deleteComment(
+			@PathVariable("commentNo") int commentNo
+			, @PathVariable("refBoardNo") int refBoardNo
+			, Model model) {
 		try {
 			int result = bcService.deleteComment(commentNo);
 			if (result > 0) {
-				bcService.deleteComment(commentNo);
-				return "redirect:/board/detail";
+				return "redirect:/board/detail?boardNo="+refBoardNo;
 			} else {
 				model.addAttribute("msg", "댓글이 삭제 되지 않았습니다.");
 				return "common/error";

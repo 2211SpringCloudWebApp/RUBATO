@@ -13,6 +13,15 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+#boardImg{
+    width: 100%;
+    height: 320px;
+    background-image: url(/resources/images/board/boardimg.png);
+    background-size: 100% 100%;
+    margin-bottom: 50px;
+    margin-top: 70px;
+}
+
 #boardMain h1{
     margin-top: 50px;
     margin-bottom: 30px;
@@ -65,7 +74,8 @@
 }
 
 #ulTable > li:first-child > ul > li {
-    background-color:#2FBDB1;
+    background: #2FBDB1;
+    border-bottom: 1px solid #2FBDB1;
     font-weight:bold;
     text-align:center;
 }
@@ -79,7 +89,6 @@
 #ulTable > li > ul > li { 
     float:left;
     font-size:10pt;
-    --border-bottom:1px solid #ccc;
     vertical-align:baseline;
 }    
 
@@ -98,9 +107,6 @@
     width: 1000px;
     display: flex;
     justify-content: center;
-    --margin-bottom: 50px;
-    --position: absolute;
-    --margin-left: 230px;
 }
 
 #divPaging {
@@ -116,7 +122,6 @@
     width: 30px;
     height: 30px;
     margin-right: 5px;
-    border-radius: 5px;
 }
 
 .naviBtn:hover{
@@ -126,7 +131,7 @@
 
 #divPaging a {
     display: inline-block;
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     font-size: 12px;
     margin-left: 1px;
     padding: 1px 10px;
@@ -159,16 +164,15 @@
     display: flex;
     justify-content: flex-end;
     margin-top: -50px;
-  }
+}
 
 #listWrite input[type=button] {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 60px;
     height: 30px;
     background-color: white;
     cursor: pointer;
     vertical-align: middle;
-    border-radius: 5px;
 }
 
 #listWrite input[type=button]:hover{
@@ -177,13 +181,12 @@
 }
 
 #liSearchOption input[type=submit] {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 40px;
     height: 30px;
     background-color: white;
     cursor: pointer;
     vertical-align: middle;
-    border-radius: 5px;
 }
 
 #liSearchOption input[type=submit]:hover{
@@ -192,18 +195,16 @@
 }
 
 #selSearchOption {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 100px;
     height: 30px;
-    border-radius: 5px;
 }
 
 #liSearchOption input[id=txtKeyWord]{
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 150px;
     height: 30px;
     color: #2FBDB1;
-    border-radius: 5px;
 }
 
 #searchDIV{

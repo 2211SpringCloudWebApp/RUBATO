@@ -116,7 +116,6 @@
     width: 30px;
     height: 30px;
     margin-right: 5px;
-    border-radius: 5px;
 }
 
 .naviBtn:hover{
@@ -126,11 +125,10 @@
 
 #divPaging a {
     display: inline-block;
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     font-size: 12px;
     margin-left: 1px;
     padding: 1px 10px;
-    --margin-top: 30px;
     text-align: center;
     cursor: pointer;
     line-height: 25px;
@@ -156,13 +154,12 @@
 #liSearchOption:focus { outline:none; } /*검색창 테두리 생기지 않게 하기*/
 
 #naviDIV input[type=button] {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 60px;
     height: 30px;
     background-color: white;
     cursor: pointer;
     vertical-align: middle;
-    border-radius: 5px;
     margin-left: 400px;
 }
 
@@ -172,13 +169,12 @@
 }
 
 #liSearchOption input[type=submit] {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 40px;
     height: 30px;
     background-color: white;
     cursor: pointer;
     vertical-align: middle;
-    border-radius: 5px;
 }
 
 #liSearchOption input[type=submit]:hover{
@@ -187,18 +183,16 @@
 }
 
 #selSearchOption {
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 100px;
     height: 30px;
-    border-radius: 5px;
 }
 
 #liSearchOption input[id=txtKeyWord]{
-    border: 1px solid #2FBDB1;
+    border: 1px solid #ccc;
     width: 150px;
     height: 30px;
     color: #2FBDB1;
-    border-radius: 5px;
 }
 
 #searchDIV{
