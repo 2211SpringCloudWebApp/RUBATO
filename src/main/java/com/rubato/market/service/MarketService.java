@@ -110,6 +110,20 @@ public interface MarketService {
 	 */
 	public List<MarketComment> selectAllComment(Map<String, Object> commentMap);
 
+	/**
+	 * 댓글 삭제 Service
+	 * @param comment
+	 * @return int
+	 */
+	public int deleteComment(Map<String, Object> comment);
+
+	/**
+	 * 댓글 수정 Service
+	 * @param comment
+	 * @return int
+	 */
+	public int updateComment(Map<String, Object> comment);
+
 
 
 }

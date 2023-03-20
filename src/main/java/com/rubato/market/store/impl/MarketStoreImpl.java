@@ -123,4 +123,16 @@ public class MarketStoreImpl implements MarketStore{
 		List<MarketComment> commentList = session.selectList("MarketMapper.selectAllComment", sellNo, rb);
 		return commentList;
 	}
+
+	@Override
+	public int deleteComment(SqlSession session, Map<String, Object> comment) {
+		int result = session.delete("MarketMapper.deleteComment", comment);
+		return result;
+	}
+
+	@Override
+	public int updateComment(SqlSession session, Map<String, Object> comment) {
+		int result = session.update("MarketMapper.updateComment", comment);
+		return result;
+	}
 }

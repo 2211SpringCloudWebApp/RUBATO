@@ -335,15 +335,16 @@ public class MarketController {
 	}
 	
 	/*===================================================
-	 * 판매글 댓글작성
+	 * 판매글 댓글 관련
 	 *===================================================*/
+	// 댓글 작성
 	@PostMapping("/market/detail/comment")
 	@ResponseBody
-	public String marketComment(@RequestBody Map<String, Object> map) {
-		int sellNo = Double.valueOf(String.valueOf(map.get("sellNo"))).intValue();
-		String memberId = (String) map.get("memberId");
-		String commentContent = (String) map.get("commentContent");
-		if(memberId.length()!=0) {
+	public String marketComment(@RequestBody Map<String, Object> map, HttpSession session) {
+		if(session.getAttribute("loginUser") != null) {
+			int sellNo = Double.valueOf(String.valueOf(map.get("sellNo"))).intValue();
+			String commentContent = (String) map.get("commentContent");
+			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
 			Map<String, Object> comment = new HashMap<String, Object>();
 			comment.put("sellNo", sellNo);
 			comment.put("memberId", memberId);
@@ -360,5 +361,55 @@ public class MarketController {
 			return "false";
 		}
 	}
+	
+	// 댓글 삭제
+	@PostMapping("/market/detail/comment/delete")
+	@ResponseBody
+	public String marketCommentDelete(@RequestBody Map<String, Object> map, HttpSession session) {
+		if(session.getAttribute("loginUser") != null) {
+			int sellNo = Double.valueOf(String.valueOf(map.get("sellNo"))).intValue();
+			int commentNo = Double.valueOf(String.valueOf(map.get("commentNo"))).intValue();
+			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			Map<String, Object> comment = new HashMap<String, Object>();
+			comment.put("sellNo", sellNo);
+			comment.put("commentNo", commentNo);
+			comment.put("memberId", memberId);
+			int result = marketService.deleteComment(comment);
+			if(result>0) {
+				return "true";
+			}
+			else {
+				return "false";
+			}
+		}
+		else {
+			return "false";
+		}
+	}
 
+	// 댓글 수정
+	@PostMapping("/market/detail/comment/modify")
+	@ResponseBody
+	public String marketCommentModify(@RequestBody Map<String, Object> map, HttpSession session) {
+		if(session.getAttribute("loginUser") != null) {
+			int commentNo = Double.valueOf(String.valueOf(map.get("commentNo"))).intValue();
+			String commentContent = (String) map.get("commentContent");
+			String memberId = ((Member) session.getAttribute("loginUser")).getMemberId();
+			Map<String, Object> comment = new HashMap<String, Object>();
+			comment.put("commentNo", commentNo);
+			comment.put("commentContent", commentContent);
+			comment.put("memberId", memberId);
+			int result = marketService.updateComment(comment);
+			if(result>0) {
+				return "true";
+			}
+			else {
+				return "false";
+			}
+		}
+		else {
+			return "false";
+		}
+	}
+	
 }

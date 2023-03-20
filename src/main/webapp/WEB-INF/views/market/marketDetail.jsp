@@ -130,22 +130,25 @@ ${sell.sellContent }
         </div>
         <div id="comment-area">
             <textarea name="commentContent" id="commentContent" cols="30" rows="10" placeholder="부적절한 댓글을 작성할 시 관련 법령에 의거 처벌될 수 있습니다."></textarea>
-            <button id="enroll-btn" onclick="commentWrite(${sell.sellNo}, '${loginMember.memberId }')">등록하기</button>
-			<c:forEach items="${commentList }" var="comment">
+            <button id="enroll-btn" onclick="commentWrite(${sell.sellNo})">등록하기</button>
+			<c:forEach items="${commentList }" var="comment" varStatus="status">
 	            <div id="comment">
 	                <img src="/resources/images/market/user.png" id="userimg" alt="">
 	                <span id="nickname">${comment.memberNickname }</span>
+	                <c:if test="${sell.memberId eq comment.memberId }">
+		                <span id="writerMark">작성자</span>
+	                </c:if>
 	                <c:if test="${comment.memberId eq loginMember.memberId }">
-		                <span id="commentModify">수정</span>
+		                <span id="commentModify" onclick="commentModify(${status.count}, '${comment.commentContent }', ${comment.commentNo })">수정</span>
 		                <span id="partition"> · </span>
-		                <span id="commentDelete">삭제</span>
+		                <span id="commentDelete" onclick="commentDelete(${sell.sellNo}, ${comment.commentNo })">삭제</span>
 	                </c:if>
 	                <c:if test="${comment.memberId ne loginMember.memberId }">
 		                <span id="commentReport">신고</span>
 	                </c:if>
 	                <br>
 	                <span id="registerDay"><fmt:formatDate value="${comment.writeDate }" pattern="yyyy-MM-dd HH:mm"/></span>
-	                <p>${comment.commentContent }</p>
+	                <p id="ptag${status.count }">${comment.commentContent }</p>
 	            </div>
 			</c:forEach>
             <div id="navi">

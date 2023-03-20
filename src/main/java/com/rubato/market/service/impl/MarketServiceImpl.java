@@ -108,4 +108,16 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 
+	@Override
+	public int deleteComment(Map<String, Object> comment) {
+		return marketStore.deleteComment(session, comment);
+	}
+
+
+	@Override
+	public int updateComment(Map<String, Object> comment) {
+		return marketStore.updateComment(session, comment);
+	}
+
+
 }

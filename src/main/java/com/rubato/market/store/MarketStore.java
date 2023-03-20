@@ -121,6 +121,22 @@ public interface MarketStore {
 	 */
 	public List<MarketComment> selectAllComment(SqlSession session, Map<String, Object> commentMap);
 
+	/**
+	 * 댓글 삭제 Store
+	 * @param session
+	 * @param comment
+	 * @return int
+	 */
+	public int deleteComment(SqlSession session, Map<String, Object> comment);
+
+	/**
+	 * 댓글 수정 Store
+	 * @param session
+	 * @param comment
+	 * @return int
+	 */
+	public int updateComment(SqlSession session, Map<String, Object> comment);
+
 
 
 }

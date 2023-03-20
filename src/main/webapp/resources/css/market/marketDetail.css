@@ -130,7 +130,7 @@ main{
     }
     #modify{
         color: #aaa8a8;
-        margin-left: 510px;
+        margin-left: 500px;
         cursor: pointer;
     }
     #partition{
@@ -170,6 +170,7 @@ textarea{
         border: none;
         background-color: white;
         margin-left: 630px;
+        margin-bottom: 10px;
         color: #7e7d7d;
         font-weight: bolder;
         font-size: 95%;
@@ -207,4 +208,11 @@ textarea{
 		cursor: pointer;
 		color: white;
 		background-color: #bdbdbd;
+	}
+	#writerMark{
+		font-size: 80%;
+		border: 1px solid #4a83ff;
+		border-radius: 20px;
+		padding: 0px 3px;
+		color: #4a83ff;
 	}
