@@ -19,6 +19,7 @@ import com.rubato.manager.service.ManagerService;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
+import com.rubato.report.domain.Report;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
@@ -370,6 +371,38 @@ public class ManagerController {
 		}
 	}
 	
+	/*===================================================
+	 * 게시글 관리 기능 관련 - 신고 게시판
+	 *===================================================*/
+	
+	@RequestMapping(value = "/manager/reportBoard", method = RequestMethod.GET)
+	public String managerReportLogic(		// 신고 게시판 관리 리스트
+			HttpSession session
+			, HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			,Model model
+			) {
+		session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getReportListCount();
+			pi = this.getPageInfo(page, totalCount);
+			if(session.getAttribute("loginUser")!= null) {
+				List<Report> reportList = managerService.selectReportBoard(pi);
+				if(!reportList.isEmpty()) {
+					model.addAttribute("pi", pi);
+					model.addAttribute("reportList", reportList);
+				}
+			}
+			return "manager/managerReportBoard";
+		}
+	}
+	
+	
+	
+	
 	
 	/*===================================================
 	 * 페이징 처리
@@ -392,5 +425,8 @@ public class ManagerController {
 		return pi;
 	}
 
+	
+	
+	
 	
 }

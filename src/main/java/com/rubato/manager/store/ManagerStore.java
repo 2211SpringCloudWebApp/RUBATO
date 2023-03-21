@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
+import com.rubato.report.domain.Report;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
@@ -168,6 +169,20 @@ public interface ManagerStore {
 	public List<MarketSell> selectMarketListByKeyword(SqlSession session, PageInfo pi, SearchMarket searchMarket);
 
 	public List<MarketImage> selectImage(PageInfo pi);
+
+	/**
+	 * 신고 게시물 전체 개수 Store
+	 * @param session
+	 * @return int
+	 */
+	public int getReportListCount(SqlSession session);
+
+	/**
+	 * 신고 게시판 리스트 Store
+	 * @param pi
+	 * @return List<Report>
+	 */
+	public List<Report> selectReportBoard(PageInfo pi);
 	
 
 }

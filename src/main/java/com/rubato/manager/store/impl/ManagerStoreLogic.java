@@ -13,6 +13,7 @@ import com.rubato.manager.store.ManagerStore;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
+import com.rubato.report.domain.Report;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
@@ -191,6 +192,22 @@ public class ManagerStoreLogic implements ManagerStore{
 	public List<MarketImage> selectImage(PageInfo pi) {
 		List<MarketImage> imageList = session.selectList("ManagerMapper.selectImage");
 		return imageList;
+	}
+
+	@Override
+	public int getReportListCount(SqlSession session) {
+		int result = session.selectOne("ReportMapper.getReportListCount");
+		return result;
+	}
+
+	@Override
+	public List<Report> selectReportBoard(PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Report> reportList = session.selectList("ReportMapper.selectReportBoard", null, rowBounds);
+		return reportList;
 	}
 
 	

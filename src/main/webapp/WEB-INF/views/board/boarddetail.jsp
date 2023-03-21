@@ -38,7 +38,9 @@
 								type="button" value="수정" id="boardModify"
 								onclick="location.href='/board/modify?boardNo=${board.boardNo}'">
 							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
-							<input type="button" value="신고" id="boardReport">
+							<!-- 하얀 수정 -->
+							<input type="button" value="신고" id="boardReport" onclick="location.href='/report/writeView?boardCategory=${board.boardCategory}&boardNo=${board.boardNo} '">
+							
 						</div>
 					</div>
 				</form>
@@ -86,6 +88,15 @@
 					modifyButton.style.display = "inline-block"; // 버튼 보임
 				} else {
 					modifyButton.style.display = "none"; // 버튼 안 보임
+				} 
+				
+				// 하얀 추가
+				// 본인이 작성한 게시글에서는 신고버튼 안보이게 함
+				var boardReport = document.querySelector("#boardReport");
+				if (isLoggedIn() && "${board.memberId}" === "${sessionScope.loginUser.memberId}") {
+					boardReport.style.display = "none";	// 내가 작성한 게시글에서는 신고버튼 안보임
+				} else {
+					boardReport.style.display = "inline-block";	// 내가 작성한 게시글이 아니면 신고버튼 보임
 				}
 
 				// isLoggedIn()에 맞는 함수 작성해주기

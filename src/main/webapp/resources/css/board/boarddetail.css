@@ -78,6 +78,7 @@
 
 #boardList{
     margin-left: 10px;
+    margin-bottom : 50px; /* 하얀 추가 - 신고버튼 사라지면 댓글이랑 간격이 좁아져서 수정함 */
     width: 50px;
     height: 30px;
     display: inline-block;

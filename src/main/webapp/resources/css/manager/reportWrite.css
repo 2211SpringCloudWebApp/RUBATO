@@ -1,0 +1,74 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#boardWrite{
+    width: 1000px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0 auto;
+}
+
+#boardWrite h1{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 50px;
+}
+
+.listLine{
+    clear:both; 
+    width: 1000px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    --margin-bottom: 100px;
+}
+
+#selwriteOption{
+    border : none;
+    height: 50px;
+    float: left;
+}
+
+#writeSubject1{
+    text-align: center;
+}
+
+#writeSubject2 input[type=text]{
+    border : none;
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#boardContent1000 {
+    border : none;
+    width: 1000px;
+    height: 500px;
+}
+
+#boardWrite input[type=button]{
+    margin-top: 20px;
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+}
+
+#boardWrite input[type=button]:hover{
+    background-color: #2FBDB1;
+    color: white;
+}
+
+#submitBtn{
+    text-align: center;
+}
+
+
+
+
+
+
+

@@ -38,7 +38,7 @@
                     </ul>
                 </li>
                 <li class="group">
-                    <div class="title">신고관리</div>
+                    <div class="title"><a href="/manager/reportBoard">신고관리</a></div>
                 </li> 
                 <li class="group">
                     <div class="title"><a href="/manager/logout">로그아웃</a></div>

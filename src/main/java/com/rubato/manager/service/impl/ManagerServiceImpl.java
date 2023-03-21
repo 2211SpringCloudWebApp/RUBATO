@@ -13,6 +13,7 @@ import com.rubato.manager.store.ManagerStore;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.member.domain.Member;
+import com.rubato.report.domain.Report;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
@@ -161,6 +162,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<MarketImage> selectImage(PageInfo pi) {
 		List<MarketImage> imageList = managerStore.selectImage(pi);
 		return imageList;
+	}
+
+	@Override
+	public int getReportListCount() {
+		int result = managerStore.getReportListCount(session);
+		return result;
+	}
+
+	@Override
+	public List<Report> selectReportBoard(PageInfo pi) {
+		List<Report> reportList = managerStore.selectReportBoard(pi);
+		return reportList;
 	}
 
 

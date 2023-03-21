@@ -5,6 +5,7 @@ import java.util.List;
 import com.rubato.board.domain.Board;
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.member.domain.Member;
+import com.rubato.report.domain.Report;
 import com.rubato.manager.domain.PageInfo;
 import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
@@ -158,6 +159,19 @@ public interface ManagerService {
 	public List<MarketSell> selectMarketListByKeyword(PageInfo pi, SearchMarket searchMarket);
 
 	public List<MarketImage> selectImage(PageInfo pi);
+
+	/**
+	 * 신고 게시물 전체 개수 Service
+	 * @return
+	 */
+	public int getReportListCount();
+
+	/**
+	 * 신고 게시판 리스트 Service
+	 * @param pi
+	 * @return
+	 */
+	public List<Report> selectReportBoard(PageInfo pi);
 
 
 
