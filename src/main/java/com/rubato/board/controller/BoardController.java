@@ -168,6 +168,7 @@ public class BoardController {
 	        int result = bService.updateViewCount(boardNo);
 	        if (result > 0) {
 	            Board board = bService.selectOneByNo(boardNo);
+	            int commentCount = bService.selectBoardCommentCount(boardNo);
 	            List<BoardComment> comments = bcService.selectCommentList(boardNo);
 	            String memberId = board.getMemberId();
 	            Member writer = memService.selectMemberById(memberId);
@@ -176,6 +177,7 @@ public class BoardController {
 	                model.addAttribute("board", board);
 	                model.addAttribute("writer", writer);
 	                model.addAttribute("comments", comments);
+	                model.addAttribute("commentCount", commentCount);
 	                model.addAttribute("loginMember", loginMember);
 	                return "board/boarddetail";
 	            } else {

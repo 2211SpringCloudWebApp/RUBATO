@@ -136,10 +136,9 @@
 
 
 #commentWriter, #commentDate{
-    --float: left;
     width: 200px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #commentDiv{
@@ -177,16 +176,15 @@
     display : flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 #commentSub input[type=text]{
     width: 890px;
     height: 50px;
-    margin-top: 80px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     margin-right: 10px;
-    --float: left;
     outline: none;
 }
 
@@ -195,9 +193,9 @@
     height: 50px;
     display: inline-block;
     border: 1px solid #ccc;
-    margin-top: 80px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     cursor: pointer;
-    --float: left;
 }
 
 #commentSub input[type=submit]:hover{
@@ -205,19 +203,32 @@
     color: white;
 }
 
-#commentDeleteBtn{
-    width: 30px;
-    height: 20px;
-    display: flex;
+
+.deleteCommentButton {
+    width: 40px;
+    height: 25px;
+    display: inline-block;
     border: 1px solid #ccc;
-    background-color: #ccc;
-    margin-bottom: 10px;
+    background-color: white;
     cursor: pointer;
+    text-align: center;
 }
 
-#commentDeleteBtn:hover{
+.deleteCommentButton:hover{
     background-color: grey;
+    color: white;
 }
+
+
+#commentView{
+    margin-top: 20px;
+}
+
+#commentWrapper{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 
 

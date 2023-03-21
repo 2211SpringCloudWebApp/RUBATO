@@ -10,11 +10,12 @@ public class BoardComment {
 	private String memberId;
 	private Timestamp commentDate;
 	private Timestamp commentUpdate;
+	private int commentViewCount;
 	
 	public BoardComment() {}
 
 	public BoardComment(int commentNo, int boardNo, String commentContent, String memberId, Timestamp commentDate,
-			Timestamp commentUpdate) {
+			Timestamp commentUpdate, int commentViewCount) {
 		super();
 		this.commentNo = commentNo;
 		this.boardNo = boardNo;
@@ -22,12 +23,21 @@ public class BoardComment {
 		this.memberId = memberId;
 		this.commentDate = commentDate;
 		this.commentUpdate = commentUpdate;
+		this.commentViewCount = commentViewCount;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardComment [댓글번호=" + commentNo + ", 게시물번호=" + boardNo + ", 댓글내용=" + commentContent
-				+ ", 댓글작성자=" + memberId + ", 댓글작성일=" + commentDate + ", 댓글수정일=" + commentUpdate + "]";
+				+ ", 댓글작성자=" + memberId + ", 댓글작성일=" + commentDate + ", 댓글수정일=" + commentUpdate + ", 댓글개수=" + commentViewCount + "]";
+	}
+
+	public int getCommentViewCount() {
+		return commentViewCount;
+	}
+
+	public void setCommentViewCount(int commentViewCount) {
+		this.commentViewCount = commentViewCount;
 	}
 
 	public int getCommentNo() {

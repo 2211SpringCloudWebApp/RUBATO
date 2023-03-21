@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rubato.board.domain.Board;
 import com.rubato.board.domain.BoardComment;
 import com.rubato.board.service.BoardCommentService;
+import com.rubato.board.service.BoardService;
 import com.rubato.member.domain.Member;
 
 @Controller
@@ -28,6 +30,8 @@ public class BoardCommentController {
 	private BoardCommentService bcService;
 	@Autowired
 	private HttpSession httpSession;
+	@Autowired
+	private BoardService bService;
 
 	// 댓글 목록
 	@RequestMapping(value = "/boradcomment/bcList", method = RequestMethod.GET)
@@ -95,4 +99,12 @@ public class BoardCommentController {
 			return "common/error";
 		}
 	}
+	// 댓글 조회수
+	@GetMapping("/board/commentViewCount")
+	@ResponseBody
+	public int selectBoardCommentCount(@RequestParam("boardNo") int boardNo) {
+	    int commentCount = bService.selectBoardCommentCount(boardNo);
+	    return commentCount;
+	}
+	
 }

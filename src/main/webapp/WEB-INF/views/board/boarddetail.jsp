@@ -56,7 +56,8 @@
 					<!-- 작성된 댓글 목록 -->
 					<div class="detailLine"></div>
 					<div id="commentDiv">
-						<p>${bcList.size()}개의 댓글</p>
+						<p id="commentView"><b>${commentCount }</b>개의 댓글</p>
+						<div class="detailLine"></div>
 						<c:forEach var="bc" items="${comments}">
 							<div class="commentWrapper">
 								<span id="commentWriter">작성자 ${bc.memberId}</span>
@@ -65,12 +66,8 @@
 								</span><br>
 								<span id="commentWD">${bc.commentContent}</span>
 								<c:if test="${bc.memberId eq sessionScope.loginUser.memberId}">
-									<span class="deleteCommentButton">
-									<form action="/board/comment/delete" method="post">
-										<input type="hidden" name="commentNo" value="${bc.commentNo}" />
-										<input type="submit" value="삭제" id="commentDeleteBtn" onclick="deleteCheck(${bc.boardNo}, ${bc.commentNo});">
-									</form>
-									</span>
+									<span class="deleteCommentButton" onclick="deleteCheck(${bc.boardNo}, ${bc.commentNo});">삭제</span>
+<!-- 									<input type="button" value="삭제" id="commentDeleteBtn"> -->
 								</c:if>
 								<div class="detailLine"></div>
 							</div>
@@ -105,8 +102,8 @@
 						if (confirm("정말 삭제하시겠습니까?")) {
 							location.href = "/boardComment/remove/" + boardNo + "/" + commentNo;
 						} else {
-						history.back();
-					}
+// 							history.back();
+						}
 					}
 
 					// 본인이 작성한 댓글에서만 삭제버튼이 보이게 함

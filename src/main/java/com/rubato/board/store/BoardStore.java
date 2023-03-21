@@ -82,5 +82,13 @@ public interface BoardStore {
 	 */
 	public int updateViewCount(SqlSession session, int boardNo);
 
+	/**
+	 * 댓글 개수 Store
+	 * @param session
+	 * @param boardNo
+	 * @return int
+	 */
+	public int selectBoardCommentCount(SqlSession session, int boardNo);
+
 
 }

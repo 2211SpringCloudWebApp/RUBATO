@@ -65,5 +65,13 @@ public interface BoardService {
 	 * @return int
 	 */
 	public int updateViewCount(int boardNo);
+	
+	
+	/**
+	 * 댓글 개수 Service
+	 * @param boardNo
+	 * @return int
+	 */
+	public int selectBoardCommentCount(int boardNo);
 
 }

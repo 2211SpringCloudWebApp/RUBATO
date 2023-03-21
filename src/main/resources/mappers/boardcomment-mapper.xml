@@ -17,12 +17,12 @@
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComment">
-		DELETE FROM BOARD_COMMENT WHERE COMMENT_NO = #{commentNo}
+		DELETE FROM BOARD_COMMENT WHERE COMMENT_NO = #{commentNo} AND MEMBER_ID = #{memberId}
 	</delete>
 	
 	<!-- 댓글 목록 -->
 	<select id="selectCommentList" resultMap="BoardCommentResultMap">
-		SELECT * FROM BOARD_COMMENT ORDER BY BOARD_NO DESC
+		SELECT * FROM BOARD_COMMENT WHERE BOARD_NO = #{boardNo} ORDER BY BOARD_NO DESC
 	</select>
 	
 	

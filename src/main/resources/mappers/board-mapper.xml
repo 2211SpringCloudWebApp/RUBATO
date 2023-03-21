@@ -68,6 +68,11 @@
 		SELECT COUNT(*) FROM BOARD
 	</select>
 	
+	<!-- 댓글 개수 -->
+	<select id="selectBoardCommentCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD_COMMENT WHERE BOARD_NO = #{boardNo} ORDER BY COMMENT_NO DESC
+	</select>
+	
 	<!-- 게시판 검색 결과 조회 -->
 	<select id="searchListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
