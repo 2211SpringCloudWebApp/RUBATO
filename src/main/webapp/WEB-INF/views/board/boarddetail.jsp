@@ -34,12 +34,17 @@
 						<div id="contentText">${board.boardContent }</div>
 						<div class="detailLine"></div>
 						<div id="detailBtn">
-							<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> <input
-								type="button" value="수정" id="boardModify"
-								onclick="location.href='/board/modify?boardNo=${board.boardNo}'">
-							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
-							<!-- 하얀 수정 -->
-							<input type="button" value="신고" id="boardReport" onclick="location.href='/report/writeView?boardCategory=${board.boardCategory}&boardNo=${board.boardNo} '">
+						<!-- 하얀 수정 - 관리자로 들어갔을때는 리스트 버튼만 뜨게 함 -->
+							<c:if test="${loginUser.memberId != 'mngmt2023' }">
+								<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'">
+								<input type="button" value="수정" id="boardModify" onclick="location.href='/board/modify?boardNo=${board.boardNo}'">
+								<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
+								<input type="button" value="신고" id="boardReport" onclick="location.href='/report/writeView?boardCategory=${board.boardCategory}&boardNo=${board.boardNo} '">
+							</c:if>
+							<c:if test="${loginUser.memberId == 'mngmt2023' }">
+								<input type="button" value="리스트" id="reportList" onclick="location.href='/manager/reportBoard'">
+							</c:if>
+							
 							
 						</div>
 					</div>

@@ -57,7 +57,6 @@
                                     <th>글 번호</th>
                                     <th>제목</th>
                                     <th>작성자</th>
-                                    <th>내용</th>
                                     <th>작성날짜</th>
                                     <th>삭제</th>
                                 </tr>
@@ -68,7 +67,6 @@
                                     <td>${lesson.lessonNo }</td>
                                     <td><a class="a-color" href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
                                     <td>${lesson.memberId }</td>
-                                    <td>${lesson.lessonContent }</td>
                                     <td>${lesson.lessonDate }</td>
                                     <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
                                 </tr>

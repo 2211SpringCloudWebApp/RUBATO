@@ -39,6 +39,7 @@
 					</c:if>
 					<c:if test="${member.memberId == 'mngmt2023' }">
 						<input type="button" value="리스트" onclick="location.href='/manager/reportBoard'">
+						<input type="button" value="신고게시물" onclick="location.href='/board/detail?boardNo=${boardNo}'">
 					</c:if>
 				</div>
 				<input type="hidden" name="postCategory" value="${boardCategory }">

@@ -87,7 +87,17 @@
     cursor: pointer;
     border-radius: 5px;
 }
-
+#reportList {
+	margin-left: 10px;
+    margin-bottom : 50px; 
+    width: 70px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
 #boardList:hover{
     background-color: #2FBDB1;
     color: white;
