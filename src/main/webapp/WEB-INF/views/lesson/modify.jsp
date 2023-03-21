@@ -14,8 +14,26 @@
         <link rel="stylesheet" href="/resources/css/common/footer.css">
 	</head>
 	<body>
+		 <script>
+	        function check() {
+	            var lessonTitle = document.querySelector("#lesson-title");
+	            var lessonPlan = document.querySelector("#lesson-plan");
+	            var titleRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;
+	            var planRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;    
+	            if(!titleRegExp.test(lessonTitle.value)) {
+	                lessonTitle.style.backgroundColor = 'palegoldenrod'; 
+	                alert("레슨명은 5~20자로 만들어 주세요!");
+	                return false;
+	            } else if(!planRegExp.test(lessonPlan.value)) {
+	            	lessonPlan.style.backgroundColor = 'palegoldenrod'; 
+	                alert("한줄 소개는 5~20자로 적어주세요!");
+	                return false;
+	            } 
+	        }
+	    </script>
+    
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-         <div id="modify-main">
+        <div id="modify-main">
         <form action="/lesson/modify" method="post">
             <fieldset>
             <legend>[ 레슨 정보 수정하기 ]</legend>
@@ -74,7 +92,7 @@
                 </ul>
             </fieldset>
             <div id="modify-btns">
-                <input type="submit" value="저장" class="modify-btn">
+                <input type="submit" value="저장" class="modify-btn" onclick="return check();">
                 <input type="button" value="삭제" class="modify-btn" onclick="removeLesson(${lesson.lessonNo });">
             </div>
         </form>   
