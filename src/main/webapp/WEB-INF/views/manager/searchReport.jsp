@@ -66,7 +66,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <c:forEach items="${reportList }" var="report">
+                              <c:forEach items="${searchReportList }" var="report">
                                 <tr>
                                     <td><a class="a-color" href="javascript:goPost('${report.reportContent }', '${report.postNo }', '${report.postCategory}')">${report.reportNo }</a></td>
                                     <td><a class="a-color" href="/board/detail?boardNo=${report.postNo }">${report.postNo }</a></td>
@@ -85,13 +85,13 @@
                         <div id="select">
                             <form action="/manager/searchReport" method="get">
                                 <select name="searchCondition" id="">
-                                    <option value="all">전체</option>
-                                    <option value="category">카테고리</option>
-                                    <option value="type">신고유형</option>
-                                    <option value="writer" >신고자</option>
-                                    <option value="condition">처리상태</option>
+                                    <option value="all" <c:if test="${searchReport.searchCondition == 'all' }">selected</c:if>>전체</option>
+                                    <option value="category" <c:if test="${searchReport.searchCondition == 'category' }">selected</c:if>>카테고리</option>
+                                    <option value="type" <c:if test="${searchReport.searchCondition == 'type' }">selected</c:if>>신고유형</option>
+                                    <option value="writer" <c:if test="${searchReport.searchCondition == 'writer' }">selected</c:if>>신고자</option>
+                                    <option value="condition" <c:if test="${searchReport.searchCondition == 'condition' }">selected</c:if>>처리상태</option>
                                 </select>
-                                <input type="text" name="searchValue" value="${keyword }"placeholder="검색">
+                                <input type="text" name="searchValue" value="${searchReport.searchValue }"placeholder="검색">
                                 <input type="submit" id="search-btn" name="search-btn"value="검색">
                             </form>
                         </div>
@@ -100,25 +100,27 @@
                         		<td colspan="8">
                         			<!-- 한번에 1페이지로 이동 -->
                         			<c:if test="${pi.currentPage - 1 != 0}">
-                        				<a href="/manager/reportBoard?page=1" class="naviBtn"> ◀◀ </a>
+                        				<a href="/manager/searchReport?page=1&searchValue=${searchReport.searchValue }&searchCondition=${searchReport.searchCondition }" class="naviBtn"> ◀◀ </a>
 									</c:if>
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
-                        				<a href="/manager/reportBoard?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
+                        				<a href="/manager/searchReport?page=${pi.currentPage - 1 }&searchValue=${searchReport.searchValue }&searchCondition=${searchReport.searchCondition }" class="naviBtn"> ◀ </a>
 									</c:if>
 									<c:if test="${pi.currentPage - 1 == 0}">
                         				<a href="javascript:void(0)" class="naviBtn"> ◀ </a>
 									</c:if>
 									<!--ㄴ 현재페이지 - 1 해서 0이 아닐때만 이전으로 이동 0 이면 a링크 동작 x -->
                         			<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-										<c:url var="pageUrl" value="/manager/reportBoard">
+										<c:url var="pageUrl" value="/manager/searchReport">
 											<c:param name="page" value="${p }"></c:param>
+											<c:param name="searchValue" value="${searchReport.searchValue }"></c:param>
+											<c:param name="searchCondition" value="${searchReport.searchCondition }"></c:param>
 										</c:url>
 										<a href="${pageUrl }" class="naviBtn">${p }</a>&nbsp;
 									</c:forEach>
 									<!--현재페이지 + 1 이 최대페이지랑 똑같을때까지 '>' 이걸 보여주겠다 -->
 									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
-                        				<a href="/manager/reportBoard?page=${pi.currentPage + 1 }" class="naviBtn"> ▶ </a>
+                        				<a href="/manager/searchReport?page=${pi.currentPage + 1 }&searchValue=${searchReport.searchValue }&searchCondition=${searchReport.searchCondition }" class="naviBtn"> ▶ </a>
 									</c:if>
 									<!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
 									<c:if test="${pi.currentPage == pi.maxPage}">
@@ -126,7 +128,7 @@
 									</c:if>
 									<!-- 한번에 마지막 페이지로 이동 -->
 									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
-                        				<a href="/manager/reportBoard?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
+                        				<a href="/manager/searchReport?page=${pi.maxPage }&searchValue=${searchReport.searchValue }&searchCondition=${searchReport.searchCondition }" class="naviBtn"> ▶▶ </a>
 									</c:if>
                         		</td>
                         	</tr>

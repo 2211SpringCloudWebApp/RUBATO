@@ -11,6 +11,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.manager.domain.SearchReport;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 
@@ -119,13 +120,13 @@ public interface ManagerService {
 	 * 자유게시판 검색 Service
 	 * @param pi
 	 * @param searchBoard
-	 * @return
+	 * @return List<Board>
 	 */
 	public List<Board> selectBoardListByKeyword(PageInfo pi, SearchBoard searchBoard);
 
 	/**
 	 * 마켓 게시물 전체 개수 Service
-	 * @return
+	 * @return int
 	 */
 	public int getMarketListCount();
 
@@ -146,7 +147,7 @@ public interface ManagerService {
 	/**
 	 * 마켓 게시판 전체 개수 Service(검색했을때)
 	 * @param searchMarket
-	 * @return
+	 * @return int
 	 */
 	public int getMarketListCount(SearchMarket searchMarket);
 
@@ -154,7 +155,7 @@ public interface ManagerService {
 	 * 마켓 게시판 검색 Service
 	 * @param pi
 	 * @param searchMarket
-	 * @return
+	 * @return List<MarketSell>
 	 */
 	public List<MarketSell> selectMarketListByKeyword(PageInfo pi, SearchMarket searchMarket);
 
@@ -162,16 +163,31 @@ public interface ManagerService {
 
 	/**
 	 * 신고 게시물 전체 개수 Service
-	 * @return
+	 * @return int
 	 */
 	public int getReportListCount();
 
 	/**
 	 * 신고 게시판 리스트 Service
 	 * @param pi
-	 * @return
+	 * @return List<Report>
 	 */
 	public List<Report> selectReportBoard(PageInfo pi);
+
+	/**
+	 * 신고 게시판 전체 개수 Service(검색했을때)
+	 * @param searchReport
+	 * @return int
+	 */
+	public int getReportListCount(SearchReport searchReport);
+
+	/**
+	 * 신고 게시판 검색 Service
+	 * @param pi
+	 * @param searchReport
+	 * @return List<Report>
+	 */
+	public List<Report> selectReportListByKeyword(PageInfo pi, SearchReport searchReport);
 
 
 

@@ -19,6 +19,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.manager.domain.SearchReport;
 
 @Repository
 public class ManagerStoreLogic implements ManagerStore{
@@ -208,6 +209,22 @@ public class ManagerStoreLogic implements ManagerStore{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<Report> reportList = session.selectList("ReportMapper.selectReportBoard", null, rowBounds);
 		return reportList;
+	}
+
+	@Override
+	public int getReportListCount(SqlSession session, SearchReport searchReport) {
+		int result = session.selectOne("ReportMapper.getReportListCount", searchReport);
+		return result;
+	}
+
+	@Override
+	public List<Report> selectReportListByKeyword(SqlSession session, PageInfo pi, SearchReport searchReport) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Report> searchReportList = session.selectList("ReportMapper.selectReportListByKeyword", searchReport, rowBounds);
+		return searchReportList;
 	}
 
 	

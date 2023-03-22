@@ -19,6 +19,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.manager.domain.SearchReport;
 
 @Service
 public class ManagerServiceImpl implements ManagerService{
@@ -174,6 +175,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<Report> selectReportBoard(PageInfo pi) {
 		List<Report> reportList = managerStore.selectReportBoard(pi);
 		return reportList;
+	}
+
+	@Override
+	public int getReportListCount(SearchReport searchReport) {
+		int result = managerStore.getReportListCount(session, searchReport);
+		return result;
+	}
+
+	@Override
+	public List<Report> selectReportListByKeyword(PageInfo pi, SearchReport searchReport) {
+		List<Report> searchReportList = managerStore.selectReportListByKeyword(session, pi, searchReport);
+		return searchReportList;
 	}
 
 

@@ -25,6 +25,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.manager.domain.SearchReport;
 
 @Controller
 public class ManagerController {
@@ -400,7 +401,34 @@ public class ManagerController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/manager/searchReport", method=RequestMethod.GET)
+	public String reportSearchLogic(		// searchReport.jsp 에서 검색하게 해주는 메소드
+			@ModelAttribute SearchReport searchReport
+			, HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
+			, Model model) {	
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");  // 관리자 로그인이 안됐으면 관리자 로그인 페이지로 이동시킴
+		if(loginUser == null) {
+			return "redirect:/manager/mainView";
+		} else {
+			int totalCount = managerService.getReportListCount(searchReport);
+			pi = this.getPageInfo(page, totalCount);
+			try {
+				List<Report> searchReportList = managerService.selectReportListByKeyword(pi, searchReport);
+				if(!searchReportList.isEmpty()) {
+					model.addAttribute("searchReport", searchReport);
+					model.addAttribute("pi", pi);
+					model.addAttribute("searchReportList", searchReportList);
+					return "manager/searchReport";
+				} else {
+					return "manager/searchReport";
+				}
+			} catch (Exception e) {
+			}
+			return "manager/searchReport";
+		}
+	}
 	
 	
 	

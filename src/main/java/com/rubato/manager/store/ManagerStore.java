@@ -13,6 +13,7 @@ import com.rubato.manager.domain.SearchBoard;
 import com.rubato.manager.domain.SearchLesson;
 import com.rubato.manager.domain.SearchMarket;
 import com.rubato.manager.domain.SearchMember;
+import com.rubato.manager.domain.SearchReport;
 import com.rubato.market.domain.MarketImage;
 import com.rubato.market.domain.MarketSell;
 
@@ -36,7 +37,7 @@ public interface ManagerStore {
 	 * 회원 활성화 Store
 	 * @param session
 	 * @param memberId
-	 * @return
+	 * @return int
 	 */
 	public int updateStatus(SqlSession session, String memberId);
 
@@ -53,7 +54,7 @@ public interface ManagerStore {
 	 * 회원 검색 게시물 전체 개수 Store
 	 * @param session
 	 * @param searchMember
-	 * @return
+	 * @return int
 	 */
 	public int getListCount(SqlSession session, SearchMember searchMember);
 
@@ -77,7 +78,7 @@ public interface ManagerStore {
 	/**
 	 * 레슨 게시물 리스트 Store
 	 * @param session
-	 * @return
+	 * @return int
 	 */
 	public int getLessonListCount(SqlSession session, SearchLesson searchLesson);
 
@@ -86,7 +87,7 @@ public interface ManagerStore {
 	 * @param session
 	 * @param pi
 	 * @param searchLesson
-	 * @return
+	 * @return List<Lesson>
 	 */
 	public List<Lesson> selectLessonListByKeyword(SqlSession session, PageInfo pi, SearchLesson searchLesson);
 
@@ -101,7 +102,7 @@ public interface ManagerStore {
 	/**
 	 * 자유 게시판 리스트 Store
 	 * @param pi
-	 * @return
+	 * @return List<Board>
 	 */
 	public List<Board> selectBoard(PageInfo pi);
 
@@ -117,7 +118,7 @@ public interface ManagerStore {
 	 * 자유 게시판 게시글 Store - 검색했을때
 	 * @param session
 	 * @param searchBoard
-	 * @return
+	 * @return int
 	 */
 	public int getBoardListCount(SqlSession session, SearchBoard searchBoard);
 
@@ -126,14 +127,14 @@ public interface ManagerStore {
 	 * @param session
 	 * @param pi
 	 * @param searchBoard
-	 * @return
+	 * @return List<Board>
 	 */
 	public List<Board> selectBoardListByKeyword(SqlSession session, PageInfo pi, SearchBoard searchBoard);
 
 	/**
 	 * 마켓 게시물 전체 개수 Store
 	 * @param session
-	 * @return
+	 * @return int
 	 */
 	public int getMarketListCount(SqlSession session);
 
@@ -164,7 +165,7 @@ public interface ManagerStore {
 	 * @param session
 	 * @param pi
 	 * @param searchMarket
-	 * @return
+	 * @return List<MarketSell>
 	 */
 	public List<MarketSell> selectMarketListByKeyword(SqlSession session, PageInfo pi, SearchMarket searchMarket);
 
@@ -183,6 +184,23 @@ public interface ManagerStore {
 	 * @return List<Report>
 	 */
 	public List<Report> selectReportBoard(PageInfo pi);
+
+	/**
+	 * 신고 게시판 전체 개수 Store(검색했을때)
+	 * @param session
+	 * @param searchReport
+	 * @return int
+	 */
+	public int getReportListCount(SqlSession session, SearchReport searchReport);
+
+	/**
+	 * 신고 게시판 검색 Store
+	 * @param session
+	 * @param pi
+	 * @param searchReport
+	 * @return List<Report>
+	 */
+	public List<Report> selectReportListByKeyword(SqlSession session, PageInfo pi, SearchReport searchReport);
 	
 
 }
