@@ -2,7 +2,8 @@
 main{
     width: 700px;
     height: 1100px;  
-    margin: 0 auto; 
+    margin: 0 auto;
+    margin-top: 100px;
     padding-left: 20px;
     font-family: 'Noto Sans KR', sans-serif;
 }

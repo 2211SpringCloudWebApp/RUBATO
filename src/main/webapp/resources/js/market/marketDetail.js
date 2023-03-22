@@ -74,6 +74,10 @@ var deleteCheck = ()=> {
 //댓글작성
 var commentWrite = (sellNo)=>{
 	var commentContent = document.querySelector("#commentContent").value;
+	if (commentContent == "") {
+      alert('댓글 내용을 입력해주세요.');
+      return false;
+    }
 	$.ajax({
 		type: 'POST',
 		url: '/market/detail/comment',
@@ -143,6 +147,10 @@ var commentModify = (statusCount, commentContent, commentNo)=> {
 //댓글 수정
 var commentModify2 = (statusCount, commentNo)=>{
 	var commentContent = document.querySelector("[name=modifyContent"+statusCount+"]").value;
+	if (commentContent == "") {
+      alert('댓글 내용을 입력해주세요.');
+      return false;
+    }
 	$.ajax({
 		type: 'POST',
 		url: '/market/detail/comment/modify',

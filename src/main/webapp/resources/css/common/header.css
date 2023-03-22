@@ -1,20 +1,32 @@
 @charset "UTF-8";
+#header-w {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.979);
+    box-shadow: 5px 5px 10px 2px #ccc;
+    border-bottom: 2px solid #2fbdb171;
+    position: fixed;
+    top: 0;
+}
 #header-container {
     width: 1200px;
-    height: 170px;  
+    height: 70px;
     margin: 0 auto; 
-    border-bottom: 1px solid #2fbdb1;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX( -50% );
 }
 #header-container ul li{
     list-style-type: none;
 }
 #navigator {
     width: 700px;
-    height: 50px;
-    margin-top: 120px;
+    height: 30px;
+    margin-top: 30px;
     padding: 0;
     float: left;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
     .item {
         float: left;
@@ -33,44 +45,43 @@
     #navigator a:hover {
         font-weight: bold;
         font-size: 95%;
-        border-left: 1px solid #2fbdb1;
-        border-right: 1px solid #2fbdb1;
+        /* border-left: 1px solid #2fbdb1;
+        border-right: 1px solid #2fbdb1; */
         cursor: pointer;
     }
     #logo-img {
         width: 150px;
-        height: 150px;
-        background-image: url("/resources/images/common/logo.png");
+        height: 50px;
+        background-image: url("/resources/images/common/flat_logo.png");
         background-size: 100%;
-        margin-top: 30px;
+        margin-top: 20px;
         margin-right: 50px;
         float: left;
     }
 ​
 #login-wrapper {
     width: 250px;
-    float: right;
+    float: right; 
 }
     #login-wrapper button {
-        margin-top: 120px;
+        margin-top: 25px;
         width: 120px;
         height: 40px;
         border-radius: 5px;
         font-weight: 700;
-        font-size: 95%;
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family: 'IBM Plex Sans KR', sans-serif;
     }
     #login-success {
         position: relative;
         top: 80px;
     }
     #login-btn {
-        background-color: white;
+        background-color: rgba(231, 231, 231, 0.377);
         color: #6b6b6b;
-        border: 1px solid #2fbdb1;
+        border: 2px solid #2fbdb171;
     }
     #join-btn {
-        background-color: #2fbdb1;
+        background-color: #2fbdb1b0;
         color: white;
         border: none;
     }
@@ -80,3 +91,238 @@
         color: white;
         border: none;
     }
+    
+    
+#chatting-logo{
+	width: 30px;
+	height: 30px;
+	position: relative;
+	top: 10px;
+	cursor: pointer;
+	left: 10px;
+}
+
+
+/* 모달창 */
+#modal.modal-overlay {
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    left: 75vw;
+    top: 8vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 5px 5px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#modal .modal-window {
+    background: rgba( 69, 139, 197, 0.70 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 500px;
+}
+#modal .title {
+    padding-left: 10px;
+    display: inline;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    
+}
+#modal .title h2 {
+    display: inline;
+}
+#modal .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+}
+
+#modal .content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+}
+
+#m-searchNickname{
+	border: none;
+	width: 150px;
+	border-radius: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 20px;
+	padding-right: 30px;
+	font-size: 90%;
+	color: #818080;
+	margin-left: 90px;
+	margin-bottom: 10px;
+}
+	#m-searchNickname:focus{
+		outline: none;
+	}
+	#m-searchBtn {
+		background-image: url(/resources/images/common/search.png); /* 16px x 16px */
+	    background-color: transparent; /* make the button transparent */
+	    background-repeat: no-repeat;  /* make the background image appear only once */
+	    border: none;           /* assuming we don't want any borders */
+	    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+	    height: 16px;           /* make this the size of your image */
+	    padding-left: 16px;     /* make text start to the right of the image */
+	    vertical-align: middle; /* align the text vertically centered */
+	    position: relative;
+	    right: 30px;
+	    top: -1px;
+	}
+#m-listArea{
+	height: 360px;
+	overflow-y: scroll;
+}
+	#m-nickNameList{
+		border-collapse: collapse;
+		display: none;
+		position: absolute;
+		text-align: center;
+		font-size: 90%;
+		margin: 0 auto;
+		width: 100%;
+		background-color: white;
+		padding: 10px;
+		height: 300px;
+		overflow-y: scroll;
+	}
+		#m-nickNameList tr:hover{
+			background-color: rgba(0,0,0, 0.25);
+		}
+		#m-nickNameList tr td:nth-child(1){
+			width: 280px;
+		}
+	.m-chattingBtn{
+		border: none;
+		background-color: #383bc7;
+		border-radius: 10px;
+		color: white;
+		cursor: pointer;
+	}
+	
+#m-chattingList{
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+	#m-chattingList tr{
+		text-align: center;
+		color: white;
+		font-weight: bolder;
+		border-bottom: 0.5px solid rgba(255,255,255, 0.25);
+	}
+	#m-chattingList th{
+		color: black;
+		padding-bottom: 10px;
+	}
+	#m-chattingList td{
+		cursor: pointer;
+		padding-bottom: 10px;
+	}
+		#m-chattingList td:hover{
+			background-color: rgba(255,255,255,0.25);
+		}
+		#m-chattingList tr td:nth-child(1){
+			width: 300px;
+		}
+#m-msgList{
+/* 	display:flex; */
+	display: none;
+	flex-direction: column;
+}
+#m-prev{
+	color: white;
+	font-weight: bolder;
+	font-size: 150%;
+	cursor: pointer;
+	padding: 5px;
+}
+.m-recvMsgArea{
+	margin-bottom: 10px;
+	align-self: flex-start;
+}
+.m-sendMsgArea{
+	margin-bottom: 10px;
+	align-self: flex-end;
+}
+.recvMsg{
+	width: auto;
+	display: inline-block;
+	max-width: 200px;
+	padding: 10px;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 3px 3px 10px gray;
+	font-size: 85%;
+	margin-left: 10px;
+}
+.sendMsg{
+	width: auto;
+	display: inline-block;
+	max-width: 200px;
+	padding: 10px;
+	background-color: #ebff4f;
+	border-radius: 20px;
+	box-shadow: 3px 3px 10px gray;
+	font-size: 85%;
+	margin-right: 10px;
+}
+.senderNickname{
+	font-size: 80%;
+	margin-left: 10px;
+	color: white;
+}
+.recvMsg{
+	font-size: 90%;
+}
+.sendMsg{
+	font-size: 90%;
+}
+.m-date{
+	color: #eee;
+	font-size: 75%;
+	position: relative;
+	top: 5px;
+}
+#m-sendContent{
+	width: 320px;
+	padding: 5px;
+	padding-left: 10px;
+	border: none;
+	border-radius: 20px;
+	margin-left: 10px;
+	margin-top: 10px;
+	resize: none;
+}
+	#m-sendContent:focus{
+		outline: none;
+	}
+#m-sendBtn{
+	background-image: url(/resources/images/common/send.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 35px;           /* make this the size of your image */
+    padding-left: 35px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+    position: relative;
+    right: 0px;
+    top: -15px;
+}

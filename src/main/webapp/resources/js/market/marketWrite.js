@@ -105,6 +105,8 @@ var deleteImage3 = ()=>{
 
 // 유효성 체크
 document.querySelector("#enroll-btn").addEventListener("click", (event)=>{
+	const priceInput = document.getElementById('price');
+	var sellContent = document.getElementsByName("sellContent")[0].value;
 	// 1. 파일 첨부 확인 검증
     if(!document.querySelector("#input-file2")){
         alert("원활한 거래를 위해서 최소한 2장의 이미지를 첨부해주세요.")
@@ -119,6 +121,21 @@ document.querySelector("#enroll-btn").addEventListener("click", (event)=>{
             event.preventDefault();
         }
     }
+    
+    // 3. 가격 숫자 검증
+    if (!/^\d{1,3}(,\d{3})*(\.\d+)?$/.test(priceInput.value)) {
+      alert('금액을 숫자로 입력해주세요.');
+      // 입력값 초기화
+      priceInput.value = '';
+      event.preventDefault();
+    }
+    
+    // 4. 글내용 검증
+    if (sellContent == "") {
+      alert('글 내용을 입력해주세요.');
+      event.preventDefault();
+    }
+    
 });
 
 // 2. 파일 확장자 검증 코드

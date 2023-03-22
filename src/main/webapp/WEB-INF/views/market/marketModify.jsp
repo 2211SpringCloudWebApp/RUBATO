@@ -25,7 +25,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<main>
 		    <div id="top-area">
-		        <p>마켓 - 판매등록</p>
+		        <p>마켓 - 판매글 수정</p>
 		    </div>
 		    <form action="/market/modify" id="form-tag" method="POST" enctype="multipart/form-data">
 		    <div id="post-area">

@@ -1,3 +1,4 @@
+   
 #footerContainer{
     width: 1200px;
     text-align: center;
@@ -15,10 +16,11 @@
 
 #footerText{
     margin-top: 20px;
-    color: #ccc;
+    color: #777777;
 }
 
 #footerText a:link, a:visited{
     text-decoration: none;
-    color: #ccc;
+    color: #2fbdb1;
+    font-weight: 700;
 }

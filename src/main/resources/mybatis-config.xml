@@ -16,6 +16,7 @@
 		<typeAlias type="com.rubato.lesson.domain.Apply" alias="Apply"/>
 		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>
 		<typeAlias type="com.rubato.board.domain.BoardComment" alias="BoardComment"/>
+		<typeAlias type="com.rubato.chatting.domain.Chatting" alias="Chatting"/>
 	</typeAliases>
 	<!-- mapper파일 매핑 -->
 	<mappers>
@@ -26,5 +27,6 @@
 		<mapper resource="mappers/manager-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/boardcomment-mapper.xml"/>
+		<mapper resource="mappers/chatting-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,15 +1,20 @@
 main{
-    width: 1200px;
-    height: 2200px;  
-    margin: 0 auto; 
-    padding-left: 20px;
+    height: 2500px;  
     font-family: 'Noto Sans KR', sans-serif;
 }
 #top-area{
-	margin-top: 30px;
+	padding: 0;
+	margin: 0;
+	margin-top: 70px;
+	width: 100%;
     color: rgb(81, 79, 79);
+    margin-bottom: 20px;
     font-size: 2em;
     font-weight: 600;
+}
+#main-area{
+	width: 1200px;
+	margin: 0 auto; 
 }
 #top-area2{
     display: flex;
