@@ -1,24 +1,19 @@
+  
 #footerContainer{
-    width: 1200px;
+    width: 100%;
+    height: 300px;
     text-align: center;
     margin: 0 auto;
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    border-top: 0.5px solid #ccc;
 }
-
-#footerLine{
-    width: 1200px;
-    border-top: solid 0.5px #ccc;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
 #footerText{
     margin-top: 20px;
-    color: #ccc;
+    color: #777777;
 }
 
 #footerText a:link, a:visited{
     text-decoration: none;
-    color: #ccc;
+    color: #2fbdb1;
+    font-weight: 700;
 }

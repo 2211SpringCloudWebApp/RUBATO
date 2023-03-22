@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 
 public interface LessonStore {
@@ -55,14 +56,41 @@ public interface LessonStore {
 	 * @param memberId Store
 	 * @return List<Lesson>
 	 */
-	public List<Lesson> selectMyLessons(SqlSession session, String memberId);
+	public List<Lesson> selectMyLessons(SqlSession session, String memberId, PageInfo pi);
 
 	/**
-	 * 레슨글 전체수 Store
+	 * 레슨글 전체 개수 Store
 	 * @param session
 	 * @return int
 	 */
 	public int getListCount(SqlSession session);
+	
+	/**
+	 * 회원별 레슨 개수 Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int getListCount(SqlSession session, String memberId);
+	
+	/**
+	 * 검색된 레슨 개수 Store
+	 * @param session
+	 * @param search
+	 * @return int
+	 */
+	public int getListCount(SqlSession session, Search search);
+	
+	/**
+	 * 레슨글 검색
+	 * @param session
+	 * @param pi
+	 * @param search
+	 * @return List<Lesson>
+	 */
+	public List<Lesson> selectListByKeyword(SqlSession session, PageInfo pi, Search search);
+
+	
 
 /*---------------------------------------------------------------------------*/
 	
@@ -105,7 +133,7 @@ public interface LessonStore {
 	 * @param memberId
 	 * @return List<Apply>
 	 */
-	public List<Apply> selectApplys(SqlSession session, String memberId);
+	public List<Apply> selectApplys(SqlSession session, String memberId, PageInfo pi);
 	
 	/**
 	 * 레슨별 신청글 목록 Store
@@ -122,6 +150,16 @@ public interface LessonStore {
 	 * @return int
 	 */
 	public int getListCount(SqlSession session, int lessonNo);
+
+	/**
+	 * 회원별 신청글 개수 Store
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	public int getApplyCount(SqlSession session, String memberId);
+
+
 
 
 	

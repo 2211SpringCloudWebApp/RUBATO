@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.lesson.store.LessonStore;
@@ -47,13 +48,28 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override //나의 레슨 목록
-	public List<Lesson> selectMyLessons(String memberId) {
-		return lStore.selectMyLessons(session, memberId);
+	public List<Lesson> selectMyLessons(String memberId, PageInfo pi) {
+		return lStore.selectMyLessons(session, memberId, pi);
 	}
 	
-	@Override //레슨글 전체 수
+	@Override //레슨글 전체 개수
 	public int getListCount() {
 		return lStore.getListCount(session);
+	}
+	
+	@Override //회원별 레슨 개수
+	public int getListCount(String memberId) {
+		return lStore.getListCount(session, memberId);
+	}
+
+	@Override //검색된 레슨 개수
+	public int getListCount(Search search) {
+		return lStore.getListCount(session, search);
+	}
+
+	@Override //레슨글 검색
+	public List<Lesson> selectListByKeyword(PageInfo pi, Search search) {
+		return lStore.selectListByKeyword(session, pi, search);
 	}
 
 	
@@ -81,8 +97,8 @@ public class LessonServiceImpl implements LessonService{
 	}
 
 	@Override //신청글 목록
-	public List<Apply> selectApplys(String memberId) {
-		return lStore.selectApplys(session, memberId);
+	public List<Apply> selectApplys(String memberId, PageInfo pi) {
+		return lStore.selectApplys(session, memberId, pi);
 	}
 	
 	@Override //레슨별 신청글 목록
@@ -94,6 +110,15 @@ public class LessonServiceImpl implements LessonService{
 	public int getListCount(int lessonNo) {
 		return lStore.getListCount(session, lessonNo);
 	}
+
+	@Override //회원별 신청 개수
+	public int getApplyCount(String memberId) {
+		return lStore.getApplyCount(session, memberId);
+	}
+
+
+
+	
 
 
 	

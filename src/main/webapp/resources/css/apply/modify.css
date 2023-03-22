@@ -1,8 +1,9 @@
 #modify-main {
     width: 800px;
     margin: 0 auto;
-    height: 700px;
+    height: 650px;
     line-height: 5;
+    padding-top: 100px;
 }
     #modify-main fieldset {
         border: 1px solid #ccc;

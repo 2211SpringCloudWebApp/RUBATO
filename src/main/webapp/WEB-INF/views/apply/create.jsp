@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
 </head>
-<body> 
+<body>  
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div id="apply-main">
         <fieldset>
@@ -30,7 +30,7 @@
                         <label for="apply-price">희망 금액 (회당)</label>
                         <input type="text" id="apply-price" name="applyPrice" placeholder=""> 만원<br>
                         <p><small>
-                            ※ 선생님이 제시한 금액 >>> <strong style="color: #2fbdb1; font-size: 1.05em;">${lesson.lessonPrice} 만원</strong>
+                            ※ 선생님이 제시한 금액 ≫ <strong style="color: #2fbdb1; font-size: 1.05em;">${lesson.lessonPrice} 만원</strong>
                         </small></p>
                     </li>
                     <li style="margin-top: -30px;">
@@ -42,9 +42,8 @@
                         <textarea name="applyContent" id="apply-content" cols="45" rows="10" placeholder="원하는 수업 내용을 자세히 적어주세요!"></textarea>
                     </li>        
                 </ul>
-            </fieldset>
             <div id="apply-btns">
-                <input type="submit" value="신청하기" class="apply-btn">
+                <input type="submit" value="신청하기" class="apply-btn" onclick="return check();">
                 <input type="reset" value="초기화" class="apply-btn">
             </div>
             </form>

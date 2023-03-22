@@ -36,5 +36,8 @@
 	</select>
 	<select id="countByLesson" resultType="_int">
 		SELECT COUNT(*) FROM LESSON_APPLY WHERE LESSON_NO = #{lessonNo}
+	</select>
+	<select id="countByMember" resultType="_int">
+		SELECT COUNT(*) FROM LESSON_APPLY WHERE MEMBER_ID = #{memberId}
 	</select>	
 </mapper>

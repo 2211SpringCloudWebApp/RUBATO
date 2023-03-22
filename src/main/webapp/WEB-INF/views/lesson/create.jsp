@@ -19,14 +19,16 @@
         function check() {
             var lessonTitle = document.querySelector("#lesson-title");
             var lessonPlan = document.querySelector("#lesson-plan");
+
             var titleRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;
             var planRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;    
-            if(!titleRegExp.test(lessonTitle.value)) {
-                lessonTitle.style.backgroundColor = 'palegoldenrod'; 
+
+            if(!titleRegExp.test(lessonTitle).value) {
+                lessonTitle.style.backgroundColor = 'gold;'; 
                 alert("레슨명은 5~20자로 만들어 주세요!");
                 return false;
-            } else if(!planRegExp.test(lessonPlan.value)) {
-            	lessonPlan.style.backgroundColor = 'palegoldenrod'; 
+            } else if(!planRegExp.test(lessonPlan).value) {
+            	lessonPlan.style.backgroundColor = 'gold;'; 
                 alert("한줄 소개는 5~20자로 적어주세요!");
                 return false;
             } 
@@ -35,10 +37,10 @@
 
 
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    <div id="create-main">
-        <fieldset>
-            <legend>[ Rubato 선생님 되기 ]</legend>
-            <form action="/lesson/create" method="post">
+    <div id="create-main">   
+        <form action="/lesson/create" method="post">
+            <fieldset>
+                <legend>[ Rubato 선생님 되기 ]</legend>
                 <ul id="lesson-create">
                     <li>
                         <label for="lesson-title">레슨 이름</label>
@@ -90,12 +92,12 @@
                         <textarea name="lessonContent" id="lesson-content" cols="45" rows="10" placeholder="상세한 소개로 매칭확률 UP!"></textarea>
                     </li>  
                 </ul>
+            </fieldset>
                 <div id="create-btns">
                     <input type="submit" value="레슨 생성" class="create-btn" onclick="return check();">
                     <input type="reset" value="초기화" class="create-btn">
                 </div>
-            </form>
-        </fieldset>
+        </form> 
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

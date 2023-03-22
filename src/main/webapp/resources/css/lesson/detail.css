@@ -1,8 +1,9 @@
 #detail-main {
     width: 1000px;
-    height: 800px;
+    height: 900px;
     margin: 0 auto; 
     font-family: 'Noto Sans KR', sans-serif;
+    padding-top: 50px;
 }
     #detail-main h2 {
         text-align: center;

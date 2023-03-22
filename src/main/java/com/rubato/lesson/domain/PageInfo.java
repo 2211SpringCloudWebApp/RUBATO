@@ -2,7 +2,7 @@ package com.rubato.lesson.domain;
 
 public class PageInfo {
 
-	private int currenPage; //현재페이지
+	private int currentPage; //현재페이지
 	private int boardLimit;	//페이지 당 게시글 수
 	private int naviLimit;	//페이지 당 pageNavi 
 	private int startNavi;	//pageNavi 시작
@@ -13,10 +13,10 @@ public class PageInfo {
 	
 	public PageInfo() {}
 	
-	public PageInfo(int currenPage, int boardLimit, int naviLimit, int startNavi, int endNavi, int totalCount,
+	public PageInfo(int currentPage, int boardLimit, int naviLimit, int startNavi, int endNavi, int totalCount,
 			int maxPage) {
 		super();
-		this.currenPage = currenPage;
+		this.currentPage = currentPage;
 		this.boardLimit = boardLimit;
 		this.naviLimit = naviLimit;
 		this.startNavi = startNavi;
@@ -25,12 +25,12 @@ public class PageInfo {
 		this.maxPage = maxPage;
 	}
 
-	public int getCurrenPage() {
-		return currenPage;
+	public int getCurrentPage() {
+		return currentPage;
 	}
 
-	public void setCurrenPage(int currenPage) {
-		this.currenPage = currenPage;
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
 	}
 
 	public int getBoardLimit() {

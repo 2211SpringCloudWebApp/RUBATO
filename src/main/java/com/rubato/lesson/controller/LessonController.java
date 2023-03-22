@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rubato.lesson.domain.Lesson;
 import com.rubato.lesson.domain.PageInfo;
+import com.rubato.lesson.domain.Search;
 import com.rubato.lesson.domain.Apply;
 import com.rubato.lesson.service.LessonService;
 import com.rubato.member.domain.Member;
@@ -176,13 +177,18 @@ public class LessonController {
 	@RequestMapping(value = "/lesson/mylesson", method = RequestMethod.GET)
 	public String myLessonView(
 			HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {
 		try {
 			HttpSession session = request.getSession();
 			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-			List<Lesson> lList = lService.selectMyLessons(memberId);
+			int totalCount = lService.getListCount(memberId);
+			PageInfo pi = getPageInfo(page, totalCount);
+			List<Lesson> lList = lService.selectMyLessons(memberId, pi);
 			if(!lList.isEmpty()) {
 				model.addAttribute("lList", lList);
+				model.addAttribute("memberId", memberId);
+				model.addAttribute("pi", pi);
 				return "/lesson/mylesson";
 			} else {
 				model.addAttribute("msg", "레슨 내역이 없어요");
@@ -194,23 +200,34 @@ public class LessonController {
 		}
 	}
 
-	private PageInfo getPageInfo(int currentPage, int totalCount) {
-		PageInfo pi = null;
-		int boardLimit = 10;
-		int naviLimit = 5;
-		int maxPage;
-		int startNavi;
-		int endNavi;
-		
-		maxPage = (int)((double)totalCount/boardLimit+0.9);
-		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
-		endNavi = startNavi + naviLimit - 1;
-		if(endNavi > maxPage) {
-			endNavi = maxPage;
+	/*===================================================
+	 * 레슨 검색
+	 *===================================================*/
+	@RequestMapping(value = "/lesson/search", method = RequestMethod.GET)
+	public String lessonSearchView(
+			@ModelAttribute Search search
+			, @RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage
+			, Model model) {
+		try {
+			int totalCount = lService.getListCount(search);
+			PageInfo pi = this.getPageInfo(currentPage, totalCount);
+			List<Lesson> searchList = lService.selectListByKeyword(pi, search);
+			if(!searchList.isEmpty()) {
+				model.addAttribute("search", search);
+				model.addAttribute("pi", pi);
+				model.addAttribute("sList", searchList);
+				return "lesson/search";
+			} else {
+				model.addAttribute("msg", "검색된 결과가 없습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
 		}
-		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
-		return pi;
 	}
+	
 	
 	
 	
@@ -338,21 +355,24 @@ public class LessonController {
 	}
 	
 	
-	
-	
 	/*===================================================
-	 * 신청글 목록 View
+	 * 나의 신청글 목록 View
 	 *===================================================*/
 	@RequestMapping(value = "/apply/myapply", method = RequestMethod.GET)
 	public String applyListView(
 			HttpServletRequest request
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page
 			, Model model) {
 		try {
 			HttpSession session = request.getSession();
 			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
-			List<Apply> aList = lService.selectApplys(memberId);
+			int totalCount = lService.getApplyCount(memberId);
+			PageInfo pi = getPageInfo(page, totalCount);
+			List<Apply> aList = lService.selectApplys(memberId, pi);
 			if(!aList.isEmpty()) {
 				model.addAttribute("aList", aList);
+				model.addAttribute("memberId", memberId);
+				model.addAttribute("pi", pi);
 				return "apply/myapply";
 			} else {
 				model.addAttribute("msg", "레슨 신청 내역이 없어요");
@@ -378,6 +398,7 @@ public class LessonController {
 			List<Apply> aList = lService.selectByLesson(lessonNo, pi);
 			if(!aList.isEmpty()) {
 				model.addAttribute("aList", aList);
+				model.addAttribute("lessonNo", lessonNo);
 				model.addAttribute("pi", pi);
 				return "apply/listbylesson";
 			} else {
@@ -391,7 +412,26 @@ public class LessonController {
 	}
 	
 	
-	
+	/*===================================================
+	 * 페이징
+	 *===================================================*/
+	private PageInfo getPageInfo(int currentPage, int totalCount) {
+		PageInfo pi = null;
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int)((double)totalCount/boardLimit+0.9);
+		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(endNavi > maxPage) {
+			endNavi = maxPage;
+		}
+		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+		return pi;
+	}
 	
 	
 	

@@ -1,122 +1,3 @@
-@charset "UTF-8";
-#header-w {
-    width: 100%;
-    height: 70px;
-    background-color: rgba(231, 231, 231, 0.377);
-    border-bottom: 2px solid #2fbdb171;
-    position: fixed;
-    top: 0;
-}
-#header-container {
-    width: 1200px;
-    height: 70px;
-    margin: 0 auto; 
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX( -50% );
-}
-#header-container ul li{
-    list-style-type: none;
-}
-#navigator {
-    width: 700px;
-    height: 30px;
-    margin-top: 30px;
-    padding: 0;
-    float: left;
-    font-family: 'IBM Plex Sans KR', sans-serif;
-}
-    .item {
-        float: left;
-        width: 33%;
-        text-align: center;
-        line-height: 50px;
-    }
-    #navigator a{
-        display: block;
-    }
-    #navigator a:link, #navigator a:visited  {
-        text-decoration: none;
-        color: rgb(90, 107, 106);
-        font-weight: 700;
-    }
-    #navigator a:hover {
-        font-weight: bold;
-        font-size: 95%;
-        /* border-left: 1px solid #2fbdb1;
-        border-right: 1px solid #2fbdb1; */
-        cursor: pointer;
-    }
-    #logo-img {
-        width: 150px;
-        height: 50px;
-        background-image: url("/resources/images/common/flat_logo.png");
-        background-size: 100%;
-        margin-top: 20px;
-        margin-right: 50px;
-        float: left;
-    }
-​
-#login-wrapper {
-    width: 250px;
-    float: right; 
-}
-    #login-wrapper button {
-        margin-top: 25px;
-        width: 120px;
-        height: 40px;
-        border-radius: 5px;
-        font-weight: 700;
-        font-family: 'IBM Plex Sans KR', sans-serif;
-    }
-    #login-success {
-        position: relative;
-        top: 80px;
-    }
-    #login-btn {
-        background-color: rgba(231, 231, 231, 0.377);
-        color: #6b6b6b;
-        border: 2px solid #2fbdb171;
-    }
-    #join-btn {
-        background-color: #2fbdb1b0;
-        color: white;
-        border: none;
-    }
-    #login-btn:hover, #join-btn:hover {
-        cursor: pointer;
-        background-color: #ccc;
-        color: white;
-        border: none;
-    }
-    
-#footerContainer{
-    width: 1200px;
-    text-align: center;
-    margin: 0 auto;
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-#footerLine{
-    width: 1200px;
-    border-top: solid 0.5px #ccc;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-#footerText{
-    margin-top: 20px;
-    color: #777777;
-}
-
-#footerText a:link, a:visited{
-    text-decoration: none;
-    color: #2fbdb1;
-    font-weight: 700;
-}
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 #container {
     width: 100%;
     height: 2000px;  
@@ -194,7 +75,7 @@
     height: 1000px;
     width: 1560px;
     font-family: 'Noto Sans KR', sans-serif;
-    border-top: 1px solid #2fbdb1;
+    border-top: 1px solid #32a79dd7;
     margin: auto;
 }
     
@@ -234,19 +115,27 @@
         height: 100px;
         width: 100%;
         text-align: center;
-        font-size: 22px;
-        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 27px;
+        font-weight: 800;
+        color: #32a79dd7;
+        padding-top: 50px;
+        font-family: 'IBM Plex Sans KR', sans-serif;
     }
     #main2-img {
         height: 400px;
-        width: 1500px;
+        width: 1560px;
         display: flex;
         justify-content: space-around;
 
     }
+    #main2-img a:link, #main2-img a:visited {
+        text-decoration: none;
+        color: white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
     .lesson-hot {
-        width: 400px;
-        height: 200px;
+        width: 600px;
+        height: 400px;
         float: left;
     }
         .lesson-hot div:hover {
@@ -254,22 +143,25 @@
             transition: 0.5s;
         } 
         .lesson-hot p {
-            background: linear-gradient(45deg, #39b9af44, #46C2CB);
+            width: 540px;
+            background: linear-gradient(45deg, #32a79dcc, #5584AC);
             font-size: 20px;
             color: white;
             padding: 10px;
             text-align: center;
             border-radius: 5px;
             font-weight: 700;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            font-family: 'IBM Plex Sans KR', sans-serif;
         }
         .lesson-hot div {
             width: 600px;
             height: 300px;
             text-align: center;
-            color: white;
             font-size: 20px;
             font-weight: 900;
-            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            font-family: 'IBM Plex Sans KR', sans-serif;
         }
         #lesson-1 div{
             background-image: url("/resources/images/common/pianoside.jpg");
@@ -285,98 +177,72 @@
 
 
 #underContainer{
-    width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 100 auto;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
-
-.quickS{
+.quickS {
     width: 1200px;
-    margin: 100px auto;
+    margin: 70px auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
     box-sizing: border-box;
     flex-wrap: nowrap;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.quickText{
-    margin-top: 50px;
-    margin-left: 30px;
-}
-
-.quickText2{
-    margin-left: 50px;
-}
-
-.quickS img{
-    width: 120px;
-    height: 120px;
-    margin-top: 40px;
-    margin-left: 110px;
-}
-
-#quickBox1:hover{
-    transform: translateY(-10px);
-    transition: all 0.3s ease-out;
-}
-
-#quickBox2:hover{
-    transform: translateY(-10px);
-    transition: all 0.3s ease-out;
-}
-
-#quickBox3:hover{
-    transform: translateY(-10px);
-    transition: all 0.3s ease-out;
-}
-
-#quickBox4:hover{
-    transform: translateY(-10px);
-    transition: all 0.3s ease-out;
-}
-
-#quickBox1{
-    width: 250px;
-    height: 300px;
-    background-color: #B2A4FF;
-    box-shadow: 5px 5px 10px 2px #ccc;
-}
-#quickBox2{
-    width: 250px;
-    height: 300px;
-    background-color: #FFB4B4;
-    box-shadow: 5px 5px 10px 2px #ccc;
-}
-#quickBox3{
-    width: 250px;
-    height: 300px;
-    background-color: #FFDEB4;
-    box-shadow: 5px 5px 10px 2px #ccc;
-}
-#quickBox4{
-    width: 250px;
-    height: 300px;
-    background-color: #FFF9CA;
-    box-shadow: 5px 5px 10px 2px #ccc;
-}
-
+  }
+    .quick-box {
+        position: relative;
+        width: 200px; 
+        height: 200px;
+    }
+    .quick-box img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    } 
+    .info {
+        color: #fff;
+        position: absolute; 
+        top: 40px;
+        background: rgba(116, 116, 116, 0.5); 
+        width: 170px;
+        height: 40px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.35s ease-in-out;
+        text-align: center;
+    }
+    .quick-box:hover{
+        transform: translateY(-10px);
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+        }
+    .quick-box:hover .info {
+        opacity: 1;
+    }
+    .info p {
+        margin: 0 auto;
+        font-size: 18px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-transform: uppercase;
+        padding-top: 6px;
+    }
 #divLine{
-    width: 1200px;
-    border-top: solid 0.5px #ccc;
+    width: 1560px;
+    border-top: 1px solid #32a79dd7;
     margin: 0 auto;
-    margin-top: -10px;
 }
-
 .underBox{
     width: 350px;
     height: 200px;
-    background: linear-gradient(45deg, #39b9af44, #46C2CB);
+    background: linear-gradient(45deg, #32a79dcc, #5584AC);
     box-shadow: 3px 3px 5px 2px #ccc;
     color: white;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
-    .underBox h3,p {
+    .underBox h3, .underBox p {
         margin-left: 20px;
         margin-top: 20px;
     }
