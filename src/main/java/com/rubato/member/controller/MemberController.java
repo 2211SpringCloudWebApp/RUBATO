@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rubato.board.domain.Board;
+import com.rubato.board.domain.BoardComment;
 import com.rubato.board.domain.PageInfo;
 import com.rubato.board.domain.Search;
+import com.rubato.board.service.BoardCommentService;
 import com.rubato.board.service.BoardService;
 import com.rubato.common.MailSendService;
 import com.rubato.market.domain.MarketPayment;
@@ -26,6 +28,7 @@ import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.SearchInfo;
 import com.rubato.market.service.MarketService;
 import com.rubato.member.domain.CategoryCount;
+import com.rubato.member.domain.MPageInfo;
 import com.rubato.member.domain.Member;
 import com.rubato.member.service.MemberService;
 
@@ -49,8 +52,10 @@ public class MemberController {
 	private BoardService bService;
 	
 	@Autowired
-	private MarketService marketService;
+	private BoardCommentService bcService;
 	
+	@Autowired
+	private MarketService marketService;
 	
 	/*===================================================
 	 * 로그인 기능 관련
@@ -71,8 +76,15 @@ public class MemberController {
 			Member member = mService.selectIdPw(mParam);
 			HttpSession session = request.getSession();
 			if(member != null) {
-				session.setAttribute("loginUser", member);
-				return "redirect:/index.jsp";
+				if(member.getStatus().equals("Y")) {
+					session.setAttribute("loginUser", member);
+					return "redirect:/index.jsp";
+				}
+				else {
+					model.addAttribute("msg", "해당 계정은 비활성화되었습니다. 관리자에게 문의하세요.");
+					return "common/error";
+				}
+				
 			}else {
 				model.addAttribute("msg", "로그인 정보가 존재하지 않습니다.");
 				return "member/login";
@@ -95,6 +107,9 @@ public class MemberController {
 		Member mParam = new Member(memberId, memberPwd);
 		Member member = mService.selectIdPw(mParam);
 		if(member!=null) { // 로그인 확인
+			if(member.getStatus().equals("N")) {
+				return "unactive";
+			}
 			session.setAttribute("loginUser", member);
 			return "true";
 		}
@@ -263,7 +278,10 @@ public class MemberController {
 	// 회원 정보 불러오기
 	@RequestMapping(value="/member/modify" , method = RequestMethod.GET)
 	public String MypageInfo(HttpSession session, Model model) {
-		Member member = (Member)session.getAttribute("loginUser");
+		Member mOne = (Member)session.getAttribute("loginUser");
+		String memberId = mOne.getMemberId();
+		Member member = mService.selectMemberById(memberId);
+		member.setMemberPwd(mOne.getMemberPwd());
 		model.addAttribute("member", member);
 		return "member/modify";
 	}
@@ -281,7 +299,7 @@ public class MemberController {
 			if(result > 0) {
 				
 				model.addAttribute("member", member);
-				return "member/mypage";
+				return "redirect:/member/mypage";
 			}else {
 				model.addAttribute("msg", "정보 수정이 되지 않았습니다.");
 				return "member/aa";
@@ -321,12 +339,14 @@ public class MemberController {
 	public String MypageWriteView(
 			 @ModelAttribute Search search
 			 , HttpSession session
-			 , @RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage, Model model) {
+			 , @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
 		try {
-			Member mOne = (Member)session.getAttribute("loginUser");
-			String memberId = (mOne).getMemberId();
-			List<Board> boardList = bService.selectListById(memberId);
-			model.addAttribute("myList", boardList);
+			String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+			int totalCount = bService.getBoardListCount(memberId);
+			PageInfo pi = this.PageInfoWrite(page, totalCount);
+			List<Board> boardList = bService.selectListById(pi, memberId);
+			model.addAttribute("bList", boardList);
+			model.addAttribute("pi", pi);
 			return "/board/mypageMyWrite";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -334,6 +354,25 @@ public class MemberController {
 			return "/board/mypageMyWrite";
 		}
 	}
+	
+	// 게시판 목록 네비게이터 시작, 끝값 설정
+		private PageInfo PageInfoWrite(int currentPage, int totalCount) {
+			PageInfo pi = null;
+			int boardLimit = 10; // 한 페이지 당 게시글 개수
+			int naviLimit = 5; // 한 페이지 당 pageNavi 수
+			int maxPage; 	 // 페이지의 마지막 번호
+			int startNavi; // pageNavi 시작값
+			int endNavi; // pageNavi 끝값
+
+			maxPage = (int)((double) totalCount/boardLimit+0.9);
+			startNavi = (((int)((double) currentPage/naviLimit+0.9))-1)*naviLimit+1;
+			endNavi = startNavi+naviLimit-1;
+			if (endNavi > maxPage) {
+				endNavi = maxPage;
+			}
+			pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+			return pi;
+		}
 	
 	// 내가 쓴 글 상세화면
 		@RequestMapping(value = "/board/mypageMyWritedetail", method = RequestMethod.GET)
@@ -348,8 +387,68 @@ public class MemberController {
 				return "common/error";
 			}
 		}
+		
+		// 게시판 삭제
+		@RequestMapping(value = "/board/remove1", method = RequestMethod.GET)
+		public String boardRemove(@RequestParam("boardNo") int boardNo, HttpSession session,  Model model) {
+			try {
+				Member mOne = (Member)session.getAttribute("loginUser");
+				String memberId = (mOne).getMemberId();
+				List<Board> boardList = bService.selectListById(memberId);
+				model.addAttribute("myList", boardList);
+				int result = bService.deleteBoard(boardNo);
+				if (result > 0) {
+					return "redirect:/board/mypageMyWrite";
+				} else {
+					model.addAttribute("msg", "게시글이 삭제 되지 않았습니다.");
+					return "redirect:/board/mypageMyWrite";
+				}
+			} catch (Exception e) {
+				e.getStackTrace();
+				model.addAttribute("msg", "게시글이 삭제 되지 않았습니다.");
+				return "redirect:/board/mypageMyWrite";
+			}
+		}
 	
 	// 마이페이지 내가 쓴 댓글
+		@RequestMapping(value = "/board/searchListByComment", method = RequestMethod.GET)
+		public String searchListByComment(
+				 @ModelAttribute Search search
+				 , HttpSession session
+				 , @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, Model model) {
+			try {
+				String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+				int totalCount = bcService.getBoardCommentListCount(memberId);
+				PageInfo pi = this.PageInfoComment(page, totalCount);
+				List<BoardComment> cList = bcService.searchListByComment(pi, memberId);
+				model.addAttribute("cList", cList);
+				model.addAttribute("pi", pi);
+				return "/board/searchListByComment";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("msg", e.getMessage());
+				return "/board/searchListByComment";
+			}
+		}
+		
+		// 게시판 목록 네비게이터 시작, 끝값 설정
+		private PageInfo PageInfoComment(int currentPage, int totalCount) {
+			PageInfo pi = null;
+			int boardLimit = 10; // 한 페이지 당 게시글 개수
+			int naviLimit = 5; // 한 페이지 당 pageNavi 수
+			int maxPage; 	 // 페이지의 마지막 번호
+			int startNavi; // pageNavi 시작값
+			int endNavi; // pageNavi 끝값
+
+			maxPage = (int)((double) totalCount/boardLimit+0.9);
+			startNavi = (((int)((double) currentPage/naviLimit+0.9))-1)*naviLimit+1;
+			endNavi = startNavi+naviLimit-1;
+			if (endNavi > maxPage) {
+				endNavi = maxPage;
+			}
+			pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+			return pi;
+		}
 		
 	// 마이페이지 나의 판매 내역
 		@GetMapping("/market/mypageSellListView")
@@ -359,9 +458,8 @@ public class MemberController {
 					, HttpSession session
 					, @RequestParam(value="page", required=false, defaultValue="1") Integer page) { // 게시물 목록 View
 			try {
-				Member mOne = (Member)session.getAttribute("loginUser");
-				String memberId = (mOne).getMemberId();
-				List<MarketSell> sList = marketService.searchsellListById(memberId);
+				String memberId = ((Member)session.getAttribute("loginUser")).getMemberId();
+				List<MarketSell> sList = marketService.searchsellListById(memberId); 
 				model.addAttribute("sList", sList);
 				return "/market/mypageSellListView";
 			} catch (Exception e) {
@@ -370,6 +468,8 @@ public class MemberController {
 				return "/market/mypageSellListView";
 			}
 		}
+		
+
 		
 	// 마이페이지 구매 신청 내역
 		@GetMapping("/market/searchbuyListById")
@@ -382,6 +482,9 @@ public class MemberController {
 				Member mOne = (Member)session.getAttribute("loginUser");
 				String memberId = (mOne).getMemberId();
 				List<MarketPayment> paymentList = marketService.searchbuyListById(memberId);
+				for(MarketPayment payment : paymentList) {
+					System.out.println(payment.toString());
+				}
 				model.addAttribute("paymentList", paymentList);
 				return "/market/searchbuyListById";
 			} catch (Exception e) {

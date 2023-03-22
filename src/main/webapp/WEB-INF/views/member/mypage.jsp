@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                             <td><a href="/board/mypageMyWrite?memberId="${loginUser.memberId }>${count.boardWriteCount}</a></td>
-                            <td><a href="#">${count.boardCommentCount }</a></td>
+                            <td><a href="/board/searchListByComment?memberId="${loginUser.memberId }>${count.boardCommentCount }</a></td>
                         </tr>
                     </table> <br>
                     <table border="1">
@@ -52,7 +52,7 @@
                         </tr>
                         <tr>
                             <td><a href="/market/mypageSellListView">${count.sellWriteCount }</a></td>
-                            <td><a href="#">${count.buyApplyCount }</a></td>
+                            <td><a href="/market/searchbuyListById">${count.buyApplyCount }</a></td>
                         </tr>
                     </table>
                 </div>

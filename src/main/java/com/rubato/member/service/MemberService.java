@@ -1,5 +1,9 @@
 package com.rubato.member.service;
 
+import java.util.List;
+
+import com.rubato.market.domain.MarketSell;
+import com.rubato.market.domain.PageInfo;
 import com.rubato.member.domain.Member;
 
 public interface MemberService {
@@ -66,7 +70,7 @@ public interface MemberService {
 	public int boardWriterCount(String memberId);
 	
 	/**
-	 * 마이페이지 
+	 * 마이페이지 내가 쓴 댓글 내역
 	 * @param memberId
 	 * @return int
 	 */
@@ -100,7 +104,7 @@ public interface MemberService {
 	 */
 	public int buyApplyCount(String memberId);
 	
-
+	
 	
 	
 	

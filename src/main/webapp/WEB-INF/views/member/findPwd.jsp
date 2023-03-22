@@ -6,7 +6,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="/resources/css/member/findId.css">
+		<link rel="stylesheet" href="/resources/css/member/findPwd.css">
+		<link rel="stylesheet" type="text/css" href="/resources/css/common/header.css">
 		<link rel="stylesheet" type="text/css" href="/resources/css/common/footer.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<title>RUBATO - 비밀번호 찾기</title>

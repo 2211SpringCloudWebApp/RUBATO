@@ -32,7 +32,8 @@
 						<tr>
 							<th>아이디 <span>*</span></th>
 							<td>
-								<input type="text" name="memberId" class="input-box" maxlength="15" required>
+								<input type="text" id="memberId" name="memberId" class="input-box" maxlength="15"
+									required>
 								<input type="button" id="idCheck-btn" value="중복확인">
 								<br>
 								<span id="idCheck-msg"></span>
@@ -44,12 +45,11 @@
 								<input type="password" id="memberPwd" name="memberPwd" class="input-box"
 									placeholder="패스워드를 입력하세요" maxlength="16">
 								<p id="required-pwd">
-									※ 영문 대소문자, 숫자, 특수문자 중 2가지 이상 조합하여 설정해주세요. (8~16자)<br>
-									※ 아이디와 4자리 이상 동일하거나, 4자리 이상 반복되는 문자와 숫자는 사용이 불가합니다.<br>
-									※ 사용 가능 특수문자: !”#$%’()*+,-./:;<=>?@[]^_`{|}~
+									※ 6~15자로 영문 대소문자, 최소 1개의 숫자 혹은 특수 문자를 포함해야 합니다.
 								</p>
 								<!-- 민우추가 -->
 								<span id="pwdCheck-msg"></span>
+
 							</td>
 						</tr>
 						<tr>
@@ -70,7 +70,8 @@
 						<tr>
 							<th>닉네임 <span>*</span></th>
 							<td>
-								<input type="text" name="memberNickname" class="input-box" placeholder="닉네임을 입력하세요">
+								<input type="text" id="memberNickname" name="memberNickname" class="input-box"
+									placeholder="닉네임을 입력하세요">
 								<input type="button" id="nickCheck-btn" value="중복확인">
 								<br>
 								<span id="nickCheck-msg"></span>
@@ -95,8 +96,8 @@
 						</tr>
 						<tr>
 							<th>연락처 <span>*</span></th>
-							<td><input type="text" name="memberPhone" class="input-box" placeholder="하이픈(-)을 제외하고 입력하세요"
-									maxlength="11"></td>
+							<td><input type="text" id="memberPhone" name="memberPhone" class="input-box"
+									placeholder="하이픈(-)을 제외하고 입력하세요" maxlength="11"></td>
 						</tr>
 						<tr>
 							<th>주소 <span>*</span></th>
@@ -109,11 +110,12 @@
 						</tr>
 					</table>
 					<div id="button-area">
-						<input type="submit" value="가입하기" onclick="return validation()">
+						<input type="submit" value="가입하기" onclick="return validation(event)">
 					</div>
 				</form>
 			</section>
 		</main>
 	</body>
+	
 
 	</html>

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/market/mypageSellListView.css">
+    <link rel="stylesheet" href="/resources/css/market/searchbuyListById.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/common/header.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/common/footer.css">
     <script src="/resources/js/manager/managerMarketBoard.js" defer></script>
@@ -23,8 +23,8 @@
            
             <div id="main-board">
                 <div id="main-table">
+            <h1 style="color: #2FBDB1;">구매 신청 내역</h1>
                    
-            <h1 style="color: #2FBDB1;">나의 판매 내역</h1>
                         <table>
                             <thead>
                                 <tr>
@@ -32,30 +32,30 @@
                                     <th>이미지</th>
                                     <th>글 제목</th>
                                     <th>판매 가격</th>
-                                    <th>판매 지역</th>
-                                    <th>작성자</th>
-                                    <th>작성일</th>
+                                    <th>판매자 ID</th>
+                                    <th>배송 메세지</th>
+                                    <th>결제일</th>
                                 </tr>
                             </thead>
                             <tbody>
                              <!-- value="${imageList[status.index].img1 }"  -->
                             
                      
-                              <c:forEach items="${sList }" var="market" varStatus="status">
+                              <c:forEach items="${paymentList }" var="market" varStatus="status">
                                 <tr>
                                     <td>${market.sellNo }</td>
                                     <td><img style="width: 100px;" src="${market.img1 }" alt=""></td>
                                     <td>${market.sellTitle }</td>
-                                    <td>${market.sellPrice }</td>
-                                    <td>${market.sellArea }</td>
-                                    <td>${market.memberId }</td>
-                                    <td>${market.writeDate }</td>
+                                    <td>${market.paymentPrice }</td>
+                                    <td>${market.sellerId }</td>
+                                    <td>${market.deleveryMsg }</td>
+                                    <td>${market.paymentDate }</td>
                                 </tr>
                               </c:forEach>
                             </tbody>
                         </table>
             		
-<%--                     <div id="footer">
+                    <div id="footer">
                         <div id="select">
                             <form action="/manager/searchMarket" method="get">
                                 <select name="searchCondition" id="">
@@ -71,37 +71,37 @@
                         <div id="page">
                             <tr>
                                 <td colspan="7">
-                                    <c:if test="${mpi.currentPage - 1 != 0}">
+                                    <c:if test="${pi.currentPage - 1 != 0}">
                                         <a href="/manager/marketBoard?page=1" class="naviBtn"> ◀◀ </a>
                                     </c:if>
                                     <!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
-                                    <c:if test="${mpi.currentPage - 1 != 0}">
-                                        <a href="/manager/marketBoard?page=${mpi.currentPage - 1 }" class="naviBtn"> ◀ </a>
+                                    <c:if test="${pi.currentPage - 1 != 0}">
+                                        <a href="/manager/marketBoard?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
                                     </c:if>
-                                    <c:if test="${mpi.currentPage - 1 == 0}">
+                                    <c:if test="${pi.currentPage - 1 == 0}">
                                         <a href="javascript:void(0)" class="naviBtn"> ◀ </a>
                                     </c:if>
                                     <!--ㄴ 현재페이지 - 1 해서 0이 아닐때만 이전으로 이동 0 이면 a링크 동작 x -->
-                                    <c:forEach begin="${mpi.startNavi }" end="${mpi.endNavi }" var="p">
+                                    <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
                                         <c:url var="pageUrl" value="/manager/marketBoard">
                                             <c:param name="page" value="${p }"></c:param>
                                         </c:url>
                                         <a href="${pageUrl }" class="naviBtn">${p }</a>&nbsp;
                                     </c:forEach>
                                     <!--현재페이지 + 1 이 최대페이지랑 똑같을때까지 '>' 이걸 보여주겠다 -->
-                                    <c:if test="${mpi.currentPage + 1 <= mpi.maxPage}">
+                                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
                                         <a href="/manager/marketBoard?page=${pi.currentPage + 1 }" class="naviBtn"> ▶ </a>
                                     </c:if>
                                     <!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
-                                    <c:if test="${mpi.currentPage == mpi.maxPage}">
+                                    <c:if test="${pi.currentPage == pi.maxPage}">
                                         <a href="javascript:void(0)" class="naviBtn"> ▶ </a>
                                     </c:if>
-                                    <c:if test="${mpi.currentPage + 1 <= mpi.maxPage}">
-                                        <a href="/manager/marketBoard?page=${mpi.maxPage }" class="naviBtn"> ▶▶ </a>
+                                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                                        <a href="/manager/marketBoard?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
                                     </c:if>
                                 </td>
                             </tr>
-                        </div> --%>
+                        </div>
                     </div>
                 </div>
             </div>

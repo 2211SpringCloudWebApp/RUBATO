@@ -21,7 +21,15 @@ public interface BoardService {
 	 * @return int
 	 */
 	public int getListCount(Search search);
-
+	
+	/**
+	 * 게시판 검색 게시물 전체 개수 Store
+	 * @param session
+	 * @param search
+	 * @return int
+	 */
+	public int getListCount(String memberId);
+	
 	/**
 	 * 게시판 목록 조회 Service
 	 * @param pi
@@ -29,7 +37,7 @@ public interface BoardService {
 	 */
 	public List<Board> selectBoardList(PageInfo pi);
 
-	int getListCount();
+	
 	/**
 	 * 게시판 검색 Service
 	 * @param pi
@@ -44,15 +52,32 @@ public interface BoardService {
 	 * @return Board
 	 */
 	public Board selectOneByNo(int boardNo);
+	
+	//	민우 추가
+	/**
+	 * 게시판 삭제 Service
+	 * @param memberId
+	 * @return
+	 */
+	List<Board> selectListById( String memberId);
 
-//	민우 추가
+
 	/**
 	 * 아이디로 목록 조회 Service
 	 * @param memberId
 	 * @return List<Board>
 	 */
-	List<Board> selectListById(String memberId);
+	List<Board> selectListById(PageInfo pi, String memberId);
 
+	/**
+	 * 게시판 검색 게시물 전체 개수 Store
+	 * @param session
+	 * @param search
+	 * @return int
+	 */
+	public int getBoardListCount(String memberId);
+	
+	int getListCount();
 	/**
 	 * 게시판 수정 Service
 	 * @param board
@@ -66,5 +91,6 @@ public interface BoardService {
 	 * @return int
 	 */
 	public int deleteBoard(int boardNo);
+
 
 }

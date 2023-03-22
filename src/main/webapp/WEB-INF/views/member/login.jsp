@@ -51,10 +51,15 @@
 						memberPwd: memberPwd
 					},
 					success: function (data) {
-						if (data == "false")
+						if(data ==="unactive"){
+							alert("비활성화된 계정입니다. 관리자에게 문의하세요");
+						}
+						else if (data == "false"){
 							alert('잘못된 아이디이거나, 비밀번호가 틀렸습니다.');
-						else
+						}
+						else{
 							location.href = "/index.jsp"; // login페이지로 돌아가시면 됩니다.
+						}
 					}
 				});
 			}

@@ -12,10 +12,12 @@ public class MarketPayment {
 	private int paymentPrice;
 	private String deleveryMsg;
 	private Timestamp paymentDate;
+	private String img1;
 	
-	
+	public MarketPayment() {}
+
 	public MarketPayment(int paymentNo, int sellNo, String sellTitle, String sellerId, String buyerId, int paymentPrice,
-			String deleveryMsg, Timestamp paymentDate) {
+			String deleveryMsg, Timestamp paymentDate, String img1) {
 		super();
 		this.paymentNo = paymentNo;
 		this.sellNo = sellNo;
@@ -25,95 +27,89 @@ public class MarketPayment {
 		this.paymentPrice = paymentPrice;
 		this.deleveryMsg = deleveryMsg;
 		this.paymentDate = paymentDate;
+		this.img1 = img1;
 	}
-
 
 	public int getPaymentNo() {
 		return paymentNo;
 	}
 
-
 	public void setPaymentNo(int paymentNo) {
 		this.paymentNo = paymentNo;
 	}
-
 
 	public int getSellNo() {
 		return sellNo;
 	}
 
-
 	public void setSellNo(int sellNo) {
 		this.sellNo = sellNo;
 	}
-
 
 	public String getSellTitle() {
 		return sellTitle;
 	}
 
-
 	public void setSellTitle(String sellTitle) {
 		this.sellTitle = sellTitle;
 	}
-
 
 	public String getSellerId() {
 		return sellerId;
 	}
 
-
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
-
 
 	public String getBuyerId() {
 		return buyerId;
 	}
 
-
 	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId;
 	}
-
 
 	public int getPaymentPrice() {
 		return paymentPrice;
 	}
 
-
 	public void setPaymentPrice(int paymentPrice) {
 		this.paymentPrice = paymentPrice;
 	}
-
 
 	public String getDeleveryMsg() {
 		return deleveryMsg;
 	}
 
-
 	public void setDeleveryMsg(String deleveryMsg) {
 		this.deleveryMsg = deleveryMsg;
 	}
-
 
 	public Timestamp getPaymentDate() {
 		return paymentDate;
 	}
 
-
 	public void setPaymentDate(Timestamp paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
+	public String getImg1() {
+		return img1;
+	}
+
+	public void setImg1(String img1) {
+		this.img1 = img1;
+	}
 
 	@Override
 	public String toString() {
 		return "MarketPayment [paymentNo=" + paymentNo + ", sellNo=" + sellNo + ", sellTitle=" + sellTitle
 				+ ", sellerId=" + sellerId + ", buyerId=" + buyerId + ", paymentPrice=" + paymentPrice
-				+ ", deleveryMsg=" + deleveryMsg + ", paymentDate=" + paymentDate + "]";
-	}
+				+ ", deleveryMsg=" + deleveryMsg + ", paymentDate=" + paymentDate + ", img1=" + img1 + "]";
+	} 
+	
+	
 	
 	
 	

@@ -4,7 +4,7 @@
     flex-direction: column;
     width: 1300px;
     align-items: center;
-    margin: 0 auto;
+    margin: 125px auto 0 auto;
 }
     #register-msg>p:nth-child(1){
         font-size: 1.5em;

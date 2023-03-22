@@ -35,6 +35,7 @@
 						<div class="detailLine"></div>
 						<div id="detailBtn">
 							<input type="button" value="목록" id="boardList" onclick="location.href='/board/mypageMyWrite'"> 
+							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
 						</div>
 					</div>
 				</form>
@@ -61,7 +62,7 @@
 				// 삭제버튼 클릭한 경우 한번 더 묻는 팝업창 생성, 확인 시 삭제완료
 				function removeCheck(boardNo) {
 					if (confirm("정말 삭제하시겠습니까?")) {
-						location.href = "/board/remove?boardNo=" + boardNo;
+						location.href = "/board/remove1?boardNo=" + boardNo;
 					}
 				}
 				// 본인이 작성한 게시물에서만 수정버튼이 보이게 함

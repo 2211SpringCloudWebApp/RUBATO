@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int getListCount() {
-		int result = bStore.getListCount(session);
+	public int getListCount(String memberId) {
+		int result = bStore.getListCount(session, memberId);
 		return result;
 	}
 	
@@ -55,13 +55,7 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 	
-//	민우 추가
-	@Override
-	public List<Board> selectListById(String memberId) {
-		List<Board> boardList = bStore.selectListById(session, memberId);
-		return boardList;
-	}
-
+	//	민우 추가
 	@Override
 	public int updateBoard(Board board) {
 		return bStore.updateBoard(session, board);
@@ -72,6 +66,42 @@ public class BoardServiceImpl implements BoardService{
 		int result = bStore.deleteBoard(session, boardNo);
 		return result;
 	}
+
+	@Override
+	public int getBoardListCount(String memberId) {
+		int result = bStore.getBoardListCount(session ,memberId);
+		return result;
+	}
+
+	@Override
+	public List<Board> selectListById(PageInfo pi, String memberId) {
+		List<Board> boardList = bStore.selectListById(session, pi ,memberId);
+		return boardList;
+	}
+
+	@Override // 삭제
+	public List<Board> selectListById(String memberId) {
+		List<Board> boardList  = bStore.selectListById(session, memberId);
+		return boardList;
+	}
+
+	@Override
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
+
+
+	
+
+	
+
+	
+
+	
 
 
 
