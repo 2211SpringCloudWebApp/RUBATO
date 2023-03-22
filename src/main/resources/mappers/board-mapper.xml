@@ -83,7 +83,10 @@
 	</select>
 	
 <!-- 	민우 추가 -->
-	<select id="searchListById" resultMap="BoardResultMap">
+	<select id="getBoardListCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="selectListById" resultMap="BoardResultMap">
 		SELECT * FROM BOARD WHERE MEMBER_ID = #{memberId}
 	</select>
 	
