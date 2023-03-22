@@ -35,7 +35,7 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="title">
-                <h2>채팅</h2>
+                <h2>채팅 - [${loginUser.memberNickname }]님</h2>
             </div>
             <div class="close-area">X</div>
             <div class="content">
@@ -63,14 +63,17 @@
 <!-- 원래 header.js 파일로 따로 뺴두려 했지만, 다른 사람들 모든 코드에 js를 추가해야 하므로 일단 여기에 구현합니다. -->
 <script>
 // 모달창 띄우기
+	var opponentNickname = "";
 	const modal = document.querySelector("#modal");
 	const btnModal = document.querySelector("#chatting-logo");
 	btnModal.addEventListener("click", e => {
 		let cnt = 1;
+		document.querySelector("#m-chattingList").innerHTML = "";
 		$.ajax({
 			type: 'GET',
 			url: '/chatting/chattinglist',
 			success: function(response){
+				console.log(response)
 				$(response).each(function(index, member){
 					let list = "<tr><td id='existedChatting"+cnt+"' onclick='existedChatting("+cnt+")'>"+member.senderNickname+"</td></tr>";
 					$("#m-chattingList").append(list);
@@ -94,7 +97,7 @@
 	});
 
 // 상대방 닉네임 저장 변수
-var opponentNickname = "";
+// var opponentNickname = "";
 // 닉네임 검색 ajax
 	document.querySelector("#m-searchBtn").addEventListener("click", function(){
 		let cnt = 1;
@@ -211,11 +214,25 @@ var opponentNickname = "";
 	
 // 채팅방 나가기
 	document.querySelector("#m-prev").addEventListener("click", function(){
+		let cnt = 1;
 		clearInterval(time);
 		document.querySelector("#m-msgList").innerHTML = "";
+		document.querySelector("#m-chattingList").innerHTML = "";
 		document.querySelector("#m-msgList").style.display = "none";
 		document.querySelector("#m-nickNameList").style.display = "none";
-// 		document.querySelector("#m-chattingList").style.display = "";
+		$.ajax({
+			type: 'GET',
+			url: '/chatting/chattinglist',
+			success: function(response){
+				console.log(response)
+				$(response).each(function(index, member){
+					let list = "<tr><td id='existedChatting"+cnt+"' onclick='existedChatting("+cnt+")'>"+member.senderNickname+"</td></tr>";
+					$("#m-chattingList").append(list);
+					cnt++;
+				});
+			}
+		});
+		document.querySelector("#m-chattingList").style.display = "";
 	});
 
 	

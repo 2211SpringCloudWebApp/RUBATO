@@ -1,8 +1,11 @@
 package com.rubato.chatting.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,11 +32,20 @@ public class ChattingController {
 		String loginId = ((Member) session.getAttribute("loginUser")).getMemberId();
 		List<Chatting> chatList = chatService.selectChattingById(loginId);
 		for(Chatting chatting : chatList) {
-			String receiverId = chatting.getReceiverId();
-			String receiverNickname = chatService.getNicknameById(receiverId);
-			chatting.setReceiverNickname(receiverNickname);
+			if(chatting.getSenderNickname() == null) {
+				chatting.setSenderNickname(chatting.getReceiverNickname());
+			}
 		}
-		return chatList;
+		Set<String> senderNicknameSet = new HashSet<>(); // senderNickname 값을 저장할 HashSet
+		List<Chatting> distinctChatList = new ArrayList<>(); // 중복된 Chatting 객체를 제거한 리스트
+		
+		for (Chatting chatting : chatList) {
+		    if (senderNicknameSet.add(chatting.getSenderNickname())) {
+		        distinctChatList.add(chatting);
+		    }
+		}
+		
+		return distinctChatList;
 	}
 	
 	// [채팅] 채팅방 입장
@@ -46,9 +58,6 @@ public class ChattingController {
 			map.put("opponentNickname", opponentNickname);
 			map.put("loginId", loginId);
 			List<Chatting> msgList = chatService.selectAllChatting(map);
-//		for(Chatting msg : msgList) {
-//			System.out.println(msg.toString());
-//		}
 			return msgList;
 		}
 		else {
@@ -91,7 +100,6 @@ public class ChattingController {
 		sendInfo.put("msgContent", msgContent);
 		int result = chatService.insertChatting(sendInfo);
 		if(result>0) {
-			System.out.println("result>0 진입");
 			List<Chatting> msgList = chatService.selectAllChatting(sendInfo);
 			for(Chatting chatting : msgList) {
 				System.out.println(chatting.toString());
