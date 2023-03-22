@@ -5,13 +5,16 @@
 
         <head>
             <meta charset="UTF-8">
-            <title>자유게시판 목록</title>
+            <title>RUBATO 자유게시판</title>
             <!-- common header css & js -->
             <link rel="stylesheet" href="/resources/css/common/header.css">
             <!-- common footer css & js -->
             <link rel="stylesheet" href="/resources/css/common/footer.css">
             <!-- boardlist css & js -->
             <link rel="stylesheet" type="text/css" href="/resources/css/board/boardsearch.css">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
         </head>
 
         <body>

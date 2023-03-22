@@ -87,8 +87,10 @@ public class BoardController {
 	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
 	public String boardModify(@RequestParam("boardNo") Integer boardNo, @ModelAttribute Board board, Model model) {
 		try {
+			List<BoardComment> comments = bcService.selectCommentList(boardNo);
 			int result = bService.updateBoard(board);
 			if (result > 0) {
+				model.addAttribute("comments", comments);
 				return "redirect:/board/detail?boardNo=" + board.getBoardNo(); // boardNo 오타 수정
 			} else {
 				model.addAttribute("msg", "게시판 수정이 완료되지 않았습니다.");

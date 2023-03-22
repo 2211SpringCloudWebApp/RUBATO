@@ -11,7 +11,16 @@ public class BoardComment {
 	private Timestamp commentDate;
 	private Timestamp commentUpdate;
 	private int commentViewCount;
+	private String memberNickname;
 	
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
+	}
+
 	public BoardComment() {}
 
 	public BoardComment(int commentNo, int boardNo, String commentContent, String memberId, Timestamp commentDate,

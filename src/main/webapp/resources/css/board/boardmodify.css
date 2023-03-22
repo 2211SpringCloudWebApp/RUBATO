@@ -7,7 +7,7 @@
 
 #contentContainer{
     margin: 0 auto;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     width: 1000px;
 }
 
@@ -18,7 +18,8 @@
 }
 
 #contentDetail{
-    margin-bottom: 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 
@@ -104,7 +105,6 @@
     border: 1px solid #2FBDB1;
     background-color: white;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 #boardList:hover{
@@ -120,7 +120,6 @@
     border: 1px solid #ccc;
     background-color: white;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 
@@ -134,14 +133,13 @@
     width: 50px;
     height: 30px;
     display: inline-block;
-    border: 1px solid grey;
+    border: 1px solid #ccc;
     background-color: white;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 #boardDelete:hover{
-    background-color: #2FBDB1;
+    background-color: #ccc;
     color: white;
 }
 
@@ -177,7 +175,6 @@
     border: 1px solid #ccc;
     margin-right: 10px;
     float: left;
-    border-radius: 5px;
 }
 
 #commentSub input[type=submit]{
@@ -188,7 +185,6 @@
     background-color: white;
     margin-top: 20px;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 #commentSub input[type=submit]:hover{

@@ -4,16 +4,19 @@
     padding: 0;
     box-sizing: border-box;
 }
-#boardMai{
-    height: 100%;
-}
+
 
 #contentContainer{
     margin: 0 auto;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     width: 1000px;
     margin-top: 100px;
 }
+
+#commentDiv{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
 #commentContainer {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
@@ -40,6 +43,14 @@
     margin-bottom: 10px;
 }
 
+.detailLine2{
+    width: 1000px;
+    border-top: dotted 0.5px #ccc;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 #contentTop{
     width: 1000px;
     height: 40px;
@@ -61,6 +72,7 @@
 
 #contentWriter{
     width: 15%;
+    margin-bottom: 20px;
 }
 
 #contentDate{
@@ -93,7 +105,8 @@
     width: 50px;
     height: 30px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #2FBDB1;
+    background-color: white;
     cursor: pointer;
 }
 
@@ -119,6 +132,21 @@
     color: white;
 }
 
+#boardReport {
+    margin-left: 875px;
+    width: 50px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+#boardReport:hover{
+    background-color: #ccc;
+    color: white;
+}
+
 #boardDelete{
     margin-left: 810px;
     width: 50px;
@@ -130,7 +158,7 @@
 }
 
 #boardDelete:hover{
-    background-color: grey;
+    background-color: #ccc;
     color: white;
 }
 
@@ -149,6 +177,7 @@
 
 #commentWriter{
     font-size: 0.9rem;
+    color: #2FBDB1;
 }
 
 #commentDate {
@@ -192,7 +221,9 @@
     width: 100px;
     height: 50px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #2FBDB1;
+    background-color: #2FBDB1;
+    color: white;
     margin-top: 20px;
     margin-bottom: 20px;
     cursor: pointer;
@@ -200,7 +231,7 @@
 
 #commentSub input[type=submit]:hover{
     background-color: #2FBDB1;
-    color: white;
+    color: black;
 }
 
 
@@ -212,10 +243,11 @@
     background-color: white;
     cursor: pointer;
     text-align: center;
+    font-size: 14px;
 }
 
 .deleteCommentButton:hover{
-    background-color: grey;
+    background-color: #ccc;
     color: white;
 }
 

@@ -5,13 +5,16 @@
 
 		<head>
 			<meta charset="UTF-8">
-			<title>게시판 본문/댓글 상세</title>
+			<title>RUBATO 자유게시판</title>
 			<!-- common header css & js -->
 			<link rel="stylesheet" href="/resources/css/common/header.css">
 			<!-- common footer css & js -->
 			<link rel="stylesheet" href="/resources/css/common/footer.css">
 			<!-- boarddetail css & js -->
 			<link rel="stylesheet" type="text/css" href="/resources/css/board/boardmodify.css">
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 		</head>
 
 		<body>
@@ -38,7 +41,7 @@
 								<div id="contentWriter">${board.memberId }</div>
 								<div id="contentDate"><input type="text" name="boardDate">${board.boardDate }</div>
 								<div id="contentCount">조회수 : ${board.viewCount }</div>
-								<div id="contentComment">댓글 : ${boardComment.commentNo }</div>
+								<div id="contentComment">댓글 : ${commentCount }</div>
 							</div>
 							<div class="detailLine"></div>
 							<div id="contentText">
@@ -52,25 +55,6 @@
 							</div>
 						</div>
 					</form>
-				<!-- 작성된 댓글 목록 -->
-				<p>${bcList.size()}개의 댓글</p>
-				<div class="detailLine"></div>
-				<div id="commentDiv">
-					<c:forEach var="bc" items="${bcList}">
-						<div id="commentWriter">작성자 ${bc.memberId }</div>
-						<div id="commentDate">작성일 ${bc.commentDate}</div>
-						<div id="commentWD">${bc.commentContent }</div>
-					</c:forEach>
-				</div>
-				<div class="detailLine"></div>
-				<!-- 댓글 작성 -->
-				<div id="commentSub">
-					<form action="/board/comment" method="post">
-						<input type="hidden" name="boardNo" value="${boardComment.boardNo }">
-						<input type="text" placeholder="타인을 배려하는 마음을 담아 댓글을 작성해주세요." name="commentContent"> <input
-							type="submit" value="댓글 등록">
-					</form>
-				</div>
 			</div>
 
 			<script>
@@ -102,20 +86,15 @@
 
 				// isLoggedIn()에 맞는 함수 작성해주기
 				function isLoggedIn() {
-					var checkObj = "${loginUser.memberId }";
-					if(checkObj != "") {
+					var checkObj = "${loginUser.memberId}";
+					if (checkObj != "") {
 						return true;
-					}else{
+					} else {
 						return false;
 					}
-					// 쿠키를 사용하여 로그인 여부를 판단
-// 					var cookieValue = document.cookie
-// 						.split('; ')
-// 						.find(row => row.startsWith('login='))
-// 						?.split('=')[1];
-
-// 					return cookieValue === 'true';
 				}
 			</script>
 		</body>
+		<!-- common footer jsp include -->
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 		</html>

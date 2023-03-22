@@ -10,7 +10,7 @@
     margin: 0 auto;
     --background-color: pink;
     width: 1200px;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 #boardImg{
@@ -34,7 +34,7 @@
 
 .listLine{
     width: 1000px;
-    border-top: solid 0.5px #ccc;
+    border-top: dotted 0.5px #ccc;
     margin: 0 auto;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -74,10 +74,15 @@
 }
 
 #ulTable > li:first-child > ul > li {
-    background: #2FBDB1;
-    border-bottom: 1px solid #2FBDB1;
+    background: #2fbdb1ad;
+    border-bottom: 1px solid #32a79dcc;
     font-weight:bold;
     text-align:center;
+    color: white;
+    height: 40px;
+    margin-bottom: 25px;
+    font-size: 20px;
+    padding-top: 5px;
 }
 
 #ulTable > li > ul {
@@ -126,7 +131,7 @@
 
 .naviBtn:hover{
     background-color: #2FBDB1;
-    color: black;
+    color: white;
 }
 
 #divPaging a {
@@ -167,10 +172,11 @@
 }
 
 #listWrite input[type=button] {
-    border: 1px solid #ccc;
+    border: 1px solid #2FBDB1;
     width: 60px;
     height: 30px;
-    background-color: white;
+    background-color: #2FBDB1;
+    color: white;
     cursor: pointer;
     vertical-align: middle;
 }
@@ -191,7 +197,7 @@
 
 #liSearchOption input[type=submit]:hover{
     background-color: #2FBDB1;
-    color: black;
+    color: white;
 }
 
 #selSearchOption {

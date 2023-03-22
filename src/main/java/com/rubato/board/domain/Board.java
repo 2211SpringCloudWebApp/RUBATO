@@ -11,6 +11,7 @@ public class Board {
 	private Timestamp boardDate;
 	private Timestamp boardUpdate;
 	private int viewCount;
+	private String memberNickname;
 	
 	public Board() {}
 
@@ -25,6 +26,14 @@ public class Board {
 		this.boardDate = boardDate;
 		this.boardUpdate = boardUpdate;
 		this.viewCount = viewCount;
+	}
+
+	public String getMemberNickname() {
+		return memberNickname;
+	}
+
+	public void setMemberNickname(String memberNickname) {
+		this.memberNickname = memberNickname;
 	}
 
 	@Override
