@@ -1,8 +1,9 @@
 #apply-main {
     width: 800px;
     margin: 0 auto;
-    height: 700px;
+    height: 750px;
     line-height: 5;
+    padding-top: 100px;
 }
     #apply-main fieldset {
         border: 1px solid #ccc;

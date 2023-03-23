@@ -1,8 +1,9 @@
 #create-main {
     width: 800px;
     margin: 0 auto;
-    height: 1000px;
+    height: 850px;
     line-height: 5;
+    padding-top: 70px;
 }
     #create-main fieldset {
         border: 1px solid #ccc;

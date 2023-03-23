@@ -33,12 +33,6 @@ public class Apply {
 		this.lessonNo = lessonNo;
 		this.memberId = memberId;
 	}
-
-	@Override
-	public String toString() {
-		return "LessonApply [lessonNo=" + lessonNo + ", memberId=" + memberId + ", applyPrice=" + applyPrice
-				+ ", applyPlan=" + applyPlan + ", applyContent=" + applyContent + ", applyDate=" + applyDate + "]";
-	}
 	
 	public int getLessonNo() {
 		return lessonNo;

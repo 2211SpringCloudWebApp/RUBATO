@@ -34,14 +34,6 @@ public class Lesson {
 		this.lessonUpdate = lessonUpdate;
 	}
 
-	@Override
-	public String toString() {
-		return "Lesson [lessonNo=" + lessonNo + ", memberId=" + memberId + ", lessonTitle=" + lessonTitle
-				+ ", lessonPre=" + lessonPre + ", lessonContent=" + lessonContent + ", lessonArea=" + lessonArea
-				+ ", lessonPlan=" + lessonPlan + ", lessonPrice=" + lessonPrice + ", lessonDate=" + lessonDate
-				+ ", lessonUpdate=" + lessonUpdate + "]";
-	}
-
 	public int getLessonNo() {
 		return lessonNo;
 	}

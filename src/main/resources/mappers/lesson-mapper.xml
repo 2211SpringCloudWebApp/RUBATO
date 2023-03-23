@@ -31,13 +31,44 @@
 		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID WHERE LESSON_NO = #{lessonNo}
 	</select>
 	<select id="selectLessons" resultMap="lessonResultMap">
-		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID ORDER BY LESSON_NO DESC
 	</select>
 	<select id="selectMyLessons" resultMap="lessonResultMap">
 		SELECT * FROM LESSON WHERE MEMBER_ID = #{memberId}
 	</select>
 	<select id="getListcount" resultType="_int">
 		SELECT COUNT(*) FROM LESSON 
+	</select>
+	<select id="countByMember" resultType="_int">
+		SELECT COUNT(*) FROM LESSON WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="countBySearch" resultType="_int">
+		SELECT COUNT(*) FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+		<where>
+			<if test="searchCondition == 'all'">
+				M.MEMBER_NICKNAME LIKE '%' || #{searchValue} || '%' OR L.LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'title'">
+				L.LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'writer'">
+				M.MEMBER_NICKNAME LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
+	</select>
+	<select id="selectListByKeyword" resultMap="lessonResultMap">
+		SELECT L.*, M.MEMBER_NICKNAME FROM LESSON L JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+		<where>
+			<if test="searchCondition == 'all'">
+				M.MEMBER_NICKNAME LIKE '%' || #{searchValue} || '%' OR L.LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'title'">
+				L.LESSON_TITLE LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'writer'">
+				M.MEMBER_NICKNAME LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
 	</select>
 	
 </mapper>
