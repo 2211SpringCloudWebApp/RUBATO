@@ -39,6 +39,24 @@
 		<result property="viewCount" column="VIEW_COUNT"/>
 	</resultMap>
 	
+	<resultMap type="MarketSell" id="marketSellResultMap">
+		<id property="sellNo" column="SELL_NO"/>
+		<result property="sellTitle" column="SELL_TITLE"/>
+		<result property="sellContent" column="SELL_CONTENT"/>
+		<result property="sellPrice" column="SELL_PRICE"/>
+		<result property="sellArea" column="SELL_AREA"/>
+		<result property="productCondition" column="PRODUCT_CONDITION"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="writeDate" column="WRITE_DATE"/>
+		<result property="modDate" column="MOD_DATE"/>
+		<result property="sellCondition" column="SELL_CONDITION"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="img1" column="IMG1"/>
+		<result property="img2" column="IMG2"/>
+		<result property="img3" column="IMG3"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+	</resultMap>
+	
 	<!-- 회원관리 -->
 	<select id="selectMembers" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
@@ -77,6 +95,11 @@
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</delete>
+	<update id="updateStatus">
+		UPDATE MEMBER 
+		SET STATUS= CASE WHEN STATUS = 'Y' THEN 'N' ELSE 'Y' END
+		WHERE MEMBER_ID=#{memberId}
+	</update>
 	
 	
 	
@@ -123,8 +146,81 @@
 	</select>
 	<select id="getBoardListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
+		<choose>
+			<when test="searchCondition == 'category'">
+				WHERE BOARD_CATEGORY LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR BOARD_CATEGORY LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
 	</select>
+	<select id="selectBoardListByKeyword" resultMap="BoardResultMap">
+		SELECT * FROM BOARD
+		<choose>
+			<when test="searchCondition == 'category'">
+				WHERE BOARD_CATEGORY LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR BOARD_CATEGORY LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
 	<delete id="deleteBoard">
 		DELETE FROM BOARD WHERE BOARD_NO=#{boardNo}
 	</delete>
+	
+	<!-- 마켓 게시판 -->
+	<select id="selectMarketBoard" resultMap="marketSellResultMap">
+		select s.sell_no,s.sell_title,s.sell_price,s.sell_area,s.member_id,s.write_date, substr(i.img1, 57) as img1 from market_sell s join market_image i on i.sell_no = s.sell_no order by 6 desc
+	</select>
+	<select id="getMarketListCount" resultType="_int">
+		SELECT COUNT(*) FROM MARKET_SELL
+		<choose>
+			<when test="searchCondition == 'no'">
+				WHERE SELL_NO LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR SELL_NO LIKE '%' || #{searchValue} || '%' OR SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectMarketListByKeyword" resultMap="marketSellResultMap">
+		select s.sell_no,s.sell_title,s.sell_price,s.sell_area,s.member_id,s.write_date, substr(i.img1, 57) as img1 from market_sell s join market_image i on i.sell_no = s.sell_no
+		<choose>
+			<when test="searchCondition == 'no'">
+				WHERE s.SELL_NO LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'writer'">
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+				WHERE MEMBER_ID LIKE '%' || #{searchValue} || '%' OR s.SELL_NO LIKE '%' || #{searchValue} || '%' OR SELL_TITLE LIKE '%' || #{searchValue} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
+	<delete id="deleteMarketBoard">
+		DELETE FROM MARKET_SELL WHERE SELL_NO=#{sellNo}
+	</delete>
+	
+	
+	
+	
 </mapper>

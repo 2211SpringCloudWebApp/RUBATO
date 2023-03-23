@@ -18,6 +18,9 @@ body {
 a {
 	text-decoration: none;
 }
+a:visited {
+    color: #000;
+}
 /* #main-menu {
     width: 13%;
 } */
@@ -84,7 +87,7 @@ main{
 }
 
 #footer {
-/*     display: flex; */
+	display: flex;
     margin-top: 20px;
 }
 
@@ -96,6 +99,7 @@ main{
 }
 #page {
   text-align: center;
+  margin-left: 20px;
 }
 #page a {
   color: #000000b1;
@@ -120,7 +124,7 @@ main{
 table {
   border-collapse: separate;
   border-spacing: 0;
-  width: 1700px;
+  width: 1100px;
 }
 
 th,
@@ -153,4 +157,17 @@ tr:last-child td:first-child {
 }
 tr:last-child td:last-child {
   border-bottom-right-radius: 6px;
+}
+
+
+td a:visited {
+  color: #2fbdb1;
+}
+td a:hover {
+  color: red;
+}
+
+.a-color {
+	 color: #2fbdb1;
+	 font-weight: 800;
 }

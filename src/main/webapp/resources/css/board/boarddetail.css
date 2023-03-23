@@ -102,6 +102,7 @@
 
 #boardList{
     margin-left: 10px;
+    margin-bottom : 50px; /* 하얀 추가 - 신고버튼 사라지면 댓글이랑 간격이 좁아져서 수정함 */
     width: 50px;
     height: 30px;
     display: inline-block;
@@ -109,7 +110,17 @@
     background-color: white;
     cursor: pointer;
 }
-
+#reportList {
+	margin-left: 10px;
+    margin-bottom : 50px; 
+    width: 70px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
 #boardList:hover{
     background-color: #2FBDB1;
     color: white;

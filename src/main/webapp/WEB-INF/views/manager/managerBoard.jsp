@@ -11,14 +11,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/manager/managerMember.css">
+    <link rel="stylesheet" href="/resources/css/manager/managerBoard.css">
     <script src="/resources/js/manager/managerBoard.js" defer></script>
 </head>
 <body>
     <div id="container">
         <header>
             <div id="logo">
-                <img src="/resources/images/manager/logo.png" alt="로고">
+                <a href="/manager/main"><img src="/resources/images/manager/logo.png" alt="로고"></a>
             </div>
             <hr>
         </header>
@@ -33,12 +33,12 @@
                     <ul class="sub">
                         <li><a href="/manager/board">-- 자유게시판</a></li>  
                         <li><a href="/manager/lessonBoard">-- 레슨게시판</a></li>                
-                        <li><a href="#">-- 마켓게시판</a></li>                
+                        <li><a href="/manager/marketBoard">-- 마켓게시판</a></li>                
 
                     </ul>
                 </li>
                 <li class="group">
-                    <div class="title">신고관리</div>
+                    <div class="title"><a href="/manager/reportBoard">신고관리</a></div>
                 </li> 
                 <li class="group">
                     <div class="title"><a href="/manager/logout">로그아웃</a></div>
@@ -64,15 +64,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${boardList }" var="board">
+                              <c:forEach items="${boardList }" var="board">
                                 <tr>
-                                    <td style="width: 130px;">${board.boardNo }</td>
-                                    <td style="width: 100px;">${board.boardCategory }</td>
-                                    <td style="width: 130px;">${board.boardTitle }</td>
-                                    <td style="width: 210px;">${board.memberId }</td>
-                                    <td style="width: 150px;">${board.boardDate }</td>
-                                    <td style="width: 400px;">${board.viewCount }</td>
-                                    <td><a href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
+                                    <td>${board.boardNo }</td>
+                                    <td>${board.boardCategory }</td>
+                                    <td><a class="a-color" href="/board/detail?boardNo=${board.boardNo }">${board.boardTitle }</a></td>
+                                    <td>${board.memberId }</td>
+                                    <td>${board.boardDate }</td>
+                                    <td>${board.viewCount }</td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${board.boardNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>
@@ -80,8 +80,8 @@
             
                     <div id="footer">
                         <div id="select">
-                            <form action="/manager/searchMember" method="get">
-                                <select name="searchMemberCondition" id="">
+                            <form action="/manager/searchBoard" method="get">
+                                <select name="searchCondition" id="">
                                     <option value="all">전체</option>
                                     <option value="category">카테고리</option>
                                     <option value="writer">작성자</option>
@@ -93,6 +93,10 @@
                         <div id="page">
                         	<tr>
                         		<td colspan="7">
+                        			<!-- 한번에 1페이지로 이동 -->
+                        			<c:if test="${pi.currentPage - 1 != 0}">
+                        				<a href="/manager/board?page=1" class="naviBtn"> ◀◀ </a>
+									</c:if>
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
                         				<a href="/manager/board?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
@@ -114,6 +118,10 @@
 									<!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
 									<c:if test="${pi.currentPage == pi.maxPage}">
                         				<a href="javascript:void(0)" class="naviBtn"> ▶ </a>
+									</c:if>
+									<!-- 한번에 마지막 페이지로 이동 -->
+									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        				<a href="/manager/board?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
 									</c:if>
                         		</td>
                         	</tr>

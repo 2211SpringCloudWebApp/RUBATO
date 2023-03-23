@@ -18,6 +18,7 @@
 		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>
 		<typeAlias type="com.rubato.board.domain.BoardComment" alias="BoardComment"/>
 		<typeAlias type="com.rubato.chatting.domain.Chatting" alias="Chatting"/>
+		<typeAlias type="com.rubato.report.domain.Report" alias="Report"/>
 	</typeAliases>
 	<!-- mapper파일 매핑 -->
 	<mappers>
@@ -29,5 +30,6 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/boardcomment-mapper.xml"/>
 		<mapper resource="mappers/chatting-mapper.xml"/>
+		<mapper resource="mappers/report-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -11,14 +11,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/manager/managerMember.css">
+    <link rel="stylesheet" href="/resources/css/manager/managerLesson.css">
     <script src="/resources/js/manager/managerLessonBoard.js" defer></script>
 </head>
 <body>
     <div id="container">
         <header>
             <div id="logo">
-                <img src="/resources/images/manager/logo.png" alt="로고">
+                <a href="/manager/main"><img src="/resources/images/manager/logo.png" alt="로고"></a>
             </div>
             <hr>
         </header>
@@ -33,12 +33,12 @@
                     <ul class="sub">
                         <li><a href="/manager/board">-- 자유게시판</a></li>  
                         <li><a href="/manager/lessonBoard">-- 레슨게시판</a></li>                
-                        <li><a href="#">-- 마켓게시판</a></li>                
+                        <li><a href="/manager/marketBoard">-- 마켓게시판</a></li>                
 
                     </ul>
                 </li>
                 <li class="group">
-                    <div class="title">신고관리</div>
+                    <div class="title"><a href="/manager/reportBoard">신고관리</a></div>
                 </li> 
                 <li class="group">
                     <div class="title"><a href="/manager/logout">로그아웃</a></div>
@@ -57,7 +57,6 @@
                                     <th>글 번호</th>
                                     <th>제목</th>
                                     <th>작성자</th>
-                                    <th>내용</th>
                                     <th>작성날짜</th>
                                     <th>삭제</th>
                                 </tr>
@@ -65,13 +64,11 @@
                             <tbody>
                             <c:forEach items="${lbList }" var="lesson">
                                 <tr>
-                                    <td style="width: 30px;">${lesson.lessonNo }</td>
-                                    <td style="width: 100px;">${lesson.lessonTitle }</td>
-                                    <td style="width: 30px;">${lesson.memberId }</td>
-                                    <td style="width: 210px;">${lesson.lessonContent }</td>
-                                    <td style="width: 150px;">${lesson.lessonDate }</td>
-                                    <td style="width: 150px;"><a href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
-                                    
+                                    <td>${lesson.lessonNo }</td>
+                                    <td><a class="a-color" href="/lesson/detail?lessonNo=${lesson.lessonNo }">${lesson.lessonTitle }</a></td>
+                                    <td>${lesson.memberId }</td>
+                                    <td>${lesson.lessonDate }</td>
+                                    <td><a class="a-color" href="javascript:void(0)" onclick="deleteCheck('${lesson.lessonNo}');">삭제</a></td>
                                 </tr>
                               </c:forEach>
                             </tbody>
@@ -92,6 +89,9 @@
                         <div id="page">
                         	<tr>
                         		<td colspan="6">
+                        		<c:if test="${pi.currentPage - 1 != 0}">
+                        				<a href="/manager/lessonBoard?page=1" class="naviBtn"> ◀◀ </a>
+									</c:if>
 									<!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
 									<c:if test="${pi.currentPage - 1 != 0}">
                         				<a href="/manager/lessonBoard?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
@@ -113,6 +113,9 @@
 									<!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
 									<c:if test="${pi.currentPage == pi.maxPage}">
                         				<a href="javascript:void(0)" class="naviBtn"> ▶ </a>
+									</c:if>
+									<c:if test="${pi.currentPage + 1 <= pi.maxPage}">
+                        				<a href="/manager/lessonBoard?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
 									</c:if>
                         		</td>
                         	</tr>
