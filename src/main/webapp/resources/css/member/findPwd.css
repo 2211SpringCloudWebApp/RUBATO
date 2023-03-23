@@ -79,7 +79,7 @@
     }
 
 .main {
-    width: 250px;
+    width: 280px;
     --height: 300px;
     display: flex;
     justify-content: center;
@@ -119,7 +119,7 @@
 
 #submit{
 	width: 100%;
-    background-color: #2FBDB1;
+    background-color: #2fbdb1b0;
     border-color: transparent;
     color: white;
     margin-bottom : 20px

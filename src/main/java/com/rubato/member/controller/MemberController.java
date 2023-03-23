@@ -420,6 +420,7 @@ public class MemberController {
 				int totalCount = bcService.getBoardCommentListCount(memberId);
 				PageInfo pi = this.PageInfoComment(page, totalCount);
 				List<BoardComment> cList = bcService.searchListByComment(pi, memberId);
+				
 				model.addAttribute("cList", cList);
 				model.addAttribute("pi", pi);
 				return "/board/searchListByComment";
@@ -481,9 +482,7 @@ public class MemberController {
 				Member mOne = (Member)session.getAttribute("loginUser");
 				String memberId = (mOne).getMemberId();
 				List<MarketPayment> paymentList = marketService.searchbuyListById(memberId);
-				for(MarketPayment payment : paymentList) {
-					System.out.println(payment.toString());
-				}
+				
 				model.addAttribute("paymentList", paymentList);
 				return "/market/searchbuyListById";
 			} catch (Exception e) {

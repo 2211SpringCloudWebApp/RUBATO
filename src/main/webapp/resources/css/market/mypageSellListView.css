@@ -68,8 +68,10 @@ ul.sub li:hover {
 }
 #main-board {
     /* background-color: bisque; */
-    width: 70%;
-    margin-left: 20px;
+    width: 100%;
+    position: relative;
+    left: 2%;
+    margin-bottom : 35px;
 }
 #main-table {
     margin : 90px auto 0 180px;
