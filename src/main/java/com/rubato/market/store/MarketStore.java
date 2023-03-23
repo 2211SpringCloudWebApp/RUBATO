@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.rubato.market.domain.MarketComment;
 import com.rubato.market.domain.MarketImage;
+import com.rubato.market.domain.MarketPayment;
 import com.rubato.market.domain.MarketSell;
 import com.rubato.market.domain.PageInfo;
 import com.rubato.market.domain.SearchInfo;
@@ -138,5 +139,22 @@ public interface MarketStore {
 	public int updateComment(SqlSession session, Map<String, Object> comment);
 
 
-
+	
+//	민우추가
+	/**
+	 * 마이페이지 나의 판매 내역 Store
+	 * @param session
+	 * @param memberId
+	 * @return List<MarketSell>
+	 */
+	public List<MarketSell> searchsellListById (SqlSession session, String memberId);
+	
+	/**
+	 * 마이페이지 구매 신청 내역 Store
+	 * @param session
+	 * @param memberId
+	 * @return List<MarketPayment>
+	 */
+	public List<MarketPayment> searchbuyListById(SqlSession session, String memberId);
+	
 }

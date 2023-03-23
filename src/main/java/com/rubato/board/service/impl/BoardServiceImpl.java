@@ -54,7 +54,8 @@ public class BoardServiceImpl implements BoardService{
 		Board board = bStore.selectOneByNo(session, boardNo);
 		return board;
 	}
-
+	
+	//	민우 추가
 	@Override
 	public int updateBoard(Board board) {
 		return bStore.updateBoard(session, board);
@@ -75,7 +76,22 @@ public class BoardServiceImpl implements BoardService{
 	public int selectBoardCommentCount(int boardNo) {
 		return bStore.selectBoardCommentCount(session, boardNo);
 	}
-
-
+	
+	public int getBoardListCount(String memberId) {
+		int result = bStore.getBoardListCount(session ,memberId);
+		return result;
+	}
+	
+	@Override
+	public List<Board> selectListById(PageInfo pi, String memberId) {
+		List<Board> boardList = bStore.selectListById(session, pi ,memberId);
+		return boardList;
+	}
+	
+	@Override // 삭제
+	public List<Board> selectListById(String memberId) {
+		List<Board> boardList  = bStore.selectListById(session, memberId);
+		return boardList;
+	}
 
 }

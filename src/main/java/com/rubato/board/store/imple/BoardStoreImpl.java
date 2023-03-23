@@ -19,10 +19,15 @@ public class BoardStoreImpl implements BoardStore {
 		int result = session.insert("BoardMapper.insertBoard", board);
 		return result;
 	}
-
+	
 	@Override
 	public int getListCount(SqlSession session) {
 		int result = session.selectOne("BoardMapper.getListCount");
+		return result;
+	}
+	@Override
+	public int getListCount(SqlSession session, Search search) {
+		int result = session.selectOne("BoardMapper.searchListCount", search);
 		return result;
 	}
 
@@ -36,11 +41,6 @@ public class BoardStoreImpl implements BoardStore {
 		return bList;
 	}
 
-	@Override
-	public int getListCount(SqlSession session, Search search) {
-		int result = session.selectOne("BoardMapper.searchListCount", search);
-		return result;
-	}
 
 	@Override
 	public List<Board> selectListByKeyword(SqlSession session, PageInfo pi, Search search) {
@@ -57,7 +57,24 @@ public class BoardStoreImpl implements BoardStore {
 		Board board = session.selectOne("BoardMapper.selectOneByNo", boardNo);
 		return board;
 	}
+	
+//	민우 추가
+	@Override
+	public List<Board> selectListById(SqlSession session,PageInfo pi, String memberId) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Board> boardList = session.selectList("BoardMapper.selectListById", memberId, rowBounds);
+		return boardList;
+	}
 
+	@Override
+	public int getBoardListCount(SqlSession session, String memberId) {
+		int result = session.selectOne("BoardMapper.getBoardListCount" ,memberId);
+		return result;
+	}
+	
 	@Override
 	public int updateBoard(SqlSession session, Board board) {
 		int result = session.update("BoardMapper.updateBoard", board);
@@ -81,5 +98,12 @@ public class BoardStoreImpl implements BoardStore {
 		int result = session.selectOne("BoardMapper.selectBoardCommentCount", boardNo);
 		return result;
 	}
+	public List<Board> selectListById(SqlSession session, String memberId) {
+		List<Board> boardList = session.selectList("BoardMapper.selectListById", memberId);
+		return boardList;
+	}
+
+	
+	
 
 }

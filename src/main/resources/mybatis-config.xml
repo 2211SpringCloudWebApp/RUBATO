@@ -12,6 +12,7 @@
 		<typeAlias type="com.rubato.market.domain.MarketSell" alias="MarketSell"/>
 		<typeAlias type="com.rubato.market.domain.MarketImage" alias="MarketImage"/>
 		<typeAlias type="com.rubato.market.domain.MarketComment" alias="MarketComment"/>
+		<typeAlias type="com.rubato.market.domain.MarketPayment" alias="MarketPayment"/>
 		<typeAlias type="com.rubato.lesson.domain.Lesson" alias="Lesson"/>
 		<typeAlias type="com.rubato.lesson.domain.Apply" alias="Apply"/>
 		<typeAlias type="com.rubato.board.domain.Board" alias="Board"/>

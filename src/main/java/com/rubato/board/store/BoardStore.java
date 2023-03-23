@@ -58,6 +58,23 @@ public interface BoardStore {
 	 */
 	public Board selectOneByNo(SqlSession session, int boardNo);
 
+	//	민우 추가
+	/**
+	 * 아이디로 내가 쓴 글 Id로목록 조회 Store
+	 * @param session
+	 * @param memberId
+	 * @return List<Board>
+	 */
+	List<Board> selectListById(SqlSession session, PageInfo pi, String memberId);
+
+	/**
+	 * 마이페이지 내가 쓴 글 목록 카운트
+	 * @param session
+	 * @param memberId
+	 * @return int
+	 */
+	
+	public int getBoardListCount(SqlSession session,String memberId);
 	/**
 	 * 게시판 수정 Store
 	 * @param session
@@ -73,6 +90,17 @@ public interface BoardStore {
 	 * @return int
 	 */
 	public int deleteBoard(SqlSession session, int boardNo);
+	
+	/**
+	 * 마이페이지 목록 조회
+	 * @param session
+	 * @param memberId
+	 * @return List<Board>
+	 */
+	public List<Board> selectListById(SqlSession session, String memberId);
+
+	
+
 
 	/**
 	 * 조회수 증가 Store

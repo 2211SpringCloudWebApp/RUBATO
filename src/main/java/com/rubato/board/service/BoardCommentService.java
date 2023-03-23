@@ -3,6 +3,7 @@ package com.rubato.board.service;
 import java.util.List;
 
 import com.rubato.board.domain.BoardComment;
+import com.rubato.board.domain.PageInfo;
 
 public interface BoardCommentService {
 
@@ -26,7 +27,20 @@ public interface BoardCommentService {
 	 * @return List<BoardComment>
 	 */
 	public List<BoardComment> selectCommentList(int boardNo);
-
+	
+	//민우 추가
+	/**
+	 * 마이페이지 내가 쓴 댓글 Service
+	 * return List<BoardComment>
+	 */
+	
+	public List<BoardComment> searchListByComment(PageInfo pi, String memberId);
+	
+	/**
+	 * 마이페이지 내가 쓴 댓글 카운트 Service
+	 * return int
+	 */
+	public int getBoardCommentListCount(String memberId);
 	
 	
 }

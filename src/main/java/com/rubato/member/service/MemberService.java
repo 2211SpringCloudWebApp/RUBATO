@@ -1,5 +1,9 @@
 package com.rubato.member.service;
 
+import java.util.List;
+
+import com.rubato.market.domain.MarketSell;
+import com.rubato.market.domain.PageInfo;
 import com.rubato.member.domain.Member;
 
 public interface MemberService {
@@ -11,6 +15,12 @@ public interface MemberService {
 	 */
 	public Member selectIdPw(Member member);
 
+	/** 회원 아이디 찾기 Service
+	 * @param mParam
+	 * @return Member
+	 */
+	public Member findId(Member mParam);
+	
 	/**
 	 * 회원가입 Service
 	 * @param member
@@ -45,6 +55,56 @@ public interface MemberService {
 	 */
 	public int deleteMember(String memberId);
 
+	/**
+	 * 회원 비밀번호 찾기 Service
+	 * @param mParam
+	 * @return Member
+	 */
+	public Member findPwd(Member mParam);
+	
+	/**
+	 * 마이페이지 작성한 글 내역
+	 * @param memberId
+	 * @return int
+	 */
+	public int boardWriterCount(String memberId);
+	
+	/**
+	 * 마이페이지 내가 쓴 댓글 내역
+	 * @param memberId
+	 * @return int
+	 */
+	public int boardCommentCount(String memberId);
+	
+	/** 
+	 * 마이페이지 레슨 등록 내역
+	 * @param memberId
+	 * @return int
+	 */
+	public int lessonWriteCount(String memberId);
+	
+	/**
+	 * 마이페이지 레슨 신청 내역
+	 * @param memberId
+	 * @return
+	 */
+	public int lessonApplyCount(String memberId);
+	
+	/** 
+	 * 마이페이지 판매 등록 내역
+	 * @param memberId
+	 * @return int
+	 */
+	public int sellWriteCount(String memberId);
+	
+	/**
+	 * 마이페이지 구매 신청 내역
+	 * @param memberId
+	 * @return
+	 */
+	public int buyApplyCount(String memberId);
+	
+	
 	
 	
 	

@@ -26,5 +26,16 @@
 		SELECT BC.*, M.MEMBER_NICKNAME FROM BOARD_COMMENT BC JOIN MEMBER M ON BC.MEMBER_ID = M.MEMBER_ID WHERE BOARD_NO = #{boardNo} ORDER BY BOARD_NO DESC
 	</select>
 	
-	
+	<!-- 민우 추가 마이페이지 내가 쓴 댓글 -->
+	<select id="searchListByComment" resultMap="BoardCommentResultMap">
+		SELECT C.COMMENT_NO, C.COMMENT_CONTENT, C.COMMENT_DATE, C.MEMBER_ID, B.BOARD_CATEGORY, B.VIEW_COUNT 
+		FROM BOARD_COMMENT C 
+		JOIN BOARD B ON B.BOARD_NO = C.BOARD_NO 
+		WHERE C.MEMBER_ID = #{memberId}
+	</select>
+	<select id="getBoardCommentListCount" resultType="_int">
+		SELECT COUNT(*) AS COMMENT_COUNT
+		FROM BOARD_COMMENT C 
+		JOIN BOARD B ON B.BOARD_NO = C.BOARD_NO
+	</select>
 </mapper>

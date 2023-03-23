@@ -6,8 +6,10 @@ public class BoardComment {
 	
 	private int commentNo;
 	private int boardNo;
+	private String boardCategory;
 	private String commentContent;
 	private String memberId;
+	private int viewCount;
 	private Timestamp commentDate;
 	private Timestamp commentUpdate;
 	private int commentViewCount;
@@ -23,13 +25,15 @@ public class BoardComment {
 
 	public BoardComment() {}
 
-	public BoardComment(int commentNo, int boardNo, String commentContent, String memberId, Timestamp commentDate,
-			Timestamp commentUpdate, int commentViewCount) {
+	public BoardComment(int commentNo, int boardNo, String boardCategory, String commentContent, String memberId,
+			int viewCount, Timestamp commentDate, Timestamp commentUpdate) {
 		super();
 		this.commentNo = commentNo;
 		this.boardNo = boardNo;
+		this.boardCategory = boardCategory;
 		this.commentContent = commentContent;
 		this.memberId = memberId;
+		this.viewCount = viewCount;
 		this.commentDate = commentDate;
 		this.commentUpdate = commentUpdate;
 		this.commentViewCount = commentViewCount;
@@ -65,6 +69,14 @@ public class BoardComment {
 		this.boardNo = boardNo;
 	}
 
+	public String getBoardCategory() {
+		return boardCategory;
+	}
+
+	public void setBoardCategory(String boardCategory) {
+		this.boardCategory = boardCategory;
+	}
+
 	public String getCommentContent() {
 		return commentContent;
 	}
@@ -79,6 +91,14 @@ public class BoardComment {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
 
 	public Timestamp getCommentDate() {
@@ -96,7 +116,7 @@ public class BoardComment {
 	public void setCommentUpdate(Timestamp commentUpdate) {
 		this.commentUpdate = commentUpdate;
 	}
-	
+
 	
 
 }

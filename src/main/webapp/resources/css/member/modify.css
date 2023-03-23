@@ -5,7 +5,7 @@
     width: 1300px;
     align-items: center;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 130px;
 }
     #register-msg>p:nth-child(1){
         font-size: 1.5em;
@@ -32,7 +32,7 @@
     padding: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 800px;
-    height: 585px;
+    height: 685px;
     margin: 0 auto;
     background-color: white;
 }
@@ -124,9 +124,9 @@ table{
 
 
 #select-area {
-	margin-left : 545px;
+	margin-left : 535px;
     display: flex;
-    height: 70px;
+    height: 55px;
     width: 100%;
 }
 

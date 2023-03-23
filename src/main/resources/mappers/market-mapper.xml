@@ -35,9 +35,35 @@
 		<result property="modifyDate" column="MODIFY_DATE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 	</resultMap>
+	<resultMap type="MarketPayment" id="MarketPaymentresultMap">
+		<result property="paymentNo" column="PAYMENT_NO"/>
+		<result property="sellNo" column="SELL_NO"/>
+		<result property="sellTitle" column="SELL_TITLE"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="buyerId" column="BUYER_ID"/>
+		<result property="paymentPrice" column="PAYMENT_PRICE"/>
+		<result property="deleveryMsg" column="DELIVERY_MSG"/>
+		<result property="paymentDate" column="PAYMENT_DATE"/>
+		<result property="img1" column="IMG1"/>
+	</resultMap>
 	
 	<!-- SQL Query -->
 	<!-- select -->
+	<!-- 	민우 추가 -->
+	<select id="searchsellListById" resultMap="marketSellResultMap">
+		select s.sell_no,s.sell_title,s.sell_price,s.sell_area,s.member_id,s.write_date, substr(i.img1, 57) as img1 from market_sell s join market_image i on i.sell_no = s.sell_no where member_id = #{memberId}
+	</select>
+	<select id="searchbuyListById" resultMap="MarketPaymentresultMap">
+		select p.sell_no,p.sell_title,p.seller_id,p.payment_price,p.delivery_msg,p.payment_date, substr(i.img1, 57) as img1 from market_payment p join market_image i on p.sell_no = i.sell_no where buyer_id = #{memberId}
+	</select>
+<!-- 	<select id="sellListCount" resultType="_int">
+		SELECT COUNT(*) AS count
+		FROM market_sell s
+		JOIN market_image i ON i.sell_no = s.sell_no
+		WHERE s.member_id = #{memberId}
+		
+	</select> -->
+	
 	<select id="selectAllSell" resultMap="marketSellResultMap">
 <!-- 		SELECT * FROM MARKET_SELL INNER JOIN MARKET_IMAGE ON MARKET_SELL.SELL_NO = MARKET_IMAGE.SELL_NO -->
 		SELECT S.*, I.IMG1, COUNT(C.SELL_NO) AS COMMENT_COUNT

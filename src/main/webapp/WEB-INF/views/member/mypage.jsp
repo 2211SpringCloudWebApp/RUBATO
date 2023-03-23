@@ -31,8 +31,8 @@
                             <td>댓글 작성 내역</td>
                         </tr>
                         <tr>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><a href="/board/mypageMyWrite?memberId="${loginUser.memberId }>${count.boardWriteCount}</a></td>
+                            <td><a href="/board/searchListByComment?memberId="${loginUser.memberId }>${count.boardCommentCount }</a></td>
                         </tr>
                     </table> <br>
                     <table border="1">
@@ -41,26 +41,26 @@
                             <td>레슨 신청 내역</td>
                         </tr>
                         <tr>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><a href="/lesson/mylesson">${count.lessonWriteCount }</a></td>
+                            <td><a href="/apply/myapply">${count.lessonApplyCount }</a></td>
                         </tr>
                     </table> <br>
                     <table border="1">
                         <tr>
-                            <td>판매 등록 내역</td>
+                            <td>나의 판매 내역</td>
                             <td>구매 신청 내역</td>
                         </tr>
                         <tr>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><a href="/market/mypageSellListView">${count.sellWriteCount }</a></td>
+                            <td><a href="/market/searchbuyListById">${count.buyApplyCount }</a></td>
                         </tr>
                     </table>
                 </div>
             </div>
             <input type="hidden" name="memberId" value="${memberId}">
             <input type="submit" id="login-modify" value="회원정보수정">
-    </form>
     </div>
+    </form>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     </body>
