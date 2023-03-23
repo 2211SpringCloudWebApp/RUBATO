@@ -4,6 +4,7 @@
 	<resultMap type="BoardComment" id="BoardCommentResultMap">
 		<id 	property="commentNo"  	   column="COMMENT_NO"/>
 		<result property="boardNo" 		   column="BOARD_NO"/>
+		<result property="boardCategory" 		   column="BOARD_CATEGORY"/>
 		<result property="commentContent"  column="COMMENT_CONTENT"/>
 		<result property="memberId" 	   column="MEMBER_ID"/>
 		<result property="commentDate" 	   column="COMMENT_DATE"/>
@@ -36,6 +37,6 @@
 	<select id="getBoardCommentListCount" resultType="_int">
 		SELECT COUNT(*) AS COMMENT_COUNT
 		FROM BOARD_COMMENT C 
-		JOIN BOARD B ON B.BOARD_NO = C.BOARD_NO
+		JOIN BOARD B ON B.BOARD_NO = C.BOARD_NO WHERE C.MEMBER_ID = #{memberId}
 	</select>
 </mapper>

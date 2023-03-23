@@ -93,7 +93,6 @@
 					<button type="button" onclick="removeMember();">탈퇴하기</button>
 				</div>
 			</div>
-			</div>
 		</main>
 		<script>
 			function removeMember() {

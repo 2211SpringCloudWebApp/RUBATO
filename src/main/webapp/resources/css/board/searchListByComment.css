@@ -1,0 +1,215 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#boardMain{
+    margin-top: 100px;
+    margin: 0 auto 38px auto;
+    --background-color: pink;
+    width: 1200px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#boardMain h1{
+    margin-top: 100px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#boardListUl{
+	margin-bottom: 20px;
+}
+
+.listLine{
+    width: 1000px;
+    border-top: solid 0.5px #ccc;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+#boardList ul, li{ 
+    list-style:none;
+    text-align:center;
+    padding:0;
+    margin:0;
+}
+
+#boardList{
+    width: 1000px;
+    margin: 0 auto; /*가운데 정렬*/
+}
+
+#boardList > ul > li:first-child {
+    text-align: center;
+    font-size:14pt;
+    height:40px;
+    vertical-align:middle;
+    line-height:30px;
+}
+
+#ulTable {margin-top:10px;}
+
+#boardTitlecss{
+    text-decoration: none;
+    color: black;
+}
+
+#boardTitlecss a:link, a:visited{
+    text-decoration: none;
+    color: black;
+}
+
+#ulTable > li:first-child > ul > li {
+    background-color:#2FBDB1;
+    font-weight:bold;
+    text-align:center;
+}
+
+#ulTable > li > ul {
+    clear:both;
+    padding:0px auto;
+    position:relative;
+    min-width:40px;
+}
+#ulTable > li > ul > li { 
+    float:left;
+    font-size:10pt;
+    --border-bottom:1px solid #ccc;
+    vertical-align:baseline;
+}    
+
+#ulTable > li > ul > li:first-child                  {width:10%;} /*No 열 크기*/
+#ulTable > li > ul > li:first-child +li              {width:15%;} /*분류 열 크기*/
+#ulTable > li > ul > li:first-child +li+li           {width:50%;} /*제목 열 크기*/
+#ulTable > li > ul > li:first-child +li+li+li        {width:15%;} /*작성일 열 크기*/
+#ulTable > li > ul > li:first-child +li+li+li+li     {width:10%;} /*작성자 열 크기*/
+
+.left {
+    text-align : center;
+}
+
+#naviDIV{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    --margin-bottom: 50px;
+    --position: absolute;
+    --margin-left: 230px;
+}
+
+#divPaging {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.naviBtn{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.naviBtn:hover{
+    background-color: #2FBDB1;
+    color: black;
+}
+
+#divPaging a {
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    font-size: 12px;
+    margin-left: 1px;
+    padding: 1px 10px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 25px;
+}
+
+#divPaging a:first-child{
+    margin-left: 0;
+}
+
+#divPaging a:link, a:visited{
+    text-decoration: none;
+    color: black;
+}
+
+#liSearchOption {clear:both;}
+#liSearchOption > div {
+    margin:0 auto; 
+    margin-top: 250px; 
+    width:auto; 
+    height:100px;
+}
+
+#liSearchOption:focus { outline:none; } /*검색창 테두리 생기지 않게 하기*/
+
+#listWrite {
+    width: 1000px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -50px;
+  }
+
+#listWrite input[type=button] {
+    border: 1px solid #2FBDB1;
+    width: 60px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+#listWrite input[type=button]:hover{
+    background-color: #2FBDB1;
+    color: black;
+}
+
+#liSearchOption input[type=submit] {
+    border: 1px solid #2FBDB1;
+    width: 40px;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+#liSearchOption input[type=submit]:hover{
+    background-color: #2FBDB1;
+    color: black;
+}
+
+#selSearchOption {
+    border: 1px solid #2FBDB1;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#liSearchOption input[id=txtKeyWord]{
+    border: 1px solid #2FBDB1;
+    width: 150px;
+    height: 30px;
+    color: #2FBDB1;
+    border-radius: 5px;
+}
+
+#searchDIV{
+	margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+
+
+

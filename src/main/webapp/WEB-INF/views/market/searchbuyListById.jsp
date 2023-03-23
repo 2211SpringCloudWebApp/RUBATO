@@ -54,56 +54,6 @@
                               </c:forEach>
                             </tbody>
                         </table>
-            		
-                    <div id="footer">
-                        <div id="select">
-                            <form action="/manager/searchMarket" method="get">
-                                <select name="searchCondition" id="">
-                                    <option value="all">전체</option>
-                                    <option value="no">글번호</option>
-                                    <option value="title">제목</option>
-                                    <option value="writer">작성자</option>
-                                </select>
-                                <input type="text" name="searchValue" value="${keyword }"placeholder="검색">
-                                <input type="submit" id="search-btn" name="search-btn"value="검색">
-                            </form>
-                        </div>
-                        <div id="page">
-                            <tr>
-                                <td colspan="7">
-                                    <c:if test="${pi.currentPage - 1 != 0}">
-                                        <a href="/manager/marketBoard?page=1" class="naviBtn"> ◀◀ </a>
-                                    </c:if>
-                                    <!--'<' 누르면 현재페이지 -1 한 페이지를 보여주기 -->
-                                    <c:if test="${pi.currentPage - 1 != 0}">
-                                        <a href="/manager/marketBoard?page=${pi.currentPage - 1 }" class="naviBtn"> ◀ </a>
-                                    </c:if>
-                                    <c:if test="${pi.currentPage - 1 == 0}">
-                                        <a href="javascript:void(0)" class="naviBtn"> ◀ </a>
-                                    </c:if>
-                                    <!--ㄴ 현재페이지 - 1 해서 0이 아닐때만 이전으로 이동 0 이면 a링크 동작 x -->
-                                    <c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-                                        <c:url var="pageUrl" value="/manager/marketBoard">
-                                            <c:param name="page" value="${p }"></c:param>
-                                        </c:url>
-                                        <a href="${pageUrl }" class="naviBtn">${p }</a>&nbsp;
-                                    </c:forEach>
-                                    <!--현재페이지 + 1 이 최대페이지랑 똑같을때까지 '>' 이걸 보여주겠다 -->
-                                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
-                                        <a href="/manager/marketBoard?page=${pi.currentPage + 1 }" class="naviBtn"> ▶ </a>
-                                    </c:if>
-                                    <!--근데 현재페이지가 최대페이지랑 같다면 a링크는 동작하지 x -->
-                                    <c:if test="${pi.currentPage == pi.maxPage}">
-                                        <a href="javascript:void(0)" class="naviBtn"> ▶ </a>
-                                    </c:if>
-                                    <c:if test="${pi.currentPage + 1 <= pi.maxPage}">
-                                        <a href="/manager/marketBoard?page=${pi.maxPage }" class="naviBtn"> ▶▶ </a>
-                                    </c:if>
-                                </td>
-                            </tr>
-                        </div>
-                    </div>
-                </div>
             </div>
             <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

@@ -68,11 +68,11 @@ ul.sub li:hover {
 }
 #main-board {
     /* background-color: bisque; */
-    width: 70%;
+    --	width: 70%;
     margin-left: 20px;
 }
 #main-table {
-    margin : 90px auto 0 180px;
+    margin : 90px auto 35px 180px;
 }
 main{ 
     display: flex; 

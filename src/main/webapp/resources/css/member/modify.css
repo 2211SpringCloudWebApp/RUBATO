@@ -124,10 +124,9 @@ table{
 
 
 #select-area {
-	margin-left : 535px;
-    display: flex;
     height: 55px;
-    width: 100%;
+	position: relative;
+    left: 37%;
 }
 
 #button-area{
@@ -138,6 +137,7 @@ table{
     --margin-left: 245px;
     --width: 70%;
     --flex: auto;
+    float: left;
     
     
 
@@ -145,7 +145,7 @@ table{
     #button-area input{
         border: none;
         padding: 7.5px 100px;
-        background-color: #3eeadc;
+        background-color: #2fbdb1b0;
         color: white;
         font-weight: bolder;
         font-size: 1.2em;
@@ -160,6 +160,7 @@ table{
 #delete-area {
     width: 30%;
     flex : auto;
+     float: left;
 }
 	#delete-area button{
 	padding: 10px;

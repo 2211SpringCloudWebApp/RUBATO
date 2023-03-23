@@ -11,7 +11,7 @@
             <!-- common footer css & js -->
             <link rel="stylesheet" href="/resources/css/common/footer.css">
             <!-- boardlist css & js -->
-            <link rel="stylesheet" type="text/css" href="/resources/css/board/mypageMyWrite.css">
+            <link rel="stylesheet" type="text/css" href="/resources/css/board/searchListByComment.css">
         </head>
 
         <body>
@@ -31,7 +31,6 @@
                                 <li>댓글내용</li>
                                 <li>작성일</li>
                                 <li>작성자</li>
-                                <li>조회수</li>
                             </ul>
                         </li>
                         <!-- 게시물이 출력될 영역 -->
@@ -43,7 +42,6 @@
                                     <li class="left">${board.commentContent }</a></li>
                                     <li class="boardLi">${board.commentDate }</li>
                                     <li>${board.memberId }</li>
-                                    <li>${board.viewCount }</li>
                                     <li>
                                         <div class="listLine"></div>
                                     </li>
