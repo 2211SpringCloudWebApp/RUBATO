@@ -21,6 +21,7 @@
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
     overflow-y: scroll;
+    margin-bottom: 50px;
 }
 #commentContainer::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -89,7 +90,7 @@
 
 #contentText{
     width: 800px;
-    height: 500px;
+    height: 250px;
     margin-bottom: 50px;
     margin-top: 30px;
     display: block;
