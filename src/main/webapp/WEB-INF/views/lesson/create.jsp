@@ -15,26 +15,6 @@
     <link rel="stylesheet" href="/resources/css/common/footer.css">
 </head>
 <body> 
-    <script>
-        function check() {
-            var lessonTitle = document.querySelector("#lesson-title");
-            var lessonPlan = document.querySelector("#lesson-plan");
-
-            var titleRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;
-            var planRegExp = /^[a-zA-Zㄱ-힣0-9]{5,20}$/;    
-
-            if(!titleRegExp.test(lessonTitle).value) {
-                lessonTitle.style.backgroundColor = 'gold;'; 
-                alert("레슨명은 5~20자로 만들어 주세요!");
-                return false;
-            } else if(!planRegExp.test(lessonPlan).value) {
-            	lessonPlan.style.backgroundColor = 'gold;'; 
-                alert("한줄 소개는 5~20자로 적어주세요!");
-                return false;
-            } 
-        }
-    </script>
-
 
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div id="create-main">   
@@ -44,7 +24,7 @@
                 <ul id="lesson-create">
                     <li>
                         <label for="lesson-title">레슨 이름</label>
-                        <input type="text" id="lesson-title" name="lessonTitle">
+                        <input type="text" id="lesson-title" name="lessonTitle" maxlength="30">
                     </li>
                     <li>
                         <label for="lesson-area">레슨 지역</label>
@@ -85,7 +65,7 @@
                     </li>
                     <li>
                         <label for="lesson-pre">한줄 소개</label>
-                        <input type="text" id="lesson-pre" name="lessonPre" placeholder="목록에서 보일 한줄 소개를 적어주세요.">
+                        <input type="text" id="lesson-pre" name="lessonPre" placeholder="목록에서 보일 한줄 소개를 적어주세요." maxlength="30">
                     </li>
                     <li>
                         <label for="lesson-content">상세 소개</label>
@@ -94,11 +74,17 @@
                 </ul>
             </fieldset>
                 <div id="create-btns">
-                    <input type="submit" value="레슨 생성" class="create-btn" onclick="return check();">
+                    <input type="submit" value="레슨 생성" class="create-btn">
                     <input type="reset" value="초기화" class="create-btn">
                 </div>
         </form> 
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+    <script>
+    var content = document.querySelector("textarea");
+    content = content.value.replace("\r\n", "<br>")
+
+    </script>
 </body>
 </html>

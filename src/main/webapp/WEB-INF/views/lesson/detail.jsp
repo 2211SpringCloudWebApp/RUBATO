@@ -29,9 +29,9 @@
             <div>${lesson.lessonPlan}</div>
         </div>
         <div id="detail-intro">
-            <fieldset>
+            <fieldset id="detail-text">
                 <legend>상세설명</legend>
-                ${lesson.lessonContent}
+                <p style="white-space: pre-line;">${lesson.lessonContent}</p>
             </fieldset>
         </div>       
         <div id="detail-btns">
@@ -57,6 +57,7 @@
                 location.href="/apply/create?lessonNo=${lesson.lessonNo}";
             } 
         }
+
     </script>
 
 </body>

@@ -4,6 +4,7 @@
     font-family: 'Noto Sans KR', sans-serif;
     text-align: center;
     margin: 0 auto;
+    padding-top: 100px;
 }
     #error-container h2 {
         color: #2fbdb1;

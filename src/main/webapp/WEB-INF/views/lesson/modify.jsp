@@ -23,7 +23,7 @@
                 <ul id="lesson-modify">
                     <li>
                         <label for="lesson-title">레슨 이름</label>
-                        <input type="text" id="lesson-title" name="lessonTitle" value="${lesson.lessonTitle}">
+                        <input type="text" id="lesson-title" name="lessonTitle" value="${lesson.lessonTitle}" maxlength="30">
                     </li>
                     <li>
                         <label for="lesson-area">레슨 지역</label>
@@ -49,7 +49,6 @@
                         </select>
                     </li>
                     <li>
-                        <!-- 자바스크립트 써서 선택한값 선택되어있게 하기 -->
                         <label for="lesson-price">희망 금액 (회당)</label>
                         <select name="lessonPrice" id="lesson-price">
                             <option value="0~3">0~3</option>
@@ -65,7 +64,7 @@
                     </li>
                     <li>
                         <label for="lesson-pre">한줄 소개</label>
-                        <input type="text" id="lesson-pre" name="lessonPre" value="${lesson.lessonPre}">
+                        <input type="text" id="lesson-pre" name="lessonPre" value="${lesson.lessonPre}" maxlength="30">
                     </li>
                     <li>
                         <label for="lesson-content">상세 소개</label>
