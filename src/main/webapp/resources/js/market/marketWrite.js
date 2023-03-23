@@ -140,10 +140,11 @@ document.querySelector("#enroll-btn").addEventListener("click", (event)=>{
 
 // 2. 파일 확장자 검증 코드
 var checkExt = (name)=>{
-    var reg = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
-    let result = 0;
-    if(!name.match(reg)) {
-        result += 1;
+    var allowedExtensions = ["jpg", "jpeg", "png", "gif", "bmp"];
+    var fileExtension = name.split('.').pop().toLowerCase();
+
+    if(!allowedExtensions.includes(fileExtension)) {
+        return 1;
     }
-    return result;
+    return 0;
 }
