@@ -55,7 +55,7 @@
                 <div id="main2-img">
                     <div class="lesson-hot" id="lesson-1">
                         <p>오늘 등록된 따끈따끈한 레슨</p>
-                        <div><a href="">
+                        <div><a href="/lesson/detail?lessonNo=182">
                             <br><br><br><br>
                             있어보이게 피아노 치는 법 <br>
                             일주일에 한번 레슨으로 한달에 한곡 완성!
@@ -63,7 +63,7 @@
                     </div>
                     <div class="lesson-hot" id="lesson-2">
                         <p>조회수 급상승↗</p>
-                        <div><a href="">
+                        <div><a href="/lesson/detail?lessonNo=181">
                             <br><br><br><br>
                             대형기획사 현직 트레이너가 알려드리는 <br>
                             발성 기초부터 보컬 스킬까지
