@@ -5,80 +5,56 @@
 
 		<head>
 			<meta charset="UTF-8">
-			<title>게시판 본문/댓글 상세</title>
+			<title>RUBATO 자유게시판</title>
 			<!-- common header css & js -->
 			<link rel="stylesheet" href="/resources/css/common/header.css">
 			<!-- common footer css & js -->
 			<link rel="stylesheet" href="/resources/css/common/footer.css">
 			<!-- boarddetail css & js -->
-			<link rel="stylesheet" type="text/css" href="/resources/css/board/boarddetail.css">
+			<link rel="stylesheet" type="text/css" href="/resources/css/board/boardmodify.css">
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
 		</head>
 
 		<body>
 			<!-- common header jsp include -->
 			<jsp:include page="/WEB-INF/views/common/header.jsp" />
 			<div id="contentContainer">
-				<form action="/board/modify" method="get">
-					<div id="contentDetail">
-						<h1 style="color: #2FBDB1;">자유게시판</h1>
-						<div class="detailLine"></div>
-						<div id="contentTop">
-							<div id="contentCategory">
-								<select id="selwriteOption" name="boardCategory">
-									<option value='G' <c:if test="${board.boardCategory eq 'G' }">selected</c:if>>고민
-									</option>
-									<option value='L' <c:if test="${board.boardCategory eq 'L' }">selected</c:if>>레슨후기
-									</option>
-									<option value='I' <c:if test="${board.boardCategory eq 'I' }">selected</c:if>>일상공유
-									</option>
-									<option value='K' <c:if test="${board.boardCategory eq 'K' }">selected</c:if>>기타
-									</option>
-								</select>
+					<form action="/board/modify" method="post">
+						<input type="hidden" name="boardNo" value="${boardNo }" />
+						<div id="contentDetail">
+							<h1>자유게시판</h1>
+							<div class="detailLine"></div>
+							<div id="contentTop">
+								<div id="contentCategory">
+									<select id="selwriteOption" name="boardCategory">
+										<option value='고민' <c:if test="${board.boardCategory eq 'G' }">selected</c:if>>고민</option>
+										<option value='레슨후기' <c:if test="${board.boardCategory eq 'L' }">selected</c:if>>레슨후기</option>
+										<option value='일상공유' <c:if test="${board.boardCategory eq 'I' }">selected</c:if>>일상공유</option>
+										<option value='기타' <c:if test="${board.boardCategory eq 'K' }">selected</c:if>>기타</option>
+									</select>
+								</div>
+								<div id="contentSubject">
+									<input type="text" value="${board.boardTitle }" name="boardTitle">
+								</div>
+								<div id="contentWriter">${board.memberId }</div>
+								<div id="contentDate"><input type="text" name="boardDate">${board.boardDate }</div>
+								<div id="contentCount">조회수 : ${board.viewCount }</div>
+								<div id="contentComment">댓글 : ${commentCount }</div>
 							</div>
-							<div id="contentSubject">
-								<input type="text" value="${board.boardTitle }" name="boardTitle">
+							<div class="detailLine"></div>
+							<div id="contentText">
+								<textarea rows="30" cols="100" name="boardContent">${board.boardContent }</textarea>
 							</div>
-							<div id="contentWriter" name="memberId">${board.memberId }</div>
-							<div id="contentDate" name="boardDate">${board.boardDate }</div>
-							<div id="contentCount" name="viewCount">조회수 : ${board.viewCount }</div>
-							<div id="contentComment" name="commentNo">댓글 : ${boardComment.commentNo }</div>
+							<div class="detailLine"></div>
+							<div id="detailBtn">
+								<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> 
+								<input type="submit" value="등록" id="boardModify">
+								<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
+							</div>
 						</div>
-						<div class="detailLine"></div>
-						<div id="contentText">
-							<textarea rows="30" cols="100" name="boardContent">${board.boardContent }</textarea>
-						</div>
-						<div class="detailLine"></div>
-						<div id="detailBtn">
-							<input type="button" value="목록" id="boardList" onclick="location.href='/board/list'"> 
-							<input type="button" value="등록" id="boardModify"
-								onclick="location.href='/board/detail?boardNo=${board.boardNo}'">
-							<input type="button" value="삭제" id="boardDelete" onclick="removeCheck(${board.boardNo });">
-							<input type="button" value="신고" id="boardReport">
-						</div>
-					</div>
-				</form>
-				<!-- 작성된 댓글 목록 -->
-				<p>0개의 댓글</p>
-				<div class="detailLine"></div>
-				<div id="commentDiv">
-
-					<div id="commentWriter">작성자</div>
-					<div id="commentDate">작성일</div>
-
-					<div id="commentWD">
-						<input type="text">
-					</div>
-
-				</div>
-				<div class="detailLine"></div>
-				<!-- 댓글 작성 -->
-				<div id="commentSub">
-					<form action="/board/comment" method="post">
-						<input type="hidden" name="boardNo" value="${boardComment.boardNo }">
-						<input type="text" placeholder="타인을 배려하는 마음을 담아 댓글을 작성해주세요." name="commentContent"> <input
-							type="submit" value="댓글 등록">
 					</form>
-				</div>
 			</div>
 
 			<script>
@@ -110,23 +86,15 @@
 
 				// isLoggedIn()에 맞는 함수 작성해주기
 				function isLoggedIn() {
-					var checkObj = "${loginUser.memberId }";
-					if(checkObj != "") {
+					var checkObj = "${loginUser.memberId}";
+					if (checkObj != "") {
 						return true;
-					}else{
+					} else {
 						return false;
 					}
-					// 쿠키를 사용하여 로그인 여부를 판단
-// 					var cookieValue = document.cookie
-// 						.split('; ')
-// 						.find(row => row.startsWith('login='))
-// 						?.split('=')[1];
-
-// 					return cookieValue === 'true';
 				}
-
 			</script>
-
 		</body>
-
+		<!-- common footer jsp include -->
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 		</html>

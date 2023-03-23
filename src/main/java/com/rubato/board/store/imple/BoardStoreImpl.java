@@ -70,4 +70,16 @@ public class BoardStoreImpl implements BoardStore {
 		return result;
 	}
 
+	@Override
+	public int updateViewCount(SqlSession session, int boardNo) {
+		int result = session.update("BoardMapper.updateViewCount", boardNo);
+		return result;
+	}
+
+	@Override
+	public int selectBoardCommentCount(SqlSession session, int boardNo) {
+		int result = session.selectOne("BoardMapper.selectBoardCommentCount", boardNo);
+		return result;
+	}
+
 }

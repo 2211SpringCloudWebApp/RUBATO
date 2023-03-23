@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardCommentMapper">
 	<resultMap type="BoardComment" id="BoardCommentResultMap">
-		<id 	property="commentNo"  	 column="COMMENT_NO"/>
-		<result property="boardNo" 		 column="BOARD_NO"/>
-		<result property="commentContent" 	 column="COMMENT_CONTENT"/>
-		<result property="memberId" 	 column="MEMBER_ID"/>
-		<result property="commentDate" 	 column="COMMENT_DATE"/>
-		<result property="commentUpdate" 	 column="COMMENT_UPDATE"/>
+		<id 	property="commentNo"  	   column="COMMENT_NO"/>
+		<result property="boardNo" 		   column="BOARD_NO"/>
+		<result property="commentContent"  column="COMMENT_CONTENT"/>
+		<result property="memberId" 	   column="MEMBER_ID"/>
+		<result property="commentDate" 	   column="COMMENT_DATE"/>
+		<result property="commentUpdate"   column="COMMENT_UPDATE"/>
+		<result property="memberNickname"  column="MEMBER_NICKNAME"/>
 	</resultMap>
 	
 	<!-- 댓글 등록 -->
@@ -22,7 +23,7 @@
 	
 	<!-- 댓글 목록 -->
 	<select id="selectCommentList" resultMap="BoardCommentResultMap">
-		SELECT * FROM BOARD_COMMENT ORDER BY BOARD_NO DESC
+		SELECT BC.*, M.MEMBER_NICKNAME FROM BOARD_COMMENT BC JOIN MEMBER M ON BC.MEMBER_ID = M.MEMBER_ID WHERE BOARD_NO = #{boardNo} ORDER BY BOARD_NO DESC
 	</select>
 	
 	

@@ -59,4 +59,19 @@ public interface BoardService {
 	 */
 	public int deleteBoard(int boardNo);
 
+	/**
+	 * 조회수 증가 Service
+	 * @param boardNo
+	 * @return int
+	 */
+	public int updateViewCount(int boardNo);
+	
+	
+	/**
+	 * 댓글 개수 Service
+	 * @param boardNo
+	 * @return int
+	 */
+	public int selectBoardCommentCount(int boardNo);
+
 }

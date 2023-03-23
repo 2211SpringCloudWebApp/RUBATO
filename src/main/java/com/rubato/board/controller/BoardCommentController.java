@@ -9,16 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rubato.board.domain.Board;
 import com.rubato.board.domain.BoardComment;
 import com.rubato.board.service.BoardCommentService;
+import com.rubato.board.service.BoardService;
 import com.rubato.member.domain.Member;
 
 @Controller
@@ -27,6 +30,8 @@ public class BoardCommentController {
 	private BoardCommentService bcService;
 	@Autowired
 	private HttpSession httpSession;
+	@Autowired
+	private BoardService bService;
 
 	// 댓글 목록
 	@RequestMapping(value = "/boradcomment/bcList", method = RequestMethod.GET)
@@ -75,13 +80,15 @@ public class BoardCommentController {
 	}
 
 	// 댓글 삭제
-	@DeleteMapping("/boardComment/{commentNo}")
-	public String deleteComment(@PathVariable("commentNo") int commentNo, Model model) {
+	@GetMapping("/boardComment/remove/{refBoardNo}/{commentNo}")
+	public String deleteComment(
+			@PathVariable("commentNo") int commentNo
+			, @PathVariable("refBoardNo") int refBoardNo
+			, Model model) {
 		try {
 			int result = bcService.deleteComment(commentNo);
 			if (result > 0) {
-				bcService.deleteComment(commentNo);
-				return "redirect:/board/detail";
+				return "redirect:/board/detail?boardNo="+refBoardNo;
 			} else {
 				model.addAttribute("msg", "댓글이 삭제 되지 않았습니다.");
 				return "common/error";
@@ -92,4 +99,12 @@ public class BoardCommentController {
 			return "common/error";
 		}
 	}
+	// 댓글 조회수
+	@GetMapping("/board/commentViewCount")
+	@ResponseBody
+	public int selectBoardCommentCount(@RequestParam("boardNo") int boardNo) {
+	    int commentCount = bService.selectBoardCommentCount(boardNo);
+	    return commentCount;
+	}
+	
 }

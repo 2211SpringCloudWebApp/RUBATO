@@ -74,5 +74,21 @@ public interface BoardStore {
 	 */
 	public int deleteBoard(SqlSession session, int boardNo);
 
+	/**
+	 * 조회수 증가 Store
+	 * @param session
+	 * @param boardNo
+	 * @return int
+	 */
+	public int updateViewCount(SqlSession session, int boardNo);
+
+	/**
+	 * 댓글 개수 Store
+	 * @param session
+	 * @param boardNo
+	 * @return int
+	 */
+	public int selectBoardCommentCount(SqlSession session, int boardNo);
+
 
 }
