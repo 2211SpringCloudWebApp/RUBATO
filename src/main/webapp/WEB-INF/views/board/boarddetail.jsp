@@ -46,7 +46,8 @@
 										<input type="button" value="신고" id="boardReport" onclick="location.href='/report/writeView?boardCategory=${board.boardCategory}&boardNo=${board.boardNo} '">
 									</c:if>
 									<c:if test="${loginUser.memberId == 'mngmt2023' }">
-										<input type="button" value="리스트" id="reportList" onclick="location.href='/manager/reportBoard'">
+										<input type="button" value="자유게시판리스트" id="reportList" onclick="location.href='/manager/board'">
+										<input type="button" value="신고리스트" id="reportList" onclick="location.href='/manager/reportBoard'">
 									</c:if>
 								</div>
 						</div>
