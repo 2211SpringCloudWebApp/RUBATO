@@ -61,6 +61,14 @@
     background-color: #2FBDB1;
     color: white;
 }
+input[type=submit] {
+	margin-top: 20px;
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #2FBDB1;
+    background-color: white;
+}
 
 #submitBtn{
     text-align: center;
