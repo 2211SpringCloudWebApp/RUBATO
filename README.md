@@ -120,15 +120,19 @@
 <img width="722" alt="image" src="https://user-images.githubusercontent.com/119032800/227850645-142bf880-9c3e-4517-aca6-1a3bfb9df63c.png">
 4-4. 레슨 신청 내역
 <img width="764" alt="image" src="https://user-images.githubusercontent.com/119032800/227850695-0fb88709-43bf-4670-9133-b266e5aab3e9.png">
-4-5. 
+4-5. 나의 판매 내역
 <img width="809" alt="image" src="https://user-images.githubusercontent.com/119032800/227850749-10f6292b-1aea-4d07-a654-4f18a998e919.png">
-4-6.
+4-6. 구매 신청 내역
 <img width="847" alt="image" src="https://user-images.githubusercontent.com/119032800/227851307-f25ecae9-9d76-462f-804b-80feda9aa0b8.png">
 
 ### 5. 레슨게시판
+5-1. 
 <img width="944" alt="image" src="https://user-images.githubusercontent.com/119032800/227852206-49664279-dc2b-4731-b848-cb35d16a66ee.png">
+5-2. 
 <img width="747" alt="image" src="https://user-images.githubusercontent.com/119032800/227852243-4410af8e-63c4-45dc-a460-8edcd96bffe6.png">
+5-3. 
 <img width="667" alt="image" src="https://user-images.githubusercontent.com/119032800/227852366-3660f5e5-cf92-4b38-9744-ddd4fc7f7090.png">
+5-4. 
 <img width="656" alt="image" src="https://user-images.githubusercontent.com/119032800/227852511-a894601d-b9bf-4765-970c-5bbbfe64ceea.png">
 
 ### 6. 마켓게시판
