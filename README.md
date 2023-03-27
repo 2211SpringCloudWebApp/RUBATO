@@ -100,11 +100,11 @@
 ### 2. 로그인
 <img width="959" alt="image" src="https://user-images.githubusercontent.com/119032800/227849955-7ce82e76-c3b5-4f80-975e-7636c60fe7b2.png">
 2-1 아이디찾기
-<img width="656" alt="image" src="https://user-images.githubusercontent.com/119032800/227851608-432b2a5c-262f-483e-828b-b65460caad3e.png">
-<img width="661" alt="image" src="https://user-images.githubusercontent.com/119032800/227851694-6e373097-42c7-479f-8c52-24e24f1f12a3.png">
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/119032800/227851608-432b2a5c-262f-483e-828b-b65460caad3e.png">
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/119032800/227851694-6e373097-42c7-479f-8c52-24e24f1f12a3.png">
 2-2. 비밀번호 찾기
-<img width="711" alt="image" src="https://user-images.githubusercontent.com/119032800/227851838-380d6d48-c216-411e-99dc-924231433948.png">
-<img width="650" alt="image" src="https://user-images.githubusercontent.com/119032800/227851776-2097c722-0f8b-4821-9d03-841fc4d96a7f.png">
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/119032800/227851838-380d6d48-c216-411e-99dc-924231433948.png">
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/119032800/227851776-2097c722-0f8b-4821-9d03-841fc4d96a7f.png">
 
 
 ### 3. 회원가입
