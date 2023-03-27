@@ -126,13 +126,13 @@
 <img width="847" alt="image" src="https://user-images.githubusercontent.com/119032800/227851307-f25ecae9-9d76-462f-804b-80feda9aa0b8.png">
 
 ### 5. 레슨게시판
-5-1. 
+5-1. 레슨 목록
 <img width="944" alt="image" src="https://user-images.githubusercontent.com/119032800/227852206-49664279-dc2b-4731-b848-cb35d16a66ee.png">
-5-2. 
+5-2. 레슨 상세
 <img width="747" alt="image" src="https://user-images.githubusercontent.com/119032800/227852243-4410af8e-63c4-45dc-a460-8edcd96bffe6.png">
-5-3. 
+5-3. 레슨 신청글 작성
 <img width="667" alt="image" src="https://user-images.githubusercontent.com/119032800/227852366-3660f5e5-cf92-4b38-9744-ddd4fc7f7090.png">
-5-4. 
+5-4. 레슨 생성
 <img width="656" alt="image" src="https://user-images.githubusercontent.com/119032800/227852511-a894601d-b9bf-4765-970c-5bbbfe64ceea.png">
 
 ### 6. 마켓게시판
